@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>link与@import引入CSS样式表的区别</title>
+  </head>
+  <body>
+    <!-- link、@import 的区别 -->
+    <!-- 1、从属关系不同：link 属于 HTML 的标签；@import 属于 CSS 的关键字；link 除了引入 CSS 文件还可以引入 RSS、rel；@import 只能引入 CSS -->
+    <!-- 2、加载顺序不同：页面遇到 link 标签后直接引入 CSS 异步加载，不影响 HTML 的正常解析；@import 页面加载完毕后才会被加载 -->
+    <!-- 3、兼容性：link 不存在兼容；@import 是在 css2.1 提出的，IE5 以上的浏览器才支持 -->
+    <!-- 4、DOM 操作：link 可以被 DOM 操作；@import 不行 -->
+    <!-- 5、link 引入的样式权重大于 @import 引入的样式 -->
+    <!-- @import 是在最上面添加样式 -->
+  </body>
+</html>

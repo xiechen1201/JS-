@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ## Date
+      var date = new Date();
+      // date 返回时间
+      // 生成一个时间片段，不是实时更新的
+
+      // ## Date.prototype 方法
+      // date.toString() 返回字符串的时间格式
+      // date.getFullYear(), date.getYear() 废弃！！！
+      // date.getMonth() 返回月份（0-11）
+      // date.getDate() 返回月份中的第几天（1-31 天）
+      // date.getDay() 返回星期几（0-6，0 是星期天）
+      // date.getHours() 获取时
+      // date.getMinutes() 获取分
+      // date.getSeconds() 获取秒
+      // date.getMilliseconds() 获取毫秒
+      // date.getTime() 获取时间戳（TimeStamp）
+      // 纪元时间 1970年1月1日0点0分0秒
+      // 获取时间戳就表示 纪元时间到date之间过了多少毫秒 ，利用时间长可以对比两个时间的大小等
+      // 以上方法都有 setXXX 方法 date.setTime(时间戳);
+
+      // ## 参数
+      // new Date() 接收参数，返回按照参数的时间片段
+      // 1、new Date(时间戳 )
+      // 2、new Date(2012, 5, 7, 20, 23, 35)
+      // 3、new Date("2017-5-7 20:23:35")
+      // 4、new Date("2017/5/7 20:23:35")
+
+      // ## setInterval 计时器
+      // 每隔特定毫秒数执行一次函数
+      // 存在 window 对象上
+      // window.setInterval(function () {}, 1000);
+      // window.setInterval("console.log(2)", 1000);
+      // window.setInterval("test()", 1000);
+      // window.setInterval(test, 1000);
+
+      // setInterval 返回一个计时器ID
+
+      // clearInterval 清除计时器
+
+      // window.setTimeout 延时器
+      // 参数同 setInterval
+      // 返回一个标识ID
+      // clearTimeout 清除延时器
+
+      // this 指向 window 对象
+    </script>
+  </body>
+</html>

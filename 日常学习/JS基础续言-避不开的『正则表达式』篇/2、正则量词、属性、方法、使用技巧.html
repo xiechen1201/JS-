@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>正则量词、属性、方法、使用技巧</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // 正则的特点：
+  // 不会回头再进行匹配
+  // 贪婪模式，能匹配多就不匹配少
+
+  // ## 量词
+
+  // n+ {1, 正无穷} 表示+前面紧挨着的字符至少出现1次，最多出现无数次
+  /* var reg = /\w+/g;
+  var str = "abcdefg";
+  console.log(str.match(reg)); // ['abcdefg'] */
+
+  // n* {0, 正无穷} 表示*前面紧挨着的字符出现0次或无数次
+  // var reg = /\w*/g;
+  // var str = "abcdefg";
+  // console.log(str.match(reg)); // ['abcdefg', '']
+
+  // var reg = /\d*/g;
+  // var str = "abcdefg";
+  // console.log(str.match(reg)); // ['', '', '', '', '', '', '', '']
+
+  // 字符串从左到右依次先匹配多，再匹配少，如果一旦匹配上就不回头匹配了
+  // 贪婪匹配原则：能匹配多个绝不匹配少个
+
+  // n? {0, 1} 表示?前面紧挨着的字符出现0次或1次
+  /* var reg = /\w?/g;
+  var str = "abcdefg";
+  console.log(str.match(reg)); //  ['a', 'b', 'c', 'd', 'e', 'f', 'g', ''] */
+
+  // n{x, y} 表示{}前面紧挨着的字符出现x次或y次
+  /* var reg = /\w{1,2}/g;
+  var str = "abcdefg";
+  console.log(str.match(reg)); // ['ab', 'cd', 'ef', 'g'] */
+
+  // {1,} 表示等价于 +
+
+  /* var reg = /\w{5,}/g;
+  var str = "abcdefg";
+  console.log(str.match(reg)); // ['abcdefg'] */
+
+  /* var reg = /\w{5,}/g;
+  var str = "abcd";
+  console.log(str.match(reg)); // null */
+
+  // ##
+  // ^n 匹配任何以n开头的字符串
+
+  /* var reg = /^ab/gm;
+  var str = "abcdabcd\nabcdabcd";
+  console.log(str.match(reg)); */
+
+  // n$ 匹配任何以n结尾的字符串
+  /* var reg = /cd$/gm;
+  var str = "abcdabcd\nabcdabcd";
+  console.log(str.match(reg)); */
+
+  // 检查以abcd开头和以abcd结尾的字符串
+  /* var reg = /^abcd.*abcd$/g;
+  var str = "abcd123123abcd";
+  console.log(str.match(reg)); */
+
+  // 匹配检查以abcd开头和以abcd结尾的字符串，且中间是数字
+  /* var reg = /^abcd\d+abcd$/g;
+  var str = "abcd123123abcd";
+  console.log(str.match(reg)); */
+
+  // 匹配 138 开头的11位手机号码
+  /* var str = "13812345678";
+  var reg = /^138\d{8}/;
+  console.log(reg.test(str)); */
+
+  // ?=n 匹配任何其后紧接着指定字符n的字符串
+  // a字符串后面紧挨是b字符的字符
+  // ?!=
+  // a字符串后面紧挨不是b字符的字符
+  /* var str = "abcdabcd";
+  var reg = /a(?=b)/g;
+  console.log(str.match(reg)); */
+
+  // ## 匹配格式
+  // 子表达式和反向引用
+  // 匹配 xxyy 这样的字符串
+  // () 内是子表达式的一种方式
+  // \1 表示反向引用第几个子表达式
+  /* var str = "bbaaaaccaaaaidddbaaaaa";
+  var reg = /(\w)\1(\w)\2/g;
+  console.log(str.match(reg)); */
+
+  // ==========
+
+  // ## 正则对象的属性
+  /* var reg = /(\w)\1(\w)\2/g;
+  console.log(reg.global); // 表示 g
+  console.log(reg.ignoreCase); // 表示 i
+  console.log(reg.multiline); // 表示 m
+  console.log(reg.source); // 正则表达式的本体 */
+
+  // ## 正则对象的方法
+
+  // reg.test() 是否匹配正则的规则
+
+  // reg.exec() 方便调试正则？
+  var reg = /123/g;
+  var str = "123123123123";
+  console.log(reg.exec(str)); // 返回类数组，继承于 Array
+</script>

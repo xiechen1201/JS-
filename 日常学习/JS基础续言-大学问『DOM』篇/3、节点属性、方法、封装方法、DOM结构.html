@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span></span>
+    <div class="box" id="box" style="background-color: green">
+      我是文本节点
+      <!--我是注释 -->
+      <h1>我是h1</h1>
+      <a href="">我是超链接</a>
+      <p>我是段落标签</p>
+    </div>
+  </body>
+</html>
+<script>
+  // 节点是有属性的
+  // 字符串转小写 toLowerCase()
+  // 字符串转大写 toUpperCase()
+
+  // ## nodeName 节点的名字
+  // nodeName 是只读属性
+  // nodeName 返回元素的的 nodeName 大写
+  console.log(document.nodeName); // document 节点
+  console.log(document.getElementsByTagName("div")[0].nodeName); // DIV，元素节点,返回大写
+  console.log(document.getElementsByTagName("div")[0].firstChild.nodeName); // #text
+  console.log(document.getElementsByTagName("div")[0].childNodes[1].nodeName); // #commment
+  console.log(document.getElementsByTagName("div")[0].childNodes[3].nodeName); // H1
+
+  // ## nodeValue 节点的值
+  // nodeValue 是可读可写属性
+  // 文本节点、注释节点、属性节点才有 nodeValue
+  console.log(document.getElementsByTagName("div")[0].nodeValue);
+  console.log(document.getElementsByTagName("div")[0].firstChild.nodeValue);
+  console.log(document.getElementsByTagName("div")[0].childNodes[1].nodeValue);
+  console.log(
+    document.getElementsByTagName("div")[0].getAttributeNode("id").nodeValue
+  ); // getAttributeNode 获取属性节点(了解即可)
+
+  // ## nodeType 节点的类型值
+  // 只读属性
+  console.log(document.getElementsByTagName("div")[0].nodeType);
+  console.log(document.getElementsByTagName("div")[0].firstChild.nodeType);
+  console.log(document.getElementsByTagName("div")[0].childNodes[1].nodeType);
+
+  // ## 利用 nodeType 封装方法 childNodes，只要元素节点
+  function elementChildren(node) {
+    var arr = [];
+    var children = node.childNodes;
+    for (var i = 0; i < children.length; i++) {
+      if (children[i].nodeType === 1) {
+        arr.push(children[i]);
+      }
+    }
+    return arr;
+  }
+  console.log(elementChildren(document.getElementsByTagName("div")[0]));
+
+  // ## attributes 节点的属性集合(了解即可)
+  // attributes 可读可写
+  console.log(document.getElementsByTagName("div")[0].attributes);
+  console.log(document.getElementsByTagName("div")[0].attributes[0]);
+  console.log(document.getElementsByTagName("div")[0].attributes[0].nodeValue);
+
+  // ========== DOM 结构
+  // ## document 对象
+  // document.__proto__ => HTMLDocument.prototype
+  // HTMLDocument.prototype.__proto__ => Document.prototype
+  // Document.prototype.__proto__ => Node.prototype
+  // 所以 getElementById、getElementsByTagName 等方法都继承 Document.prototype
+
+  // ## CharacterData 对象
+  // Text.prototype.__proto__ => CharacterData.prototype
+  // Comment.prototype.__proto__ => CharacterData.prototype
+
+  // ## Element
+  // HTMLElement.prototype.__proto_ => Element.prototype
+  // XMLElement.prototype.__proto_ => Element.prototype
+
+  // ==========
+  // ## hasChildNodes() 返回 true/flase ,包括多种节点类型的判断
+  console.log(document.getElementsByTagName("span")[0].hasChildNodes());
+
+  // ==========
+  // ## DOM操作深入
+
+  // ==========
+  // ## 获取全部标签
+  console.log(document.getElementsByTagName("*"));
+
+  // ==========
+  // ## 访问文档信息： head、body、title、documentElement
+  console.log(document.head);
+  console.log(document.body);
+  console.log(document.title);
+  console.log(document.documentElement); // 返回 html
+
+  // ===========
+  // 原型上编程：遍历任意个父元素，找到他的子元素节点（写在哪个原型上）
+  // 有数字参数 某一个对应的子元素
+  // 没有数字参数 子元素节点的集合
+
+  // 原型上编程，找出一个元素的第N层父级元素
+</script>

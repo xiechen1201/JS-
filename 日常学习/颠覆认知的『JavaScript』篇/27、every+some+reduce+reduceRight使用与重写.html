@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="data" style="display: none">
+      [{"id":
+      "1","course":"前端开发之企业级深度JavaScript特训课【JS++前端】","classes":"19","teacher":"小野","img":"ecmascript.jpg","is_free":"1","datetime":"1540454477","price":"0"},
+      {"id": "2","course":"WEB前端工程师就业班之深度JS
+      DOM+讲师辅导-第3期【JS++前端】","classes":"22","teacher":"小野","img":"dom.jpg","is_free":"0","datetime":"1540454477","price":"699"},
+      {"id":
+      "3","course":"前端开发之企业级深度HTML特训课【JS++前端】","classes":"3","teacher":"小野","img":"html.jpg","is_free":"1","datetime":"1540454477","price":"0"},
+      {"id":
+      "4","course":"前端开发之企业级深度CSS特训课【JS++前端】","classes":"5","teacher":"小野","img":"css.jpg","is_free":"1","datetime":"1540454477","price":"0"},
+      {"id":
+      "5","course":"前端就业班VueJS+去哪儿网+源码课+讲师辅导-第3期【JS++前端】","classes":"50","teacher":"哈默","img":"vuejs.jpg","is_free":"0","datetime":"1540454477","price":"1280"},
+      {"id":
+      "6","course":"前端就业班ReactJS+新闻头条实战+讲师辅导-第3期【JS++前端】","classes":"21","teacher":"托尼","img":"reactjs.jpg","is_free":"0","datetime":"1540454477","price":"2180"},
+      {"id":
+      "7","course":"WEB前端开发工程师就业班-直播/录播+就业辅导-第3期【JS++前端】","classes":"700","teacher":"JS++名师团","img":"jiuyeban.jpg","is_free":"0","datetime":"1540454477","price":"4980"}]
+    </div>
+    <script>
+      var data = document.getElementById("data").innerHTML;
+      data = data.replace(/\s/g, "");
+      data = JSON.parse(data);
+
+      // ## every
+      // 数组的每一项是否符合条件
+      // Array.prototype.every
+      // 参数1: fn(el, index, array)
+      // 参数2: this 对象
+      // 返回值: true/false
+      // 特点1: 如果有一个不满足条件就停止遍历（条件就是 return 后面的表达式）
+      /* data.every(function (el, index, array) {
+        console.log(this);
+        return el.is_free === "0";
+      }, {}); */
+
+      // 重写
+      /* Array.prototype.myEvery = function (fn) {
+        var arr = this,
+          len = arr.length,
+          arg2 = arguments[1],
+          result = true;
+
+        for (var i = 0; i < len; i++) {
+          var bool = fn.apply(arg2, [arr[i], i, arr]);
+          if (!bool) {
+            result = false;
+            break;
+          }
+        }
+
+        return result;
+      };
+
+      var res = data.myEvery(function (el, index, array) {
+        return el.is_free === "0";
+      });
+      console.log(res); */
+
+      // ====================
+      // ## some
+      // 数组的任意一项是否符合条件
+      // Array.prototype.some
+      // 参数1: fn(el, index, array)
+      // 参数2: this 对象
+      // 返回值: true/false
+      // 特点1: 只要有一个满足条件就停止遍历（条件就是 return 后面的表达式）
+      /* data.some(function (el, index, array) {
+        console.log(el);
+        return el.is_free === "0";
+      }, {}); */
+
+      // 重写
+      /* Array.prototype.mySome = function (fn) {
+        var arr = this,
+          len = arr.length,
+          arg2 = arguments[1],
+          result = false;
+
+        for (var i = 0; i < len; i++) {
+          var bool = fn.apply(arg2, [arr[i], i, arr]);
+          if (bool) {
+            result = true;
+            break;
+          }
+        }
+
+        return result;
+      };
+
+      var res = data.mySome(function (el, index, array) {
+        return el.is_free === "1";
+      });
+      console.log(res); */
+
+      // ====================
+      // ## reduce 归纳函数
+      // Array.prototype.reduce
+      // 参数1: fn(prev, cur, index, array)
+      // 参数2: 必填，传递给函数的初始值，和其他的函数不同（其他的函数是非必填的 this 指向）
+      // 无法像其他函数那样更改this指向
+      // 返回一个处理累加后的数据
+      // 本质上和遍历没有什么不同
+      /* var initalVal = [];
+      data.reduce(function (prev, cur, index, array) {
+        console.log(prev === initalVal); // true，指向同一个数组
+        console.log(prev, cur);
+        return prev;
+      }, initalVal); */
+
+      // 每一次 reduce 的时候 prev 新增一个数据
+      /* var initalVal = [];
+      var newArr = data.reduce(function (prev, cur, index, array) {
+        prev.push(cur.course);
+        // 每一次通过必须 return 进行传承值
+        return prev;
+      }, initalVal);
+      console.log(newArr); */
+
+      /* var initalVal = [];
+      var newArr = data.reduce(function (prev, cur, index, array) {
+        if (cur.is_free === "1") prev.push(cur);
+        return prev;
+      }, initalVal);
+      console.log(newArr); */
+
+      // cookie字符串=》arr=》obj 的案例
+
+      // 重写
+      /* Array.prototype.myReduce = function (fn, initalVal) {
+        var arr = this,
+          len = arr.length,
+          arg2 = arguments[2] || window;
+
+        for (let i = 0; i < len; i++) {
+          initalVal = fn.apply(arg2, [initalVal, arr[i], i, arr]);
+        }
+
+        return initalVal;
+      }; */
+
+      // ## reduceRight
+      // Array.prototype.reduceRight
+      // reduce 和 reduceRight 区别只是 reduceRight 倒序遍历
+      /* var initalVal = [];
+      var newArr = data.reduceRight(function (prev, cur, index, array) {
+        prev.push(cur.id);
+        return prev;
+      }, initalVal);
+      console.log(newArr); */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .test {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- XML -->
+    <person>
+      <name>张三</name>
+      <sex>男</sex>
+      <age>18</age>
+    </person>
+    <div class="test"></div>
+  </body>
+</html>
+<script>
+  // DOM Document Object Model 文档对象模型
+  // DOM 对象 宿主对象
+  // JavaScript 3种对象：
+  // 1、本地对象 Native Object(和浏览器没有关系): Object Function Array Strging Number Boolean Error Date RgeExp
+  // 2、内置对象 Bulit-in Object：Global(Global 是个总称，例如 isNaN() parseInt()) Math
+  // 本地对象和内置对象都说ESMA的内部对象
+  // 宿主对象：Host Object（执行JS脚步的环境提供的对象，例如浏览器，浏览器提供的对象就是宿主对，宿主对象又称浏览器对象，不同的浏览器提供了不同的宿主对象的方法，所以不同的浏览器在使用宿主对象方法的时候会存在兼容性）
+
+  // ===========
+
+  // 浏览器对象有window所有的方法都说操作BOM，docment所有的方法都是操作DOM
+  // DOM存在的目的：通过浏览器提供的这一套方法表示或者操作HTML或者XML
+
+  // ===========
+
+  // XML是什么：自定义标签；HTML是浏览器提供的；XML为HTML奠定了一个基本的HTML规范
+  // 标签和元素的区别：标签包含标签内部的东西组合成元素
+  var person = document.getElementsByTagName("person");
+  console.log(person);
+
+  // ==========
+
+  // DOM 无法直接更改CSS样式表，操作的样式其实是元素的内联样式
+
+  var test = document.getElementsByClassName("test")[0]
+  test.style.backgroundColor = "green"
+</script>

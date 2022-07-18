@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  var arr = [1, 1, 2, 6, 3, 5, 0, 3, 6, 8, 9, 4, 4, 2, 0, 9, 5, 2];
+
+  // ## 双层 for 循环
+  function unqueArr(array) {
+    var _arr = [];
+    var isRepeat;
+
+    for (let i = 0; i < array.length; i++) {
+      isRepeat = false;
+      for (let j = 0; j < _arr.length; j++) {
+        // 比较 _arr 和 array 的每一项
+        if (_arr[j] === array[i]) {
+          isRepeat = true;
+          break;
+        }
+      }
+      if (!isRepeat) {
+        _arr.push(array[i]);
+      }
+    }
+    return _arr;
+  }
+  console.log(unqueArr(arr));
+
+  // ==========
+  // ## filter + indexOf
+  function unqueArr1(array) {
+    return array.filter(function (item, index) {
+      return array.indexOf(item) === index;
+    });
+  }
+  console.log(unqueArr1(arr));
+
+  // ==========
+  // ## forEach + indexOf
+  function unqueArr2(array) {
+    var _arr = [];
+
+    array.forEach((element) => {
+      if (_arr.indexOf(element) === -1) {
+        _arr.push(element);
+      }
+    });
+    return _arr;
+  }
+  console.log(unqueArr2(arr));
+
+  // ==========
+  // forEach + includes
+
+  // array.indexOf(item) => 下标，对 NaN 无效
+  // array.includes(item) => true/false，对 NaN 有效
+  function unqueArr3(array) {
+    var _arr = [];
+    array.forEach((item) => {
+      if (!_arr.includes(item)) {
+        _arr.push(item);
+      }
+    });
+    return _arr;
+  }
+  console.log(unqueArr3(arr));
+
+  // ==========
+  // for + sort
+  function unqueArr4(array) {
+    var _arr = [];
+
+    array.sort();
+
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] !== array[i + 1]) {
+        _arr.push(array[i]);
+      }
+    }
+
+    return _arr;
+  }
+  console.log(unqueArr4(arr));
+
+  // ==========
+  // sort + reduce
+  function unqueArr5(array) {
+    return array.sort().reduce((prev, item) => {
+      if (prev.length === 0 || prev[prev.length - 1] !== item) {
+        prev.push(item);
+      }
+      return prev;
+    }, []);
+  }
+  console.log(unqueArr5(arr));
+
+  // ==========
+  // for + map
+  function unqueArr6(array) {
+    var _arr = [];
+    var _temp = new Map();
+
+    for (let index = 0; index < array.length; index++) {
+      if (!_temp.get(array[index])) {
+        _temp.set(array[index], 1);
+        _arr.push(array[index]);
+      }
+    }
+    return _arr;
+  }
+  console.log(unqueArr6(arr));
+
+  // ==========
+  // Array.from + Set
+  function unqueArr6(array) {
+    return Array.from(new Set(array));
+  }
+  console.log(unqueArr6(arr));
+</script>

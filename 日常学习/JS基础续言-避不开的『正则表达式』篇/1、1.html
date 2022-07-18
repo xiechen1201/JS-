@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>转义符号与字符、正则基础、修饰/元字符</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ##
+  // 转义符号 /
+  // 转义字符 /字符
+
+  // 将双引号转义为字符串中的一个字符（认为：字符串变量字符串）
+  /* var str = "我是\"大神\"程序员";
+  console.log(str); */
+
+  // 将 / 转义为字符串中的字符
+  /* var str = "我是\\大神\\程序员";
+  console.log(str); */
+
+  // ## \n \r \t
+  // 规定好的转义字符
+
+  // \n 表示换行
+  /* var str = "我是\n大神程序员";
+  console.log(str);
+  document.write(str); // 不会进行换行，转义字符是给编辑系统使用的，HTML是文档不会识别 */
+
+  // \r 表示回车换行
+
+  // \t 表示一个 tab（四个空格），也称制表符
+  /* var str = "我是\t大神程序员";
+  console.log(str); */
+
+  // javaScript 默认不容许字符串是换行
+  // \ 将空格转化为空格
+  /* var str = "<h1>内容</h1>\
+            <h2>内容</h2>\
+            <h3>内容</h3>"; */
+
+  // ==========
+
+  // ## RegExp 正则表达式（regular expression）
+  // 将字符串按照一定的规则匹配或者检索这个规则中指定的类型字符
+  // 对字符串操作的一种逻辑公式
+
+  // 1、对象字面量（或直接声明对象）
+  /* var obj = {};
+  var arr = [];
+  // 2、实例化构造函数
+  var obj1 = new Object();
+  var arr1 = new Array() */
+
+  // 正则是个对象，实例化一个正则
+  // 参数：正则表达式，修饰符
+  // 修饰符： i>不区分大小写 g>全局匹配 m>多行匹配
+  /* var reg = new RegExp("test", "i");
+  var test = "This is a Test";
+  // 用reg对象为规则来检测test的字符串中是否包含test
+  // 字符串片段，区分大小写，必须是连续的
+  console.log(reg.test("test")); */
+
+  // 正则的字面量方式
+  /* var reg = /test/ig;
+  var str = "This is a Test; Test is important.";
+  console.log(reg.test(str));
+  console.log(str.match(reg)) */
+
+  // 当正则表达式是个变量的时候，还是要使用实例化的方式
+  /* var v = "test";
+  var reg = new RegExp(v,"ig");
+  var str = "This is a Test; Test is important.";
+  console.log(str.match(reg)) */
+
+  // ==========
+
+  // ##
+
+  // new 的时候是完全新的正则对象（深拷贝）
+  /* var reg1 = /test/;
+  var reg2 = new RegExp(reg1);
+  reg1.a = 1;
+  console.log(reg2.a); // undefind */
+
+  // 不 new 的时候是拿来正则对象的引用
+  /* var reg1 = /test/;
+  var reg2 = RegExp(reg1);
+  reg1.a = 1;
+  console.log(reg2.a); // undefind */
+
+  // ## 修饰符
+  // i 忽略大小写
+  /* var reg = /Test/i;
+  var str = "This is a test";
+  console.log(reg.test(str)); // true */
+
+  // g 全局匹配
+  /*  var reg = /Test/gi;
+  var str = "This is a test";
+  console.log(str.match(reg)); //  */
+
+  // m 多行匹配，^ 以...开头
+  /* var reg = /^Test/gim;
+  var str = "This is a test; \nTest is important;";
+  console.log(str.match(reg)); // true */
+
+  // ## 表达式
+  // [] 表示只要是括号内的任意一位
+  // 匹配成功的字符不会再参与匹配
+  // 比如：091 然后在用 7sq 匹配 sqj、qjn ... 进行匹配
+  /* var str = "0917sqjnka12198";
+  var reg = /[1234567890][1234567890][1234567890]/g;
+  console.log(str.match(reg)) */
+
+  /* var str = "wxyz";
+  var reg = /[wx][xy][z]/g;
+  console.log(str.match(reg)); // [xyz] */
+
+  // []以区间的方式
+  /* var str = "ankjkjjkGhhjqwhq9Z087Jhjhjgu";
+  // var reg = /[a-z][0-9][A-Z]/g;
+  var reg = /[a-z0-9A-Z][0-9][A-Z]/;
+  console.log(str.match(reg)); // ["q9Z"] */
+
+  // [^0] 表示非0
+  /* var str = "ankjkjjkGhhjqwhq9Z087Jhjhjgu";
+  var reg = /[^0-9][a-z]/g;
+  console.log(str.match(reg));  */
+
+  // | 表示或者
+  /* var str = "234asjkhjsais12312lajknkj";
+  var reg = /(123|234)/g;
+  console.log(str.match(reg)); // [234, 123] */
+
+  // 加上() 后表示()里面的一组+[a-z]
+  // 不加（）表示 234[a-z]
+  /*  var str = "234vajkhjsais123slajknkj";
+  var reg = /(123|234)[a-z]/g;
+  console.log(str.match(reg)); // ['234v', '123s'] */
+
+  // ## 元字符
+  // 正则使用的转义字符
+
+  // \w 表示任意一个字母、数字或下划线[0-9A-z_]
+  // \W 表示非...
+
+  /* var reg = /\wab/g;
+  var str = "234abc_%&";
+  console.log(str.match(reg)); // ['4ab'] */
+
+  /* var reg = /\Wab/g;
+  var str = "234abc_%&";
+  console.log(str.match(reg)); // null */
+
+  // \d 表示 [0-9]的数字
+  // \D 表示非...
+
+  /* var reg = /\dabc/g;
+  var str = "234abc_%&";
+  console.log(str.match(reg)); // ["4abc"] */
+
+  /* var reg = /\Dabc/g;
+  var str = "234eabc_%&";
+  console.log(str.match(reg)); // ["eabc"] */
+
+  // \s 表示 [\r\n\t\v\f] 字符
+  // \r回车 \n换行 \tTab \v垂直换行 \f换页
+  // \S 表示非...
+
+  /* var reg = /\sab/g;
+  var str = "23 abc-&%\nabv";
+  console.log(str.match(reg)); */
+
+  // \b 表示单词边界
+  // \D 表示非...
+  // 单词边届的意思：https://zhidao.baidu.com/question/584326176.html
+
+  /* var reg = /\bThis/g;
+  var str = "This is a test";
+  console.log(str.match(reg)); // ['This'] */
+
+  // . 表示非回车或换行所有的字符
+
+  /* var reg = /./g;
+  var str = "This\ris\ta\ntest;6&";
+  console.log(str.match(reg)); */
+
+  /**
+   * GO = {
+   *  a: undefind 1
+   *  test: fn
+   *  c: undefind 3
+   * }
+   * AO = {
+   *  b: undefind 2
+   * }
+   * 
+   */
+  
+</script>

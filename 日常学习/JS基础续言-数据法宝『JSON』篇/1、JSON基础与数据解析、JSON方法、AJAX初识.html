@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON基础与数据解析、JSON方法、AJAX初识</title>
+  </head>
+  <body>
+    <div id="box" data-info='{"name":"zhangsan","age":"18"}'></div>
+    <script>
+      // ## 对象是无序排列的
+      /* var obj = {
+        d: function () {
+          console.log("this is d");
+        },
+        a: 1,
+        b: 2,
+        c: 3,
+      }; */
+
+      // ## JSON
+
+      // 所有编程语言都离不开的三大数据类型
+      // scalar 标量 =》字符串和数字
+      // sequence 序列 =》数组和列表
+      // mapping 映射 =》键值对
+
+      /**
+       * JSON：JavaScript Object Notation
+       * JSON 的存在：为了数据交互，所以不可能有方法
+       * JSON 是轻量级的数据交互格式
+       *
+       * 键名一定要用双引号
+       * 映射用冒号隔开 "name": "Bob"
+       * 并列数据用冒号隔开 "name": "Bob", "age": "18"
+       * 映射集合用{}包裹：{"name": "Bob", "age": "18"}
+       * 并列数据集合用 []: [{"name": "Bob", "age": "18"}, {"name": "Many", "age": "18"}]
+       *
+       * 最早期用 XML 用于数据交互，
+       * XML 可以自定义标签，HTML 不能是，因为有规范的
+       * <person>
+       *    <username>张三</username>
+       *    <age>18</age>
+       * </person>
+       *
+       * XML 的缺点：
+       * 1、XML 文档比较大
+       * 2、不易读
+       * 3、解析比较困难，性能受到影响
+       *
+       * 所以就出现了 JSON
+       */
+      /* var jsonData = {
+        "a": 1,
+        "b": 2,
+        "c": 3,
+      }; */
+
+      /* let oBox = document.getElementById("box")
+      console.log(JSON.parse(oBox.dataset.info)) */
+
+      // ## JSON 的方法
+      // JSON.parse() 将字符串转为JSON
+      // JSON.stringify() 将JSON转位字符串
+
+      // ## 请求JSON
+      fetch("./data.json").then(function (response) {
+        response.text().then((res) => {
+          console.log(JSON.parse(res));
+        });
+      });
+    </script>
+  </body>
+</html>

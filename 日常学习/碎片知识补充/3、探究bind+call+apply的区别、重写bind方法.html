@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>探究bind与call/apply的区别、重写bind方法</title>
+  </head>
+  <body>
+    <script>
+      // ## call、apply 和 bind
+      /* var p1 = {
+        name: "张三",
+        hobby: this.hobby,
+        play: function (sex, age) {
+          console.log("年龄" + age + "；性别" + sex + "；喜欢" + this.hobby);
+        },
+      };
+      var p2 = {
+        name: "李四",
+        hobby: "踢球",
+      };
+
+      p1.play.call(p2, "男", 20);
+      p1.play.apply(p2, ["男", 20]);
+      p1.play.bind(p2, "男", 20)(); */
+
+      // call 改变 this 指向后且立即执行
+      // bind 改变 this 指向后返回一个新的函数，但是不执行
+
+      // ## 案例
+      // bind 不会立即执行
+      // el.addEventListener("click", this.tabClick.bind(this), false);
+
+      // ==========
+
+      // ## bind
+      // bind 挂载在 Function.prototype
+
+      // ## 模拟一个 bind
+      /* var p = {
+        age: 18,
+      };
+      function Person() {
+        console.log(this);
+        console.log(this.age);
+      }
+      // Person.call(p);
+      // Person.apply(p);
+      // Person.bind(p)();
+
+      // Person.call(p) 之后立即执行，没有返回值 person2 是 undefind
+      // Person.call(p);
+      // new person2();
+
+      // var person2 = Person.call(p);
+      // new person2();
+
+      // bind 在遇到实例化的时候会失效，仍然指向实例化对象
+      // bind 改变的是 Person 里面的 this （window => p），但是不执行
+      // new person2() 的时候 this 仍然指向实例化对象，这是两个不同的过程
+
+      // Person.bind(p); 之后不会立即执行
+      // 改变 this 指向后不影响我 new 
+      var person3 = Person.bind(p);
+      new person3(); */
+
+      // ## 重写 bind 方法
+      Function.prototype.myBind = function (context) {
+        var _self = this;
+        var args = Array.prototype.slice.call(arguments, 1);
+
+        var fn = function () {
+          var newArgs = Array.prototype.slice.call(arguments);
+          _self.apply(
+            this instanceof _self ? this : context,
+            args.concat(newArgs)
+          );
+        };
+        fn.prototype = this.prototype;
+        return fn;
+      };
+
+      var p = {
+        age: 18,
+      };
+      function Person() {
+        console.log(this);
+      }
+      Person.myBind(p, "name", "age")();
+      var person2 = Person.myBind(p);
+      new person2();
+    </script>
+  </body>
+</html>

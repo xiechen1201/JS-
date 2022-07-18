@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <div>
+      <ul>
+        <li>
+          <a href=""></a>
+          <span style="display: none"></span>
+          <img src="" alt="" />
+        </li>
+      </ul>
+    </div> -->
+    <div id="box">我是一个孤独的盒子</div>
+  </body>
+</html>
+<script>
+  // HTML+CSS+JavaScript
+  // 解析 加载
+
+  // ## 解析
+  // DOMTree 文档树
+  // 浏览器会把整个文档解析为 DOM 树（深度优先解析原则）
+  /**
+   *
+   *          html
+   *    head        body
+   * mete title  div
+   *             ul
+   *             li
+   *            a span img
+   */
+
+  // CSSTree 样式树
+  // CSS 也会构建一个树，和 DOM 树类似
+
+  // 渲染树 renderTree
+  // DOMTree + CSSTree 结合形成 renderTree
+  // renderTree 才开始渲染页面，
+  // 然后浏览器根据 rednderTree 绘制页面j
+  /**
+   * renderTree 渲染树的执行过程
+   * 1、渲染树每个节点都有自己的样式
+   * 2、渲染树不包含隐藏节点的（dispaly：none）
+   * 3、visibility 是要绘制的，只是不可见
+   * 4、渲染树上的每一个节点都会被当作是一个盒子
+   */
+
+  // ## 加载
+  // DOM 树在解析的时候是不管内部资源
+  // 先有解析后有加载，解析和加载是异步完成的
+  // 解析只是把 img 放到 dom 树上，然后才开始加载资源
+  // 解析的时候即使有 display:none 也会挂在到 dom 树上
+
+  // =========
+
+  // ## 回流（重排）+重绘
+  // 当JS对页面的节点操作时就会产生回流或者重绘
+  // 回流一定会引起重绘
+  // 重绘不一定是回流产生的后续反应（重绘可以单独产生）
+
+  // 因操作的节点的大小、布局、显示改变的时候渲染树中的一部分或者全部需要重新构建，这样的现象就叫回流，一个页面至少有一次回流（也就是初始化渲染的时候）
+
+  // 除开回流操作的之外操作（更改背景色，字体颜色等）就会引起重绘
+
+  // 回流的时候，浏览器会重新构建受影响部分的渲染树，一定会引起重绘
+  // 回流完成后，浏览器会s更新新的渲染树绘制回流的部分或者全部节点，这个重新渲染的过程称为重绘
+
+  /**
+   * 引起回流的因素
+   * 1、DOM 的增删
+   * 2、DOM 节点的位置变化
+   * 3、元素的尺寸、margin、paddinf、border、width、height 变化
+   * 4、元素的 display: none
+   * 5、页面的渲染初始化
+   * 6、浏览器窗口尺寸变化
+   * 7、像浏览器请求某些样式信息（offset、scroll、client、getComputedStyle）
+   *
+   * 除开以上意外的都会引起重绘
+   */
+
+  // 举例 🌰
+  /* var oBox = document.getElementById("box");
+  var boxStyle = oBox.style;
+  boxStyle.width = "100px"; // 回流+重绘
+  boxStyle.height = "100px"; // 回流+重绘
+  boxStyle.margin = "10px"; // 回流+重绘
+  boxStyle.padding = "10px"; // 回流+重绘
+  boxStyle.backgroundColor = "black"; // 重绘
+  boxStyle.border = "1px solid red"; // 回流+重绘
+  boxStyle.color = "#fff"; // 重绘
+  boxStyle.fontSize = "32px"; // 回流+重绘
+
+  var h1 = document.createElement("h1");
+  h1.innerHTML = "我是一个h1";
+  document.body.appendChild(h1); // appendChild只会重绘+回流h1自己，如果插入到某元素之前，那么h1后面所有的元素都需要回流+重绘 */
+
+  // 优化
+
+  // display: none 办法
+  /* var oBox = document.getElementById("box");
+  var boxStyle = oBox.style;
+  boxStyle.display = "none";
+  boxStyle.width = "100px"; // 回流+重绘
+  boxStyle.height = "100px"; // 回流+重绘
+  boxStyle.margin = "10px"; // 回流+重绘
+  boxStyle.padding = "10px"; // 回流+重绘
+  boxStyle.backgroundColor = "black"; // 重绘
+  boxStyle.border = "1px solid red"; // 回流+重绘
+  boxStyle.color = "#fff"; // 重绘
+  boxStyle.fontSize = "32px"; // 回流+重绘
+  boxStyle.display = "block"; */
+
+  /* var oBox = document.getElementById("box");
+  oBox.className += " active"; */
+  // 这样的方式一次性操作样式
+
+  // 适用于动态值
+  /* var oBox = document.getElementById("box");
+  oBox.style.cssText =  "width: 25px; height: 100px; background-color: green"; */
+
+  // 创建文档碎片
+  /* var frag = document.createDocumentFragment();
+  for (let i = 0; i < 10; i++) {
+    frag.appendChild(document.createElement("li"));
+  }
+  document.body.appendChild(frag); */
+
+  // 缓冲数据
+  /* var offset = div.offsetWidth;
+  div.style.offset = offset + "px"; */
+
+  // 切勿操作 margin，用 position 代替
+
+  // 1、回流比重绘的代价更高
+  // 2、回流产生的
+
+  // ## 任务队列
+</script>

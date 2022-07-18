@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      class="box"
+      style="
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        top: 0;
+        left: 0;
+      "
+    ></div>
+  </body>
+</html>
+<script>
+  // ## keydown keyup
+  // 一般在 document 环境下
+  // 执行顺序 keydown> keypress> keyup
+  /* document.onkeydown = function () {
+    console.log("keydown");
+  };
+  document.onkeyup = function () {
+    console.log("keyup");
+  };
+   document.onkeypress = function () {
+    console.log("keypress");
+  } */ // keydown 一直按着会连续触发
+
+  // ## keydown 和 keypress 的区别
+  // keydown 没有 charCode，keypress 有
+  // 他们都有 keyCode
+
+  // keypress 更多的是区分大小写，但是只能显示 ASCLL 码里面的字符
+  // 按键按下的是 ASCLL 里面的字符才能触发事件
+  // onkeydown 是任何按键都能触发事件
+  /* document.onkeypress = function (event) {
+    var event = event || window.event;
+    console.log(1,String.fromCharCode(event.charCode))
+  };
+  document.onkeydown = function (event) {
+    console.log(2)
+  }; */
+
+  /* document.onkeypress = function (event) {
+    var event = event || window.event;
+    console.log(event.keyCode, event.charCode);
+  };
+  document.onkeydown = function (event) {
+    var event = event || window.event;
+    console.log(event.keyCode, event.charCode);
+  }; */
+
+  var oDiv = document.getElementsByClassName("box")[0];
+  document.onkeydown = function (event) {
+    var event = event || window.event,
+      code = event.keyCode,
+      bLeft = parseInt(window.getComputedStyle(oDiv, null).left),
+      bTop = parseInt(window.getComputedStyle(oDiv, null).top);
+
+    switch (code) {
+      case 37:
+        oDiv.style.left = bLeft - 5 + "px";
+        break;
+      case 39:
+        oDiv.style.left = bLeft + 5 + "px";
+        break;
+      case 38:
+        oDiv.style.top = bTop - 5 + "px";
+        break;
+      case 40:
+        oDiv.style.top = bTop + 5 + "px";
+        break;
+    }
+  };
+</script>

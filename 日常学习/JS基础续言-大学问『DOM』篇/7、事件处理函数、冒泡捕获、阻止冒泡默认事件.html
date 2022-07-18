@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* div {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+      } */
+      .wrapper {
+        width: 300px;
+        height: 300px;
+        background-color: green;
+      }
+      .outer {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+      }
+      .inner {
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div></div> -->
+    <div class="wrapper">
+      <div class="outer">
+        <div class="inner"></div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  // ## 事件
+  // 什么是事件
+  // onclick = function(){ // 事件反馈}
+  // 绑定事件处理程序 事件处理函数
+  // 事件是元素本身就具有的能力
+  // 绑定事件 = 绑定事件的处理函数，而不是绑定事件本身
+  /* var oDiv = document.getElementsByTagName("div")[0];
+  oDiv.onclick = function () {
+    this.style.backgroundColor = "orange";
+  }; */
+  // oDiv 就是事件源
+  // 事件 + 事件的反馈 = 交互体验
+
+  // 绑定事件处理函数的方式
+  // el.onclick = function(){}
+  // 这样的方式同一个函数同一个处理函数会覆盖
+
+  // <div onclick="console.log(1)" onclick="handleClickDiv"></div>
+
+  // el.addEventListener("click", function(){}, false)
+  // IE9 以下不兼容，W3C的规范
+  // 一个元素可以绑定多个同样的事件处理函数
+  /* var oDiv = document.getElementsByTagName("div")[0];
+  oDiv.addEventListener(
+    "click",
+    function () {
+      console.log("点击事件");
+    },
+    false
+  );
+  oDiv.addEventListener(
+    "click",
+    function () {
+        console.log(this)
+      console.log("点击事件2");
+    },
+    false
+  ); */
+
+  // 同一个元素绑定多个同一个事件，但是这样的形式会认为是同一个事件处理函数
+  /* var oDiv = document.getElementsByTagName("div")[0];
+  oDiv.addEventListener("click", test, false);
+  oDiv.addEventListener("click", test, false);
+  function test() {
+    console.log(1);
+  } */
+
+  // IE8及以下版本绑定方式
+  // el.attachEvent("onclick",function(){
+  //   this 指向 window
+  //   })
+
+  // ==========
+  // ## 事件处理程序的运行环境 this
+  // onclick = function(){} 和 addEventListener 中的this指向自己
+
+  // ==========
+  /* function addEvent(el, type, fn) {
+    if (el.addEventListener) {
+      el.addEventListener(type, fn, false);
+    } else if (el.attachEvent) {
+      el.attachEvent("on" + type, function () {
+        fn.call(el);
+      });
+    } else {
+      el["on" + type] = fn;
+    }
+  }
+  var oDiv = document.getElementsByTagName("div")[0];
+  addEvent(oDiv, "click", function () {
+    console.log(1);
+  }); */
+
+  // ==========
+  // ## 解除事件处理程序
+  // el.onclick = null
+  // el.removeEventListener("click", test, false) // 必须和 el.addEventListener 参数一样(函数引用)
+  // el.detachEvent("onClick", test)
+
+  // ==========
+  // ## 事件冒泡和捕获
+
+  var wrapper = document.getElementsByClassName("wrapper")[0];
+  var outer = document.getElementsByClassName("outer")[0];
+  var inner = document.getElementsByClassName("inner")[0];
+  // 点击子元素，这个事件要向上冒泡，直到传到顶层的父级元素停止，这种现象就叫事件冒泡
+  // DOM嵌套结构：子点击事件 =》 父点击事件 =》 父点击事件
+  // addEventListener(el,fn, true)
+  // true 事件捕获 false 事件冒泡
+  // 事件捕获
+  // 从父级到子级出发点击事件的过程这样的现象
+  // 必须是嵌套关系
+  // 嵌套关系最顶层父级元素开始捕获事件只到事件源停止
+  // 先捕获，后冒泡
+  // focus blur change submit reset select 这些事件没有冒泡事件
+  // IE浏览器没有事件捕获
+  // webkit 内核有关系
+
+  /* wrapper.addEventListener(
+    "click",
+    function () {
+      console.log("bubbleWrapper");
+    },
+    false
+  );
+  outer.addEventListener(
+    "click",
+    function () {
+      console.log("bubbleOuter");
+    },
+    false
+  );
+  inner.addEventListener(
+    "click",
+    function () {
+      console.log("bubbleInner");
+    },
+    false
+  );
+  wrapper.addEventListener(
+    "click",
+    function () {
+      console.log("wrapper");
+    },
+    true
+  );
+  outer.addEventListener(
+    "click",
+    function () {
+      console.log("outer");
+    },
+    true
+  );
+  inner.addEventListener(
+    "click",
+    function () {
+      console.log("inner");
+    },
+    true
+  ); */
+
+  // 阻止冒泡
+  // W3C=》 event.stopPropagation()
+  // event =》 事件对象，发生事件的一些信息
+  // IE8 存在 window 上
+  // IE 的方式 e.cancelBubble
+  wrapper.addEventListener(
+    "click",
+    function (event) {
+      console.log("bubbleWrapper");
+    },
+    false
+  );
+  outer.addEventListener(
+    "click",
+    function (event) {
+      event.cancelBubble = true;
+      console.log("bubbleOuter");
+    },
+    false
+  );
+  inner.addEventListener(
+    "click",
+    function (event) {
+      // 兼容IE8
+      var e = event || window.event;
+      e.stopPropagation();
+      console.log("bubbleInner");
+    },
+    false
+  );
+
+  // 兼容性写法
+  function cancelBubble(e) {
+    var e = e || window.event;
+    if (e.stopPropagation) {
+      e.stopPropagation();
+    } else {
+      e.cancelBubble = true;
+    }
+  }
+
+  // 取消默认事件
+  // 无法在 addEventListener 上使用
+  // document.oncontextmenu = function(){
+  //   console.log(1)
+  //   return false
+  // }
+
+  // W3C 的方式 e.preventDefault()
+  //  IE9 不兼容
+  // document.addEventListener("contextmenu",function(event){
+  //   var event= event || window.event
+  //   event.preventDefault()
+  // },false)
+
+  // IE9 以下
+  // e.returnValue = false
+</script>

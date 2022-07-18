@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ========== 分割 ==========
+  // ## 继承关系
+
+  /* Professor.prototype = {
+    name: "Mr.Zhang",
+    tSkill: "JAVA",
+  };
+  function Professor() {
+    this.age = "40";
+  }
+
+  // 继承 Professor
+  Teacher.prototype = new Professor();
+  function Teacher() {
+    this.name = "Mr.Wang";
+    this.mSkill = "JAVASCRIPT";
+  }
+
+  // 继承 Teacher
+  Student.prototype = new Teacher();
+  function Student() {
+    this.name = "Mr.Li";
+    this.pSkill = "HTML/CSS";
+  }
+  const student = new Student();
+  console.log(student); */
+
+  // ======
+
+  // 没有必要继承 Teacher 和 Professor 的 name 属性
+  /* Teacher.prototype.wife = "Ms.Liu";
+  function Teacher(name, mSkill) {
+    this.name = name;
+    this.mSkill = mSkill;
+  }
+  function Student(name, mSkill, age, major) {
+    // 实际上也算不上继承，只是借用 Teacher 的属性
+    Teacher.call(this,name, mSkill);
+    this.age = age;
+    this.major = major;
+  }
+  var student = new Student("Mr.Zhang", "JS/JQ", 18, "Computer");
+  console.log(student);
+  console.log(student.wife); // undefind 无法获取到 Teacher 的 prototype */
+
+  // ======
+
+  // 公共原型
+  /* Teacher.prototype = {
+    pSkill: "JS/JQ",
+  };
+  function Teacher(name) {
+    this.name = name;
+    this.tSktill = "JAVA";
+  }
+
+  // 没有原型，那就加一个
+  Student.prototype = Teacher.prototype;
+  // Student 设置原型的 age 属性也会反应到 Teacher.prototype
+  Student.prototype.age = 18;
+  function Student() {
+    Teacher.call(this, "Mr.Wang");
+  }
+  console.log(Teacher.prototype);
+  console.log(new Student()); */
+
+  // ======
+
+  // 圣杯模式
+  // 隔离但是又可以继承
+  /* function Teacher() {
+    this.name = "Mr.Li";
+    this.tSkill = "Java";
+  }
+  Teacher.prototype = {
+    pSkill: "JS/JQ",
+  };
+
+  function Student() {
+    this.name = "Mr.Wang";
+  }
+
+  // 定义一个中转构造函数
+  function Buffer() {}
+  // 赋值原型，实现继承的效果
+  Buffer.prototype = Teacher.prototype;
+  Student.prototype = new Buffer();
+  // 当 Student.prototype.age 的时候其实是在 Buffer 的实例上赋值了一个 age 属性
+  // Buffer:{
+  //    age: 20
+  //    prototype: Teacher.prototype
+  // }
+  // 这样就不会影响到 Teacher.prototype
+  Student.prototype.age = 20;
+  console.log(new Student()); */
+
+  // ======
+
+  /* // 封装优化圣杯模式
+  function inherit(target, origin) {
+    function Buffer() {}
+    Buffer.prototype = origin.prototype;
+    target.prototype = new Buffer();
+    // 设置构造器和继承源
+    target.prototype.constructor = target;
+    target.prototype.super_class = origin;
+  }
+
+  function Teacher() {}
+  function Student() {}
+  inherit(Student, Teacher);
+
+  var s = new Student();
+  console.log(s); */
+
+  // ========== 分割 ==========
+  // ## 圣杯模式利用闭包包装
+
+  // 利用立即执行环境，防止全局污染，变量命名笔记随意，利于后期维护
+  /* var inherit = (function () {
+    var Buffer = function () {};
+    return function (target, origin) {
+      Buffer.prototype = origin.prototype;
+      target.prototype = new Buffer();
+      // 设置构造器和继承源
+      target.prototype.constructor = target;
+      target.prototype.super_class = origin;
+    };
+  })();
+  inherit(Teacher, Student);
+  function Teacher() {}
+  function Student() {}
+  
+  var s = new Student();
+  console.log(s); */
+
+  // ========== 分割 ==========
+  // 作业
+  // 1、打印一个参数能被3或5或7整除的数
+  // 2、打印斐波那契数列的第N位
+  // 3、打印从0到一个数的累加值
+</script>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <a href="">我是超链接</a>
+    <div></div> -->
+    <!-- <div>
+      <p>我是p标签</p>
+    </div> -->
+    <!-- <div>
+      <h1>h1标签</h1>
+      <a href="">我是超链接</a>
+      <p>我是p标签</p>
+    </div> -->
+    <!-- <div>
+      <h1></h1>
+    </div> -->
+    <!-- <ul id="list"></ul> -->
+    <!--  <div>
+      <h1>123</h1>
+      <p>234</p>
+      <a href="">345</a>
+    </div> -->
+    <!-- <ul id="list"></ul> -->
+  </body>
+</html>
+<script>
+  // ## hasChildNodes() 判断节点下有没有子节点
+
+  // ==========
+  // ## createElement() 创建元素节点
+  // 出自 Document 对象 document.createElement
+  /* var div = document.createElement("div"); // 创建DOM对象后，放在堆内存当中
+  div.innerHTML = "123";
+  document.body.appendChild(div); */
+
+  // ## createTextNode() 创建文本节点
+  /* var text = document.createTextNode("这是创建的文本节点");
+  document.body.appendChild(text); */
+
+  // ## createComment() 创建注释节点
+  /* var comment = document.createComment("这是创建的注释节点");
+  document.body.appendChild(comment); */
+
+  // ==========
+  // ## appendChild() 增加子节点
+  // 在 Node.prototype 下
+  // appendChild() 会把元素放到本身的末尾
+  /*
+  var div = document.getElementsByTagName("div")[0];
+  var p = document.createElement("p");
+  p.innerHTML = "创建的P标签";
+  var text = document.createTextNode("创建的文本节点");
+  var comment = document.createComment("创建的注释节点");
+  div.appendChild(p);
+  div.appendChild(text);
+  div.appendChild(comment);
+  */
+
+  // appendChild() 还可以剪切节点
+  /*
+  var a = document.getElementsByTagName("a")[0];
+  var div = document.getElementsByTagName("div")[0];
+  div.appendChild(a);
+  */
+
+  // ## insertBefore(new, origin) 插入：把new节点插入到origin节点之前
+  // 在 Node.prototype 下
+  /*
+  var div = document.getElementsByTagName("div")[0];
+  var p = document.getElementsByTagName("p")[0];
+  var a = document.createElement("a");
+  div.insertBefore(a, p);
+  var h1 = document.createElement("h1");
+  h1.innerHTML = "创建的H1";
+  div.insertBefore(h1, a);
+  */
+
+  // ==========
+  // ## removeChild()
+  // 在 Node.prototype 下
+  // removeChild 只是在DOM文档结构中删除掉，但无法从内存当中删除
+  /* var div = document.getElementsByTagName("div")[0];
+  var p = document.getElementsByTagName("p")[0];
+  div.removeChild(p); */
+
+  // ==========
+  // ## remove()
+  // 真正的删除，会从内存中删除
+  /* var p = document.getElementsByTagName("p")[0];
+  p.remove(); */
+
+  // ==========
+  // ## replaceChild(new, origin) 替换节点
+  /* var div = document.getElementsByTagName("div")[0];
+  var h1 = document.getElementsByTagName("h1")[0];
+  var h2 = document.createElement("h2");
+  div.replaceChild(h2, h1); */
+
+  // ==========
+  // ## innerHTML 操作元素的内部内容
+  // 在 HTMLElement.prototype 下
+  /* var div = document.getElementsByTagName("div")[0];
+  console.log(div.innerHTML);
+  div.innerHTML = "123";
+  console.log(div.innerHTML);
+  div.innerHTML += "456";
+  console.log(div.innerHTML); */
+
+  /*  var list = document.getElementById("list");
+  var data = [
+    {
+      title: "天下无贼",
+      area: "中国🇨🇳",
+    },
+    {
+      title: "复仇者联盟",
+      area: "美国🇺🇸",
+    },
+    {
+      title: "千与千寻",
+      area: "日本🇯🇵",
+    },
+  ];
+  data.forEach((item, index) => {
+    list.innerHTML += `<li>${item.title}--${item.area}</li>`;
+  }); */
+
+  // ## innerText
+  // 老版本火狐不支持用 textContent 代替
+  // textContent IE老版本不支持
+  /*  
+  var div = document.getElementsByTagName("div")[0];
+  console.log(div.innerText); // 元素下全部的文本
+
+  // innerText会把标签内容转化为文本内容（字符实体）
+  div.innerText = "<a>a标签内容</a>" 
+  */
+
+  // ==========
+  // 元素节点的方法
+  // ## setAttribute() 设置元素新增属性名和属性值
+  /* var div = document.getElementsByTagName("div")[0];
+  div.setAttribute("id", "box");
+
+  // ## getAttribute() 获取元素新增属性名和属性值
+  console.log(div.getAttribute("id"));
+
+  // HTML5 版本中给给元素新增了data-*的属性
+  // 有兼容性
+  div.setAttribute("data-name", "aixiaoye");
+  div.setAttribute("data-age", "18");
+  console.log(div.dataset); // dataset 管理了自定义属性，必须是 data- 开头 */
+
+  // ==========
+  // document.createDocumentFragment // 创建文档片段
+  /* 
+  var oUl = document.getElementById("list");
+  var oDiv = document.createElement("div");
+  var oFrag = document.createDocumentFragment("div");
+
+  // for (let i = 0; i < 1000; i++) {
+  //   var oLi = document.createElement("li");
+  //   oLi.innerHTML = "这是第" + i + "个项目";
+  //   oLi.className = "list-item";
+  //   // oLi.setAttribute("class", "list-item");
+  //   oUl.appendChild(oLi); // 循环循环，重复的回流
+  // }
+
+  // 先把所有的内容放到一个不在节点树的元素上，最后再把这个元素放到节点树长
+
+  for (let i = 0; i < 1000; i++) {
+    var oLi = document.createElement("li");
+    oLi.innerHTML = "这是第" + i + "个项目";
+    oLi.className = "list-item";
+    // oDiv.appendChild(oLi);
+    oFrag.appendChild(oLi);
+  }
+  // oUl.appendChild(oDiv);
+  oUl.appendChild(oFrag);
+
+  // 但是多了一个节点
+
+  // createDocumentFragment 对象不在DOM节点中 不存在dom节点树当中，就是一个临时的容器，不会引起页面的回流
+  // 最后吧所有的内容都交给dom，大大提升性能
+  */
+
+  // ===========
+  // 模拟 hasChildNodes 原型上编程 hasChild 判断父元素有没有子元素节点
+  // 在原型上编程，寻找兄弟元素节点，参数为正：找之后的第N个，参数为负：找之前的第N个，参数为0，找自己
+  // 创建元素的方法创建一个ul>li列表
+  // 遍历一个父级元素下面所有的子元素节点（子节点>子节点 递归的方式）
+  // 原型上封装 insertAfter 方法
+  // 元素列表倒序排列
+
+  Element.prototype.insertAfter = function (target, afterNode) {};
+</script>

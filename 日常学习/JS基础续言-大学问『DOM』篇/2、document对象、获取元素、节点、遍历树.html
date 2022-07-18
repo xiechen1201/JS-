@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 实例获取元素 -->
+    <!--  <div id="testId" name="testName">123</div>
+    <span>1234</span>
+    <span>5678</span>
+    <div class="testClassName">123</div>
+    <input type="text" name="username" /> -->
+    <!-- 实例节点树 -->
+    <ul>
+      <li>
+        <h2>我是标题标签</h2>
+        <p>我是段落标签</p>
+        <a href="">我是超链接</a>
+        <!-- 我是注释 -->
+      </li>
+    </ul>
+  </body>
+</html>
+<script>
+  // ## document 对象
+  // html 就是一个文档，也就是 document（整个HTML）,html 的父级节点是 document，html 的父节点是 null
+  // document 的父级元素是 null
+  // document 是对象 Object
+
+  // ## 获取元素
+  /* document.getElementById("testId"); // 通过ID查找元素，IE8以下版本浏览器不区分大小写
+  document.getElementById("testName"); // IE8以下版本浏览器可以通过 name 属性找到元素
+  // 返回类数组，类数组是对象，类数组表现的方式类似数组，但是没有数组的方法
+  document.getElementsByTagName("span"); // 通过元素的标签名来获取元素
+  document.getElementsByClassName("testClassName"); // 通过元素的类名来获取元素，IE8及以下没有该方法
+  document.getElementsByName("username"); // 通过元素的name属性来获取元素
+
+  // HTML5 新引入的 WEB API
+  // 优点：简单方便
+  // 缺点：性能不太好，不实时
+  document.querySelector(".testName"); // 以CSS选择器的方式获取元素，返回第一个匹配的元素
+  document.querySelectorAll("div"); //  以CSS选择的方式获取元素，返回匹配的伪数组
+
+  var divs = document.querySelectorAll("div");
+  console.log(divs);
+  divs[0].remove();
+  console.log(divs); */
+
+  // =========
+  // ## 遍历节点树
+  // 节点树
+  // 节点包含元素，元素是节点的一部分
+  // 节点有
+  // 元素节点（也就是DOM 元素） 1
+  // 属性节点 2
+  // 文本节点 3
+  // 注释节点 8
+  // document节点 9
+  // documentFragment节点 11
+
+  /* 
+  // parentNode 父节点（一个子元素只有一个父元素）
+  var a = document.getElementsByTagName("a")[0];
+  console.log(a.parentNode);
+  console.log(a.parentNode.parentNode);
+
+  // childNodes 子节点集合
+  // var li = document.getElementsByTagName("li")[0];
+  // console.log(li.childNodes); // 返回中有多种节点包含空格和注释
+
+  // firstChild 第一个子元素
+  var li = document.getElementsByTagName("li")[0];
+  console.log(li.firstChild);
+
+  // lastChild 最后一个子元素
+  var li = document.getElementsByTagName("li")[0];
+  console.log(li.lastChild);
+
+  // previousSibling 前一个兄弟节点
+  // nextSibling 后一个兄弟节点
+  var p = document.getElementsByTagName("p")[0];
+  console.log(p.previousSibling);
+  console.log(p.nextSibling); */
+
+  // =========
+  // 遍历元素节点树
+
+  /* 
+  // parentElement 父元素 只返回元素 IE9以下不支持
+  var li = document.getElementsByTagName("li")[0];
+  console.log(li.parentElement);
+  // children 子元素 只返回元素 IE7及以下不支持
+  console.log(li.children);
+  // childElementCount = children.length
+
+  // firstElementChild IE9以下不支持
+  console.log(li.firstElementChild);
+  // lastElementChild IE9以下不支持
+  console.log(li.lastElementChild);
+  // nextElementSibling IE9以下不支持
+  console.log(li.nextElementSibling);
+  // previousElementSibling IE9以下不支持
+  console.log(li.previousElementSibling); */
+
+  // =========
+</script>

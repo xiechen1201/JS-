@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // 函数执行 this 存在，AO 保存了 this 对象，this 指向 window
+  /* function Car(color) {
+    // window.color
+    this.color = color;
+  }
+  Car(); */
+
+  // this 在没有实例化的时候，它的指向是 widnow，一旦实例化了构造函数以后，this 指向实例化对象
+  // car1 和 car2 都用的是 this，但是数据不一样，证明 this 并不是指向 function，而指向实例化对象
+  // 不实例化对象的时候 this 指向 window
+  /* function Car(color, brand) {
+    this.color = color;
+    this.brand = brand;
+  }
+  var car1 = new Car("red", "Benz");
+  var car2 = new Car("black", "Mazda");
+  console.log(car1.color, car2.color); */
+
+  // 构造函数中的 this 到底是怎么回事？
+  /* function Car(color, brand) {
+    this.color = color;
+    this.brand = brand;
+  }
+  var car1 = new Car("red", "Benz");
+  console.log(car1.color); */
+  /**
+   * 代码执行先创建 GO
+   * GO = {
+   *    Car: function,
+   *    car1: undefind
+   * }
+   *
+   * new Car() 的时候就相当于函数执行，函数执行就会创建 AO
+   * AO = {
+   *
+   * }
+   *
+   * 因为 new 关键字的存在，Car() 就会变成构造函数，构造函数的 AO 默认创建 this 对象
+   * new 关键字创建了 this 对象，最后 return this
+   * AO = {
+   *    this:{}
+   * }
+   *
+   * 开始执行构造函数，构造函数内 this 赋值
+   * AO = {
+   *    this:{
+   *        color: color
+   *        brand: brand
+   *    }
+   * }
+   *
+   * 赋值完成后 return this 对象，赋值给 car1
+   * GO = {
+   *    Car: function,
+   *    car1: this
+   * }
+   *
+   * 所以可以访问 car1.color
+   *
+   */
+
+  // 模拟一个 new 的过程
+  /* function Car(color, brand) {
+    var me = {};
+    me.color = color;
+    me.brand = brand;
+    return me;
+  }
+  var car1 = Car("red", "Benz");
+  console.log(car1.color); */
+
+  // 当显式 return 引用值的时候返回引用值
+  // 如果显式 return 原始值则依然返回 this 对象
+  /* function Car() {
+    this.color = "red";
+    this.brand = "Benz";
+    return 123;
+    // return {};
+    // return [];
+    // return function () {};
+  }
+  var car1 = new Car();
+  console.log(car1, car1.color); */
+
+  // ================ 包装类 ================
+  // 原始值没有自己的方法和属性
+  var a = 1;
+  console.log(a.length);
+  var b = "abc";
+
+  // new Number() 内置的构造函数
+  // 实例化了一个对象
+  // 当一个数字经过 new Number() 以后就变成了一个数字对象
+  /* var c = new Number(1);
+  c.len = 1;
+  console.log(c);
+
+  // 参数运算的时候，包装对象又会转换为原始值
+  console.log(c + 1); */
+
+  // new Number() new String() new Boolean()
+  /* var a = "abc";
+  console.log(a);
+
+  var aa = new String("abc");
+  console.log(aa);
+
+  var bb = aa + "BCD";
+  console.log(bb); */
+
+  // undefind 和 null 不可以设置任何方法和属性
+
+  // JS 包装类
+  // JS 看见原始值
+  /*  var a = 123; // 原始值，原始值没有方法和属性
+  a.len = 3; // 看你是原始值的数字，你没有资格有对象，如果你非要加那我就给你加一个 
+  // new Number(123)，现在可以赋值属性了
+  // 但是 new Number(123) 没有被变量保存，然后删除属性
+  // 访问 a.len 的时候，len 属性已经被删除了 */
+
+  // 为什么能打印出 length 属性
+  /* var str = "abc";
+  console.log(str.length);
+  // 字符串经过包装类，包装对象中有 length 属性
+  // new String("abc").length */
+
+  // var str = "abc";
+  // str.length = 1;
+  // console.log(str);
+  // 看到原始值所以 length 属性进行 new String(str).length = 1;
+  // 没变量保存，所以删除属性
+
+  // =============面试题=============
+
+  /* var name = "languiji";
+  name += 10; // languiji10
+  var type = typeof name; // "string"  new String(typeof name) 可以保存 text 属性
+  if (type.length === 6) { // true
+    // new String(type).text = "strign" 
+    // delete type
+    type.text = "strign"; 
+    
+  }
+  console.log(type.text); */
+
+  /* function Car(brand, color) {
+    this.brand = "Benz";
+    this.color = "red";
+  }
+  var car = new Car("Mazda", "blank");
+  console.log(car); // Benz red
+  */
+
+  /* function Test(a, b, c) {
+    var d = 1;
+    this.a = a;
+    this.b = b;
+    this.c = c;
+
+    function f() {
+      d++;
+      console.log(d);
+    }
+    this.g = f;
+    // return this
+    // 形成闭包
+  }
+  var test1 = new Test();
+  test1.g(); // 2
+  test1.g(); // 3
+
+  var test2 = new Test()
+  test2.g() // 2 */
+
+  /* var x = 1,
+    y = (z = 0);
+  function add(n) {
+    return (n = n + 1);
+  }
+
+  y = add(x);
+
+  function add(n) {
+    return (n = n + 3);
+  }
+
+  z = add(x);
+
+  // x=1 y=4 z=4
+  console.log(x, y, z); */
+
+  /* function foo1(x) {
+    console.log(arguments); // [1,2,3,4,5]
+    return x;
+  }
+  foo1(1, 2, 3, 4, 5);
+
+  // 不会执行
+  function foo2(x) {
+    console.log(arguments);
+    return x;
+  }(1, 2, 3, 4, 5);
+
+  (function foo3(x) {
+    console.log(arguments); // [1,2,3,4,5]
+    return x;
+  })(1, 2, 3, 4, 5); */
+
+  /* function b(x, y, a) {
+    a = 10;
+    console.log(arguments[2]); // 10
+  }
+  b(1, 2, 3); */
+</script>

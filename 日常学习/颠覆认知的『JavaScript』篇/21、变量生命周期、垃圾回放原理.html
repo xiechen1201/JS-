@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ## 垃圾回收机制
+  // 执行环境的时候负责管理代码执行过程中使用的内存。
+  /**
+   * 1、找出不再使用的变量
+   * 2、释放其占用的内存
+   * 3、固定的时间间隔运行
+   */
+  // 全局变量浏览器、页面关闭就会释放，因为全局变量可能随时被调用
+  // 局部变量只会在函数执行过程中存在
+
+  // ## 闭包问题
+  /* function test() {
+    var a = 10;
+    return function () {
+      console.log(a++);
+    };
+  }
+  var test1 = test();
+  test1();
+  test1();
+  // 解除闭包的引用
+  var test1 = null;
+  test1(); */
+
+  // ## 系统如何知道变量还有没有用？
+
+  // ==========
+
+  // ## 标记清除法
+  /* function test() {
+    var a = 0; // 标记进入环境
+  }
+  test(); // 标记 a 离开环境
+  var b = 0;
+  var c = 1;
+  // 最后排除全局和闭包AO中的变量，然后清理标志离开环境的变量 */
+
+  // ## 引用计数法
+  // 记录每个值被引用的次数，次数为 0 就会回收
+  /* function test() {
+    var a = new Object(); // a = 1;
+    var b = new Object(); // b = 1;
+
+    // var c = a; // a + 1 = 2
+    // c = b; // a - 1 = 1, b + 1 = 2;
+
+    // 循环引用
+    a.prop = b; // b = 2
+    b.prop = a; // a = 2
+
+    a = null; // 解除引用
+    b = null;
+  }
+  test();
+   */
+</script>

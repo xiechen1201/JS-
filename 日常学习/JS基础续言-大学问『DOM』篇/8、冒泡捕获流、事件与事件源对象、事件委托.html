@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        width: 300px;
+        height: 300px;
+        background-color: green;
+      }
+      .outer {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+      }
+      .inner {
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="outer">
+        <div class="inner"></div>
+      </div>
+    </div>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+    </ul>
+  </body>
+</html>
+<script>
+  // ## 事件流
+  // 描述从页面中接收事件的顺序，冒泡、捕获都属于事件流
+  // IE 提出事件冒泡流（Event Bubbling）
+  // Netscape 网景公司提出事件捕获流（Event Capturing）
+
+  // inner.onclick = function(){} 无法使用事件捕获
+
+  // ## 事件流
+  // 事件捕获和事件冒泡中间还有个阶段
+  // 处于目标阶段 =》 捕获阶段、处于目标阶段、冒泡阶段
+
+  // 到目标阶段的时候按照事件先后次序执行
+
+  /* var wrapper = document.getElementsByClassName("wrapper")[0];
+  var outer = document.getElementsByClassName("outer")[0];
+  var inner = document.getElementsByClassName("inner")[0];
+
+  wrapper.addEventListener("click",function () {
+      console.log("wrapper冒泡");
+  },false);
+  outer.addEventListener("click",function () {
+      console.log("outer冒泡");
+  },false);
+  inner.addEventListener("click",function () {
+      console.log("inner冒泡");
+  },false);
+  wrapper.addEventListener("click",function () {
+      console.log("wrapper捕获");
+  },true);
+  outer.addEventListener("click",function () {
+      console.log("outer捕获");
+  },true);
+  inner.addEventListener("click",function () {
+      console.log("inner捕获");
+  },true); */
+
+  // ## 事件对象
+  // 当对某个元素进行某个事件的触发，浏览器会把该事件触发后的详情信息包装成对象传到函数中
+  /* var oDiv = document.getElementsByClassName("wrapper")[0];
+  oDiv.onclick = function (event) {
+    var event = event || window.event;
+    console.log(event);
+    // srcElement、target 就是事件源对象
+    // 火狐只有target ，IE只有srcElement
+    var target = event.target || target.srcElement;
+    console.log(target);
+  }; */
+
+  // ## 事件委托或者事件代理
+  /* var oUl = document.getElementsByTagName("ul")[0],
+    oLi = document.getElementsByTagName("li"),
+    length = oLi.length,
+    item;
+
+  //   for (var i = 0; i < length; i++) {
+  //     item = oLi[i];
+  //     item.onclick = function () {
+  //       console.log(this.innerText);
+  //     };
+  //   }
+
+  oUl.addEventListener(
+    "click",
+    function (event) {
+      var event = event || window.event;
+
+      // 真正的事件源是 li
+      if (event.target.nodeName === "LI") {
+        console.log(event.target.innerText);
+        // 类数组不能使用数组的方法
+        // 继承 Array.prototype.index 后就可以查找 li 的下标
+        console.log(Array.prototype.indexOf.call(oLi, event.target));
+      }
+    },
+    false
+  ); */
+
+  // 事件委托的好处：
+  // 不需要循环性能比较好，
+
+  // ==========
+  // ## 作业：去做一个TODOList列表
+</script>

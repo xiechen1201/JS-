@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // 编写程序将数组扁平化并将扁平化数组后去重，最终得到一个升序且不重复的一维数组
+  var arr = [
+    [1, 2, 3],
+    [3, 4, 5, 5],
+    [6, 7, 8, 9, [11, 12, [12, 13, [14]]]],
+    10,
+  ];
+
+  // ## 扁平化
+
+  // for 循环 + 递归
+  /* function flatten(arr) {
+    var _arr = arr || [];
+    var newArr = [];
+
+    for (let i = 0; i < _arr.length; i++) {
+      if(_isArr(_arr[i])){
+        newArr = newArr.concat(flatten(_arr[i]))
+      }else{
+        newArr.push(arr[i])
+      }
+    }
+
+    function _isArr(item){
+      return {}.toString.call(item) === "[object Array]"
+    }
+
+    return newArr
+  }
+  console.log(flatten(arr));
+  */
+
+  /* Array.prototype.flatten = function () {
+    var _arr = this;
+    var newArr = [];
+    var toStr = {}.toString;
+
+    if (toStr.call(_arr) !== "[object Array]") {
+      throw new Error("只有数组才能调用flatten方法");
+    }
+
+    _arr.forEach((item) => {
+      toStr.call(item) === "[object Array]"
+        ? (newArr = newArr.concat(item.flatten()))
+        : newArr.push(item);
+    });
+
+    return newArr;
+  };
+  console.log(arr.flatten()); */
+
+  // ES6 的flat方法默认可以解决二维数组，Infinity 可以无穷扁平
+  /* console.log(arr.flat(Infinity)); */
+
+  // 完整答案
+  let res = Array.from(new Set(arr.flat(Infinity))).sort(function (a, b) {
+    return a - b;
+  });
+  console.log(res);
+</script>

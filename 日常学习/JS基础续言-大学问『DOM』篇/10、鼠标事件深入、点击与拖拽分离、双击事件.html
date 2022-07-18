@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+      }
+      a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <button>点击</button> -->
+    <!-- <a href="javascript:;">百度</a> -->
+    <div class="box"></div>
+  </body>
+</html>
+<!-- <script src="./10、鼠标事件深入、点击与拖拽分离、双击事件.js"></script> -->
+<script>
+  // ##
+  // 事件触发的顺序 mousedown=> mouseup=> click
+  // var oLink = document.getElementsByTagName("a")[0];
+  // dragClick(oLink);
+
+  // ## 处理边界
+  function elDrag(el) {
+    var offsetPos = null;
+    var wWidth = document.documentElement.clientWidth,
+      wHeight = document.documentElement.clientHeight,
+      elWidth = parseInt(window.getComputedStyle(el, null).width),
+      elHeight = parseInt(window.getComputedStyle(el, null).height);
+
+    el.addEventListener(
+      "mousedown",
+      function (event) {
+        offsetPos = {
+          X: event.offsetX,
+          Y: event.offsetY,
+        };
+        document.addEventListener("mousemove", mousemove, false);
+        document.addEventListener("mouseup", mouseup, false);
+      },
+      false
+    );
+    function mousemove(event) {
+      var elLeft = event.pageX - offsetPos.X,
+        elTop = event.pageY - offsetPos.Y;
+
+      if (elLeft <= 0) {
+        elLeft = 0;
+      } else if (elLeft >= wWidth - elWidth) {
+        elLeft = wWidth - elWidth;
+      }
+
+      if (elTop <= 0) {
+        elTop = 0;
+      } else if (elTop >= wHeight - elHeight) {
+        elTop = wHeight - elHeight;
+      }
+
+      el.style.left = elLeft + "px";
+      el.style.top = elTop + "px";
+    }
+    function mouseup() {
+      document.removeEventListener("mousemove", mousemove, false);
+    }
+  }
+
+  elDrag(document.getElementsByClassName("box")[0]);
+
+  // ## 右键
+  // 鼠标 左中右=》0 1 2
+  // 对 mousedown 和 mouseup 事件来说，event 对象上会有一个 button 属性，表示按下或释放的是哪个按键。DOM 为这个 button 属性定义了 3 个值：0 表示鼠标主键、1 表示鼠标中键（通常也是滚轮键）、2 表示鼠标副键。
+  // document.onmousedown = function (event) {
+  //   console.log(event.button);
+  // };
+</script>

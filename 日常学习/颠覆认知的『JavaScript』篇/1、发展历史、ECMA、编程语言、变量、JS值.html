@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    4、编程语言 编译型 解释型 翻译过程：
+    源码--》编译器--》机器语言--》可执行的文件
+    源码--》解释器--》解释一行就执行一行 脚本语言 javascript
+    是客户端脚本语言，php是服务端脚本语言 脚本引擎=》解释器=》 JavaScript =
+    ECMAScript DOM BOM JS引擎是单线程 单线程和多线程
+    单线程同时可以做一件事情，多线程可以同时做多件事情 JavaScript
+    引擎是单线程，但可以模拟多线程， 轮转时间片 短时间之内轮流执行多个任务的片段
+    1、任务1 任务2 2、切分任务1 任务2 3、随机排列这些任务片段，组成队列
+    4、按照这个队列顺序，将任务片段送进JS进程 5、JS线程执行一个又一个的任务片段
+
+    <!--  -->
+    <!-- 引入外部的JS文件 -->
+    <script type="text/javascript" src="./js/index.js"></script>
+    <!-- 内部的JS -->
+    <script type="text/javascript">
+      console.log("hello world");
+    </script>
+    <!-- 不能在js脚步引入内写代码 -->
+    <script src="./js/index.js">
+      console.log("Hello World")
+    </script>
+
+    <!-- type="text/javascript" 表示脚本文件是 js -->
+
+    <!-- 变量 -->
+    <!-- 变量是容器，存储数据，后续使用 -->
+    关键字 var var a 变量声明 a=3 变量赋值 var a = 3 变量声明并赋值 = 表示赋值
+    连续声明 var x = 1, y = 2; 重复复制 var a = 1; a = 2; console.log(a) ==> 2
+    命名规范 不能数字开头 可以 字母、_、$ 开头 可以包含 字母、_、$ 开头
+    不能用关键字和保留字命名 https://www.yuque.com/xiechen/ga1rqp/gd84e1
+    语义化、避免拼音 小驼峰 myEnglishName 大驼峰 MyEnglishName
+    <script>
+      // 运算 > 赋值 优先级
+      var a = 1;
+      var b = 2;
+      var z = a + b; // 3
+
+      // JS的值
+      // 原始值，基本类型
+      // Number String Boolean Undefind Null
+      var a = 1;
+      var b = 3.14;
+      var str = "Hello World";
+      //   Boolean：true 和 false 两个值
+      // Undefind：
+      // Null 空值 初始化组建、函数、销毁函数、占位
+
+      // 动态语言--脚本语言--解释型语言--弱类型语言
+      // 静态语言--编译型语言--强类型语言
+      // JS是弱类型语言
+
+      //  引用值
+      //  Object Array Function Date Regexp
+
+      // 栈和堆
+
+      var arr1 = [1, 2, 3];
+      var arr2 = arr1;
+      arr1.push(4, 5);
+      console.log(arr2);
+      arr1 = [6, 7, 8];
+      console.log(arr1);
+      console.log(arr2);
+
+    
+    </script>
+  </body>
+</html>

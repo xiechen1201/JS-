@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ## 链式操作
+  /*
+  var sched = {
+    wakeup: function () {
+      console.log("跑步");
+      return this;
+    },
+    morning: function () {
+      console.log("去购物");
+      return this;
+    },
+    noon: function () {
+      console.log("休息一下");
+      return this;
+    },
+  };
+  sched.wakeup().morning().noon();
+   */
+
+  // ==========
+
+  // ## 对象遍历 for...in...
+  /* var car = {
+    brand: "Benz",
+    color: "red",
+    displacement: "3.0",
+    lang: 5,
+    width: 2.5,
+  };
+  for (const key in car) {
+    console.log(car[key]);
+  } */
+
+  /* var arr = [1, 2, 3, 4, 5];
+  for (const key in arr) {
+    console.log(key);
+  } */
+
+  // ==========
+
+  // ## hasOwnProperty() 判断一个属性是否属于自己实例对象本身（不会到原型上寻找）！！！
+
+  /* var obj = {
+    name: "job",
+    age: 32,
+  };
+  console.log(obj.hasOwnProperty(obj.name)); */
+
+  /* Object.prototype.name = "Object";
+
+  Car.prototype = {
+    lang: 5,
+    width: 2.5,
+  };
+  function Car() {
+    this.brand = "Benz";
+    this.color = "red";
+    this.displacement = "3.0";
+  }
+  var car = new Car();
+  console.log(car);
+
+  // for...in... 会把实例对象+原型链上所有的属性都打印出来
+  for (const key in car) {
+    // 只要实例化对象本身的属性
+    if (car.hasOwnProperty(key)) {
+      console.log(car[key]);
+    }
+  } */
+
+  // ## in 语句，判断一个属性是否属于自己实例对象本身（会到原型上寻找）！！！
+  /* var car = {
+    brand: "Benz",
+    color: "red",
+  };
+  // 类似 car["displacement"]
+  console.log("displacement" in car); */
+
+  /* Car.prototype.displacement = "3.0";
+  function Car() {
+    this.brand = "Benz";
+    this.color = "red";
+  }
+  var car = new Car();
+  console.log("displacement" in car); */
+
+  // ## instanceof 判断某个对象是否是某个构造函数的实例
+  /* // A对象的原型里到底有没有B构造函数的原型（原型链的关系）
+  function Car() {}
+  var car = new Car();
+
+  console.log(car instanceof Car); // true
+  console.log(car instanceof Object); // true
+  console.log([] instanceof Array); // true
+  console.log([] instanceof Object); // true
+  console.log({} instanceof Object); // true */
+
+  // 判断是不是数组
+  /* var a = [];
+  console.log(a.constructor);
+  console.log(a instanceof Array);
+  console.log(Object.prototype.toString.call(a)); // 最靠谱的方式 */
+  /**
+   * Object.protoprtype = {
+   *    toString: function(){
+   *        toString 里面的 this 更改为 arr
+   *        this.toString()
+   *    }
+   * }
+   */
+
+  // ==========
+
+  // ## 普通函数内部的 this
+  // 函数内部的this默认指向 window
+  /* function test(b) {
+    var a = 1;
+    var b = b;
+    function c() {}
+    this.d = 3; // window.d = 3
+  }
+  test(123);
+  console.log(d); // 3 */
+  /**
+   * AO = {
+   *    this: window,
+   *    argument: [123]
+   *    a: undefind,
+   *    b: undefind, => 123
+   *    c: function,
+   *    d: undefind,
+   * }
+   */
+
+  // ## 构造函数内部的 this 指向实例化对象
+  /**
+   * 1、创建 this 对象
+   * var this = {}
+   *
+   * 2、赋值原型
+   * var this = {__proro__: Test.prototype}
+   *
+   * 3、属性赋值
+   * var this = {__proro__: Test.prototype, name: 123}
+   *
+   * 4、返回 this 并指向实例化对象
+   *
+   */
+  /*  function Test() {
+    this.name = 123;
+  }
+  var test = new Test(); */
+  /**
+   * AO = {
+   *    this: {window 对象} => {__proro__: Test.prototype, name: 123}
+   * }
+   * GO = {
+   *    Test: function
+   *    test: {}
+   * }
+   */
+
+  // ## call/apply
+  /* function Person() {
+    this.name = "张三";
+    this.age = 18; 
+  }
+  function Programmer() {
+    // 改变 this 指向
+    Person.call(this);
+    this.work = "Programmer";
+  }
+  var p = new Programmer();
+  console.log(p); */
+
+  // ==========
+
+  // ## callee/caller
+
+  // callee
+  /* function test(a, b, c) {
+    console.log(arguments.callee); // 指向当前所在的函数
+    console.log(arguments.callee.length);
+    console.log(test.length);
+    console.log(arguments.length);
+  }
+  test(1, 2); */
+
+  /* function test1() {
+    console.log(arguments.callee);
+    function test2() {
+      console.log(arguments.callee);
+    }
+    test2()
+  }
+  test1() */
+
+  // 立即执行函数实现 n-1 的累加
+  /* function sum(n) {
+    if (n <= 1) {
+      return 1;
+    }
+    return n + arguments.callee(n - 1);
+  }
+  console.log(sum(10)) */
+  /* var sum = (function (n) {
+    if (n <= 1) {
+      return 1;
+    }
+    // 当不知道函数名的时候如何递归？
+    return n + arguments.callee(n - 1);
+  })(10);
+  console.log(sum) */
+
+  // caller
+  /* test1();
+  function test1() {
+    test2();
+  }
+  function test2() {
+    // 返回当前被调用 test2 函数的函数引用
+    // 必须放到一个执行函数内，放到全局无效
+    console.log(test2.caller);
+  } */
+
+  // ==========
+  // 面试题
+  /* foo(1, 2, 3, 4, 5);
+  function foo() {
+    // 不存在 this 指向的问题
+    bar.apply(null, arguments);
+    // bar.call() 函数真正执行
+  }
+  function bar() {
+    console.log(arguments); // 1 2 3 4 5
+  } */
+
+  /* JS 的 typeof 可能返回的值有哪些？
+  number string boolean undefind object function
+  object: null */
+
+  /* function b(x, y, a) {
+    // 形参和实参映射关系，谁改都会相互影响
+    arguments[2] = 10;
+    alert(a); // 10
+  }
+  b(1, 2, 3); */
+
+  /* var f =
+    (function f() {
+      return "1";
+    },
+    function g() {
+      return 2;
+    });
+  console.log(typeof f); // function */
+
+  /* var f = (function f() {
+    return "1";
+  },
+  function g() {
+    return 2;
+  })();
+  console.log(typeof f); // number */
+
+  /*  undefind == null // true
+  undefind === null // false
+  isNaN("100") // false
+  parseInt("1a") == 1 // true */
+
+  /*  {} == {} // flase，因为引用值对比的是堆内存的地址
+  var obj = {}
+  var obj1 = obj
+  var obj2 = obj
+  obj1 == obj2 // true */
+
+  /* var a = "1";
+  function test() {
+    var a = "2";
+    this.a = "3";
+    console.log(a);
+  }
+  test(); // 2
+  new test(); // 2 打印的是a，不是 this.a
+  console.log(a); // 3 因为函数内部的this 指向 window，相当于把 window.a = 1 改成 window.a = 3 */
+
+  /* var a = 5;
+  function test() {
+    a = 0;
+    console.log(a);
+    console.log(this.a);
+    var a;
+    console.log(a);
+  }
+  test(); // 0 5 0
+  new test(); // 0 undefind 0，实例化对象没有赋值 a */
+  /* GO = {
+      a:undefined > 5
+      test: function
+  }
+  AO = {
+      a: undefined > 0
+  } */
+</script>

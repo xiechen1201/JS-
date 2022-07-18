@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      html,
+      body,
+      .container {
+        height: 100%;
+      }
+      .column {
+        height: 100%;
+        float: left;
+      }
+      .middle {
+        width: 100%;
+        background-color: green;
+      }
+      .middle .main {
+        height: 100%;
+        margin: 0 200px 0 150px;
+      }
+      .left {
+        width: 150px;
+        margin-left: -100%;
+        background-color: orange;
+      }
+      .right {
+        width: 200px;
+        margin-left: -200px;
+        background-color: red;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 双飞翼 -->
+    <div class="container">
+      <div class="column middle">
+        <div class="main">12121212121212121212121212121212</div>
+      </div>
+      <div class="column left"></div>
+      <div class="column right"></div>
+    </div>
+  </body>
+</html>

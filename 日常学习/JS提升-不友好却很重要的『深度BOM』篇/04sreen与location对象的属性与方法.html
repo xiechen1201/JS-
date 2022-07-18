@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // # window.screen
+      // 大部分属性只支持IE，所以不常用
+
+      // ## window.location
+      // URL: uniform resource locator 统一资源定位器
+
+      // https:// 协议
+      // www.baidu.com // 域名
+      // :8080 // 端口号（http默认是:80，https默认是:443）
+      // /s // 具体文件夹
+      // ?content=内容&num=1 // 参数（问号后面都为参数）
+      // #demo // 哈希值
+
+      // 用 window.location 去获取URL的信息
+      // 以下属性均是可读可写的
+      window.location.href; // 当前的URL
+      window.location.protocol; // 协议
+      window.location.hostname; // 域名，主机名
+      window.location.port; // 端口号
+      window.location.pathname; // 路径，文件夹
+      window.location.search; // 参数
+      window.location.hash; // 哈希
+
+      // 单页面应用
+      // SPA: q
+      // 模拟多个页面但是不跳转的前提下实现多页面
+
+      // window.onhashchange 事件hash更改后触发
+    </script>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>【实战】正则实例集合、不捕获分组</title>
+  </head>
+  <body>
+    <!-- onkeyup="test(this)" -->
+    <input type="text" name="" id="test" />
+    <button onclick="test1()">点击</button>
+  </body>
+</html>
+<script>
+  // 接下来的顺序：正则 查漏补缺 BOM JS运动 数组拓展
+
+  var oTest = document.getElementById("test");
+
+  function test(obj) {
+    // var reg = /\s/g; // 匹配空格
+    // var reg = /\D/g; // 匹配非数字
+    // var reg = /\W+/; // 不仅包含字母数字下划线，还包括希腊字母、俄文字母
+    var reg = /[^A-z0-9_]+/;
+    obj.value = obj.value.replace(reg, "");
+  }
+
+  // 身份证号
+  /* function test1() {
+    var val = oTest.value,
+      reg =
+        /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9xX]$/;
+    console.log(reg.test(val));
+  } */
+
+  // 密码强度
+  // 至少6位，包含一个大写，一个小写，一个数字，一个特殊
+  // 当有多个包含的时候要用正向预查 ?=
+  /* function test1() {
+    var val = oTest.value,
+      reg = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[~!@#$%^&*])/;
+    console.log(reg.test(val));
+  } */
+
+  // 验证图片文件名
+  /* function test1() {
+    var val = oTest.value,
+      reg = /\.jpg|\.gif|\.png/;
+    console.log(reg.test(val));
+  } */
+
+  // 用户名校验
+  // 4-16位 0-9 A-z _-
+  /* function test1() {
+    var val = oTest.value,
+      reg = /[0-9A-z_-]{4,16}/;
+    console.log(reg.test(val));
+  } */
+
+  // [A-z0-9]+\.[com|cn]
+  // 检查邮箱
+  /* function test1() {
+    var val = oTest.value,
+      reg = /^[A-z0-9]+\@[A-z0-9]+\.com$/;
+    console.log(reg.test(val));
+  } */
+
+  // ## 不捕获分组
+
+  // a(?=b)，找a后面是b的a，
+  // a(?!b)，找a后面不是b的a
+  // a(?:b)，不让字符串捕获该子表达式（不捕获分组）
+
+  /* var str = "abc";
+  var reg = /(?:a)(b)(c)/;
+  console.log(str.match(reg));  // ["bc", "b", "c"]
+  */
+  // 用子表达式括起来，不仅能匹配(b)(c)还能单独匹配 (b) 和 (c)
+  // 这样的行为称为 捕获分组（捕获子表达式）
+
+  // 匹配座机
+  /* function test1() {
+    var val = oTest.value;
+    var reg = /^(([0\+]\d{2,3}-)?(0\d{2,3})-)(\d{7,8})/;
+    console.log(reg.test(val));
+  } */
+
+  // 匹配手机号
+  /* function test1() {
+    var val = oTest.value;
+    var reg = /^(\(\+86\))?(13[09]|14[57]|15[0-9]|16[7]|17[0678]|18[0-9])\d{8}/;
+    console.log(reg.test(val));
+  } */
+
+  // 匹配日期
+  // 1990-12-01
+  /* function test1() {
+    var val = oTest.value;
+    var reg = /^(19|20)\d{2}(\-|\.\/)(0[19]|1[0-2])\2(0[1-9]|[12][0-9])/;
+    console.log(reg.test(val));
+  } */
+</script>

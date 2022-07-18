@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log(0.1 + 0.2); // 0.30000000000000004
+      // 整数和小数都是 Number 类型的
+      // 十进制
+      // 1234567890
+      // 二进制
+      // 01010101
+
+      // Javascript 采用 64 位双精度浮点数存储
+
+      // 10进制
+      // 10
+      // 转换为
+      // 二进制 10/2 = 5 ... 0
+      // 5 / 2 = 2 ... 1
+      // 2 / 2 = 1 ... 0
+      // 1 / 2 = 0 ... 1
+      // 1010
+
+      // 因为二进制数非常大，所以浏览器不是直接存储的，而是转换为科学计数法
+      // 15000 =》 1.5 x 10^4
+      // 1010 => 1.01 x 2^3
+    </script>
+  </body>
+</html>

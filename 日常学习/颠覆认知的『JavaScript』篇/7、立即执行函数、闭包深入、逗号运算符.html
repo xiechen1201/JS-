@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 全局的函数是不释放的，始终存在GO中，可以随时随地的调用
+
+      // 每次页面加载求数据的和，只调用一次
+      /* add(1, 2);
+      function add(a, b) {
+        console.log(a + b);
+      } */
+
+      // 不需要手动执行，自动执行
+      // 执行完成后立即销毁
+      // 新的函数，立即执行函数 - 初始化函数
+      // IIFE(immediaely invoked function expression)
+
+      // 写法1
+      /* (function () {})(); */
+
+      // 写法2 w3c 建议的写法
+      /* (function () {})(); */
+
+      /* (function () {
+        var a = 1;
+        var b = 2;
+       console.log(a+b);
+      })(); */
+
+      // 函数名无效
+      // test 名无法打印，因为执行完成立即销毁
+      /* (function test() {
+        var a = 2;
+        var b = 2;
+        console.log(a + b);
+      })(); */
+      //   console.log(test) // error
+
+      // 函数传参数
+      /*   (function (a, b) {
+          console.log(a + bs);
+        })(3, 4); */
+
+      // 获取返回值
+      /*  var num = (function (a, b) {
+        return a + b;
+      })(3, 4);
+      console.log(num) */
+
+      // 只有是表达式才能被执行符号"()"执行
+      // 用"()"包裹的函数是表达式
+      /* function test() {}(); */ // 语法错误
+      /* var test = function(){}(); */ // 执行
+      /* (function test(){})() */ // 执行
+
+      // 立即执行且销毁
+      /* var test  = function(){}();
+      console.log(test); // undefind，test 函数被销毁 */
+
+      // 表达式函数的函数名被忽略
+      // 立即执行函数能够
+      /* (function test() {
+        console.log(123);
+      })(); */
+
+      // 加函数声明变成函数表达式且执行
+      // + - ! && || 都能将函数声明转换为函数表达式，转换成函数表达式后可以()立即执行，函数名就无效了
+      /* +function test(){
+          console.log(1)
+      }() */
+
+      // ## 面试题
+      /* function test(a,b) {}(6); */
+      // 不传值的时候，认为是个立即执行函数，函数声明和执行符好默认是语法错误
+      // 传值的情况下不报错，将括号理解为表达式，代码解析成
+      /**
+       * function test(){};
+       * (6,5)  // 逗号运算符
+       * */
+
+      // 逗号运算符
+      // 返回逗号最后的数据
+      // console.log((6, 5)); // 5
+      // console.log(2 - 1, 6 + 5, 24 + 1); // 25
+
+      // 面试题
+      // 闭包问题导致 i=10
+      /*  function test() {
+        var arr = [];
+        for (var i = 0; i < 10; i++) {
+          arr[i] = function () {
+            document.write(i + " ");
+          };
+        }
+        return arr;
+      }
+      var myArr = test();
+      console.log(myArr);
+
+      for (var index = 0; index < myArr.length; index++) {
+        myArr[index]();
+      } */
+
+      // 解题
+      /* function test() {
+        var arr = [];
+        for (var i = 0; i < 10; i++) {
+          // 保存一个独立的作用域
+          (function (j) {
+            arr[j] = function () {
+              // 打印的是参数
+              document.write(j + " ");
+            };
+          })(i);
+        }
+        return arr;
+      }
+      var myArr = test();
+
+      for (var index = 0; index < myArr.length; index++) {
+        myArr[index]();
+      } */
+
+      /*
+       ul>li
+       for (let i = 0; i < liArr.length; i++) {
+        liArr[i].onclick = function(){
+            console.log(i)
+        }
+      } */
+
+      /* var fn =
+        (function test1() {
+          return 1;
+        },
+        function test2() {
+          return 2;
+        })();
+      console.log(typeof fn); // number */
+
+      //  (function b() {}) 是一个表达式，表达式中 b 被忽略，所以 b 是 undefind
+      /* var a = 10;
+      if (function b() {}) {
+        a += typeof b;
+      }
+      console.log(a); // 10undefind */
+
+      /* function classA() {
+        var stuArr = [1, 2, 3];
+        function join() {
+          stuArr.push(1);
+          console.log(stuArr);
+        }
+        function leave() {
+          stuArr.pop(1);
+          console.log(stuArr);
+        }
+        return {
+          join,
+          leave,
+        };
+      }
+      var classb = classA();
+      classb.join();
+      classb.join();
+      classb.leave(); */
+    </script>
+  </body>
+</html>

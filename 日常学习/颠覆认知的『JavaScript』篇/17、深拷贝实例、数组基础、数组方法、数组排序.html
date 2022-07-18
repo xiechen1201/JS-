@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ## 声明数组的方式
+  /* var arr = [1, 2, 3, 4, 5]; // 字面量
+  var arr1 = new Array(); // 通过系统内置的Array构造函数（不推荐）
+  var arr2 = Array(); // 不使用 */
+  // 所有数组都继承于 Array.prototype，所以可以使用 Array 的方法
+
+  // 每个元素在数组中都有一个下标，index,数组下标从0开始
+  // 对象访问属性 obj.name -> obj["name"]
+  // 数组底层的机制是 obj 的机制，数组中存放的元素相当于 obj 的键值
+  // 数组就是对象的另外一种形式
+
+  // ==========
+  // ## 空值
+
+  /* var arr = [, 2, 3, 4, 5,]; // 末尾的逗号会被忽略，这样的数组也称为稀松数组
+  console.log(arr.length); */
+
+  /* var arr = new (, 1, 2, , 3, 4,); // error，构造函数创建数组，不能有空值 */
+
+  /* var arr = new Array(5); // [empty*5] 5个空的值，相当于设置一个空数组的长度 [, , , ,] */
+
+  /* var arr = new Array(5.2); // error */
+
+  // ==========
+  // ## 访问数组不存在的下标
+
+  /* var arr = [1, 2, 3, 4, 5];
+  console.log(arr[5]); // undefind 同样还是 obj 访问属性的机制 obj[10] 返回 undefind，数组实际就是对象的另外一种形式，底层机制是一样的
+  arr[5] = "test1";
+  arr[0] = "test2";
+  console.log(arr); */
+
+  // ==========
+  // ## push unshift 方法
+  // 数组使用方法的时候都是继承于 Array.prototype
+
+  /* 
+  // push 是在数组的最后新增数据
+  // push 和 unshift 的返回方法执行后数组的新长度
+  var arr = [2, 3, 4];
+  arr.push(5);
+  arr.push(5, 6, 7);
+  console.log(arr);
+
+  // unshift 是在数组的最前新增数据
+  // unshift 同样的返回方法执行后数组的新长度
+  arr.unshift(1);
+  arr.unshift(11, 12);
+  console.log(arr); 
+  */
+
+  // 自己实现 array.push 方法
+  /* Array.prototype.myPush = function () {
+    for (let index = 0; index < arguments.length; index++) {
+      this[this.length] = arguments[index];
+    }
+    return this.length;
+  };
+  var arr = [];
+  var res = arr.myPush(1, 2, 3);
+  console.log(res, arr); */
+
+  // ==========
+  // ## pop 和 shift 方法
+  /* 
+  // pop 从数组的末尾删除一个元素，这个方法返回被删除的元素！！！
+  var arr = ["a", "b", "c"];
+  var res = arr.pop();
+  console.log(res, arr);
+
+  // shift 从数组的开头删除一个元素，这个方法返回被删除的元素！！！
+  var res1 = arr.shift();
+  console.log(res1, arr); 
+  */
+
+  // ==========
+  // ## reverse，数组反转倒叙
+  /* var arr = [1, 2, 3];
+  console.log(arr.reverse()); */
+
+  // ==========
+  // splice(开始的下标, 删除的个数, 要替换的元素)
+  // 这个方法返回被删除元素组成到的数组，如果没有删除元素，则返回空数组
+
+  // var arr = ["a", "b", "c"];
+
+  /* arr.splice(1, 1);
+  console.log(arr); // ["a", "c"]; */
+
+  /* arr.splice(1, 1, 4, 5, 6);
+  console.log(arr); // ['a', 4, 5, 6, 'c'] */
+
+  /* arr.splice(3, 0, "d");
+  console.log(res,arr); // ['a', 'b', 'c', 'd'] */
+
+  /* arr.splice(-1, 0, "d");
+  console.log(arr); // ['a', 'b', 'd', 'c']，-1 表示从数组末尾开始数 */
+
+  // ==========
+  // ## sort() 数组排序
+  // 这个方法返回排序后的数组
+  // sort() 是按照 ACCII 码表进行排序的
+
+  /* var arr = [-1, -5, 8, 0, 2];
+  arr.sort();
+  console.log(arr); // [-1, -5, 0, 2, 8] */
+
+  /*  var arr = ["b", "z", "h", "i", "a"];
+  var res = arr.sort();
+  console.log(arr, res); // ['a', 'b', 'h', 'i', 'z'] */
+
+  /* var arr = [27, 49, 5, 7]; // 先比较第一位
+  console.log(arr.sort()); // [27, 49, 5, 7] */
+
+  /* 
+  // 自定义排序规则
+  var arr = [27, 49, 5, 7];
+  // a 和 b 必须有，参数名随意
+  // 必须有返回值；返回负数，a就排前面；返回正数，b排前面；返回0，保持不动
+  // sort() 内部其实是循环对比a和b,根据return值决定a和b谁在前面（也就是冒泡排序进行比对）
+  arr.sort(function (a, b) {
+    // if (a > b) return 1;
+    // else return -1;
+    // 简化为
+    return a - b;
+  });
+  console.log(arr); 
+  */
+
+  // ## sort() 随机排序
+  /* var arr = [1, 2, 3, 4, 5, 6];
+  arr.sort(function (a, b) {
+    // Math.random() 返回 0-1 之间的小数
+    // var rand = Math.random();
+    // 大于 0 表示 rand 肯定是 大于 0.5
+    // return rand - 0.5 > 0 ? 1 : -1;
+
+    // 简化
+    return Math.random() - 0.5；
+  });
+  console.log(arr); */
+
+  // ## 数组对象排序
+  /* var arr = [
+    { son: "Jenny", age: 18 },
+    { son: "Jone", age: 10 },
+    { son: "Ben", age: 16 },
+    { son: "Crytal", age: 3 },
+    { son: "Lucy", age: 11 },
+  ];
+  arr.sort(function (a, b) {
+    return a.age - b.age;
+  });
+  console.log(arr) */
+
+  // ## 根据字符串长度排序
+  /* var arr = ["12345", "1", "1234", "12", "1234567"];
+  arr.sort(function (a, b) {
+    return a.length - b.length;
+  });
+  console.log(arr) */
+
+  // ## 总结
+  // push() unshift() pop() shift() splice() reverse()  sort()
+  // 以上方法都会修改原数组
+
+  // ==========
+  // 作业
+  // 用 splice() 重写数组的原型上的 unshift 方法，方法名为 myUnshift()
+  // 请按照字节数排序数组 ["我爱你","OK","Hello","你说WHAT","可以"] str.charCode
+</script>

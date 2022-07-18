@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // obj ==> [[prototype]]： Object ==> obj的原型
+  // 从实例对象出发沿着 __proto__ 一直找到其原型，直zshi找到
+
+  // ##
+  // 原型链不完整， obj1 没有链条，导致下面全部不能使用 __proto__
+  // 原型链断掉就不能使用 __proto__ 属性 
+  /* 
+  var obj1 = Object.create(null);
+  obj1.a = 1;
+
+  var obj2 = Object.create(obj1);
+  obj2.b = 2;
+  console.log(obj2.__proto__); // undefind
+  */
+</script>

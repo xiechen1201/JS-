@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ## 正向预查
+  // /1(?=2)/ 匹配数字1，条件是1后面是2
+
+  // ## 贪婪模式和非贪婪模式
+
+  // 正则默认是贪婪模式：能匹配多绝不匹配少
+  /* var str = "abc{{efg}}abcd{{xyz}}";
+  var reg = /{{.*}}/g;
+  console.log(str.match(reg)); // ['{{efg}}abcd{{xyz}}'] */
+
+  // 用 ? 号将 贪婪模式变为 非贪婪模式
+  // ? 在 * 后面就表示非贪婪模式
+  // .? 就表示 任意字符出现{0, 1}次
+  /* var str = "abc{{efg}}abcd{{xyz}}";
+  var reg = /{{.*?}}/g;
+  console.log(str.match(reg)); // ['{{efg}}abcd{{xyz}}'] */
+
+  /* var str = "aaaaaa";
+  var reg = /\w?/g;
+  console.log(str.match(reg)); // ['a', 'a', 'a', 'a', 'a', 'a', ''] */
+
+  /* var str = "aaaaaa";
+  var reg = /\w??/g;
+  console.log(str.match(reg)); // ['', '', '', '', '', '', ''] */
+
+  // ## String.prototype.replace() 方法
+  // replace(要替换的字符串, 要替换成什么字符串)
+  // 该方法本身不具备全局匹配的能力
+
+  /* var str = "JSplusplus";
+  console.log(str.replace("plus", "+")) // JS+plus */
+
+  /* var str = "JSplusplus";
+  console.log(str.replace(/plus/g, "+")) // JS++ */
+
+  // 用 $ 去拿子表达式中的引用
+  /* var str = "aabbccdd";
+  var reg = /(\w)\1(\w)\2/g;
+  console.log(str.replace(reg, "$2$2$1$1")); */
+
+  /* var str = "aabbccdd";
+  var reg = /(\w)\1(\w)\2/g;
+  var str1 = str.replace(reg, function ($, $1, $2) {
+    // $ 当前匹配出来的字符串 aabb 和 ccdd
+    // $1 是第一个子表达式
+    // $2 是第二个子表达式
+    // console.log($, $1, $2)
+
+    return $2 + $2 + $1 + $1;
+  });
+  console.log(str1) */
+
+  /* var str = "js-plus-plus";
+  var reg = /\-p/g;
+  var reg = str.replace(reg, "P");
+  console.log(reg); */
+
+  // 用表达式的方式将-字母转为大写
+  // function(匹配到的字符串, 第一个表达式)
+  // 用括()包起来就是表达式
+  /* var str = "js-plus-plus";
+  var reg = /\-(\w)/g;
+  var reg = str.replace(reg, function ($, $1) {
+    return $1.toUpperCase();
+  });
+  console.log(reg); */
+
+  // Plus 转换为 _plus
+  /* var str = "jsPlusPlus";
+  var reg = /([A-Z])/g;
+  var res = str.replace(reg, function ($, $1) {
+    return "_" + $1.toLowerCase();
+  });
+  console.log(res); */
+
+  // xxyyzz => XxYyZz
+  /* var str = "xxyyzz",
+    reg = /(\w)\1(\w)\2(\w)\3/,
+    res = str.replace(reg, function ($, $1, $2, $3) {
+      return (
+        $1.toUpperCase() + $1 + $2.toUpperCase() + $2 + $3.toUpperCase() + $3
+      );
+    });
+  console.log(res); */
+
+  // aabbcc => a$b$c$ 不能使用 function
+  // $后面是你转化的字符
+  // 其他字符正常
+  /* var str = "aabbcc",
+    reg = /(\w)\1(\w)\2(\w)\3/,
+    res = str.replace(reg,`$1$$$2$$$3`);
+  console.log(res); */
+
+  /* var str = "aa\\bb\\cc",
+    reg = /\\/g;
+    // res = str.replace(reg,`$1$$$2$$$3`);
+  console.log(str.match(reg));
+  console.log(reg.exec(str)); */
+
+  // aabbcc =》 abc
+  /* var str = "aabbcc",
+    reg = /(\w)\1(\w)\2(\w)\3/g;
+  console.log(str.replace(reg, "$1$2$3")); */
+
+  //   var str = "aaaaabbbbbcccccccc",
+  //     reg = /(\w)\1*/g;
+  //   console.log(str.replace(reg, "$1"));
+  //   console.log(str.match(reg));
+
+  // 100000000000 =》 100,000,000
+  /* var str = "100000000000";
+   var reg = /(?=(\B)(\d{3})+$)/g;
+  console.log(str.replace(reg, "$1,")); */
+
+  // {{}}}替换值
+  var str = "My name is {{name}}. I'm {{age}} years old.";
+  var reg = /{{(.*?)}}/g;
+  var res = str.replace(reg, function ($, $1) {
+    return {
+      name: "Jone",
+      age: 32,
+    }[$1];
+  });
+  console.log(res);
+</script>

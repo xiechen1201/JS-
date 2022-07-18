@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      class="box"
+      style="border: 1px solid #000; width: 2000px; height: 2000px"
+    ></div>
+  </body>
+</html>
+<script>
+  // ==========
+  // ## 浏览器的怪异模式和标准模式
+  /**
+   * <!DOCTYPE html>
+   * 表示该文档兼容 W3C 标准，也就是标准模式
+   * 不写这个标签表示文档就是怪异模式
+   * 浏览器默认向后兼容
+   *
+   * 查询是否是标准模式
+   * document.compatMode => "CSS1Compat" 标准模式
+   * "BackCompat" 怪异模式
+   */
+
+  // ==========
+  // ## 查看滚动条的距离
+  // 常规的方式：window.pageXOffset/window.pageYOffset
+  // 但是 IE8 及以下不支持
+  // IE8 支持：document.body.scrollLeft/scrollTop（IE8怪异模式支持）
+  // 或者 document.documentElement.scrollLeft/scrollTop（IE8标准模式支持）
+  // 不常见：window.scrollX/scrollY
+
+  // 滚动条是按照百分比显示的，看的是真正滚动条的距离
+
+  // ## 封装兼容性滚动距离
+  /* function getScrollOffset() {
+    if (window.pageXOffset) {
+      return {
+        left: window.pageXOffset,
+        top: window.pageYOffset,
+      };
+    } else {
+      // 兼容IE
+      return {
+        left: document.body.scrollLeft || document.documentElement.scrollLeft,
+        top: document.body.scrollTop || document.documentElement.scrollTop,
+      };
+    }
+  }
+  console.log(getScrollOffset()); */
+
+  // ==========
+  // ## 整个文档的宽高
+  // document.body.scrollHeight/scrollWeight
+  // document.documentElement.scrollHeight/scrollWeight
+
+  // 类似 window.innerWidth + window.pageXOffset
+  // 理解为整个文档的真正宽度/高度
+
+  // 兼容模式
+  // console.log(
+  //    document.documentElement.scrollWidth || document.body.scrollWidth
+  // );
+
+  // ==========
+  // ## 获取浏览器可视区域的尺寸（窗口的宽高）
+  // 常规的方式：window.innerWidth/innerHeight
+  // IE8级以下的方式：document.documentELement.clientWidth/clientHeight（标准模式）
+  // document.body.clientWidth/clientHeight（怪异模式）
+
+  // 判断兼容模式来兼容
+  /* 
+  function getViewPortSize() {
+    if (window.innerWidth) {
+      return {
+        width: window.innerWidth,
+        heigth: window.innerHeight,
+      };
+    } else {
+      if (document.compatMode === "BackCompat") {
+        return {
+          width: document.body.clientWidth,
+          height: document.body.clientHeight,
+        };
+      } else {
+        return {
+          width: document.documentElement.clientWidth,
+          height: document.documentElement.clientHeight,
+        };
+      }
+    }
+  }
+  console.log(getViewPortSize())
+   */
+
+  // window.outerWidth/outerHeight
+  // outerWidth 比 innerWidth 多包含了侧边栏、工具栏等
+
+  // ==========
+  // 了解
+  // ## getBoundingClientRect()
+  // IE下没有 height、weigth 属性
+  // 不是实时的
+  /* var box = document.getElementsByClassName("box")[0];
+  console.log(box.getBoundingClientRect()); */
+
+  // ==========
+  // ## 偏移量
+  // offsetLeft/offsetTop
+  // 只认有定位的父元素，一直找到body
+  /* var box = document.getElementsByClassName("box")[0];
+  console.log(box.offsetLeft);
+  console.log(box.offsetTop);
+  console.log(box.offsetParent); // 返回带有定位的父级元素 */
+
+  // 封装方法，不管有没有父级定位元素，都要找到距离body的距离
+  /* function getElemDocPostion(el) {
+    var parent = el.offsetParent;
+    var offsetLeft = el.offsetLeft;
+    var offsetTop = el.offsetTop;
+
+    while (parent) {
+      offsetLeft += parent.offsetLeft;
+      offsetTop += parent.offsetTop;
+      parent = parent.offsetParent;
+    }
+
+    return {
+      left: offsetLeft,
+      top: offsetTop,
+    };
+  }
+  console.log(getElemDocPostion(box)) */
+
+  // ==========
+  // ## 操作滚动条
+  // window.scroll(x, y); 滚动到的坐标
+  // window.scrollTo(x, y); 
+  // window.scrollBy(x, y); 滚动的距离,每一次滚动多少，累加，负数和正数均可
+  window.scroll(100, 100);
+  window.scrollTo(100, 100);
+
+  // ==========
+</script>
+

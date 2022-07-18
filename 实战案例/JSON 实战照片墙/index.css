@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: #3c3c3c;
+}
+body {
+  font-size: 12px/1.5 tahom;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+li {
+  list-style: none;
+}
+div {
+  box-sizing: border-box;
+}
+img {
+  width: 100%;
+  display: block;
+}
+.clearfix::after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+.cover {
+  min-width: 1200px;
+}
+.student-album {
+  width: 1200px;
+  margin: 80px auto;
+}
+.album-title {
+  height: 100px;
+  text-align: center;
+}
+.album-title h1 {
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 35px;
+  color: #000;
+  font-family: "fzzzh";
+}
+.album-title h1::before {
+  content: " ";
+  position: absolute;
+  top: 25px;
+  left: 380px;
+  width: 50px;
+  height: 2px;
+  background-color: #000;
+}
+.album-title h1::after {
+  content: " ";
+  position: absolute;
+  top: 25px;
+  right: 380px;
+  width: 50px;
+  height: 2px;
+  background-color: #000;
+}
+.album-title p {
+  font-size: 20px;
+}
+.album-wrap .list-item {
+  float: left;
+  position: relative;
+  width: 216px;
+  height: 216px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.album-wrap .list-item .mask {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  text-align: center;
+}

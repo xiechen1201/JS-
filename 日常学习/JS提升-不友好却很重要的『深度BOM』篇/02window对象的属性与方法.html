@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="handClick()">点击</button>
+    <script>
+      // ## window.name
+
+      // ## window.open()
+      // 参数1：url
+      // 参数2：窗口的name（跨域的时候笔记有用）
+      // 参数3：窗口特征（详见表格，多个属性用,分割）
+      // 参数4: true/false 是否将当前打开窗口的历史纪录替换为
+
+      // window.close()
+
+      /* let win = window.open("url");
+      window.close(win);
+      if (win.closed) {
+        // todo
+      } */
+
+      // 只能用 widnow 窗口引用去调用
+      //  var win = window.open("", "_blank", "width=600, height=600");
+      /* function handClick() {
+        let win = window.open(
+          "https://www.baidu.com",
+          "_blank",
+          "width=500,height=500"
+        );
+        win.resizeTo(50, 50); // 窗口的宽高（坐标）
+        win.resizeBy(50, 50); // 窗口的宽高（宽高）
+        win.moveBy(50, 50); //
+        win.moveTo(50, 50); //
+      } */
+
+      // window.print()
+
+      // ==========
+
+      // window 是可以拿掉的，直接使用 alert()
+
+      /* window.alert(); */ // 弹窗，会阻塞程序执行
+      /* let res = window.confirm("确认？"); // 确认框，返回 true/false，会阻塞程序执行
+      console.log(res); */
+      /* let res = window.prompt("请输入内容"); // 输入框，返回输入的内容，会阻塞程序执行
+      console.log(res); */
+      
+      // ## 窗口的关系
+    </script>
+  </body>
+</html>

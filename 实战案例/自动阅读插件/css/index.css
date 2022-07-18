@@ -1,0 +1,52 @@
+.container {
+  margin-top: 44px;
+}
+.container .bk-list {
+}
+.container .bk-list .list-item {
+  height: 150px;
+  border: 1px solid #ddd;
+}
+.container .bk-list .list-item .item-lk {
+  position: relative;
+  display: block;
+  height: 100%;
+}
+.container .bk-list .list-item .item-lk .bk-pic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 150px;
+  padding: 10px;
+}
+.container .bk-list .list-item .item-lk .bk-info {
+  height: 100%;
+  margin-left: 118px;
+  color: #424242;
+  padding: 10px;
+}
+.container .bk-list .list-item .item-lk .bk-info h2,
+.container .bk-list .list-item .item-lk .bk-info p {
+  margin-bottom: 10px;
+}
+.container .bk-list .list-item .item-lk .bk-info .intro {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #999;
+}
+
+.s-top-btn {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: url("../imgs/rocket.png") no-repeat 0 0/100% 100%;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+.s-top-btn:hover {
+  opacity: 1;
+}

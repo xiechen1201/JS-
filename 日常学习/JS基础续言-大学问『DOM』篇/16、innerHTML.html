@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ##
+  // innerHTML 设置或获取元素的HTML
+  // outerHTML 替换掉包含父元素的所有内容
+
+  // 设置 innerHTML 的时候到底发生了什么？
+  /**
+   * h1.innerHTML = "<h1>123</h1>"
+   * <h1>123</h1> 解析为HTML文档
+   * 用 DocumentFragment 将这个文档结构变成 DOM 节点
+   * 原本父元素上所有的内容都会替换成这个 DOM 节点
+   */
+
+  // 安全问题
+  // HTML和现代浏览器都会阻止通过 innerHTML 嵌入 script 脚本的程序执行
+  document.documentElement.innerHTML= "<script>alert(123)</script>"
+
+  // DOM 节点被破坏
+  oDiv.innerHTML += "<h1>123</h1>"
+  oDiv.style.color = "red"; // 无效，oDiv 的 DOM 引用被破坏
+
+  // ## Node.textContent
+  // 不会解析HTML文档，仅仅是个文本节点
+
+  // 插入纯文本不要使用 innerHTML 而使用 textContent
+  // 他只会将文本插入到元素内部去
+  oDiv.textContent = "123"
+  oDiv.textContent = "<h1>123</h1>"
+
+  // ## innerText
+  // 给元素渲染文本节点
+
+  // innerText 和 textContent 的区别
+  /**
+   * textContent获取所有元素的内容，包括script，style
+   * innerText 只会获取给人看的内容
+   * innerText 会受到 css 的影响
+   * 
+   */
+</script>

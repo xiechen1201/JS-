@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // AO 和 GO 解决作用域、作用域链相关所产生的一切问题
+  // AO 和 function 相关，函数相当于一个独立的仓库，A仓库和B仓库
+
+  // 作用域
+  // 对象
+  /* var obj = {
+    name: "1",
+    address: "1",
+    teach: function () {},
+  };
+  console.log(obj.name); */
+
+  // 每个对象都有属性和方法
+  // 函数也是一种对象类型（引用类型）
+  /* function test() {}
+  console.log(test.name); // 函数的名字
+  console.log(test.length); // 形参的个数 */
+
+  // 对象有一些属性是我们无法访问的，JS引擎内部固有的隐式属性，不供外界访问的（私有属性）
+
+  // 作用域 [[scope]]
+  // 1、函数创建时生成的一个JS内部的隐式属性
+  // 2、函数存储作用域链的容器，作用域链存储的就是 AO 和 GO
+  // AO 函数执行qi上下文
+  // GO 全局的执行qi上下文
+
+  // AO 是一个即时的存储容器
+  // 函数执行完成之后，AO是要被销毁的，再次执行函数，AO会重新生成
+
+  /*  function a() {
+    function b() {
+      var b = 2;
+    }
+    var a = 1;
+    b();
+  }
+  var c = 3;
+  a(); */
+
+  /**
+   * 每个函数在定义的时候作用域链已经保存了GO
+   * 所有函数的AO都排在GO的前面，函数可以访问外部，却不能访问内部
+   * 寻找变量是存储的作用域链自上而下进行查询的
+   */
+
+  /**
+   * 全局在执行的前一刻会》生成 GO 》 函数声明已经定义
+   * 全局开始执行》修改GO的值
+   * function test(){}
+   * GO = {
+   *  test: function test(){里面的内容不关心}
+   * }
+   *
+   *
+   *
+   *
+   *  // 全局执行 test2 被定义
+   *  // test2 被定义时，已经生成 [[scope]]，已经存储 scope chain，已经存储 GO
+   * function test2(){
+   *    // test2() 执行 test3 被定义
+   *    function test3(){}
+   *    test3()
+   * }
+   * // 函数执行那一刻生成自己的 AO
+   * test2();
+   */
+
+  // 为什么外面无法访问函数内部的变量呢？
+  // 自上而下查询，如果发现则返回
+
+  // ------
+
+  /* function a() {
+    function b() {
+      function c() {}
+      c();
+    }
+    b();
+  }
+  a(); */
+
+  /**
+   * a定义：
+   * a.[[scope]] > [GO]
+   * a执行
+   * a.[[scope]] > [AO,GO]
+   * b定义
+   * b.[[scope]] > [AO,GO]
+   * b执行
+   * b.[[scope]] > [AO,AO,GO]
+   * c定义
+   * c.[[scope]] > [AO,AO,GO]
+   * c执行
+   * c.[[scope]] > [AO,AO,AO,GO]
+   */
+  /**
+   * c结束：
+   * c.[[scope]] > [AO,AO,GO]
+   * b结束：
+   * b.[[scope]] > [AO,GO]，c.[[scope]] 销毁
+   * a结束：
+   * a.[[scope]] > [GO]，b.[[scope]] 销毁
+   */
+
+  // ------
+  // 闭包
+
+  /*   function test1() {
+    function test2() {
+      var b = 2;
+      console.log(a);
+    }
+    var a = 1;
+    return test2();
+  }
+  var c = 3;
+  var test3 = test1();
+  test3(); */
+
+  /**
+   * 总结：
+   * 当内部函数被返回到外部并保存时一定会产生闭包
+   * 闭包会产生原来的作用域链不释放
+   * 过渡的闭包可能会导致内存泄漏或者加载过慢
+   */
+
+  /* function test() {
+    var n = 100;
+    function add() {
+      n++;
+    }
+    function reduce() {
+      n--;
+      console.log(n);
+    }
+    return [add, reduce];
+  }
+  var arr = test();
+  arr[0]();
+  arr[1](); */
+
+  /* function breadMgr(num) {
+    var breadNum = num || 10;
+    function supply() {
+      breadNum += 10;
+      console.log(breadNum);
+    }
+    function sale() {
+      breadNum--;
+      console.log(breadNum);
+    }
+    return [supply, sale];
+  }
+  var breadMgr = breadMgr();
+  breadMgr[0]();
+  breadMgr[1](); */
+
+  function sunSched() {
+    var sunSched = "";
+    var operation = {
+      setSched: function (thing) {
+        sunSched = thing;
+      },
+      showSched: function () {
+        console.log("My schedule on sunday is " + sunSched);
+      },
+    };
+    return operation;
+  }
+  var sunSched = sunSched();
+  sunSched.setSched("studying");
+  sunSched.showSched();
+</script>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IE常见的BUG解决方案</title>
+  </head>
+  <body>
+    <script>
+      // 1、盒子浮动，双倍margin
+      // 解决：display: inline/block
+
+      // 2、元素浮动有3px间隙
+      // 解决：都加float
+
+      // 3、外部盒子相对定位、内部盒子绝对定位，right left top bottom 等于 0 的话，都会有1px的间隙
+      // 解决：设置偶数宽高
+
+      // 4、img 下有白色间隙
+      // 解决：display: block; 或者 vertical-align
+    </script>
+  </body>
+</html>

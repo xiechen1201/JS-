@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>从头探究this关键字</title>
+  </head>
+  <body>
+    <button id="btn">按钮</button>
+    <script>
+      // ## 普通函数，全局调用的时候，this 指向 window
+      /* function test() {
+        this.a = 1;
+        console.log(this);
+      }
+      test(); */
+
+      /* var a = 1;
+      function test() {
+        console.log(this);
+        console.log(this.a);
+      }
+      test(); */
+
+      // ## 严格模式下，函数内的 this 是 undefind
+      /* var a = 1;
+      function test() {
+        "use strict";
+        console.log(this);
+        console.log(this.a);
+      }
+      test(); */
+
+      // ## 对象的方法内可以通过 this 来访问对象本身，对象方法的 this 指向对象本身
+      /* var obj = {
+        a: 1,
+        test: function () {
+          console.log(this);
+        },
+      };
+      obj.test(); */
+
+      // ## 仍然指向 a
+      /* function test(a) {
+        this.a = a;
+        console.log(this);
+        return this;
+      }
+      console.log(test(1).a); */
+
+      // ## 实例化构造函数 this 指向实例化对象
+      /* function Test(a) {
+        this.a = a;
+        console.log(this)
+      }
+      new Test(1) */
+
+      // ## 实例化对象调用原型方法时内部 this 依然指向实例化对象
+      /* function Test(a) {
+        this.a = a;
+      }
+      Test.prototype.say = function () {
+        console.log(this.a);
+      };
+      var test = new Test(1);
+      test.say(); */
+
+      // ## 事件处理函数内部的 this 指向 DOM 本身
+      /* var oBtn = document.getElementById("btn");
+      oBtn.onclick = function () {
+        console.log(this);
+        var _this = this;
+
+        // setTimeout 内的 this 指向 window
+        setTimeout(function () {
+          console.log(this);
+          console.log(_this);
+        }, 1000);
+      }; */
+
+      // ## 模块化的 this
+      /* var initModule = (function () {
+        return {
+          a: 1,
+          b: 2,
+          plus: function () {
+            return this.a + this.b;
+          },
+        };
+      })();
+      console.log(initModule);
+      console.log(initModule.plus()); */
+
+      /* (function () {
+        function Test(a, b) {
+          this.oBtn = document.getElementById("btn");
+          this.a = a;
+          this.b = b;
+        }
+        Test.prototype = {
+          init: function () {
+            this.bindEvent();
+          },
+          bindEvent: function () {
+            // this.oBtn.onclick = this.plus.bind(this);
+
+            var _this = this;
+            this.oBtn.onclick = function () {
+              _this.plus();
+            };
+          },
+          plus: function () {
+            console.log(this.a + this.b);
+          },
+        };
+
+        window.Test = Test;
+      })();
+
+      var test = new Test(1, 2).init(); */
+
+      // ## 闭包的 this 也指向 window
+      /* function test() {
+        console.log(this);
+        return function test1() {
+          console.log(this);
+        };
+      }
+      var test3 = test()
+      test3() */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      div {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #333333;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
+<script>
+  // ## style
+  // 可读可写
+  // 所有的样式都要用小驼峰写
+  // 值必须是字符串
+  // 复合值一定要拆解 oDiv.style.border = "5px solid #000"
+  // oDiv.style.borderWidth = "5px"
+  // oDiv.style.borderStyle = "soild"
+  // oDiv.style.borderColor = "#000"
+  // 保留字前面加 css
+  // oDiv.style.cssFloat = "left"
+  // 查看css属性的方式 oDiv.style 返回元素可以设置样式的对象集合
+
+  /* var oDiv = document.getElementsByTagName("div")[0];
+  console.log(oDiv.style.width); // ""，因为访问不到 CSS 样式表
+  oDiv.style.width = "200px";
+  console.log(oDiv.style.width); // "200px"，因为 style.width 是操作 DOM 的内联样式
+  // 两个单词及以上需要小驼峰写法
+  oDiv.style.backgroundColor = "green"; */
+
+  // ==========
+  // ## window.getComputedStyle(el, null);
+  // 查看计算样式（样式换成绝地值 rem=》px #000 => rgba()）
+  // IE8 及以下不支持，但是支持 el.currentStyle
+
+  // window.getComputedStyle(el, null).prop; 获取元素的某一个属性
+  // window.getComputedStyle(oDiv, null); 返回元素所有样式集合
+
+  /* var oDiv = document.getElementsByTagName("div")[0];
+  window.getComputedStyle(oDiv, null); // 返回元素所有样式的显示值或默认值
+
+  // 兼容性写法
+  function getElStyle(el, prop) {
+    return window.getComputedStyle(el, null)[prop] || el.currentStyle[prop];
+  }
+  console.log(getElStyle(oDiv, "width")); */
+
+  // null 表示获取伪元素
+  // window.getComputedStyle(el, "after").width;
+
+  // ==========
+  // ## offsetWidth/offsetHeight
+  // 访问元素的尺寸
+  // 通过底层渲染机制区获取计算
+  // 会把padding也计算进去
+
+  // =========
+  // ## className 给元素添加类名
+</script>

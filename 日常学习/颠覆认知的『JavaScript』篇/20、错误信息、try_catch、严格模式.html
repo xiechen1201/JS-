@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ## 错误信息
+  /**
+   * 1、SyntaxError 语法错误
+   *
+   * 变量名
+   * var 1 = 1;
+   * var 1ab = 1;
+   * functions 1test(){}
+   *
+   * 关键字赋值
+   * new = 5;
+   * function = 1;
+   *
+   * 基本语法错误
+   * var a = 6：
+   */
+
+  /**
+   * 2、引用错误 is not defined
+   *
+   * 变量或者函数未被声明
+   * 直接访问 test()
+   * 直接调用 console.log(a)
+   *
+   * 给无法复赋值的对象赋值 Invalid left-hand side in assignment
+   * var a = 1 = 2;
+   */
+
+  /**
+   * 3、范围错误 RangeError
+   *
+   * 数组长度赋值为负数 Invalid array length
+   * var arr = [1, 2, 3];
+   * arr.length = ;
+   *
+   * 对象方法参数超出可行范围
+   * var num = new Number(66.66);
+   * console.log(num.toFixed(-1));
+   */
+
+  /**
+   * 4、TypeError 类型错误
+   *
+   * 调用不存在的方法
+   * 123()
+   * 123 is not a function
+   *
+   * var obj = {};
+   * obj.say();
+   * obj.say is not a function
+   *
+   * 实例化原始值
+   * var a = new "string";
+   * var b = new 123;
+   */
+
+  /**
+   * 5、URIError
+   * URI：UNIFRM RESOURCE IDENTIFIER 统一资源标识符
+   *        URL 和 URN 是 URI 的字集合
+   * URL：UNIFRM RESOURCE LOCATOR 统一资源定位符，通过 URL 能够访问一个特定的页面
+   *        http://www.baidu.com/new#today
+   *        ftp://www.baidu.com/ftp#devloper
+   * URN：UNIFRM RESOURCE NAME 统一资源名称
+   *        ftp://www.baidu.com/ftp#devloper 其实就是 URN
+   *
+   * 正确的方式
+   * var myUrl = "http:www.baidu.com?name=艾小野";
+   * console.log(encodeURI(myUrl));
+   * console.log(decodeURI(encodeURI(myUrl)));
+   *
+   * 错误的方式 %ass% 是乱写的
+   * var str = decodeURI("%ass%");
+   * console.log(str);
+   */
+
+  /**
+   * 6、EvalError eval函数执行错误
+   */
+
+  // ## 自定义错误
+  // new Error("代码错误");
+
+  // ==========
+  // ## try...catch...finally...throw...
+  // try内部正常执行的时候，catch不会执行，catch会捕获try里面的错误
+
+  /* 
+  try {
+    console.log("正常执行1");
+    console.log(a);
+    console.log("正常执行2");
+  } catch (error) {
+    // 字符串的报错提示
+    console.log(error);
+    console.log(error.name); // 错误的类型
+    console.log(error.message); // 错误的具体的错误内容
+    console.log("正常执行3");
+  } finally {
+    // 不过try有没有错误，不管catch里面有什么操作，finally都会执行
+    console.log("正常执行4");
+  }
+  console.log("正常执行5"); 
+  */
+
+  /* 
+  var jsonStr = "";
+  try {
+    if (str === "") {
+      // 抛出错误信息
+        throw "JSON字符串为空";
+    }
+    console.log("我要执行了！");
+    var json = JSON.parse(jsonStr);
+    console.log(json);
+  } catch (error) {
+    var errorTip = {
+      name: "数据传输失败！",
+      errorCode: "10010",
+    };
+    console.log(errorTip);
+  } 
+  */
+
+  // ==========
+  // ## 严格模式
+  // JavaScript 的语法规范、方法规范
+  // ECMAScript DOM BOM 统称为 JavaScript
+  /**
+   * ECMAScript
+   * 1997年 1.0 版本
+   * 1998年 2.0 版本
+   * 1999年 3.0 版本，5.0 版本并没有对 3.0 进行太大的改动
+   * 2007年 4.0 草案，因为技术太过激进，浏览器厂商不同意
+   * 2008年 4.0 版本中止，部分规范发布到 3.1 版本，3.1 版本直接更名为 5.0 版本
+   * 2009年 5.0 版本发布
+   * 2011年 5.1 版本发布
+   * 2013年 6.0 草案
+   * 2015年 6.0 版本发布
+   */
+
+  /**
+   * ES5 分正常模式、严格模式（IE9及以下不支持）
+   * 3.0 的时候安全性低，效率一般
+   * ES5 的时候 JavaScript 大火，新增规范
+   * 某些语法在 3.0 的时候运行正常，但是在ES5的严格模式下运行报错或者运行不正常
+   */
+
+  /* 
+  // 启用全局严格模式
+  "use strict";
+  function test() {
+    // 函数内启用严格模式
+    "use strict";
+  } 
+  */
+
+  // ## 举例
+  /* 
+  "use strict";
+  function test() {
+    // Uncaught TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them
+    console.log(arguments.callee);
+  }
+  test(); 
+  */
+
+  /* 
+  "use strict";
+  // Uncaught ReferenceError: a is not defined
+  a = 1; 
+  */
+
+  /* "use strict";
+  function test(){
+    console.log(this); // undefined，非严格模式下 this 指向 window
+  }
+  test(); */
+
+  /* "use strict";
+  eval("var a = 1; console.log(a);");
+  // a is not defined，严格模式下 eval 是有独立的作用域
+  console.log(a); */
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .hexagon-1 {
+        position: relative;
+        width: 100px;
+        height: 173.2px;
+        background-color: red;
+        margin: 0 auto;
+      }
+      .hexagon-1::before,
+      .hexagon-1::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 0;
+        border-top: 86.6px solid transparent;
+        border-bottom: 86.6px solid transparent;
+      }
+      .hexagon-1::before {
+        left: -50px;
+        border-right: 50px solid gray;
+      }
+      .hexagon-1::after {
+        right: -50px;
+        border-left: 50px solid gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hexagon-1"></div>
+  </body>
+</html>

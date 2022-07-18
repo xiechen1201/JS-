@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ## 重写 unshift 方法
+  /* var arr = ["d", "e", "f"];
+  Array.prototype.myUnShift = function () {
+    var pos = 0;
+    for (let index = 0; index < arguments.length; index++) {
+      this.splice(pos, 0, arguments[index]);
+    }
+    return this.length;
+  };
+  arr.myUnShift("a", "b", "c");
+  console.log(arr); */
+
+  /* var arr = ["d", "e", "f"];
+  Array.prototype.myUnShift = function () {
+    // 类数组转化为数组
+    var argArr = Array.prototype.slice.call(arguments);
+    return argArr.concat(this);
+  };
+  console.log(arr.myUnShift("1", "2")); */
+
+  // ## 数组按照元素的字节数排序
+  /* function getBytes(str) {
+    var bytes = str.length;
+
+    for (let index = 0; index < str.length; index++) {
+      if (str.charCodeAt(index) > 255) {
+        bytes++;
+      }
+    }
+    return bytes;
+  }
+  var arr = ["我爱你", "OK", "Hello", "你说WHAT", "可以"];
+  arr.sort(function (a, b) {
+    return getBytes(a) - getBytes(b);
+  });
+  console.log(arr) */
+
+  // ## 封装 typeof
+  /* function myTypeof(val) {
+    var toString = Object.prototype.toString;
+    var type = typeof val;
+    var res = {
+      "[object Array]": "array",
+      "[object Object]": "object",
+      "[object Number]": "object number",
+      "[object String]": "object string",
+      "[object Boolean]": "object boolean",
+    };
+
+    // number string boolean undefind object function
+    if (val === null) {
+      return "null";
+    } else if (type === "object") {
+      var ret = toString.call(val);
+      return res[ret];
+    } else {
+      return type;
+    }
+  }
+  console.log(myTypeof(null));
+  console.log(myTypeof({}));
+  console.log(myTypeof([]));
+  console.log(myTypeof(new Number(123))); */
+
+  // ## 数组去重
+  /* var arr = [0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, "a", "a"];
+  // 利用对象key不能重复的特性
+  Array.prototype.unique = function () {
+    var temp = {};
+    var newArr = [];
+
+    for (var i = 0; i < this.length; i++) {
+      if (!temp.hasOwnProperty(this[i])) {
+        temp[this[i]] = this[i];
+        newArr.push(this[i]);
+      }
+    }
+    return newArr;
+  };
+  console.log(arr.unique()); */
+
+  // ## 找出不重复的第一个字母
+  /* var str = "sxkjakncnjjjbcmhwiqnxjwq";
+  String.prototype.unique = function () {
+    var temp = {};
+    var newArr = [];
+    var numArr = [];
+
+    for (var i = 0; i < this.length; i++) {
+      if (!temp.hasOwnProperty(this[i])) {
+        temp[this[i]] = 0;
+      }
+      temp[this[i]]++;
+    }
+
+    for (const key in temp) {
+      if (temp[key] === 1) {
+        return key;
+      }
+    }
+  };
+  console.log(str.unique()); */
+
+  // ==========
+  // ## 作业
+</script>

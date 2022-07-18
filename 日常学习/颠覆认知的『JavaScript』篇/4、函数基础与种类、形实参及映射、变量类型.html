@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // 耦合：各个代码块重复度太高
+  // 高内聚，低耦合
+  // 把重复的代码抽离成一个功能块，模块的单一责任制
+  // 解耦合：函数
+
+  // JS 函数的基本语法
+  /* function testName(a, b, c) {
+  }
+  testName(); */
+
+  // 函数声明
+  // 类似于 var a = 1;
+  function testFun1(param) {
+    // 函数的执行语句
+  }
+  // 每调用一次函数，函数内部代码都会执行一次
+  testFun1();
+
+  /**
+   * 函数名的命名规则：
+   * 不能数字开头
+   * 可以字母、下划线、$ 开头
+   * 可以包含数字
+   * 小驼峰命名 myTestFunName
+   */
+
+  // 函数表达式（字面量）
+  var testFun4 = function testFun3() {};
+  // console.log(testFun4.name) // testFun3
+  // testFun3(); // Error
+  // 当使用表达式函数的时候，js会忽略testFun3函数名转而关注 testFun4，testFun4 才是真正要执行的函数
+  // testFun4(); // 正常
+  // 所哟可以简化成匿名函数
+  var testFun2 = function (param) {
+    // 执行语句
+  };
+  testFun2();
+
+  // var a = 10;  // 10 就是字面量
+  // 把一个函数赋值给一个testFun2，这个值就是函数字面量
+
+  /**
+   * function 函数名(可选参数){
+   *   返回值可有可以 return必须要有
+   *   函数执行完成后会在最后自动增加 return
+   * }
+   */
+
+  // 参数具有占位作用，形式上占位，形参
+  function sumFun(a, b, c) {
+    console.log(sumFun.length); // 形参个数
+    console.log(arguments.length); // 实参个数
+    console.log(a, b, c);
+  }
+  // 真正调用传数据也叫实参
+  // 实参和形参要一一对应
+  // 实参可以是任意的数据类型
+  sumFun("str", 2);
+  sumFun(1, 2);
+
+  // 形参数和实参的数量可以不相等
+  sumFun(true, 123, "str", 234);
+
+  // 参数映射
+  /* 
+  // 函数内可以更改实参的值
+  function paramFun(param1, param2) {
+    // 可以更改实参的值
+    param1 = 3;
+    console.log(arguments); // [3]
+    console.log(param1); // 3
+  }
+  paramFun(1, 2); */
+
+  // 如果没有给形参传值在函数内进行赋值 arguments 是不会显示的
+  /* function paramFun(param1, param2) {
+    param2 = 3;
+    console.log(arguments); // [1]
+    console.log(param2); // 3
+  }
+  paramFun(1); */
+
+  /* function paramFun(param1, param2) {
+    param1 = 3;
+    console.log(param1); // 3
+    console.log(arguments) // [3,2]
+
+    // param1 和 arguments[1] 虽然都是3，但是他们不是一个东西，只是一个映射关系，param1 保存在栈内存中，arguments保存在堆内存中，栈内存保存堆内存的地址
+
+    // 映射关系：无论外部如何给实参赋值，函数的形参都会跟着改变，但是一定要是形参里面这个数组有对应的值才行，如果实参和形参都存在必然会存在映射关系，形参赋值后实参也会跟着改变
+  }
+  paramFun(1, 2); */
+
+  // return
+  /* function testFun5() {
+    console.log("我正在执行函数");
+    // 代码里写了 return , return 后面的语句是不会继续执行的
+    // 终止函数的执行
+    return;
+    console.log("我执行完了就结束这个函数");
+
+    // 如果你不写，JS引擎会隐式给你添加 return
+    // return;
+  } */
+
+  /* function testFun6() {
+    // 终止且返回数据
+    return "你没有填写内容";
+  }
+  console.log(testFun6()); */
+
+  // ----
+  /* a = 1; // 全局变量 [[scope]]
+  function testFun7() {
+    // 局部变量
+    var b = 2;
+    console.log(a, b);
+
+    function testFun8() {
+      // 局部变量
+      var c = 3;
+      console.log(a, b, c);
+    }
+    testFun8();
+    // console.log(c); // Error
+  }
+
+  testFun7();
+  // console.log(b); // Error
+
+  // 函数体内可以访问外面的变量，函数外部无法访问函数内边的局部变量 */
+
+  // ---
+  // function 是一个独立的作用域
+  // 作用域：声明的变量可以访问的范围
+  function test1() {
+    var a = 1;
+    console.log(b);
+  }
+  function test2() {
+    var b = 2;
+    console.log(a);
+  }
+  test1();
+  test2();
+
+  // ----
+  // 函数式编程：固定的程序、功能段被封装的过程，实现一个固定的功能或者程序，在这个封装体中需要一个入口和一个出口
+  // 入口 函数的参数
+  // 出口 return
+</script>

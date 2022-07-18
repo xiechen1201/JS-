@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ## 模块化放大模式
+      var mod1 = (function () {
+        var test1 = function () {
+          console.log("test1");
+        };
+        var test2 = function () {
+          console.log("test2");
+        };
+        var test3 = function () {
+          console.log("test3");
+        };
+        return {
+          test1,
+          test2,
+          test3,
+        };
+      })();
+
+      var mod2 = (function (mod) {
+        var test4 = function () {
+          mod.test1();
+        };
+        var test5 = function () {
+          mod.test2();
+        };
+        var test6 = function () {
+          mod.test3();
+        };
+        return {
+          test4,
+          test5,
+          test6,
+        };
+      })(mod1);
+      // 通过传参的方式去调用，减小依赖和方便维护
+
+      mod2.test4();
+      mod2.test5();
+      mod2.test6();
+    </script>
+  </body>
+</html>

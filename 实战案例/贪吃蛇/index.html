@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>贪吃蛇</title>
+    <style>
+      .wrap {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        margin: 50px auto;
+        background-color: #000;
+      }
+      .round {
+        display: block;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: green;
+      }
+      .round:last-of-type {
+        background-color: red;
+      }
+      .food {
+        display: block;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap"></div>
+  </body>
+</html>
+<script src="../utils.js"></script>
+<script>
+  window.onload = function () {
+    init();
+  };
+
+  function init() {
+    initGame();
+  }
+
+  var initGame = function () {
+    var wrap = document.getElementsByClassName("wrap")[0];
+    var t = null;
+    var wrapW = parseInt(window.getComputedStyle(wrap, null).width),
+      wrapH = parseInt(window.getComputedStyle(wrap, null).height);
+
+    var Sanke = function () {
+      this.bodyArr = [
+        { x: 0, y: 0 },
+        { x: 0, y: 20 },
+        { x: 0, y: 40 },
+        { x: 0, y: 60 },
+        { x: 0, y: 80 },
+        { x: 0, y: 100 },
+      ];
+      this.dir = "DOWN";
+    };
+    Sanke.prototype = {
+      init: function () {
+        this.initSanke();
+        this.createFood();
+        this.run();
+        this.bindEvent();
+      },
+      bindEvent: function () {
+        var _this = this;
+        addEvent(document, "keydown", function () {
+          _this.changeDir();
+        });
+      },
+      initSanke: function () {
+        var arr = this.bodyArr,
+          len = arr.length,
+          frag = document.createDocumentFragment(),
+          item;
+
+        for (let i = 0; i < len; i++) {
+          item = arr[i];
+
+          var round = document.createElement("i");
+          round.className = "round";
+          round.style.top = item.y + "px";
+          round.style.left = item.x + "px";
+          frag.appendChild(round);
+        }
+        wrap.appendChild(frag);
+      },
+      run: function () {
+        var _this = this;
+        t = setInterval(function () {
+          _this.move();
+        }, 300);
+      },
+      move: function () {
+        var arr = this.bodyArr,
+          len = arr.length;
+
+        for (let i = 0; i < arr.length; i++) {
+          if (i === len - 1) {
+            this.setHeadXY(arr);
+          } else {
+            arr[i].x = arr[i + 1].x;
+            arr[i].y = arr[i + 1].y;
+          }
+        }
+        this.removeSnake();
+        this.initSanke();
+        this.headInBody(arr);
+        this.eatFood(arr);
+      },
+      setHeadXY: function (arr) {
+        var head = arr[arr.length - 1];
+
+        switch (this.dir) {
+          case "LEFT":
+            if (head.x <= 0) {
+              head.x = wrapW - 20;
+            } else {
+              head.x -= 20;
+            }
+            break;
+          case "RIGHT":
+            if (head.x >= wrapW - 20) {
+              head.x = 0;
+            } else {
+              head.x += 20;
+            }
+            break;
+          case "UP":
+            if (head.y <= 0) {
+              head.y = wrapH - 20;
+            } else {
+              head.y -= 20;
+            }
+            break;
+          case "DOWN":
+            if (head.y >= wrapH - 20) {
+              head.y = 0;
+            } else {
+              head.y += 20;
+            }
+            break;
+        }
+      },
+      headInBody: function (arr) {
+        var headX = arr[arr.length - 1].x,
+          headY = arr[arr.length - 1].y,
+          item,
+          _this = this;
+
+        for (let i = 0; i < arr.length - 2; i++) {
+          item = arr[i];
+
+          if (headX === item.x && headY === item.y) {
+            setTimeout(function () {
+              alert("游戏结束！");
+              clearInterval(t);
+              _this.removeSnake();
+              _this.removeFood()
+            }, 100);
+          }
+        }
+      },
+      removeSnake: function () {
+        var bodys = document.getElementsByClassName("round");
+        while (bodys.length > 0) {
+          wrap.removeChild(bodys[bodys.length - 1]);
+        }
+      },
+      changeDir: function (event) {
+        var event = event || window.event,
+          code = event.keyCode;
+
+        this.setDir(code);
+      },
+      setDir: function (code) {
+        switch (code) {
+          case 37:
+            if (this.dir !== "RIGHT" && this.dir !== "LEFT") {
+              this.dir = "LEFT";
+            }
+            break;
+          case 39:
+            if (this.dir !== "RIGHT" && this.dir !== "LEFT") {
+              this.dir = "RIGHT";
+            }
+            break;
+          case 38:
+            if (this.dir !== "UP" && this.dir !== "DOWN") {
+              this.dir = "UP";
+            }
+            break;
+          case 40:
+            if (this.dir !== "UP" && this.dir !== "DOWN") {
+              this.dir = "DOWN";
+            }
+            break;
+        }
+      },
+      createFood: function () {
+        var food = document.createElement("i");
+        food.className = "food";
+        food.style.left = this.setRandomPos(wrapW) * 20 + "px";
+        food.style.top = this.setRandomPos(wrapH) * 20 + "px";
+        wrap.appendChild(food);
+      },
+      removeFood: function () {
+        var food = document.getElementsByClassName("food")[0];
+        food.remove();
+      },
+      setRandomPos: function (widthOrHeight) {
+        return Math.floor(Math.random() * (widthOrHeight / 20));
+      },
+      eatFood: function (arr) {
+        var food = document.getElementsByClassName("food")[0],
+          foodX = parseInt(window.getComputedStyle(food, null).left),
+          foodY = parseInt(window.getComputedStyle(food, null).top),
+          headX = arr[arr.length - 1].x,
+          headY = arr[arr.length - 1].y,
+          x,
+          y;
+
+        if (headX === foodX && headY === foodY) {
+          this.removeFood();
+          this.createFood();
+
+          // 竖着走
+          if (arr[0].x === arr[1].x) {
+            x = arr[0].x;
+            if (arr[0].y > arr[1].y) {
+              y = arr[0].y + 20;
+            } else if (arr[0] < arr[1].y) {
+              y = arr[0].y - 20;
+            }
+          } else if (arr[0].y === arr[1].y) {
+            y = arr[0].y;
+            if (arr[0].x > arr[1].x) {
+              x = arr[0] + 20;
+            } else if (arr[0].x < arr[1].x) {
+              x = arr[0].x - 20;
+            }
+          }
+          arr.unshift({ x, y });
+        }
+      },
+    };
+    return new Sanke().init();
+  };
+</script>

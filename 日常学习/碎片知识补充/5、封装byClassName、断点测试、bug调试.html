@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box">
+      <p class="content content1">
+        <span class="content content2"></span>
+      </p>
+      <h1 class="content content3"></h1>
+      <span class="content content3"></span>
+    </div>
+    <script>
+      // ## 封装 getElementByClassName
+      // 因为 IE8 及之前不支持，所以我要进行封装
+      var box = document.getElementById("box");
+      Document.prototype.getElementsByClassName =
+        Element.prototype.getElementsByClassName = function (className) {
+          var allDoms = this.getElementsByTagName("*");
+          var allDomsLen = allDoms.length;
+          var allDomsItem;
+          var finalDoms = [];
+
+          for (let i = 0; i < allDomsLen; i++) {
+            allDomsItem = allDoms[i];
+            var classArr = trimSpace(allDomsItem.className).trim().split(" ");
+            var classArrLen = classArr.length;
+            var classArrItem;
+
+            for (let j = 0; j < classArrLen; j++) {
+              classArrItem = classArr[j];
+              if (classArrItem === className) {
+                finalDoms.push(allDomsItem);
+                break;
+              }
+            }
+          }
+
+          function trimSpace(str) {
+            return str.replace(/\s+/g, " ");
+          }
+
+          return finalDoms;
+        };
+
+      /* console.log(document.getElementsByClassName("content"));
+      console.log(box.getElementsByClassName("content")); */
+
+      // ## 断点调试
+      // debugger; 断点语句
+
+      /* var fn;
+      var m = 20;
+      function foo() {
+        var a = 2;
+        function baz(a) {
+          console.log(a);
+        }
+        fn = baz;
+      }
+      function bar() {
+        fn(m);
+      }
+      foo();
+      bar(); */
+    </script>
+  </body>
+</html>

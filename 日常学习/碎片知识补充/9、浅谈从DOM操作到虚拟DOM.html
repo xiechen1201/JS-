@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>浅谈从DOM操作到虚拟DOM</title>
+  </head>
+  <body>
+    <!-- <form>
+      <label for="male">男</label>
+      <input type="radio" id="male" name="sex" value="男" />
+      <label for="female">女</label>
+      <input type="radio" id="female" name="sex" value="女" checked="checked" />
+      <input type="submit" value="提交" />
+      <label for="test">选择</label>
+      <select id="test" name="selet">
+        <option value="内容1">菜单内容</option>
+        <option value="内容2">菜单内容</option>
+        <option value="内容3">菜单内容</option>
+        <option value="内容4">菜单内容</option>
+        <option value="内容5">菜单内容</option>
+      </select>
+    </form> -->
+    <script type="text/javascript">
+      // 什么是 virtual DOM？
+      // 通过JS去模拟DOM结构
+
+      // 虚拟DOM的结构
+      // 通过算法讲新的节点和旧的节点进行对比，然后改变发生变化的节点
+      /* var obj = {
+        tag: "ul",
+        attrs: {
+          id: "list",
+        },
+        children: [
+          {
+            tag: "li",
+            attrs: {
+              className: "list-item",
+            },
+            children: ["first item"],
+          },
+        ],
+      }; */
+
+      /* var vnode = h("ul#list", {}, [
+        h("li.list-item", {}, "first item"),
+        h("li.list-item", {}, "second item"),
+      ]); */
+
+      // 减少对 DOM 的操作
+    </script>
+  </body>
+</html>

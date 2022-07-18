@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: orange;
+      }
+      .box1 {
+        width: 100px;
+        height: 100px;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="box1"></div>
+    </div>
+  </body>
+</html>
+<script>
+  var oBox = document.getElementsByClassName("box")[0];
+  var oBox1 = document.getElementsByClassName("box1")[0];
+  var overCount = 0,
+    outCount = 0;
+
+  // ## 鼠标滑入滑出 mouseover mouseout
+  // 改事件存在冒泡行为！！！
+  // 对自己本身和内部的子元素滑入滑出事件都生效。（有点像捕获机制）
+  // DOM 结构简单的时候使用
+
+  /* oBox.onmouseover = function () {
+    this.style.backgroundColor = "green";
+  };
+  oBox.onmouseout = function () {
+    this.style.backgroundColor = "orange";
+  };
+  oBox1.onmouseover = function (event) {
+    // var event = event || window.event;
+    // event.stopPropagation()
+    this.style.backgroundColor = "white";
+  };
+  oBox1.onmouseout = function () {
+    this.style.backgroundColor = "black";
+  }; */
+
+  /* oBox.onmouseover = function () {
+    overCount++;
+    console.log("onmouseover", overCount);
+  };
+  oBox.onmouseout = function () {
+    outCount++;
+    console.log("onmouseout", outCount);
+  }; */
+
+  // ## 鼠标滑入滑出 mouseenter mouseleave
+  // 该事件不存在冒泡行为！！！
+  // 事件只会对自己绑定的元素负责
+  // DOM 结构复杂的时候使用
+
+ /*  oBox.onmouseenter = function () {
+    this.style.backgroundColor = "green";
+  };
+  oBox.onmouseleave = function () {
+    this.style.backgroundColor = "orange";
+  };
+  oBox1.onmouseenter = function (event) {
+    this.style.backgroundColor = "white";
+  };
+  oBox1.onmouseleave = function () {
+    this.style.backgroundColor = "black";
+  }; */
+
+  /* oBox.onmouseenter = function () {
+    overCount++;
+    console.log("onmouseenter", overCount);
+  };
+  oBox.onmouseleave = function () {
+    outCount++;
+    console.log("onmouseleave", outCount);
+  }; */
+</script>

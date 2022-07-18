@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ## 原型
+  // __proto__ 保存的原型指向 function.prototype
+  /* function Car() {}
+  var car = new Car();
+  console.log(Car.prototype.__proto__);
+  console.log(car); */
+  // 所有的对象都有自己的原型，包括原型本身！
+
+  // ## 原型链
+  // 延着 __proto__ 去原型里一层层找相应的属性就叫「原型链」
+  // 没有的属性应该都我的原型上寻找，如果我的原型上也没有，继续往上原型寻找
+  // 这样的继承属性链就是「原型链」
+  /* function Professor() {}
+  Professor.prototype.tSkill = "JAVA";
+  var professor = new Professor();
+
+  function Teacher() {
+    this.mSkill = "JS/JQ";
+  }
+  Teacher.prototype = professor;
+  var teacher = new Teacher();
+
+  function Student() {
+    this.pSkill = "HTML/CSS";
+  }
+  Student.prototype = teacher;
+  var student = new Student();
+
+  console.log(student);
+  console.log(student.mSkill);
+  console.log(student.tSkill); */
+
+  // ## 原型链的顶端
+  // 原型链的顶端是 Object.prototype
+  /* function Professor(){}
+  console.log(Professor.prototype); */
+  // Professor.prototype.__proto --》 Object.prototype
+
+  // ##
+  // 原型链上的属性增删改只能是构造函数本身去操作（不一定）！
+  /* function Professor() {}
+  Professor.prototype.tSkill = "JAVA";
+  var professor = new Professor();
+
+  function Teacher() {
+    this.mSkill = "JS/JQ";
+    this.students = 500;
+    this.success = {
+      alibaba: 28,
+      tencent: 30,
+    };
+  }
+  Teacher.prototype = professor;
+  var teacher = new Teacher();
+
+  function Student() {
+    this.pSkill = "HTML/CSS";
+  }
+  Student.prototype = teacher;
+  var student = new Student();
+
+  // 实例对象更改原型链上的引用数值会更改原型链上的属性
+  student.success.baidu = 100;
+  // 实例对象更改原型链上的原始数值会新增到自己的实例上
+  student.students++;
+  console.log(student, teacher); */
+
+  // ## this 指向
+  /* function Car() {
+    this.brand = "Benz";
+  }
+  Car.prototype = {
+    brand: "Mazsa",
+    intor: function () {
+      console.log("我是" + this.brand + "车");
+    },
+  };
+  var car = new Car();
+  // this 优先在函数内部寻找属性
+  car.intor();
+  // 谁使用 this，this 就指向谁
+  car.prototype.intor(); */
+
+  // ## 实例对象无法更改原型上的属性
+  /* function Person() {
+    this.smoke = function () {
+      // 当实例对象执行 this.weight 的时候发现自己没有就会到原型上寻找，
+      // 然后执行
+      // this.weight = this.weight - 1;
+      // 最后的结果就是 
+      // person: {weight: 129, smoke:function}
+      // Person.prototype: {weight: 130}
+      this.weight--;
+    };
+  }
+  Person.prototype = {
+    weight: 130,
+  };
+  var person = new Person();
+  person.smoke(); */
+
+  // ##
+  /*  var obj1 = {};
+  console.log(obj1);
+  var obj2 = new Object();
+  console.log(obj2); */
+
+  // 原型的原型是有系统自带的Object构造出来的
+  /* function Obj() {}
+  var obj = new Obj();
+  console.log(obj.__proto__); */
+
+  // ## 实例化的另外一种写法
+  /* // Object.create() 创建对象，该对象需要传入对象或者null
+  function Obj() {}
+  Obj.prototype.num = 1;
+  // 两种方法构建出的对象一模一样
+  var obj1 = Object.create(Obj.prototype);
+  var obj2 = new Obj();
+  console.log(obj1);
+  console.log(obj2); */
+
+  // Object.create() 的好处就是可以自定义原型
+  /* var test = {
+    num: 2,
+  };
+  var obj3 = Object.create(test);
+  console.log(obj3); */
+
+  /* var obj1 = Object.create(null);
+  console.log(obj1);
+  obj1.num = 1;
+
+  var obj2 = Object.create(obj1);
+  console.log(obj2);
+  console.log(obj2.num); */
+
+  // ## new 的过程
+  // 创建 this 对象
+  // this 对象初始化属性和方法
+  // this 对象保存构造函数的 prototype
+  // 返回 this 对象
+
+  // ##
+  // 因为 Object.prototype 是所有对象原型的顶端
+  /* var obj = Object.create(null);
+  var obj1 = { count: 1 };
+  obj.num = 1;
+
+  // 因为 obj 没有 toString 方法按道理就应该去原型链上寻找，但是它没有原型
+  // 不是所有的对象都继承与 Object.prototype，说的就是 Object.create
+  obj.toString(); // error，not a function
+
+  // __proto__ 可以更改但是无法新增
+  obj.__proto__ = obj1;
+  console.log(obj.count); // undefind */
+
+  // ========== 分割 =========
+  // 包装类也是实例化对象，可以访问对象的方法
+  // Number 构造函数的原型上有 toString() 方法就不会到 Object.prototype 上寻找
+  /* var num = new Number(1);
+  console.log(num.toString()); 
+
+  var bool = new Boolean("true");
+  console.log(bool.toString())
+  
+  console.log(undefined.toString())
+  console.log(undefined.toString()) */
+
+  // ========== 分割 =========
+
+  // ## call 和 apply
+  
+  // 更改 this 的指向
+  /* function Car(brand, color) {
+    this.brand = brand;
+    this.color = color;
+  }
+  var newCar = {};
+  // Car.call(newCar, "Benz", "red");
+  Car.apply(newCar, ["LiXiang", "black"]);
+  console.log(newCar) */
+
+  function Compute() {
+    this.plus = function (a, b) {
+      console.log(a + b);
+    };
+    this.minus = function (a, b) {
+      console.log(a - b);
+    };
+  }
+  function FullCompute() {
+    // call 可以用于分类的场景
+    // 一个入口方法对象去添加多个场景的方法等等
+    Compute.call(this);
+    this.mul = function (a, b) {
+      console.log(a * b);
+    };
+    this.div = function (a, b) {
+      console.log(a / b);
+    };
+  }
+  var compute = new FullCompute();
+  compute.plus(1, 2);
+  compute.minus(1, 2);
+  compute.mul(1, 2);
+  compute.div(1, 2);
+
+  // ========== 分割 =========
+</script>

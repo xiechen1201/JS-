@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ## 对象
+
+  // 基本写法
+  /* var teacher = {
+    name: "张三",
+    age: 32,
+    sex: "male",
+    teache: function () {
+      // 外部的函数称为函数
+      // 对象内称呼函数为方法
+      console.log("教书");
+    },
+  };
+  // 查
+  console.log(teacher.name);
+  teacher.teache();
+  // 增
+  teacher.address = "北京";
+  console.log(teacher.address);
+  teacher.eat = function () {
+    console.log("吃饭");
+  };
+  teacher.eat();
+  // 改
+  teacher.name = "李四";
+  console.log(teacher.name);
+  // 删
+  delete teacher.address;
+  console.log(teacher.address);
+  delete teacher.eat(); // 无法删除
+  delete teacher.eat; // 正常删除
+  console.log(teacher); */
+
+  // this 对象
+  /* var teacher = {
+    name: "张三",
+    age: 32,
+    sex: "male",
+    weigtht: 130,
+    smoke: function () {
+      // teacher.weigtht--;
+      // this 对象自己本身
+      this.weigtht--;
+      console.log(teacher.weigtht);
+    },
+    eat: function () {
+      // teacher.weigtht++;
+      this.weigtht++;
+      console.log(teacher.weigtht);
+    },
+  };
+  teacher.smoke();
+  teacher.smoke();
+  teacher.eat(); */
+
+  // 对象方法的使用
+  /* var attendance = {
+    students: [],
+    total: 6,
+    join: function (name) {
+      if (this.students.length === this.total) {
+        console.log("学生已到齐。");
+      } else {
+        this.students.push(name);
+        console.log(name + "到课。");
+      }
+    },
+    leave: function (name) {
+      var index = this.students.indexOf(name);
+      this.students.splice(index, 1);
+      console.log(name + "早退。");
+    },
+    classOver: function () {
+      this.students = [];
+      console.log("已下课");
+    },
+  };
+  attendance.join("张三");
+  attendance.join("李四");
+  attendance.join("王五");
+  attendance.join("123");
+  attendance.join("456");
+  attendance.join("789");
+  attendance.leave("李四");
+  attendance.classOver(); */
+
+  // 创建对象的方式
+  // 1、对象字面量或对象直接量
+  /* var obj = {
+    name: "张三",
+    age: 30,
+  };
+  obj.name = "李四"; */
+
+  // 2、构造函数
+  // 使用系统自带的构造函数
+  // 对象和构造函数是两个概念
+  // 对象是通过实例化构造函数实例出的实例对象
+  /* var obj = new Object(); // 和对象字面量是相等的
+  obj.name = "张三";
+  obj.age = 30;
+  console.log(obj) */
+
+  // 使用自定义构造函数
+  // 和普通函数写法没有区别
+  // 函数命名大驼峰写法，为了和普通函数表面上做区分
+  /* function Teacher() {
+    // 构造函数没执行之前 this 不指向任何
+    // 构造函数没执行之后 this 指向实例化的对象
+    this.name = "张三";
+    this.age = 30;
+    this.smoke = function () {
+      console.log("抽烟");
+    };
+  }
+  // 更改 name 属性互不影响
+  // 构造函数实例化对象的好处：通过一个构造函数实例化多个对象互不影响
+  var teacher1 = new Teacher();
+  var teacher2 = new Teacher();
+  teacher1.name = "李四";
+  console.log(teacher1);
+  console.log(teacher2); */
+
+  /* function Teacher() {
+    this.name = "张三";
+    this.age = 30;
+    this.smoke = function () {
+      this.age--;
+      console.log(this.age);
+    };
+    this.eat = function () {
+      this.age++;
+      console.log(this.age);
+    };
+  }
+  var teacher1 = new Teacher();
+  var teacher2 = new Teacher();
+  teacher1.smoke();
+  teacher1.smoke();
+  teacher2.eat()
+  console.log(teacher1);
+  console.log(teacher2); */
+
+  // 老师不可能是同一个名字，性别也不一样，年龄也不一样
+  // 构造对象传参数
+  /* function Teacher(name, age) {
+    this.name = name;
+    this.age = age;
+    this.smoke = function () {
+      this.age--;
+      console.log(this.age);
+    };
+    this.eat = function () {
+      this.age++;
+      console.log(this.age);
+    };
+  }
+  var teacher1 = new Teacher("张三", 25);
+  var teacher2 = new Teacher("李四", 30);
+  console.log(teacher1);
+  console.log(teacher2); */
+
+  // 框架、工具库均为对象传参的方式
+  // 根据对象的属性进行配置，如果参数按照固定的位置传参会非常的累且易错
+  /* function Teacher(data) {
+    this.name = data.name;
+    this.age = data.age;
+    this.smoke = function () {
+      this.age--;
+      console.log(this.age);
+    };
+    this.eat = function () {
+      this.age++;
+      console.log(this.age);
+    };
+  }
+  var teacher1 = new Teacher({
+    name: "张三",
+    age: 25,
+  });
+  var teacher2 = new Teacher({
+    name: "李四",
+    age: 30,
+  });
+  console.log(teacher1);
+  console.log(teacher2); */
+
+  // 作业
+  // 写一个构造函数，接收数字类型的参数，参数数量不定，完成参数相加和相乘的功能
+  /* function Computed() {
+    var arr = arguments;
+    this.add = function () {
+      var num = 0;
+      for (let index = 0; index < arr.length; index++) {
+        num += arr[index];
+      }
+      return num;
+    };
+    this.multiply = function () {
+      var num = 1;
+      for (let index = 0; index < arr.length; index++) {
+        num *= arr[index];
+      }
+      return num;
+    };
+  }
+  var test1 = new Computed(1, 2, 3, 4, 5);
+  console.log(test1.add());
+  console.log(test1.multiply()); */
+
+  // 写一个构造车的函数，可设置车的品牌，颜色，排量，再写一个构造消费者的函数，设置用户的名字，年龄，收入，通过选车的方法实例化该用户喜欢的车，在设置车的属性
+  /* function Car(platform, color, displacement) {
+    this.platform = platform;
+    this.color = color;
+    this.displacement = displacement;
+  }
+  function Person(name, age, include) {
+    this.name = name;
+    this.age = age;
+    this.include = include;
+  }
+  var person1 = new Person("张三", 20, 10000);
+  person1.car = new Car("YaGe", "Blue", "200L");
+  console.log(person1) */
+</script>

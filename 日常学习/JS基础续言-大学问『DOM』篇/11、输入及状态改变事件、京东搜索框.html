@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="content" type="text" />
+  </body>
+</html>
+<script>
+  // ## input 事件
+  // 出自 HTML5 规范，IE8 及下不支持
+  /* var oInput = document.getElementById("content");
+  oInput.oninput = function () {
+    console.log(this.value);
+  }; */
+
+  // IE8 的写法
+  /* oInput.onpropertychange = function () {
+    console.log(this.value);
+  }; */
+
+  // ## change 事件
+  // 失去焦点的时候才会触发
+  // 当聚焦和失去焦点的时候值没有变化不会触发
+  /* oInput.onchange = function () {
+    console.log(this.value);
+  }; */
+
+  // ## focus 事件，获得焦点的时候
+
+  // ## blur 事件，失去焦点事件
+
+  // ==========
+</script>

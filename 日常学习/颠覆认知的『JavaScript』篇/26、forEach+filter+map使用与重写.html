@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="data" style="display: none">
+      [{"id":
+      "1","course":"前端开发之企业级深度JavaScript特训课【JS++前端】","classes":"19","teacher":"小野","img":"ecmascript.jpg","is_free":"1","datetime":"1540454477","price":"0"},
+      {"id": "2","course":"WEB前端工程师就业班之深度JS
+      DOM+讲师辅导-第3期【JS++前端】","classes":"22","teacher":"小野","img":"dom.jpg","is_free":"0","datetime":"1540454477","price":"699"},
+      {"id":
+      "3","course":"前端开发之企业级深度HTML特训课【JS++前端】","classes":"3","teacher":"小野","img":"html.jpg","is_free":"1","datetime":"1540454477","price":"0"},
+      {"id":
+      "4","course":"前端开发之企业级深度CSS特训课【JS++前端】","classes":"5","teacher":"小野","img":"css.jpg","is_free":"1","datetime":"1540454477","price":"0"},
+      {"id":
+      "5","course":"前端就业班VueJS+去哪儿网+源码课+讲师辅导-第3期【JS++前端】","classes":"50","teacher":"哈默","img":"vuejs.jpg","is_free":"0","datetime":"1540454477","price":"1280"},
+      {"id":
+      "6","course":"前端就业班ReactJS+新闻头条实战+讲师辅导-第3期【JS++前端】","classes":"21","teacher":"托尼","img":"reactjs.jpg","is_free":"0","datetime":"1540454477","price":"2180"},
+      {"id":
+      "7","course":"WEB前端开发工程师就业班-直播/录播+就业辅导-第3期【JS++前端】","classes":"700","teacher":"JS++名师团","img":"jiuyeban.jpg","is_free":"0","datetime":"1540454477","price":"4980"}]
+    </div>
+    <script>
+      // splice slice join sort 都是 ES3 就存在的
+      // ES5 又新增了一些方法
+      var data = document.getElementById("data").innerHTML;
+      data = data.replace(/\s/g, "");
+      data = JSON.parse(data);
+
+      // ## forEach
+      // 原型方法 Array.prototype.forEach
+      // 参数1：fn，每次遍历的时候都会执行 fn，fn 有三个参数 el,index,array
+      // fn 的 this 指向 widnow 对象
+      // 参数2：更改参数1函数内的 this 对象
+      // null、undeifnd 的时候仍然指向 window，1、"1"、false 指向包装对象
+      // 没有返回值
+      /* var res = data.forEach(
+        function (el, index, array) {
+          console.log(el, index, array);
+          console.log(this)
+        },
+        { a: 1, b: 2 }
+      );
+ */
+      // this 一定是指向一个对象的，如果是基本类型的 1 “1” false 会强制转换为包装对象
+      // null undefind 无法包装指向 window
+      /* function test(){
+        console.log(this)
+      }
+      test.call(1) */
+
+      // 重写 forEach
+      /* Array.prototype.myForEach = function (fn) {
+        var array = this,
+          len = array.length,
+          arg2 = arguments[1] || this;
+
+        for (let i = 0; i < len; i++) {
+          fn.apply(arg2, [array[i], i, array]);
+        }
+      };
+      data.myForEach(function (el, index, array) {
+        console.log(el, index, array, this);
+      }, {}); */
+
+      // ## filter 筛选过滤
+      // Array.prototype.filter
+      // 参数: fn 和 一个对象
+      // 参数 fn 必须返回一个布尔值，表示哪个数据需要返回到新数组里
+      // 返回一个新的数组
+      /* var res = data.filter(function (el, index, array) {
+        // console.log(this)
+        el.id += "aaa";
+        return el.is_free === "1";
+      }, {}); */
+
+      // 重写 filter
+      /* function deepClone(obj) {
+        // do...
+        return obj;
+      }
+      Array.prototype.myFilter = function (fn) {
+        var arr = this,
+          len = arr.length,
+          arg2 = arguments[1],
+          newArr = [];
+
+        for (let i = 0; i < len; i++) {
+          var result = fn.apply(arg2, [arr[i], i, arr]);
+          result ? deepClone(newArr.push(arr[i])) : "";
+        }
+        return newArr;
+      };
+      var res = data.myFilter(function (el, index, array) {
+        console.log(this);
+        return el.is_free === "1";
+      }, {});
+      console.log(res); */
+
+      // ## map 映射
+      // Array.prototype.map
+      // 参数：fn 和 this 对象
+      // 更改 el 会影响原数组的 el
+      // fn 返回一个自由组合的数据
+      // 返回一个新的数组
+      /* var result = data.map(function (el, index, array) {
+        // el.id += "abc";
+        return el.id;
+      }, this);
+      console.log(result); */
+
+      // 重写 map
+      /* Array.prototype.myMap = function (fn) {
+        var arr = this,
+          len = arr.length,
+          arg2 = arguments[1],
+          newArr = [];
+
+        for (var i = 0; i < len; i++) {
+          var result = fn.apply(arg2, [arr[i], i, arr]);
+          newArr.push(result);
+        }
+        return newArr;
+      };
+
+      var result = data.myMap(function (el, index, array) {
+        return el.id;
+      });
+      console.log(result); */
+    </script>
+  </body>
+</html>

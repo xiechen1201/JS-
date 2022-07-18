@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>各种三角形的画法</title>
+    <style>
+      .triangle {
+        width: 0px;
+        height: 0px;
+        /* border-top: 100px solid red;
+        border-bottom: 100px solid green;
+        border-left: 100px solid orange;
+        border-right: 100px solid purple; */
+        border-right: 100px solid transparent;
+        border-left: 100px solid transparent;
+        border-bottom: 100px solid green;
+      }
+      .triangle2 {
+        width: 0;
+        height: 0;
+        border-top: 100px solid red;
+        border-bottom: 100px solid green;
+        border-left: 50px solid orange;
+        border-right: 50px solid purple;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1、发现 border 四个边是以斜线来交接的 -->
+    <!-- 2、如何让中间的区域消失 -->
+    <!-- 3、让其余的边框变为透明 -->
+    <!-- 4、border-top 删除 -->
+    <div class="triangle"></div>
+    <br />
+    <div class="triangle2"></div>
+  </body>
+</html>

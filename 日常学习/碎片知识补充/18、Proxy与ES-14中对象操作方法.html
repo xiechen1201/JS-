@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy与ES-14中对象操作方法</title>
+  </head>
+  <body>
+    <script>
+      // ##
+      // Proxy 是 ES6 新增的构造函数
+      // 用 JS 模拟
+      /* function Proxy() {}
+      var proxy = new Proxy(); */
+
+      // Object.defineProperty() 劫持数据，给对象进行拓展，对属性进行设置
+      /* var obj = {};
+      Object.defineProperty(obj, "test", {}); */
+
+      // Proxy 返回一个代理对象
+      // 并不是数据劫持，通过处理 obj 后返回一个代理对象，通过操作代理对象然后操作实际对象
+      // 参数1: target 要处理的对象
+      // 参数2: handler 可以处理对象属性的方法
+      // Proxy 的核心是怎么处理属性，defineProperty 的核心是怎么定义属性
+      // 自定义对象属性的获取、赋值、枚举、函数调用的等功能
+      /* var obj = {
+        a: 1,
+        b: 2,
+      };
+      var proxy = new Proxy(obj, {
+        // get 有两个参数
+        get(target, prop) {
+          console.log("This is property value" + target[prop]);
+          return target[prop];
+        },
+        // set 有三个参数
+        set(target, prop, newVal) {
+          target[prop] = newVal;
+        },
+        has(target, prop){
+          return target[prop]
+        }
+      });
+      // console.log(obj);
+      // console.log(proxy);
+      console.log(proxy.a);
+      proxy.b = 3;
+      console.log(proxy);
+      consoloe.log("a" in proxy); // flase, 因为 a 不存在 proxy 上，而存在于 target 上
+       */
+
+      // ====================
+      // 处理数组
+      /* var arr = [
+        { name: "小明", age: 18 },
+        { name: "小红", age: 19 },
+        { name: "小王", age: 20 },
+      ];
+      var persons = new Proxy(arr, {
+        get(target, prop) {
+          return target[prop];
+        },
+        set(target, prop, newVal) {
+          target[prop] = newVal;
+        },
+      });
+      console.log(persons[0]);
+      persons[0] = { name: "小张", age: 33 };
+      console.log(persons);
+      console.log(arr); */
+
+      // ====================
+      // 处理函数
+      /* var fn = function () {
+        console.log("I am a function.");
+      };
+      fn.a = 123;
+      var newFn = new Proxy(fn, {
+        get(target, prop) {
+          return target[prop];
+        },
+        set() {},
+      });
+      console.log(newFn)
+      console.log(newFn.a) */
+
+      // ====================
+      // ECMAScript 委员会，对对象操作有 14 种方法
+      // var obj = { a: 1, b: 2 };
+
+      // 系统内部的方法
+      // 1、获取原型 [[GetPrototypeOf]]
+      /* var proto = Object.getPrototypeOf(obj);
+      console.log(proto); */
+      // console.log(obj.__proto__);
+
+      // 2、设置原型，底层抛出的 api [[SetPrototypeOf]]
+      /* Object.setPrototypeOf(obj, { c: 3, d: 4 }); */
+      // obj.__proto__ = {}
+
+      // 3、获取对象的可拓展性 [[Is Extensible]]
+      /* var extensible = Object.isExtensible(obj);
+      console.log(extensible); */
+
+      // Object.freeze() 冻结对象，属性不可新增、删除、修改，可读
+      // Object.seal({}) 封闭对象，属性不可新增、删除，可修改、读取
+
+      // 4、获取自由属性 [[GetOwnProperty]]
+      /*  Object.setPrototypeOf(obj, { c: 3, d: 4 });
+      console.log(Object.getOwnPropertyDescriptors(obj)); // 返回对象
+      console.log(Object.getOwnPropertyNames(obj)); // 返回数组 */
+      // console.log(obj.hasOwnProperty("c"));
+
+      // 5、禁止拓展对象 [[PreventExtensions]]
+      /* Object.preventExtensions(obj);
+      obj.c = 3; // 不可新增
+      delete obj.a; // 可删除
+      console.log(obj); */
+
+      // 6、拦截对象操作 [[DefineOwnProperty]]
+      // Object.defineProperties({},"prop",{})
+
+      // 7、判断是否是自身属性 [[HasProperty]]
+      /* console.log(obj.hasOwnProperty("a")) */
+
+      // 8、[[Get]]
+      /* console.log("c" in obj);
+      console.log(obj.a); */
+
+      // 9、[[Set]]
+      /* obj.c = 3;
+      obj["d"] = 4; */
+
+      // 10、delete
+      /* delete obj.a */
+
+      // 11、[[Enumerta]]
+      /* for (const key in obj) {
+        console.log(obj[key]);
+      } */
+
+      // 12、获取键集合 [[OwnPropertyKeys]]
+      /* console.log(Object.keys(obj)); */
+
+      // 13、
+      /* function test(){}
+      test() */
+
+      // 14、
+      /* function Test() {}
+      var test = new Test(); */
+
+      // 内建的方法提供的API
+
+      // ====================
+      // ## 模拟实现一个 Proxy
+      /*let target = {
+        a: 1,
+        b: 2,
+      };
+
+       let proxy = new Proxy(target, {
+        get: function (target, prop) {
+          return target[prop];
+        },
+        set: function (target, prop, newVal) {
+          target[prop] = newVal;
+        },
+      });
+      console.log(proxy.a);
+      proxy.b = 4;
+      console.log(proxy.b); */
+
+      /* function myProxy(target, handler) {
+        let _target = deepClone(target);
+
+        Object.keys(_target).forEach((key) => {
+          Object.defineProperty(_target, key, {
+            get: function () {
+              return handler.get && handler.get(target, key);
+            },
+            set: function (newVa) {
+              handler.set && handler.set(targe, key, newVa);
+            },
+          });
+        });
+
+        return _target;
+
+        function deepClone(org, tar) {
+          var tar = tar || {},
+            toStr = Object.prototype.toString,
+            arrType = "[object Array]";
+
+          for (const key in org) {
+            if (org.hasOwnProperty(key)) {
+              if (typeof org[key] === "object" && org[key] !== null) {
+                if (toStr.call(org) === arrType) {
+                  tar[key] = [];
+                } else {
+                  tar[key] = {};
+                }
+                deepClone(org[key], tar[key]);
+              } else {
+                tar[key] = org[key];
+              }
+            }
+          }
+
+          return tar;
+        }
+      }
+
+      let proxy = new myProxy(
+        { a: 1, b: 2 },
+        {
+          get(targe, prop) {
+            return targe[prop];
+          },
+          set(targe, prop, value) {
+            targe[prop] = value;
+          },
+        }
+      );
+      console.log(proxy.a); */
+
+      // ==================
+      /* var obj = { a: 1, b: 2 };
+      var proxy = new Proxy(obj, {
+        get: function () {},
+        set: function () {},
+        // 还有很多方法(例如一行14种内部方法)
+        has: function (target, prop) {
+          console.log(target[prop]);
+        },
+        deleteProperty: function (target, prop) {
+          delete target[prop];
+        },
+      });
+      console.log(proxy);
+      console.log("a" in proxy); // false，因为 a 存在于 obj 上而不是 proxy
+
+      delete proxy.b;
+      console.log(proxy); */
+
+      // 总结：proxy 的内部方法去操作 target ，调用 proxy 的方法的时候实际操作的仍然是 target 的方法，handler 内的方法可以重写 target 内任何方法，因此来达到代理拦截的目的
+
+      // Object.defineProperty() 和 Proxy 都可以达到拦截数据的功能
+      // Object.defineProperty() 原则本身是给对象新增属性用的，Array 的 push 和 pop 等方法是无法触发 setter 机制的，但是改变数组长度、用数组的下标设置值可以触发
+      // vue2.0 是怎么做的？vue2.0 把数组相关方法全部重写，所以导致大量的代码非常臃肿
+      // Proxy 没有这个问题（代理数据去操作）（defineProperty 是对原对象操作的时候进行拦截）
+      // 为什么 vue2 没有使用 proxy，因为当时兼容不太好，目前 ES6 大量使用，vue3 用 proxy 重写了
+
+      // ==================
+      var obj = { a: 1, b: 2 };
+      var proxy = new Proxy(obj, {
+        get: function (target, prop) {
+          // return target[prop];
+          // 代替
+          return Reflect.get(target, prop);
+          // Reflect 反射，定义的内置对象，方法集合的容器
+        },
+        set: function (target, prop, newVal) {
+          const isOk = Reflect.set(target, prop, newVal);
+          if (isOk) {
+            console.log("SET successfully");
+          }
+        },
+      });
+      proxy.c = 3;
+      console.log(proxy);
+
+      // Reflect 的好处
+      // 好多方法都存在 Object.prototype.constructor （因为都是静态方法）
+      // Reflect 相当于一个的方法容器，未来很有很多方法都放到 Reflect 上而不是 Object 上
+      // JS 对 Object 的定义非常的混乱，object 是广义的对象（一切皆对象），Object 是狭义的对象
+      // Object 存在很多共用的方法，这样很多时候都觉得不太合理，这个时候就出来 Reflect 来存储方法
+      // ES6 的全局的内置对象
+    </script>
+  </body>
+</html>

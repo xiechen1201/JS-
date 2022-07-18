@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object.defineProperty</title>
+  </head>
+  <body>
+    <p>0</p>
+    <!-- <div class="J_calculator">
+      <div class="result">0</div>
+      <div class="input-group">
+        <input type="text" value="0" class="f-input" />
+      </div>
+    </div> -->
+    <script>
+      // ## Object.defineProperty()
+      // Object 构造函数的静态方法
+      // 作用是：用于定义属性
+      // 参数1：需要被定义的对象
+      // 参数2：需要被定义的对象属性
+      // 参数3：描述配置
+      //    value: 默认值
+      // Object.defineProperty(obj, "test", {});
+
+      /* function defineProperty() {
+          var _obj = {};
+
+          // 和 _obj: { a:1 } 无区别
+          // Object.defineProperty(_obj, "a", {
+          //   value: 1,
+          // });
+
+          // defineProperties 可以定义多个属性
+          Object.defineProperties(_obj, {
+            a: {
+              value: 1,
+            },
+            b: {
+              value: 2,
+            },
+          });
+
+          return _obj;
+        }
+
+        var obj = defineProperty();
+        obj.a = 5; // 属性值不可修改
+        console.log(obj);
+
+        // 属性值不可枚举（枚举就是将项列举出来）
+        for (const key in obj) {
+          console.log(obj[key]);
+        }
+
+        // 属性不可删除
+        delete obj.a;
+        console.log(obj); */
+
+      // 总结：defineProperties 的对象属性 不可修改、删除、枚举
+
+      // ==========
+      /* var obj = {};
+        // defineProperties 中的配置项
+        // writable 默认是 false ，是否可重写
+        // enumerable 默认是 false，是否可枚举
+        // configurable 默认是 false，是否可操作
+        Object.defineProperties(obj, {
+          a: {
+            value: 1,
+            writable: true,
+            enumerable: true,
+            configurable: true,
+          },
+          b: {
+            value: 2,
+          },
+        });
+
+        obj.a = 5;
+        obj.b = 6;
+        console.log(obj);
+
+        for (const key in obj) {
+          console.log(key + ": " + obj[key]);
+        }
+
+        delete obj.a;
+        console.log(obj); */
+
+      // ==========
+      // 每个属性定义的时候都会存在 getter 和 setter 机制
+      /* var obj = {};
+      Object.defineProperties(obj, {
+        a: {
+          get() {
+            return "this is a";
+          },
+          set(newVal) {
+            var oP = document.getElementsByTagName("p")[0];
+            oP.innerHTML = newVal;
+          },
+        },
+        b: {},
+      });
+      obj.a = 1;
+      console.log(obj);
+      console.log(obj.a); */
+
+      // ==========
+      // 数据劫持：利用 getter 和 setter 机制对对象存取值进行操作逻辑，这就是数据劫持
+
+      // ==========
+      // 如果配置中只有 enumerable configurable 的时候该配置是数据描述
+      // 如果配置中同时存在 「value writable」和 「get set」 是互斥的！！！
+      /* var obj = {};
+      Object.defineProperties(obj, {
+        a: {
+          value: 1, // error
+          writable: true, // error
+          get() {
+            return "this is a";
+          },
+          set(newVal) {
+            var oP = document.getElementsByTagName("p")[0];
+            oP.innerHTML = newVal;
+          },
+        },
+        b: {},
+      }); */
+
+      // ===================
+      // 本身不具备对数组进行劫持
+      // 那么如何做呢？
+
+      /* function DateArr() {
+        var _arr = [],
+          _val = null;
+
+        Object.defineProperty(this, "val", {
+          get: function () {
+            return _val;
+          },
+          set: function (newVal) {
+            _val = newVal;
+            _arr.push({ val: _val });
+            console.log("A new value " + _val + "has been pushed to _arr");
+          },
+        });
+        this.getArr = function () {
+          return _arr;
+        };
+      }
+      var dateArr = new DateArr();
+      dateArr.val = 123;
+      dateArr.val = 234;
+      console.log(dateArr.getArr()); */
+
+      // ===================
+    </script>
+  </body>
+</html>

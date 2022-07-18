@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
+<script>
+  // ## document.write();
+  /**
+   * 在文档内写入内容（标签会正常解析）
+   * 在 window.onload 内执行会替换 body 内全部内容
+   *
+   * 1、document.write() 到底怎么做的？
+   * 2、时间线
+   *
+   * 因为 script 属于标签，也会被 renderTree 进行渲染， renderTree 正在渲染时遇到 document.write() ，由于页面还没有渲染完成，所以无法写入只能在文档后追加
+   *
+   * window.onload 在 renderTree 渲染完成且资源（如img）全部加载完成后才会触发
+   * 这个时候 document.write() 就会把 body 内全部内容重写
+   *
+   * 什么是时间线？
+   * 浏览器开始加载页面的那一刻开始，到页面加载完毕，整个过程中按顺序发生的每件事情就叫时间线
+   * 执行过程：
+   * 1）生成 document，DOM 在 js 中生效
+   * 2）解析文档（从HTML的第一行开始，浏览器从第一行阅读到最后一行），异步构建 DOMTree
+   *        document.readyState = 'loading' 文档加载状态
+   * 3）遇到 link 标签开启新的线程，异步加载 css 外部文件，构建 CSSTree（CSSTree 和 DOMTree 同时异步加载）
+   * 4）没有设置异步加载的 script ，会阻塞文档解析（CSSTree 和 DOMTree 都要停止），等待 JS 脚步加载且执行完成后才会继续解析文档
+   * 5）设置异步加载的 script，异步加载 js 脚本且执行不阻塞解析文档，但是不能使用 document
+   * 6）解析文档时，如果 src=“” 属性，先解析节点，然后创建加载线程异步加载资源，不会阻塞文档解析
+   * 7）文档解析完成
+   *        document.readyState = 'interactive' 标志着文档解析完成
+   * 8）文档解析完成，defer script 脚步按照顺序执行
+   * 9）文档解析完成，触发 DOMContentLoaded 事件，程序变化：同步的脚步执行节点=》事件驱动阶段
+   * 10）async script 加载并执行完毕，img 资源加载完毕，window.onload 事件触发
+   *        document.readyState = 'complete' 标志文档加载完成
+   *
+   *
+   * defer 只加载 js 脚本但是只在文档加载完毕后执行
+   * async 加载 js 脚步后立即执行（不能确定执行顺序）
+   *
+   * 适用于没有 dom 依赖和直接需要触发的时候，存在很多不确定因素
+   */
+
+  // 文档状态变化就会触发
+ /*  console.log(document.readyState);
+  document.onreadystatechange = function () {
+    console.log(document.readyState);
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOMContentLoaded");
+  }); */
+
+  // window.onload 等文档解析事件+资源加载完毕后触发，浪费时间所以尽量少用
+  // DOMContentLoaded 等文档解析完成后触发
+  // DOMContentLoaded 没有具柄的方式 document.onDOMContentLoaded 错误
+
+  // =========================
+
+  /**
+   * 浏览器读完全部的标签 》 生成 renderTree 》 渲染页面
+   *
+   * 解析指的是生成 渲染树
+   * 渲染指的是根据渲染树渲染页面
+   *
+   */
+
+  // $(document).ready(function () {}); 类似于 DOMContentLoaded
+
+  // ## 封装文档解析完成函数（兼容性写法）
+  function doReady(fn) {
+    if (document.addEventListener) {
+      document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+          document.removeEventListener(
+            "DOMContentLoaded",
+            arguments.callee,
+            false
+          );
+          fn();
+        },
+        false
+      );
+    } else if (document.attachEvent) {
+      // 兼容 IE8
+      document.attachEvent("onreadystatechange", function () {
+        // interactive 在部分 IE 不稳定
+        if (this.readyState === "complete") {
+          document.attachEvent("onreadystatechange", arguments.callee);
+          fn();
+        }
+      });
+    }
+
+    if (
+      document.documentElement.doScroll &&
+      typeof window.frameElement === "undefind"
+    ) {
+      // IE6 的时候在 文档未解析完成时 documentElement.doScroll 会一直报错
+      try {
+        document.documentElement.doScroll("left");
+      } catch (error) {
+        return setTimeout(arguments.callee, 20);
+      }
+      fn();
+    }
+  }
+</script>

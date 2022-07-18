@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ## 三目运算符
+  /*
+  var a = 5;
+  if (a > 0) {
+    console.log("大于0");
+  } else {
+    console.log("小于等于0");
+  }
+
+  // 使用三元运算符
+  a > 0 ? console.log("大于0") : console.log("小于等于0");
+
+  // 具有 return 的功能
+  var str = a > 0 ? "大于0" : 小于等于0;
+  console.log(str);
+
+  // 三目运算符嵌套
+  var str1 = a > 0 ? (a > 3 ? "大于3" : "小于3") : "小于等于0";
+  console.log(str1);
+  */
+
+  /*
+  // 面试题
+  // "89" 和 "9" 比较的是 ASCII 表
+  var str = 89 > 9 ? ("89" > "9" ? "通过了" : "内层未通过") : "外层未通过";
+  console.log(str)
+  */
+
+  // =========
+  // ## 对象克隆
+  /*
+  var person1 = {
+    name: "zhangsan",
+    age: 18,
+    height: 180,
+    wetght: 140,
+  };
+  var person2 = person1;
+  person2.name = "lisi";
+  console.log(person1);
+  // {name: 'lisi', age: 18, height: 180, wetght: 140}
+  console.log(person2);
+  // {name: 'lisi', age: 18, height: 180, wetght: 140}
+  // 因为指向的是同一个堆内存地址，所以相互影响
+  */
+
+  // =========
+  // ## 浅拷贝
+
+  // 循环对象每个属性，把每个属性克隆一次
+  /* var person1 = {
+    name: "zhangsan",
+    age: 18,
+    height: 180,
+    wetght: 140,
+  };
+  var person2 = {};
+  for (var key in person1) {
+    person2[key] = person1[key];
+  }
+  // 赋值后互不影响，完成克隆
+  person2.name = "lisi";
+  console.log(person1);
+  console.log(person2); */
+
+  /* 
+  // 浅拷贝的问题，没有处理对象内部的引用数据
+  Object.prototype.num = 1;
+  // 对象字面量其实也是 new Object 构造出来的！！！
+  var person1 = {
+    name: "zhangsan",
+    age: 18,
+    height: 180,
+    wetght: 140,
+    children: {
+      first: "Jenney",
+      second: "Lucy",
+    },
+  };
+  var person2 = {};
+  // for in 的问题会把 person1 的原型也拷贝进去
+  for (var key in person1) {
+    person2[key] = person1[key];
+  }
+  person2.name = "lisi";
+  person2.children.third = "Jone";
+  console.log(person1);
+  console.log(person2); 
+  */
+
+  /* 
+  function clone(origin, target) {
+    for (var key in origin) {
+      // 解决克隆 person1 原型属性的问题
+      if (origin.hasOwnProperty(key)) {
+        target[key] = origin[key];
+      }
+    }
+  }
+
+  Object.prototype.num = 1;
+  var person1 = {
+    name: "zhangsan",
+    age: 18,
+    height: 180,
+    wetght: 140,
+    children: {
+      first: "Jenney",
+      second: "Lucy",
+    },
+  };
+  var person2 = {};
+  clone(person1, person2);
+  person2.name = "lisi";
+  person2.children.third = "Jone";
+
+  console.log(person1);
+  console.log(person2); 
+  */
+
+  // ==========
+  // 深拷贝
+
+ 
+  // 循环的时候判断引用值，利用递归
+  /* function deepclone(origin, target) {
+    var target = target || {};
+    var toStr = Object.prototype.toString;
+    var arrType = "[object Array]";
+
+    for (var key in origin) {
+      if (origin.hasOwnProperty(key)) {
+        if (typeof origin[key] === "object" && origin[key] !== null) {
+          toStr.call(origin[key]) === arrType
+            ? (target[key] = [])
+            : (target[key] = {});
+          deepclone(origin[key], target[key]);
+        } else {
+          target[key] = origin[key];
+        }
+      }
+    }
+    return target;
+  }
+
+  Object.prototype.num = 1;
+  var person1 = {
+    name: "张三",
+    age: 40,
+    height: 180,
+    wetght: 140,
+    car: ["Benz", "Mazda"],
+    children: {
+      first: {
+        name: "张小一",
+        age: 13,
+      },
+      second: {
+        name: "张小二",
+        age: 10,
+      },
+    },
+  };
+
+  var person2 = deepclone(person1);
+  person2.children.third = {
+    name: "张小三",
+    age: 8,
+  };
+  console.log(person1);
+  console.log(person2); */
+
+  // 利用JSON的方法
+  /* 
+  var person1 = {
+    name: "张三",
+    age: 40,
+    height: 180,
+    wetght: 140,
+    car: ["Benz", "Mazda"],
+    children: {
+      first: {
+        name: "张小一",
+        age: 13,
+      },
+      second: {
+        name: "张小二",
+        age: 10,
+      },
+    },
+  };
+  var str = JSON.stringify(person1);
+  var person2 = JSON.parse(str);
+  console.log(person1);
+  console.log(person2); 
+  */
+
+  // ==========
+  // ## 面试题
+
+  /* function test() {
+    console.log(foo); // undefind
+    var foo = 2;
+    console.log(foo); // 2
+    console.log(a); // a is not defind
+  }
+  test(); */
+
+  /* function a() {
+    var test;
+    test();
+    function test() {
+      console.log(1); // 1
+    }
+  }
+  a() */
+
+  /* 
+  // 谁调用this，this就指向谁
+  var name = "222";
+  var a = {
+    name: "111",
+    say: function () {
+      console.log(this.name);
+    },
+  };
+  var fun = a.say;
+  fun(); // 222
+  a.say(); // 111
+
+  var b = {
+    name: "333",
+    say: function (arg) {
+      arg();
+    },
+  };
+  b.say(a.say); // 222
+  b.say = a.say;
+  b.say(); // 333 */
+
+  /*
+  // 还是谁调用方法 this 就指向谁，遇到 call 和 apply 就看 call 和 apply
+   function test() {
+    var marty = {
+      name: "marty",
+      printName: function () {
+        console.log(this.name);
+      },
+    };
+
+    var test1 = {
+      name: "test1",
+    };
+    var test2 = {
+      name: "test2",
+    };
+    var test3 = {
+      name: "test3",
+    };
+    test3.printName = marty.printName;
+    marty.printName.call(test1); // test1
+    marty.printName.apply(test2); // test2
+    marty.printName(); // marty
+    test3.printName(); // test3
+  }
+  test(); */
+
+  /* var bar = {
+    a: "1",
+  };
+  function test() {
+    bar.a = "a"; // 改变了外层的 bar.a
+    Object.prototype.b = "b";
+    return function inner() {
+      console.log(bar.a);
+      console.log(bar.b); // 到原型上寻找
+    };
+  }
+  test()(); // "a" "b" */
+
+  // ==========
+  // ## 作业
+
+  // 答案+原因
+  function Foo() {
+    getName = function () {
+      console.log(1);
+    };
+    return this;
+  }
+  Foo.getName = function () {
+    console.log(2);
+  };
+  Foo.prototype.getName = function () {
+    console.log(3);
+  };
+  var getName = function () {
+    console.log(4);
+  };
+  function getName() {
+    console.log(5);
+  }
+
+  Foo.getName(); // 2
+  getName(); // 4
+  Foo().getName(); // undefind 答案：1，因为函数执行后返回this，this指向widnow
+  new Foo.getName(); // 2
+  new Foo().getName(); // 3
+  new new Foo().getName(); // 答案：3
+
+  // 用 window.prompt 接收用户输入的年份判断是否是闰年，三目运算符写
+</script>

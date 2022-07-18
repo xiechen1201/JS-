@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>match/exec、toString/valueOf、封装typeof</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // ## match 在 String.prototype 上
+  // 返回所有匹配的字符数组
+  // str.match(/\d/g);
+
+  // ## exec 在 RegExp.prototype 上
+  // /\d/.exec(str)
+  // 返回匹配的字符串，数组的长度只有1
+
+  // ## charAt
+  // 返回字符串的第 0 位字符串
+  // "abc".charAt(0);
+
+  // ## charCodeAt
+  // 返回字符串的编码是多少，只有第一位有效
+  // "abc".charCodeAt()
+
+  // ## String.fromCharCode
+  // 返回字符的位置
+
+  // ##
+  /* "aBc".toLocaleLowerCase();
+  "aBc".toLocaleUpperCase();
+  "aBc".toLowerCase();
+  "aBc".toUpperCase(); */
+  // Locale 针对特殊的语言也有效，避免使用 toLowerCase/toUpperCase
+
+  // ## slice(开始下标, 结束下标) 截取的字符串不包含下标处的字符
+  // 字符串和数组都存在
+  // 参数"1"会隐式类型转换
+
+  // ## substring
+  // 和 slice 的参数一样，
+  // 区别支持倒叙 (3,1)
+  // 不支持负数（当作0看）
+
+  // ## substr
+  // substr 的第二个参数是长度，不是下标
+  // 不存在倒叙，因为第二个参数是长度
+  //
+  // 不建议使用
+
+  // ## indexOf
+  // String.prototype 和 Array.prototype 都存在
+  // 返回索引或者-1
+  // "123".indexOf("1");
+  // 第二个参数不支持负数，把负数当作0来看
+
+  // ======
+
+  // [1, 2, 3].indexOf(2, 开始寻找的下标)
+  // 第二个参数：支持负数，null 当0处理，undefind当未传参数处理，NaN 当0处理，会进行隐是类似转换
+
+  // 字符串在处理的负数的时候，一般不会处理
+
+  // ## lastIndexOf
+  // 反向寻找值
+  // Array 
+
+  // String
+  // 不支持负数
+
+  // ========
+
+  // ## toString
+</script>
