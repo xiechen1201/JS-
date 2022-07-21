@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>重写call、apply和bind方法</title>
+  </head>
+  <body>
+    <script>
+      // ## call
+      /* Function.prototype.myCall = function (context) {
+        // 这样的判断不严谨
+        if (typeof context === "object" && context !== null) {
+          var prop =
+            Math.random().toString(36).substr(3, 6) +
+            new Date().getTime().toString(36);
+
+          var args = [];
+          for (var i = 1; i < arguments.length; i++) {
+            args.push(arguments[i]);
+          }
+
+          context[prop] = this;
+          var res = eval("context[prop](" + args + ")");
+          delete context[prop];
+          return res;
+        }
+      }; */
+
+      // ## apply
+      /* Function.prototype.myApply = function (context) {
+        // 这样的判断不严谨
+        if (typeof context === "object" && context !== null) {
+          var prop =
+            Math.random().toString(36).substr(3, 6) +
+            new Date().getTime().toString(36);
+
+          var args = [];
+          for (var i = 0; i < arguments[1].length; i++) {
+            args.push(arguments[1][i]);
+          }
+
+          context[prop] = this;
+          var res = eval("context[prop](" + args + ")");
+          delete context[prop];
+          return res;
+        }
+      }; */
+
+      /* function test(a, b) {
+        console.log(a, b);
+        console.log(this);
+        console.log(a + b);
+        return a + b;
+      }
+      test.myCall({ name: "name1" }, 1, 2);
+      test.myApply({ name: "name2" }, [1, 2]); */
+
+      // ## bind()
+      Function.prototype.myBind = function (context) {
+        var _this = this;
+        // 将类数组转换成数字且从 1 开始截取
+        var args = Array.prototype.slice.call(arguments, 1);
+
+        return function () {
+          var args2 = Array.prototype.slice.call(arguments);
+          // 这里的 this 指向 widnow 所以外界要保存
+          _this.apply(context, args.concat(args2));
+        };
+
+        /* var fn = function () {
+          var args2 = Array.prototype.slice.call(arguments);
+          _this.apply(
+            this instanceof _this ? this : context,
+            args.concat(args2)
+          );
+        };
+        fn.prototype = this.prototype;
+        return fn */
+      };
+
+      var p = {};
+      function Person(name, sex) {
+        console.log(this);
+        console.log(arguments);
+      }
+      Person.bind(p, "name1", "sex1")();
+      Person.myBind(p, "name2", "sex2")();
+      Person.myBind(p, "name3", "sex3")("name4", "sex4");
+      var p2 = Person.myBind(p, "name5", "sex5");
+      new p2()
+    </script>
+  </body>
+</html>
