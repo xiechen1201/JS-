@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>同步与异步请求、混编、AJAX、原生AJAX封装</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // ## 前言
+      /**
+       * HTTP 是浏览器和服务器之间通信的协议
+       *
+       * 如何通过点击能获取数据并展示到页面上？
+       * 混编模式：前端和后端的代码写在一起，文件拓展名是后端语言的拓展名（index.php）
+       * 因为浏览器不能解析后端语言代码，但是 php 文件可以嵌入 HTML 代码
+       *
+       * a 标签 > 点击 > 当前url带参数 > 页面进行判断如果有参数加载数据
+       *
+       * 如何不重新加载整个页面，却能获取到新的网页所需的数据和更新部分网页内容呢？
+       */
+
+      // ## AJAX
+      /**
+       * 异步的 JavaScript 和 XML(Asynchronous JavaScript and XML)
+       *
+       * Ajax 的历史：
+       * 1999年
+       * 之前都是 HTML 的资源发起 HTTP 请求（img/src a/href）
+       * IE5.0 允许 JS 脚本发起 HTTP 请求（异步）
+       * 向服务器直接发送一个请求，服务端返回数据，JS 拿到数据整理数据然后更新内容
+       *
+       * 2004年，谷歌邮件退出异步邮件更新服务
+       * 2005年，谷歌地图使用异步加载地图
+       * 2006年，W3C 发布 Ajax 国际标准
+       *
+       * 总结
+       * Ajax：使用 JS 脚本发起 HTTP 通信；
+       * JS 异步通信：请求服务器返回JSON/XML文档，前端从XML文档中提取数据，再在不刷新整个网页的基础上，渲染到网页相应的位置。
+       */
+
+      /**
+       * XMLHttpRequest 对象和 ActiveXObject 对象（IE5和IE6专用）
+       * 因为当时异步请求只支持 XML，现在这个名字已经不准确了，这个名字只是延用
+       * XMLHttpRequest 的作用：
+       * JS 内置的构造函数，需要进行实例化，例如 new Object()，new Date()，new Regexp()
+       */
+
+      // 基本写法
+      /* var xhr = new XMLHttpRequest();
+      var xhr = new ActiveXObject("Microsoft.XMLHTTP"); */
+
+      // 兼容性写法
+      /* var xhr;
+      if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+      } else {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      } */
+
+      // 方法
+      /**
+       * open() 发送设置
+       * method 请求方式
+       * url 请求地址
+       * async true异步 false同步
+       *
+       * send() 发生请求
+       * 发送POST请求体，GET请求不需要
+       */
+
+      // 事件和状态码
+      /**
+       * onreadystatechange 事件（挂载在 xhr 对象上的事件）
+       * xhr.readyState 通过 xhr 发起请求个阶段的状态码
+       *  0
+       *  1
+       *  2
+       *  3
+       *  4
+       *
+       * 注意：readyState 仅仅是针对请求的状态码，获取资源是否成功取决于 status 的状态
+       *
+       * xhr.responseText 获取字符串数据
+       * xhr.responseXML 获取XML数据
+       */
+      /* var xhr;
+      if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+      } else {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      // xhr.open("GET", "/user/info?id=123456", true);
+      // xhr.send();
+      xhr.open("POST", "/user/info", true);
+      // POST 是以表单方式提交
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send("a=1&b=2&c=3");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var resData = JSON.parse(xhr.responseText);
+          console.log(resData);
+        }
+      }; */
+
+      // ====================
+      // ## 封装 AJAX
+      var $ = (function () {
+        var xhr = window.XMLHttpRequest
+          ? new XMLHttpRequest()
+          : new ActiveXObject("Microsoft.XMLHTTP");
+
+        if (!xhr) {
+          throw new Error("浏览器不支持异步发起 HTTP 请求！");
+        }
+
+        // 对象序列化
+        function formatData(object) {
+          var str = "";
+          for (const key in object) {
+            str += key + "=" + object[key] + "&";
+          }
+          return str.replace(/&$/, "");
+        }
+
+        // 处理 Ajax 请求
+        function _doAjax(opt) {
+          var opt = opt || {},
+            type = (opt.type || "GET").toUpperCase(),
+            url = opt.url,
+            async = opt.async || true,
+            data = opt.data || null,
+            success = opt.success || function () {},
+            error = opt.error || function () {},
+            complete = opt.complete || function () {};
+
+          if (!url) {
+            throw new Error("url 不能为空！");
+          }
+
+          xhr.open(type, url, async);
+          if (type === "POST") {
+            xhr.setRequestHeader(
+              "Content-type",
+              "application/x-www-form-urlencoded"
+            );
+          }
+          if (type === "GET") {
+            xhr.send();
+          } else {
+            var str = formatData(data);
+            xhr.send(str);
+          }
+
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              success(JSON.parse(xhr.responseText));
+              complete();
+            } else {
+              error();
+              complete();
+            }
+          };
+        }
+
+        return {
+          ajax: function (opt) {
+            _doAjax(opt);
+          },
+          get: function (url, successCallback, errorCallback) {
+            _doAjax({
+              url,
+              type: "GET",
+              success: successCallback,
+              error: errorCallback,
+            });
+          },
+          post: function (url, data, successCallback, errorCallback) {
+            _doAjax({
+              url,
+              type: "POST",
+              data,
+              success: successCallback,
+              error: errorCallback,
+            });
+          },
+        };
+      })();
+
+      // 调用 ajax
+      $.ajax({
+        url: "user/list",
+        type: "POST",
+        data: {
+          a: 1,
+          b: 2,
+        },
+        success: function (res) {
+          console.log("success");
+        },
+        error: function (res) {
+          console.log("error");
+        },
+      });
+      // 调用 GET
+      $.get(
+        "user/detail",
+        function (res) {
+          console.log("success");
+        },
+        function (res) {
+          console.log("error");
+        }
+      );
+      // 调用 POST
+      $.post(
+        "/user/edit",
+        {
+          a: 1,
+          b: 2,
+        },
+        function (res) {
+          console.log("success");
+        },
+        function (res) {
+          console.log("error");
+        }
+      );
+    </script>
+  </body>
+</html>

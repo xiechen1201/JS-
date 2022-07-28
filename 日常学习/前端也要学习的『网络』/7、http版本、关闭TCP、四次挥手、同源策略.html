@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ## HTTP 协议版本
+      /**
+       * HTTP/0.9
+       * 只支持 GET 请求
+       * 只能请求 HTML 格式的资源
+       *
+       * HTTP/1.0
+       * 新增 POST 和 HEAD 请求方式
+       * 1.0 版本区分早期版本和后期版本
+       *
+       * HTTP/1.1
+       *
+       * HTTP/2.0
+       */
+
+      // ## 关闭 TCP 连接的前奏（四次挥手 🙋）
+      /**
+       * 三次握手后建立了连接，然后进行数据传输
+       * 1、客户端发送向服务端关闭请求（FIN=1 seq=u），客户端进入等待中断状态1
+       *    FIN=1 表示
+       *    seq=u 表示一个序列号，必须和 FIN 包组合表示是一次请求
+       * 2、服务端受到 FIN 包后向客户端发送（ACK=1 seq=v ack=u+1），服务端进入关闭连接等待状态
+       *    ACK=1 表示
+       *    seq=v 表示一个新的序列号
+       *    ack=u+1 表示一个确认包，FIN 包的名称 + squ 的序列号
+       * 3、服务端开始确认客户端请求的数据是否传输完成，客户端进入等待中断状态2
+       * 4、确认完毕后，服务端发送（FIN=1 ACK=1 seq=w ack=u+1）给客户端进行确认，表示服务端同意关闭请求
+       * 5、客户端收到服务端发送的确认包，客户端发送（ACK=1 seq=u+1 ack=w+1），客户端进入等待远程接收（等待一段时间然后进行关闭），服务端关闭连接，一段时间后客户端关闭连接
+       *    2MSL 的作用
+       */
+
+      // ## 同源策略
+      /**
+       * 同源策略（Same Origin Policy）
+       * 概念：
+       * 同源：相同的协议 && 相同的域名 && 相同的端口
+       * ajax 请求，后端进行源头的配置
+       * 同源策略的目的：
+       * 不受同源策略的限制：1、超链接 2、页面重定向 3、表单提交 4、资源引入：script src href
+       */
+    </script>
+  </body>
+</html>

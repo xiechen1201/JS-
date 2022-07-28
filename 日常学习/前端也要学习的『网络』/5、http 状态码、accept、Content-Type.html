@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ## http 状态码
+      /**
+       * 1xx
+       * 2xx
+       * 3xx
+       * 4xx
+       * 5xx
+       *
+       * 具体：
+       * 304 重定向
+       * 第一次请求页面是 200 ，第二次返回 304 表示重定向到缓存
+       * 服务器怎么知道缓存和服务器资源一样？
+       * 看请求头的 If-Modified-Since If-None-Match (上一次接收到的 Etag 和 )
+       * 服务端进行对比，根据标识去缓存中拿取资源
+       *
+       * 302 页面重定向
+       *
+       * 403 拒绝请求
+       *
+       * 404 找不到相应的资源
+       *
+       * 500 服务器发生不可预测的错误
+       *
+       * 503 服务器当前不能处理客户端请求
+       */
+
+      // ====================
+      // ## Accept 客户端希望接收的数据类型
+      /**
+       * 
+       * 存在于请求头中（客户端对服务器说的话）
+       * q 相对品质因子（如果不指定默认 q=1）
+       * type;q=value, type;q=value
+        text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*;q=0.8 
+        优先匹配 image/apng
+        再匹配 text/html,application/xhtml+xml,application/xml;q=0.9
+        最后匹配 *\/*;q=0.8
+       * 
+       * 子项
+       * Accept-Language 返回资源的语言类型
+       * Accept-Encoding 浏览器可以接受的压缩资源格式（Accept-Encoding: gzip,deflate,br）
+       * 
+       */
+
+      // ## Content-type
+      /**
+       * 存在于响应头中（服务器对客户端说的话）
+       * 返回资源类型和编码
+       * 
+       * 子项
+       * Content-Encoding: gzip 服务器返回的资源编码格式（压缩格式，优化传输内容的大小）
+       */
+    </script>
+  </body>
+</html>

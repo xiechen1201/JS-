@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>www历史、HTTP报文、请求方式、GET与POST</title>
+  </head>
+  <body>
+    <div>这是i个测试文字</div>
+    <script>
+      // ## WWW
+      /**
+       * WWW 在很早之前是一种协议（网页服务协议）
+       * 访问一个主页必须要加 www （www.baidu.com）
+       * 要访问一个子页面 www.baidu.com/baike
+       *
+       * 一个网站可能存在多个服务器，按照之前的办法只能在一个服务器上建立 baike 的文件夹
+       * 后来为了解决 www 去掉了， zhidao.baidu.com
+       */
+
+      // ## 发起 HTTP
+      /**
+       * HTTP 请求报文：客户端和服务端之间的数据传递，告诉服务端本次请求的目的，服务端返回数据，传输的信息就是报文
+       * HTTP 是基于 TCP/IP 协议通信的（先建立连接才能发送请求）
+       * 通过一个可靠的连接来交换信息。
+       * 服务器处理完客户端的请求，并收到客户端的应答后，即断开连接。（节省传输时间）
+       * 客户端和服务端可以传输任意类型的数据
+       *
+       *
+       * 每条HTTP报文包含一个客户端请求和服务端响应
+       */
+
+      /**
+       * HTTP 报文的格式
+       */
+
+      /**
+       * HTTP 的请求方式
+       * 常用：
+       * put：上传资源，提交即存储，存在安全漏洞
+       * delete：删除资源，提交即存储，存在安全漏洞
+       * get：获取资源
+       * post：修改资源
+       * （对应着数据的增删改查）
+       *
+       * 4种方式是为了区分请求目的，不代表 post 一定就是修改数据
+       *
+       * 不常用：
+       * options
+       * head
+       * teace
+       * connect
+       */
+      /**
+       * get 和 post 的总结：
+       * get 主要用于获取数据，数据在请求体中是查询字符串参数
+       * post 可用于新增、删除、修改数据，数据在请求体中是表单数据（Form Data），Google 浏览器 view source 中仍然是 url 参数键值对形式  a=1&b=2
+       *
+       * 区别：
+       * 1、post 更安全（不会作为 url 的一部分，不会被缓存，不会被保存在服务器日子和浏览器记录中）
+       * 2、post 发送的数据量更大，get 的 url 长度有限制
+       * 3、post 能发送多种数据类型，get 只能发送 ASCII 中的字符
+       * 4、post 比 get 速度慢
+       *    4.1 post 请求头内容更多
+       *    4.2 post 接收数据之前会先将请求头发送给服务器进行确认，然后发送数据（比 get 多了一个请求确认步骤）
+       * 5、get 会进行缓存，post 不会
+       * 6、post 不能进行管道化传输
+       *    6.1 串行连接
+       *    6.2 持久化连接（连接一次，不需要再次 TCP 连接）
+       *    6.3 管道化持久连接
+       * 
+       */
+    </script>
+  </body>
+</html>

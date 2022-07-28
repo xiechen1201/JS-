@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ## 浏览器缓存
+      /**
+       * 必要性：把已请求并返回的资源（HTML页面、图片、JS、CSS、数据等）复制成一个副本存储在浏览器的缓存中
+       * 好处：1、较少网络带宽的消耗 2、降低服务器的压力 3、减少网络延迟
+       *
+       * Pragma: no-cache
+       * 存在于响应头中，指示浏览器忽略资源缓存副本，每次访问需要到服务器进行获取
+       *
+       * Pragma 和 Cache-Control 版本的区别
+       *
+       * Cache-Control
+       * no-cache: 指示浏览器忽略资源缓存的副本
+       * no-store: 强制缓存任何情况下都不要保留任何副本
+       * max-age=31536000: 缓存的有效时长，从请求时间开始到过期时间之间的秒数
+       * public: 表明响应可以被任何对象（包括发生请求的客户端，代理服务器等等）存储
+       * private: 表明响应只能被单个用户缓存，不能作为共享缓存（即代理商服务器不能缓存它）
+       *
+       * Expires 同 max-age
+       * 格林威治时间
+       *
+       * 缓存机制（见流程图）
+       */
+
+      // ===================
+      // ## HTTP 短链接和长链接
+      /**
+       * 短连接：
+       * 长连接：
+       *
+       * 早期的 HTTP/1.0 每个 HTTP 请求都要创建一个 TCP/IP 链接（也就是串行连接）
+       * 后期的 HTTP/1.0 请求头新增 Connection: keep-alive
+       *
+       * HTTP/1.1 版本
+       * 默认开启：Connection: keep-alive
+       * 如需关闭：Connection: close
+       */
+
+      // ===================
+      // ## Content-Length
+      /**
+       * Content-Length 用于描述HTTP消息实体的传输长度
+       *
+       * get 的请求头没有 Content-Length
+       * post 的请求头和响应头都带 Content-Length
+       */
+
+      // ===================
+      // ## Referer
+      /**
+       * 来源域名，存在于请求头中
+       * 当浏览器向 web 服务发送请求的时候，一般会带上 Referer，告诉服务器访问页面的来源
+       * 好处：
+       * 
+       * Referer 可以进行设置
+       * 
+       * Referer 的应用场景：
+       * - 资源防止盗链（别人引用我服务器上的图片资源）
+       */
+    </script>
+  </body>
+</html>

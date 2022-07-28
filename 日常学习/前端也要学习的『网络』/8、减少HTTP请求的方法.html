@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>减少HTTP请求的方法</title>
+  </head>
+  <body>
+    <script>
+      // ## URL回车 => 页面呈现的过程
+      /**
+       *
+       * 1、url 输入回车
+       * 2、DNS 进行域名解析为服务器相应的 IP 地址
+       * 3、浏览器网络向服务器发起 TCP/IP 连接请求（过程中发生三次握手）
+       * 4、建立 TCP/IP 连接
+       * 5、浏览器网络发起 HTTP 请求
+       * 6、服务端返回响应的资源
+       * 7、下载 HTML 资源
+       * 8、解析 HTML
+       * 9、遇到 HTML 里的资源，再次发起 HTTP 请求，下载资源
+       * 10、时间线
+       * 11、呈现页面
+       */
+
+      // ## 减少 HTTP 请求
+      /**
+       * 1、能做雪碧图就做雪碧图
+       * 2、小尺寸的图片转换 base64 编码
+       * 3、合并JS脚本和CSS样式代码
+       * 4、配置多个域名
+       * 5、将来使用浏览器的缓存机制
+       */
+    </script>
+  </body>
+</html>
