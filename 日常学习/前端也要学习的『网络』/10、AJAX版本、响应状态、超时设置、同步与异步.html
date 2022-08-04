@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /**
+       * XMLHttpRequest 的版本：
+       * Level1 的缺点：
+       * Level1 的改进：
+       *
+       * Level2 的兼容性：
+       *
+       * xhr.status/xhr.statusText 服务器回应的 HTTP 状态码/服务器发送的状态提示
+       */
+      /* var xhr;
+      if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+      } else {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if ((xhr.status >= 200 && xhr.status < 300) || xhr.status < 304) {
+            console.log("success", xhr.responseText);
+          }
+        }
+      };
+      xhr.open("POST", "/user/info", true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send("a=1&b=2"); */
+
+      // ## Ajax 的事件
+      /**
+       * Level2 新增的事件
+       * 这些事件尽量不用，兼容性不太好，执行顺序
+       *
+       * xhr.onloadstart
+       * xhr.onload
+       * xhr.onerror
+       * xhr.onabort
+       * xhr.onloadend
+       */
+
+      // ## 超时
+      /**
+       * timeout 属性(毫秒，如果值为 0 表示没有超时时间)
+       * ontimeout 事件
+       *
+       * xhr.open("POST","/user/info",true)
+       * xhr.timeout = 30000
+       * xhr.ontimeout = function () {};
+       */
+
+      // ## 异步和同步
+      /**
+       *
+       */
+
+      // ## dataType
+      /**
+       * 表示返回的数据类型
+       * xhr.dataType = "JSON"
+       *
+       */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript" src="./jsonp.txt"></script>
+    <script type="text/javascript">
+      var a = "Hello";
+
+      function test() {
+        console.log(a);
+      }
+      // console.log(a);
+      // function test() {
+      //   console.log("执行函数");
+      // }
+
+      // function getData(data) {
+      //   console.log(data);
+      // }
+    </script>
+    <!-- <script type="text/javascript" src="./jsonpP.php"></script> -->
+    <script
+      id="callback"
+      type="text/javascript"
+      src="./jsonp.js?callback=getData"
+    ></script>
+  </body>
+</html>

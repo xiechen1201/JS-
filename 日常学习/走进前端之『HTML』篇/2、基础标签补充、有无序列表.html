@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="https://ai.taobao.com" target="iframe-name">淘宝</a>
+    <a href="https://www.jd.com" target="iframe-name">京东</a>
+    <iframe
+      frameborder="10"
+      scrolling="auto"
+      src="./1、前端认知、编辑器、HTML基础.html"
+      name="iframe-name"
+    ></iframe>
+    <table border="1" cellpadding="10">
+      <caption>
+        这是标题标签
+      </caption>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>姓名</th>
+          <th>年龄</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>123</td>
+          <td>张三</td>
+          <td>22</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>张三</td>
+          <td rowspan="2">23</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>张三</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>信息</td>
+          <td colspan="2">总人数：2人</td>
+        </tr>
+      </tfoot>
+    </table>
+    <script type="text/javascript">
+      // ## 上标、下标
+      /**
+       * 上标标签
+       * <p>前端<sup>[1]</sup></p>
+       * 内联元素
+       *
+       * 下标标签
+       * <p>前端<sub>[2]</sub></p>
+       * 内联元素
+       */
+
+      // ## 文本结点标签
+      /**
+       * <span>123</span>
+       * 内联元素，没有默认的样式
+       */
+
+      // ## 序列列表标签
+      /**
+       * 有序列表
+       * <ol type="1" start="1" reversed="reversed">
+       *  <li>HTML</li>
+       *  <li>CSS</li>
+       *  <li>JavaScript</li>
+       * </ol>
+       * 默认是 1、2、3...
+       * 属性：
+       * type="" 表示序列的编号类型（1、a、A、i、I）
+       * start="" 表示从哪个开始，只能是数字有效
+       * reversed="reversed" 表示倒序
+       *
+       *
+       * 无序列表
+       * <ul type="disc">
+       *  <li>HTML</li>
+       *  <li>CSS</li>
+       *  <li>JavaScript</li>
+       * </ul>
+       *
+       * type=""
+       *  disc 实心圆点（默认）
+       *  squra 实心方点
+       *  circle 空心圆点
+       *
+       * ol、ul、li、dl、dt、dd 都是块级元素
+       *
+       *
+       * 定义列表
+       * <dl>
+       *  <dt>项目</dt>
+       *  <dd>描述</dd>
+       *  <dt>Milk</dt>
+       *  <dd>White cold drink</dd>
+       * </dl>
+       */
+
+      // ## 表格标签
+      /**
+       * table
+       * tr 表示一行，表格行
+       * th 表示每列的表头
+       * td 表示每列的表数据单元格
+       *
+       * table 属性
+       * border="1" 表示边框宽度
+       * cellpadding="10" 表示单元格内边距
+       * cellspacing="10" 表示单元格之间的间距
+       *
+       * td 属性
+       * colspan="2" 表示单元格的跨列的列数
+       * rowspan="2" 表示单元格的跨行的行数
+       * align="left/center/right"; 表示水平对齐方式左 、中 、右
+       * valign="top/middle/bottom"; 表示垂直对齐方式：上 、中 、下
+       *
+       * 标准表格需要加上三种标签
+       * thead 表格也没
+       * tbody 表格的主体标签
+       * tfoot 表格的页尾标签
+       */
+
+      // ## 框架标签
+      /**
+       * iframe 标签由 frameset 标签衍生来的，用来嵌入页面
+       * 内联块元素
+       * 属性：
+       * src="" 表示要引用的地址
+       * width=""
+       * height=""
+       *
+       * 好像内联块元素都有 width 和 height 属性？？？
+       *
+       * 和 a/target 联合的案例
+       */
+    </script>
+  </body>
+</html>

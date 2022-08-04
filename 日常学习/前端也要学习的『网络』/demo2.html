@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 假设当前页面是 test2.plusplus.com/demo2.html
+
+      // ## window.name
+      axjax("test2.plusplus.com/demo2.php").then((result) => {
+        window.name = JSON.stringify(result);
+      });
+
+      // ## postMessage
+      axjax("test2.plusplus.com/demo2.php").then((result) => {
+        window.parent.postMessage(
+          JSON.stringify(data),
+          "test2.plusplus.com/demo2.html"
+        );
+      });
+    </script>
+  </body>
+</html>

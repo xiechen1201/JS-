@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <iframe id="myIframe" src="./index.html"></iframe>
+    <script type="text/javascript">
+      // 案例
+      /* document.domain = "www.test.com";
+      var myIframe = document.getElementById("myIframe");
+      myIframe.onload = function () {
+        console.log(myIframe.contentWindow.name);
+      }; */
+
+      // 封装一个 domain
+      /* var ajaxDomian = (function () {
+        function createIframe(frameId, frameUrl) {
+          var fream = document.createElement("iframe");
+          fream.id = frameId;
+          fream.src = frameUrl;
+          fream.style.display = none;
+
+          return fream;
+        }
+        return function (opt) {
+          document.domain = opt.basicDomain;
+          var frame = createIframe(opt.frameId, opt.frameUrl);
+          frame.onload = function () {
+            var $ = document.getElementById(opt.frameId).contentWindow;
+          };
+        };
+      })(); */
+
+      // ## 如何解决请求跨域？？？
+      /**
+       * 回顾同源策略：必须协议、域名、端口号一样
+       * 否则就会导致跨域
+       *
+       * window.name 有共享特性，同一个窗口随意更改url，windon.name 都可以被访问
+       * 主窗口和ifream窗口的源不一样，就无法拿到window.name或者window其他值
+       *
+       * 1、http://test.jsplusplus.com 请求 http://test2.jsplusplus.com
+       * 就会导致跨域，但是同源策略只针对浏览器，
+       * 网页请求同源的服务端接口，服务端再去请求不同源的地址，然后返回数据（请求转发）
+       * 朋友借书的案例，认识就是同源、不认识就是不同源
+       *
+       * 2、设置 document.domian 为同一个基础域名
+       * document.domian 当前文档的域名
+       * http://test.jsplusplus.com/index.html 利用 iframe 引用 http://test2.jsplusplus.com/index.html 页面然后用这个页面去请求 http://test2.jsplusplus.com/index.php
+       * 
+       * 3、window.name
+       * 同一个窗口不同的url能共享同一个 window.name 属性
+       * 
+       * demo1.html
+       *    window.name = "我是dome1"
+       *    setTimeout(function(){
+       *        location.href = "demo2.html"
+       *    },1000)
+       * 
+       * demo2.html
+       *    console.log(window.name); // 我是dome1
+       * 
+       * 4、postMessage
+       * 不推荐、容易收到攻击
+       * 
+       * 5、hash + iframe
+       * 适合传递简单的值，因为是明文传递的
+       * 
+       * 6、后端设置 CORS 跨域
+       * 
+       * 7、JSONP 跨域
+       * JSONP：JSON with Padding 跨域获取JSON数据的一种非官方的使用模式
+       * 
+       * 不受同源策略的项
+       * 
+       * script本身就是引用脚本，对于文件是什么格式script并不在意，script只在意文件里面的内容，只要内容能够解析就行，如果不能解析就会报错
+       * 
+       * 不支持post请求
+       */
+    </script>
+  </body>
+</html>

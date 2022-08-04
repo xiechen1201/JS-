@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        text-indent: 2em;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // ## 前端开发
+      /**
+       * Web 前端开发(Web Front-end Development)
+       * 前端有结构(HTML)、样式(CSS)、逻辑(JavaScript)
+       *
+       * HTML：HyperText Markup Language 超文本标记语言（不是编程语言，因为没有逻辑所以不算编程语言）
+       * 双标签：<h1></h1>
+       * 单标签：<a /> <hr />
+       *
+       * 标签属性：对当前标签一种功能性的设置 <img src="" />
+       *
+       * <a />
+       * href: 设置跳转地址的属性
+       * target: 目标，_blank 新开一个页签
+       */
+
+      // ## 文档的基本结构
+      /**
+       * <!DOCTYPE html> 不是标签而是申明，作用告诉浏览器该文档为 HTML5 的版本，不申明则会用浏览器的自身模式进行渲染（可能会造成页面显示的差异），声明了 W3C 的标准模式后页面渲染会按照标准模式渲染
+       * <html lang="en"> 文档根标签，lang="en" 表示该文档是简体中文
+       *    <head> 向浏览器传递网页基本的信息和配置（里面有4大件）
+       *        <meta charset="UTF-8" /> charset="UTF-8" 设置文本的字符集（否则可能页面乱码），UTF-8 Unicod，万国码，几乎认识全世界所有正在使用的文字
+       *        <title>标题</title> 标题一般写30-40个字，可以少于30但不要超过40（网站名称+主要的关键字+关键词的描述）
+       *        <meta name="keywords" content="关键字" /> keywords 一般是100个字符，逗号分隔
+       *        <meta name="descrption" content="描述内容" />
+       *    </head>
+       *    <body></body> 页面文档内容的呈现地方
+       * </html>
+       *
+       * 搜索引擎认知的优先级：
+       * title > descrption > keywords
+       *
+       * 网站爬虫会根据以上三个东西进行搜索（SEO）
+       */
+
+      // ## HTML 基础标签
+      /**
+       * ## 标题标签
+       * <h1>标题1</h1>
+       * <h2 style="background-color: green;">标题1</h2>
+       * <h3>标题1</h3>
+       * <h4>标题1</h4>
+       * <h5>标题1</h5>
+       * <h6>标题1</h6>
+       *
+       * 特点：独占一行、粗体、大小不一致、
+       * 浏览器默认字体大小是 16px，1em 就是 16px
+       *
+       * ## 段落标签
+       * <p style="text-indent: 2em;">段落标签段落标签</p>
+       *
+       * 特点：独占一行、
+       * 字体默认 16px
+       *
+       * ## 粗体标签
+       * <strong>粗体1</strong>
+       * <b></b>
+       *
+       * strong语义化标签 b是物理化标签，b 标签基本不用
+       *
+       * ## 斜体标签
+       * <em>斜体标签1</em>
+       * <i>斜体标签2</i>
+       *
+       * 同样语义化和物理化标签，i 标签经常用于加图标
+       *
+       * ## 划线标签
+       * <del>删除线标签</del>
+       * <p style="text-decoration: line-through;">通过样式来表现中划线</p>
+       * 表现为中划线
+       *
+       * <ins>下划线标签</ins>
+       * <p style="text-decoration: underline;">通过样式来表现下划线</p>
+       * 表现为下划线
+       *
+       * ## 地址标签
+       * <address>北京市丰台区xx街道</address>
+       * 表现和 i 标签一样都是斜体
+       *
+       * 以下是常用的标签
+       * ## 容器/盒子标签
+       * <div>容器标签1</div>
+       * 特点：独占一行、默认高度由内部的内容决定
+       * 只要是容器标签肯定有宽和高，只要有宽和高就是布局用的
+       * 1、浏览器是认识英文的，所以多个英文字母直接没有空格挨在一起认为是一个单词，而浏览器认为中文一个字就是一个字
+       * 2、编辑器内文本的空格和换行都是文本分隔符（多个空格和多个换行只能显示一个空格）
+       * 3、HTML 不能直接出现 <>，所以得用实体字符 &lt; &gt;
+       * 4、&nbsp; 表示空格
+       * 5、&copy; 备案中图标版权 ©
+       *
+       * ##
+       * <br /> 换行
+       * <hr /> 分割线
+       *
+       * ## 图片标签
+       * <img />
+       * 属性：
+       * src="www.xx.png" 表示一般用于加载资源，图片的地址，可以是网络路径或本地相对路径(../../img/test.png)
+       * alt="这是图片" 表示图片加载失败后对图片的说明
+       * title="这是图片" 表示鼠标悬浮后对图片的说明
+       *
+       * ## 元素类型
+       * 内联元素：inline element，不独占一行、无法定义宽高（strong em del ins）
+       * 块级元素：block element，独占一行、可以定义宽高（p div address）
+       * 内联块：inline-block element，不独占一行，可以定义宽高（img）
+       *
+       * ## 超链接/锚点标签
+       * 最早是锚点标签
+       * <a href="https://www.baidu.com">百度一下</a>
+       * 属性：
+       * href="https://www.baidu.com" 表示引用的地址
+       *    target="_blank" 表示怎么打开窗口
+       *    打电话：
+       *    <a href="tel:18801120693">拨打电话</a>
+       *    发邮件：
+       *    <a href="mailto:2501869423@qq.com">发邮件</a>
+       *    锚点定位：
+       *    <a href="#title">标题</a>
+       *    <div id="title">标题</div>
+       *    协议限定符：
+       *    <a href="javascript:alert('弹窗');"></a>
+       *    默认会刷新页面，使用协议限定符可以限制点击刷新页面
+       *    <a href="javascript:;"></a>
+       *    <a href="javascript:void(0);"></a>
+       * 
+       * ## 标签嵌套
+       * 内联元素可以嵌套内联元素
+       * 块级元素可以嵌套任何元素
+       *    注意: p 标签不能嵌套 div，a 标签不能嵌套 a 标签
+       * 
+       * ## 注释
+       * 目的：1、代码说明，方便后期维护 2、
+       * <!-- 我是注释内容 -->
+       */
+    </script>
+  </body>
+</html>
