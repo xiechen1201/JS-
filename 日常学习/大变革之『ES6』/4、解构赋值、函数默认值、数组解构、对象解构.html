@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>解构赋值、函数默认值、数组解构、对象解构</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // ## 函数的默认值
+
+      // ES5 函数默认值的写法
+      /* function foo(x, y) {
+        x = x || 1;
+        y = y || 2;
+        console.log(x + y);
+      }
+      foo(4); */
+
+      // ES6 的函数默认值的写法
+      /* function foo(x = 1, y = 2) {
+        console.log(x + y);
+      }
+      foo(4); */
+
+      //
+      /* let x = 1;
+      function foo(y = x) {
+        let x = 2;
+        console.log(y); // 1
+      }
+      foo(); */
+
+      // let 变量名不能和形参名一样
+      /* let x = 1;
+      function foo(x = 2) {
+        let x = 2;
+        console.log(x);
+      }
+      foo(); */
+
+      // 每一次都需要计算表达式的值
+      /* let a = 99;
+      function foo(b = a + 1) {
+        console.log(b);
+      }
+      foo();
+      a = 100;
+      foo(); */
+
+      // ==========
+      // ## 解构赋值
+
+      /*  let a = 1;
+      let b = 2;
+      let c = 3; */
+
+      // ES6 写法优化
+      // 模式匹配（结构化赋值），必须保证机构一样，等号两边的数据结构一样
+      /* let [a, b, c] = [1, 2, 3];
+      console.log(a, b, c); */
+
+      /* let [d, [e], [f]] = [1, [2], [3]];
+      console.log(d, e, f); */
+
+      // 解构失败会返回 undefind 变量多了
+      /* let [d, [e], [f]] = [1, [2], []];
+      console.log(d, e, f); */
+
+      // 不完全结构 值多了
+      /* let [, [e], [f]] = [1, [2], [3]];
+      console.log(e, f); */
+
+      // 解构的默认值
+      /*  let [d, [e], [f = 6]] = [1, [2], []];
+      console.log(d, e, f); */
+
+      // 除了 undefind ，都会被认为是一个正常的值
+      /* let [a, b = 2, c = 3, d = 4] = [1, undefined, null, false];
+      console.log(a, b, c, d); */
+
+      // 默认 也可以是一个函数
+      /* function foo() {
+        return "foo";
+      }
+      let [a = foo()] = [, 1];
+      console.log(a); */
+
+      //
+      /* let [x = 1, y = x] = [];
+      console.log(x, y); // 1 1 */
+
+      /* let [x = 1, y = x] = [2];
+      console.log(x, y); // 2 2 */
+
+      // 暂时性死区
+      /* let [x = y, y = 1] = [];
+      console.log(x, y); // Cannot access 'y' before initialization */
+
+      // 不能重复声明
+      /* let x = 5;
+      let [x = 1, y = x] = [];
+      console.log(x, y); // Identifier 'x' has already been declared */
+
+      // ## 对象的结构
+
+      // 创建对象的方式;
+      /* let obj1 = {};
+      let obj2 = new Object();
+      let obj3 = Object.create({}); */
+
+      // 属性名和变量同名的时候可以简写
+      // 函数名可以简写
+      /* var name = "张三";
+      let sex = "male";
+      var person = {
+        name,
+        sex,
+        age: 20,
+        eat() {
+          console.log("吃饭");
+        },
+      }; */
+
+      // 属性名拼接
+      /* let firstName = "zhang";
+      let secondName = "san";
+      let person = {
+        [firstName + secondName]: "zhangsan",
+      };
+      console.log(person) */
+
+      // 对象解构
+      // 结构完全一样的两个结构可以进行结构
+      let { a1: a, b: b, c: c } = { a1: 1, b: 2, c: 3 };
+      console.log(a, b, c);
+
+      // 变量和属性名一样的时候可以简化
+      /* let { a, b, c } = { a: 1, b: 2, c: 3 };
+      console.log(a, b, c); */
+
+      // 不完全结构,值多了
+      /* let { a = "a", b, c } = { a: 1, b: 2, c: 3, e: 4, f: 5 };
+      console.log(a, b, c); */
+
+      // 结构失败，变量多了
+      /* let { a, b, c } = { b: 2, c: 3, e: 4, f: 5 };
+      console.log(a, b, c); // undefined 2 3 */
+
+      // 取值不存在顺序
+      /* let { a, b, c } = { b: 2, a: 1, c: 3 };
+      console.log(a, b, c); */
+
+      // : 表示重命名？
+      /* let person = {
+        name: "张三",
+        age: 40,
+        son: {
+          son1: "1-1",
+          son2: "2-1",
+        },
+      };
+      let { name, age, son: Son } = person;
+      console.log(name, age, Son); */
+
+      // 多层结构
+      let person = {
+        name: "张三",
+        age: 40,
+        son: {
+          name: "张四",
+          age: 30,
+          son: {
+            name: "张五",
+            age: 20,
+          },
+        },
+      };
+      let {
+        son: { son: son1 },
+      } = person;
+      console.log(son1);
+    </script>
+  </body>
+</html>

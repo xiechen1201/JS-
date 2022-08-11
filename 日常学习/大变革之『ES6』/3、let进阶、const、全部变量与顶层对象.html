@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="post" action="">
+      <input type="name" name="name" value="zhangsan" />
+      <input type="submit" value="提交" />
+    </form>
+    <script type="text/javascript">
+      // ## let 进阶
+
+      // 两个 var 都会声明提升
+      /* for (var i = 0; i < 10; i++) {
+        var i = "a";
+        console.log(i);
+      } */
+
+      // let 父子作用域
+      /*
+        {
+            var i;
+            let i;
+            {
+                var i 会变量提升，所以直接报错
+            }
+        }
+      */
+      /* for (let i = 0; i < 10; i++) {
+        var i = "a";
+        console.log(i); // 报错
+      } */
+
+      /*
+        {
+            let i;
+            {
+                let i;
+            }
+        }
+      */
+      /* for (let i = 0; i < 10; i++) {
+        let i = "a";
+        console.log(i); // 10次a
+      } */
+
+      /* let a = 1;
+      {
+        // 函数提升只会提升到{}内
+        function a() {
+          console.log(1);
+        }
+      }
+      console.log(a) */
+
+      // ====================
+      // ## const 定义常量
+
+      // 1、定义常量必须要赋值
+      /* const a;
+      console.log(a) // Missing initializer in const declaration */
+
+      // 2、定义常量后值不能被更改
+      /* const a = 10;
+      a = 11; // TypeError: Assignment to constant variable. */
+
+      // 3、定义不能提升，也存在暂时性死区
+      /* console.log(a); // Cannot access 'a' before initialization
+      const a = 10; */
+
+      // 4、块级作用域
+      /* {
+        const a = 10;
+      }
+      console.log(a); // a is not defined */
+
+      // 5、不容许重复声明
+      /* const a = 10; 
+      const a = 12; // Identifier 'a' has already been declared */
+
+      /* var a = 10; 
+      const a = 12; // Identifier 'a' has already been declared */
+
+      // 6、定义引用值，只能保证引用值的指针不被改变，并不能保证引用值的属性不被改变
+      /* const obj = {};
+      obj.name = "张三";
+      console.log(obj); */
+
+      /* const obj = {};
+      obj = {}; // Assignment to constant variable. */
+
+      // 利用 freeze 方法来冻结引用类型
+      /* console.log(Object.prototype)
+      const obj = {};
+      Object.freeze(obj);
+      obj.name = "张三"
+      console.log(obj) */
+
+      // ====================
+      // ## 顶层对象
+      /* a = 1; // 相当于直接在 window 上新增了一个 a 属性
+      console.log(window.a); */
+
+      // function var 运行声明全局变量
+      // let const class 不允许挂在 window 上，不能作为顶层对象的属性，
+
+      /* let a = 1;
+      console.log(window.a); // undefined */
+    </script>
+  </body>
+</html>

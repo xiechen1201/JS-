@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <label for="username">用户名：</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        maxlength="5"
+        readonly="readonly"
+        placeholder="请输入文本"
+      />
+      <input type="password" name="pass" disabled="disabled" />
+      <input type="submit" value="提交" />
+
+      <input type="radio" id="mel" name="sex" value="mel" checked="checked" />
+      <label for="mel">男</label>
+      <input type="radio" id="fem" name="sex" value="fem" />
+      <label for="fem">女</label>
+
+      <input id="html" type="checkbox" name="lang" value="html" />
+      <label for="html">HTML</label>
+      <input id="css" type="checkbox" name="lang" value="css" />
+      <label for="css">CSS</label>
+      <input id="javascript" type="checkbox" name="lang" value="javascript" />
+      <label for="javascript">javascript</label>
+
+      <input type="submit" value="提交" />
+    </form>
+    <script type="text/javascript">
+      // ## form
+      /**
+       * 表单标签，无样式，块级元素
+       * 属性：
+       * method 提交表单的方式（get、post）
+       * action 提交表单的地址
+       */
+
+      // ## input
+      /**
+       * 文本标签，内联块元素
+       * 属性：
+       * type 表示输入框的类型（text、password、submit、reset、button、radio、file）
+       * value 表示输入框的值
+       * name 表示输入框的属性名/值
+       * maxlength="5" 表示最大长度
+       * placeholder 表示输入框的提示文本
+       * readonly="readonly" 或者 readonly 表示输入框是只读的
+       * disabled="disabled" 或者 disabled 表示输入框是禁用的
+       *    区别：disabled 无法进行提交，readonly 是可以提交的
+       *
+       * submit是提交按钮起到提交信息的作用，type类型是button只起到跳转的作用，不进行提交。
+       *
+       *
+       * radio
+       * 属性：
+       * checked="checked" 或 checked 表示选中
+       * name 表示表单名，当为同一个 name 的时候才能单选
+       *
+       */
+
+      // ## lable
+      /**
+       * 内联元素
+       * 属性：
+       * for 要和 input 的 id 属性一样，点击 label 的时候才能聚焦 input
+       *
+       * 拓展：
+       * MD5：消息摘要的算法，不可逆的（加密后就无法解密），加密的时候不需要提供密钥
+       */
+
+      // ## select & option
+      /**
+       * 内联块
+       * 如果 option 没有 value 属性，默认就去找 option 标签中间的内容，如果 option 的 value 值是空则取空
+       */
+
+      // ## textarea
+      /**
+       * 内联块元素
+       * 标签直接不可以有换行或者空格，没有 value 属性，标签直接的内容就是值
+       * js 获取值的时候仍然要用 .value
+       * 属性：
+       *
+       * cols 表示宽度可输入字数
+       * rows 表示高度可输入字数
+       *
+       */
+
+      // ## fieldset & legend
+      /**
+       * 分组、包裹
+       * 都是块级元素
+       */
+
+      // ## button
+      /**
+       * 按钮标签
+       *
+       * 
+       */
+    </script>
+    <button>111</button>
+    <fieldset>
+      <legend>用户登录</legend>
+      <p>111</p>
+    </fieldset>
+    <select name="lang">
+      <option value="HTML">HTML</option>
+      <option value="CSS">CSS</option>
+      <option value="javascript">javascript</option>
+    </select>
+    <textarea cols="20" rows="30"></textarea>
+  </body>
+</html>
