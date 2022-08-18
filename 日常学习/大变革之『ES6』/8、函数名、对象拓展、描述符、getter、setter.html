@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // ## 函数拓展
+
+      /* var f = function () {};
+      // ES5 之前返回的是一个空的字符串
+      console.log(f.name); // f */
+
+      // 每次声明一个function相当于 new Function()
+      /* console.log(Function)
+      var test = new Function()
+      console.log(test.name) */
+
+      /* function foo() {}
+      console.log(foo.bind({}).name); // bound foo
+      console.log(foo.call({}).name); //  Cannot read properties of undefined (reading 'name') 相当于函数执行后没有返回值，所以报错 */
+
+      // ## 对象拓展
+
+      // 属性简写，属性名和变量名同名的时候可以简写
+      /* const foo = "bar";
+      const baz = { foo }; // const baz = { foo: foo }; */
+
+      // 对象方法简写
+      /* const person = {
+        eat() {
+          console.log("吃饭");
+        }
+      }; */
+
+      // 解构赋值
+      /* var obj = { a: 1, b };
+      const { a, b } = obj; */
+
+      // 对象属性名表达式
+
+      // 属性的名称都是字符串
+      /*  var obj = { name: "123" };
+      boj[name]=>obj['name'] */
+
+      // 动态属性名
+      /* var obj = { foo: "foo" };
+      console.log(obj["f" + "o" + "o"]); // foo */
+
+      /* let a = "hello";
+      let b = "world";
+      let obj = {
+        [a + b]: "hello world",
+      };
+      console.log(obj[a + b]); */
+
+      // [] 会将属性名转换为字符串，调用 toString 方法
+      // https://es6.ruanyifeng.com/#docs/object#属性名表达式
+      /* var myObject = {};
+      myObject[true] = "foo";
+      myObject[3] = "bar";
+      myObject[myObject] = "baz";
+
+      console.log(myObject["true"]); // foo
+      console.log(myObject["3"]); // bar
+      console.log(myObject["[object Object]"]); // baz */
+
+      // 同名将被覆盖
+      /* const a = { a: 1 };
+      const b = { b: 2 };
+      const obj = {
+        [a]: "valueA",
+        [b]: "valueB",
+      };
+      console.log(obj); // {[object Object]: 'valueB'} */
+
+      //
+      /* const person = {
+        sayName() {
+          console.log(this);
+        },
+      };
+      console.log(person.sayName.name); // sayName */
+
+      // ## 描述符
+
+      // ES6 之前没有检查属性特征的方法
+      /* let obj = { a: 1 };
+      console.log(Object.getOwnPropertyDescriptor(obj, "a"));
+      // {value: 1, writable: true, enumerable: true, configurable: true}
+      // writable可写 enumerable可枚举 configurable可配置 value值
+      // 使用 Object.defineProperty() 方法对对象的属性进行配置 */
+
+      // Object.defineProperty
+      /* let obj = {};
+      Object.defineProperty(obj, "a", {
+        value: 10,
+        writable: false,
+        enumerable: true,
+        configurable: true, // configurable为false的时候不能删除
+      });
+      // writable:false 且 configurable:false 的时候不能更改属性
+      console.log(Object.getOwnPropertyDescriptor(obj, "a")); */
+
+      // ## getter setter
+
+      // 也属于属性描述符的一种
+      // get操作和put操作，一个为了读取属性、一个为了赋值操作属性
+
+      /* let obj = { a: 1 };
+      obj.a;
+      // 属性的获取：访问属性的一种，底层通过[[Get]]来操作，默认方式：是查找当前属性，如果没有就去查找原型上的属性，如果都没有则返回 undefind
+      obj.a = 2;
+      // 属性的赋值操作：底层通过[[Put]]操作，默认的方式：1、先判断访问的是否是属性描述符 getter 或者 setter ？2、不是的话就去找当前属性描述是否 writable:fasle ，3、否则直接将属性值进行赋值 */
+
+      /* var obj = {
+        log: ["example", "test"],
+        // 通过get的方式去定义一个属性
+        get latest() {
+          if (this.log.length === 0) {
+            return undefined;
+          } else {
+            return this.log[this.log.length - 1];
+          }
+        },
+      };
+      console.log(obj, obj.latest); */
+
+      // 通过 defineProperty 来定义 getter setter
+      // get、set 和 valu、writable 是互斥的
+      /* var myObject = { a: 10 };
+      Object.defineProperty(myObject, "b", {
+        enumerable: true,
+        get() {
+          console.log(this);
+          return this.a * 2;
+        },
+        set() {},
+      });
+      console.log(myObject.b); */
+
+      // set
+      /* var language = {
+        log: [],
+        set current(name) {
+          this.log.push(name);
+        },
+      };
+      language.current = "EN";
+      console.log(language) */
+
+      var obj = {
+        get a() {
+          return 2;
+        },
+        set a(value) {
+          return (this.a = value);
+        },
+      };
+      console.log(obj.a);
+      //   Object.defineProperty("");
+    </script>
+  </body>
+</html>

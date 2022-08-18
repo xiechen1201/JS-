@@ -5,31 +5,241 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
+    <style type="text/css">
       .box1 {
         width: 100px;
         height: 100px;
         overflow: auto;
       }
+      p {
+        font-size: 20px;
+        font-family: "楷体";
+        color: rgb(255, 0, 0);
+      }
+      .box2 {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+      }
+      .box3 {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        text-indent: 2em;
+      }
+      .box4 {
+        width: 200px;
+        border: 1px solid #000;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .box4:hover {
+        background-color: gray;
+      }
+      /* .box4:first-child {
+      }
+      .box4:last-child {
+      }
+      .box4:nth-child(1) {
+      } */
+      .box5 {
+        width: 300px;
+        height: 100px;
+        border: 1px solid #000;
+        text-align: justify;
+        line-height: 100px;
+      }
     </style>
   </head>
   <body>
     <div class="box1"></div>
+    <p>你好，css</p>
+    <div class="box2"></div>
+    <div class="box3">你好，长歌！</div>
+    <div class="box4">
+      前端开发前端开发前端开发前端开发前端开发前端开发前端开发前端开发前端开发
+    </div>
+    <div class="box5">1111
+      <span>111</span>
+    </div>
+    <input type="text" value="" />
     <script type="text/javascript">
       // ## width min-width max-width & height min-height max-height
       /**
-       * 设置元素的狂傲
+       * 设置元素的宽高
        * width: 100px/100%;
        * height: 100px/100%;
        */
 
       // ## overflow
       /**
-       * 设置元素溢出
-       * overflow: hidden; 溢出隐藏
-       * overflow: scroll; 溢出强制出现滚动条
-       * overflow: auto; 溢出自动出现滚动条
+       * overflow 设置元素溢出
+       *    hidden 溢出隐藏
+       *    scroll 溢出强制出现滚动条
+       *    auto 溢出自动出现滚动条
+       *
+       * overflow-x
+       * overflow-y
+       *
+       * 滚动条的宽度是占用盒子内部的宽度
        */
+
+      // ## 字体
+      /**
+       * font-size 字体大小
+       *    数值+单位 如：16px（浏览器默认 16px，单位是px，浏览器默认都是对字体的高度设置，宽度是等比例缩放的）
+       *
+       * font-weight 字体粗细
+       *    normal 正常
+       *    lighter 细体
+       *    bold 粗体
+       *    bolder 和bold一样
+       *    数值 如100、800、1000
+       * 浏览器给某些标签默认赋予了css的样式，如 h1 都是 font-weight：bold;
+       *
+       * font-style 字体风格
+       *    normal 正常
+       *    italic 斜体
+       *    oblique 斜体
+       *
+       * font-family 字体
+       *    可以是复合属性，当设置多个字体的时候，存在回退机制，当第一个字体不兼容的时候，就会找第二个字体
+       *    有空格的字体、中文字体表示是需要加双引号的
+       *
+       * color 字体颜色
+       *    英文单词颜色值 black，仅可用于测试，因为各个浏览器对颜色单词显示存在差异
+       *    16进制的颜色值 #000000 如果两个字符相等可以取一个 #000
+       *    rgb(红色, 绿色, 蓝色)
+       */
+
+      // ## 边框
+      /**
+       * border 边框，复合属性
+       *    border: 边框宽度 边框样式 边框颜色;
+       *    border 是不占据盒子内部宽度的，盒子的宽度 = content + border宽度 * 2
+       * border-top 单独对上边框进行设置
+       * border-bottom
+       * border-left
+       * border-right
+       *
+       * 复合值分解
+       * border-width: 2px; 设置上下左右的边框宽度
+       * border-width: 2px 4px; 设置上下、左右的边框宽度
+       * border-width: 2px 4px 6px; 设置上、左右、下的边框宽度
+       * border-width: 2px 4px 6px 8px; 设置上、右、下、左的边框宽度
+       * border-style: dotted dashed虚线 solid实线 double双线 groove ridge inset outset
+       * border-color
+       * border-left-color
+       *
+       * transparent 透明色
+       */
+
+      // ## 文本对齐
+      /**
+       * text-alingn 文本局长对齐（必须是在一个具有具体宽高的容器内部）
+       *    left 居左，默认
+       *    center
+       *    right 居右
+       */
+
+      // ## 文本行高
+      /**
+       * line-height 文本默认有行高（一行占据的高度）
+       * line-height: 容器的高度；这样就可以垂直居中
+       *
+       */
+
+      // ## 文本缩进
+      /**
+       * text-indent: 2em; 两个字体
+       *
+       *
+       * 绝对单位：无论任何环境且环境变化不会导致实际量的单位就是绝对单位
+       * 相对单位：因环境变化导致实际量的变化就是相对单位
+       *
+       * px:
+       * em: 当前元素内文本字体尺寸相对于html的字体大小，浏览器是 16px ，所以 2em 就是 32px
+       */
+
+      // ## 文本修饰
+      /**
+       * text-decoration 划线
+       *    none 无
+       *    underline下划线
+       *    line-through中划线
+       *    overline上划线
+       */
+
+      // ## 光标
+      /**
+       * cursor 鼠标指针
+       *    pointer手
+       *    not-allowed禁用
+       *    help文化
+       *    resize十字架;
+       */
+
+      // ## 单行文本截断
+      /**
+       * 三大件
+       * white-space: nowrap; 不换行
+       * overflow: hidden; 超出隐藏
+       * text-overflow: ellipsis; 超出内容显示省略号
+       */
+
+      // ## 元素表现
+      /**
+       * display
+       *    none
+       *    inline
+       *    inline-block
+       *    block
+       * 通过 display 可以让元素转化为不同的块类型
+       *
+       * visibility: visible/hidden; 显示/隐藏元素；保留在文档内占据的空间
+       * display:none; 不保留在文档内占据的空间
+       */
+
+      // ## 伪类选择器
+      /**
+       * 选择器:hover 鼠标移入
+       * 选择器:disabled 禁用
+       * 选择器:checked 勾选
+       * 选择器:focus 聚焦
+       * :first-child 第一个子级
+       * :last-child 最后第一个子级
+       * :nth-child(1) 第几个子级，odd奇数行 even偶数行
+       */
+
+      // opacity 值越大透明度越低，值越小透明度越高
+      // outline: none; 元素轮廓
+
+      // ## 文本对齐
+      /**
+       * 当行内快遇到行内元素，对齐位置不一样
+       * vertical-align:
+       *    middle
+       *    top
+       *    bottom
+       *    10px 具体像素
+       * 如果行内块里面没有文本，默认是和行内块的地步进行对齐，如果行内块里有文本，则会和块内的文本进行对齐，vertical-align 就是解决行内块和行内元素对齐的问题
+       */
+
+      // 容器内多行文本居中的方法：
+      // 1、容器设置 display: table
+      // 2、容器文本设置 display: table-cell; vertical-align: middle;
+
+      // ## 解决图片间隙
+      /**
+       * 行内、行内块标签，只有是换行、空格都会有文本分隔符
+       * 类似的还有 <textarea> </textarea>
+       */
+
+      // 标签样式初始化
+      // h1,h2,h3,h4,h5,h6{font-weight: normal}
+
+      // /**   */
     </script>
   </body>
 </html>

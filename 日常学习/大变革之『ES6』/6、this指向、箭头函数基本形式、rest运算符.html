@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 当函数的默认值，函数的length属性会发生变化
+      /* function test(a, b, c = 1, d, e, f) {}
+      test(1, 2, 3);
+      console.log(test.length); */
+
+      // 函数形参存在默认的时候，映射关系将不再存在
+      /* function test(a, b, c = 30, d, e, f) {
+        arguments[0] = 10;
+        b = 20;
+        console.log(arguments); // [10, 2, 3]
+      }
+      test(1, 2, 3); */
+
+      // 函数参数的解构
+      /* function foo({ x, y = 5 }) {
+        console.log(x, y);
+      }
+      foo({}); // undefind 5
+      foo({ x: 1 }); // 1 5
+      foo({ x: 1, y: 2 }); // 1 2
+      foo(); // 报错，默认不匹配 function foo({ x, y = 5 } = {}) */
+
+      /* // fetch(url, options);
+      function fetch(
+        url,
+        { body = "默认数据", method = "GET", header = {} } = {}
+      ) {
+        console.log(url, body, method, header);
+      }
+      fetch("http://www.baidu.com"); */
+
+      // ## this 指向
+      // 1、默认绑定规则：function 内部默认指向 window; 严格模式下指向 undefind
+      /* function test(){
+        console.log(this)
+      }
+      test() */
+
+      // 2、隐式绑定：谁调用 this 就只想谁
+      /* var obj = {
+        a: 1,
+        foo: function () {
+          console.log(this);
+        },
+      };
+      obj.foo();
+      var foo1 = obj.foo;
+      foo1(); */
+
+      // 3、显式绑定：call apply bind
+      // 4、实例化构造函数 this 指向实例化对象
+      // 5、DOM 事件的 this 指向 DOM 本身
+
+      // ## 箭头函数表达式
+
+      // 语法：() => {}
+      /* var foo = (a) => {a}; */
+
+      // 当形参只有一个的时候，()可以省略
+      // var foo = a => { a };
+
+      // 当存在多个形参或没有参数的时候，必须用()包裹
+      /* var foo = (a, b) => a + b; 
+      var foo1 = () => 123 */
+
+      // 当 {} 只有一个语句，且 return 出这个语句的时候 {} 可以省略
+      /* var foo = a => a;
+      var foo1 = function (a) {
+        return a;
+      }; */
+
+      // 如果不指定返回值，则返回 undefind
+      /* let foo = (a, b) => {
+        var a = 3;
+        var b = 4;
+        console.log(a, b);
+      };
+      console.log(foo()); */
+      /* let foo = (a, b) => a + b;
+      console.log(foo(1, 2)); */
+
+      // 箭头函数表达式的解构
+      /* var foo = ({ x, y } = {}) => x + y;
+      console.log(foo({ x: 1, y: 2 })); */
+
+      // 应用案例
+      /* var arr = [1, 2, 3, 4, 5];
+      arr.sort((a, b) => b - a);
+      console.log(arr) */
+
+      // 箭头函数中不存在 arguments
+      /* var sum = (a, b) => {
+        console.log(arguments);
+        return a + b;
+      };
+      sum(1, 2); */
+
+      // ... rest 运算符,将参数放入数组中, 该运算符的本质就展开或收集
+      /* var sum = (...args) => {
+        console.log(args);
+      };
+      sum(1, 2); */
+
+      // 拓展运算符把数组的数据进行展开
+      /* function foo(x, y, z) {
+        console.log(x, y, z); // 1, 2, 3
+        console.log(arguments); // 1, 2, 3, 4, 5, 6
+      }
+      foo(...[1, 2, 3, 4, 5, 6]);
+      foo.apply(null, [1, 2, 3, 4, 5, 6]); */
+
+      // ... 也可用于数组合并
+      /* let a = [2, 3, 4];
+      let b = [1, ...a];
+      console.log(b); */
+
+      // 收集函数剩余的所有的参数，这也意味着 ...c 只能在最后一位，否则报错
+      // ... 收集为一个数组
+      /* function foo(a, b, ...c) {
+        console.log(a, b, c);
+      }
+      foo(1, 2, 3, 4, 5, 6); */
+
+      // length 并不能直接访问到 ...rest 的长度
+      /* console.log(function (a, b) {}.length);
+      console.log(function (a, b, ...c) {}.length); */
+
+      let obj1 = { a: 1 };
+      let obj2 = { b: 2 };
+      let obj3 = { ...obj1, ...obj2 };
+    </script>
+  </body>
+</html>

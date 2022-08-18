@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="file" name="file" id="file" />
+  </body>
+  <script>
+    var oFlie = document.getElementById("file");
+
+    oFlie.onchange = function (e) {
+      var formData = new FormData();
+      // file 是一个字段名，根据实际业务更改！！！
+      formData.append("file", this.files[0]);
+
+      requestAjax(formData);
+    };
+
+    function requestAjax(formData) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("post", "./index.php");
+      // 设置请求头
+      xhr.setRequestHeader("Content-type", "multipart/form-data");
+      xhr.send(formData);
+      // 在接收响应期间持续不断地触
+      xhr.onprogress = function (e) {
+        console.log(e.loaded); // 返回已经上传的字节数
+        console.log(e.total); // 返回总的字节数
+
+        var percent = (e.loaded / e.total) * 100 + "%";
+        console.log("已上传：" + percent);
+      };
+      // onload 会在请求完成后触发
+      xhr.onload = function () {
+        // 对返回的 xhr.responseText 进行一些判断处理
+        // ...
+      };
+    }
+  </script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // ## 解构赋值
+      /* let { a } = { a: 1 };
+      console.log(a) */
+
+      // 如何将 a 提取出来呢？
+      /* let a;
+      ({ a } = { a: 1 });
+      console.log(a); */
+
+      // 模式匹配另外一种方式
+      /* let arr = [1, 2, 3],
+        obj = {};
+      [obj.a, obj.b, obj.c] = arr;
+      console.log(obj); */
+
+      // 用let|var声明+()就会报错
+      /* let ({a:b}) = {}
+      let {(a):b} = {}
+      let {a:(b)} = {} */
+      /* function foo(z) {} */
+
+      // 数组是特殊的对象，也能够进行解构赋值
+      /* let arr = [1, 2, 3, 4];
+      let { 0: first, [arr.length - 1]: last } = arr;
+      console.log(first, last); */
+
+      // 交换值
+      /* let a = 10,
+        b = 20;
+      [b, a] = [a, b];
+      console.log(a, b); */
+
+      // 匹配同源属性
+      // 模式匹配可以匹配同源属性
+      /* let { a: x, a: y } = { a: 10 };
+      console.log(x, y); */
+
+      // 总结：解构赋值是变量的赋值，
+
+      // 隐式转换
+      const [a, b, c, d, e] = "hello";
+      console.log(a, b, c, d, e);
+
+      const { length: len } = "hello";
+      console.log(len);
+
+      const { toString: s } = 123;
+      console.log(s);
+
+      // undefind 不能进行隐式类型转换
+    </script>
+  </body>
+</html>
