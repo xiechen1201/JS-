@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // ##
+      /* function foo() {
+        console.log("id:" + this.id);
+        return function () {
+          console.log("id:" + this.id);
+          return function () {
+            console.log("id:" + this.id);
+            return function () {
+              console.log("id:" + this.id);
+            };
+          };
+        };
+      }
+      var f = foo.call({ id: 1 });
+      var f1 = f.call({ id: 2 })();
+      var f3 = f().call({ id: 3 })();
+      var f4 = f()().call({ id: 4 }); */
+
+      // ## 对象拓展运算符
+      /* let obj = {
+        a: 1,
+        b: 2,
+      };
+      let obj1 = {
+        a: 3,
+        b: 4,
+        c: 5,
+        d: 6,
+      };
+      let obj2 = { ...obj, ...obj1 };
+      console.log(obj2); */
+
+      // ## Symbol
+      /* let s = Symbol();
+      console.log(Object.getPrototypeOf(s).constructor.iterator); // Symbol(Symbol.iterator) */
+      /**
+       * constructor 有很多的属性，属性部署了相关的方法，
+       * 例如判断对象是否是构造函数的实例： f instanceof Foo
+       * 实际上调用的就是 Foo[Symbol.hasInstance]() 属性方法
+       *
+       * Symbol(Symbol.iterator) 是一个迭代器方法
+       * iterator 迭代器，是通过 Symbol 构造器的属性的方法
+       */
+
+      // ## iterator
+      // 数组的原型部署了一个 Symbol 迭代器的接口（方法）
+
+      /* let arr = [1, 2, 3, 4];
+      let iter = arr[Symbol.iterator](); // 获取迭代器接口
+      console.log(iter); // Array Iterator {} // 返回一个空对象
+
+      // next() 方法返回数组每项的数据
+      console.log(iter.next()); // {value: 1, done: false}
+      console.log(iter.next()); // {value: 2, done: false}
+      console.log(iter.next()); // {value: 3, done: false}
+      console.log(iter.next()); // {value: 4, done: false}
+      console.log(iter.next()); // {value: undefined, done: true} */
+
+      // 迭代器的概念：对数据结构的读取的一种方式，有序的、连续的基于拉取的一种消耗数据的组织方式；
+      // 数据结构：object array 类数组 Map Set weakMap weakSet typeArray（二进制数据的缓存区）
+      // object 没有 iterator 接口，对象的key不是有序、连续的
+      // 如果想要拿去值怎么做？ for 循环肯定不行
+      // ES6 对部署了 Iterator 接口的数据类型提供了一种统一的方式进行迭代
+      // for...of... 循环，调用 iterator.next 来实现迭代循环
+      /* let arr = [1, 2, 3];
+      let obj = {
+        name: "张三",
+        age: 20,
+      };
+      // 迭代相应的数据类型的
+      for (const iterator of arr) {
+        console.log(iterator); // 值
+      }
+      // 遍历对象的
+      for (const key in arr) {
+        console.log(key); // 键
+      }
+      // obj is not iterable 对象是不能迭代
+      // 因为没有部署 iterable 接口，
+      // 如果想要迭代对象，必须给对象部署 iterable 接口
+      for (const iterator of obj) {
+        console.log(iterator); // 值
+      } */
+
+      /* let obj = {
+        name: "张三",
+        age: 20,
+        [Symbol.iterator]() {
+          console.log(this);
+        },
+      };
+      for (const iterator of obj) {
+        console.log(iterator);
+      } */
+
+      // ## 模拟迭代器方法
+      /* let arr = [1, 2, 3];
+      function makeIterator(array) {
+        let nextIndex = 0;
+        return {
+          next() {
+            return nextIndex < array.length
+              ? {
+                  value: array[nextIndex++],
+                  done: false,
+                }
+              : {
+                  value: undefined,
+                  done: true,
+                };
+          },
+        };
+      }
+      let ite = makeIterator(arr);
+      console.log(ite.next());
+      console.log(ite.next());
+      console.log(ite.next());
+      console.log(ite.next()); */
+
+      // ## typeArray 类型数组
+      // JS 没有 typeArray 构造函数，typeArray 是处理二进制数据的
+      /* const tArray = new Int8Array(8);
+      console.log(tArray);
+      tArray[0] = 100;
+      console.log(tArray); */
+    </script>
+  </body>
+</html>

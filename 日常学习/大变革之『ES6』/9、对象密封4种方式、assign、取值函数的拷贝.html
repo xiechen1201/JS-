@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      //
+      /* const obj = {
+        get foo() {},
+        set foo(x) {},
+      };
+      // console.log(obj.foo.name); // undefind
+      console.log(Object.getOwnPropertyDescriptor(obj, "foo").get.name); */
+
+      //  Object.defineProperty
+      /* var obj = {};
+      Object.defineProperty(obj, "name", {
+        value: "张三",
+        enumerable: false,
+        writable: false,
+        configurable: false, // 不能删除、修改
+      });
+      console.log(obj);
+
+      obj.name = "李四";
+      console.log(obj);
+
+      for (const key in obj) {
+        console.log(key);
+      }
+
+      delete obj.name;
+      console.log(obj);
+
+      obj.age = 20;
+      console.log(obj);  */
+
+      // 对象常量 configurable: false; writable:false; 不可删除；不可修改
+      // 但是依然可以对对象添加新的属性
+
+      // 禁止对象拓展新属性
+      // Object.preventExtensions(obj) 对象不能拓展新属性
+      // Object.isExtensible(obj) 检测对象是否可以进行拓展
+      // 不可以新增，可以更改、删除、枚举
+      /* let obj = { a: 10 };
+      Object.preventExtensions(obj);
+      console.log(Object.isExtensible(obj)); // flase
+      console.log(obj); // { a: 10 }
+      obj.a = 11;
+      obj.b = 20;
+      // Cannot define property c, object is not extensible
+      // Object.defineProperty(obj, "c", {
+      //    value: 30,
+      // });
+      console.log(obj); // { a: 11 }; */
+
+      // 对象密封 Object.seal(obj) / Object.isSealed(obj)
+      // 不可以新增、更改，可以删除、枚举
+      /* let obj = {};
+      Object.seal(obj);
+      console.log(Object.isSealed(obj)); // true, 判断对象是否密封 */
+
+      // 对象冻结 Object.freeze(obj) / Object.isFrozen(obj)
+      // 不可以新增、更改、删除，可以枚举
+      /* let obj = {};
+      Object.freeze(obj);
+      console.log(Object.isFrozen(obj)); // true */
+
+      // 都是浅拷贝，想要深度冻结需要递归
+      /* function myFreeze(obj) {
+        Object.freeze(obj);
+        for (const key in object) {
+          if (Object.hasOwnProperty.call(object, key)) {
+            if (typeof obj[key] === "object" && obj[key] !== null) {
+              myFreeze(obj[key]);
+            }
+          }
+        }
+      } */
+
+      // ES5 之前想要判断
+      // NaN === NaN = false;
+      // +0 === -0 = true;
+      /* console.log(Object.is(NaN, NaN)); // true
+      console.log(Object.is(-0, +0)); // false
+      console.log(Object.is({}, {})); // false
+      console.log(Object.is(false, 0)); // false */
+
+      // ## 对象合并 Object.assign(target,sourses,sourses2)
+      // target合并到哪里，sourses把谁进行合并
+      /* let obj = { a: 1 };
+      let ob2 = { b: 2 };
+      let target = {};
+      let res = Object.assign(target, obj, ob2);
+      console.log(target);
+      console.log(target === res); // true */
+
+      // 同名属性，后面的属性会覆盖前面的属性
+      /* const tar = { a: 1, b: 1 };
+      const tar2 = { b: 2, c: 2 };
+      const tar3 = { c: 3 };
+      Object.assign(tar, tar2, tar3);
+      console.log(tar); // {a: 1, b: 2, c: 3} */
+
+      // undefinf null 无法正常进行合并
+      // Object.assign(undefined, { a: 1 }); // Cannot convert undefined or null to object
+
+      // 基本数据会调用包装类进行合并
+      /* let res = Object.assign(1, { a: 1 });
+      console.log(res); // { 1 , a: 1 }
+      let res1 = Object.assign(true, { a: 1 });
+      console.log(res1); // { true , a: 1 } */
+
+      // 第二个参数无法转换成对象会静默失败
+      /* let res = Object.assign({}, undefined, null, { a: 1 });
+      console.log(res); // {} */
+
+      // 当第二个参数不能枚举的时候会静默失败
+      /* let res = Object.assign({}, 1);
+      let res1 = Object.assign({}, "123");
+      console.log(res); // {}
+      console.log(res1); // {0: '1', 1: '2', 2: '3'} */
+
+      /* const test = "abc";
+      const test2 = true;
+      const test3 = 10;
+      const obj = Object.assign({}, test, test2, test3, undefined, null);
+      console.log(obj); // {0: 'a', 1: 'b', 2: 'c'} */
+
+      /* var obj = { a: 3 };
+      Object.defineProperty(obj, "b", {
+        value: 4,
+      });
+      let res = Object.assign({}, obj);
+      console.log(res); // {a: 3} */
+
+      // 不能合并原型上的属性
+      // 继承属性和不可枚举属性不可拷贝
+      /* var obj = Object.create(
+        { foo: 1 },
+        {
+          bar: {
+            value: 2,
+          },
+          baz: {
+            value: 3,
+            enumerable: true,
+          },
+        }
+      );
+      console.log(obj); // {baz: 3, bar: 2}
+      console.log(obj.foo); // 1
+      let res = Object.assign({}, obj);
+      console.log(res); // {baz: 3}
+      console.log(res.foo); // undefined */
+
+      // Symbol() 函数，是一个原始数据类型，在 ES5 的基础上新增的
+      // 生产一个不会相同的原始数据类型
+      /* var a = Symbol();
+      var b = Symbol();
+      console.log(a == b); // false */
+
+      /* var a = Symbol("test");
+      var b = Symbol("test");
+      console.log(a == b); // false */
+
+      // Symbol 数据也可以进行拷贝
+      /* let res = Object.assign({ a: 1 }, { [Symbol("b")]: 2 });
+      console.log(res) */
+
+      // 合并的数据是浅拷贝
+      /* const obj1 = { a: { b: 2 } };
+      const obj2 = Object.assign({}, obj1);
+      obj1.a.b = 20;
+      console.log(obj2); // {a: {b: 20}} */
+
+      // 帮合并数组的时候，是根据属性名进行合并，也就是下标
+      // 数组的下标就是属性
+      /* let res = Object.assign([1, 2, 3], [4, 5]);
+      console.log(res) */
+
+      // 当合并取值函数的时候，合并的是函数的值
+      /* const obj = {
+        get foo() {
+          return 10;
+        },
+      };
+      const obj2 = {};
+      const res = Object.assign(obj2, obj);
+      console.log(res); */
+
+      // 给原型新增方法
+      /* function Person() {}
+      Object.assign(Person.prototype, {
+        eat() {
+          console.log("eat");
+        },
+      });
+      new Person().eat(); */
+
+      // 默认值
+      /* function test(option) {
+        let defaultObj = {
+          url: "www.baidu.com",
+          method: "post",
+        };
+        option = Object.assign({}, defaultObj, option);
+        return option;
+      }
+      let res = test({
+        url: "www.zhidao.com",
+        method: "get",
+      });
+      console.log(res); // {url: 'www.zhidao.com', method: 'get'} */
+
+      /* const sourse = {
+        set foo(value) {
+          console.log(value);
+        },
+      };
+      const res = Object.assign({}, sourse);
+      console.log(res); // {foo: undefined} */
+
+      // 可以使用 Object.defineProperty(sourse,"foo",{}) 来解决
+    </script>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // ## 原型
+      // 2、原型是实例化对象的公共祖先
+      // 3、所有的构造对象都可以通过原型链进行查找属性
+      /* function Person() {
+        this.name = "zhangsan";
+        this.age = 20;
+      }
+      var p = new Person();
+      console.log(p); */
+
+      /* __proto__
+      1、不够语义化
+      2、访问销量比较慢
+      3、所有继承自该原型的对象都会影响 */
+
+      // ## Object.setPrototypeOf() /Object.getPrototypeOf()
+      // 修改/获取对象的原型
+      // Object.create() 创建对象
+
+      /* let obj = {};
+      let res = Object.setPrototypeOf(obj, { b: 20 });
+      console.log(obj, res, obj === res); // true */
+
+      // target 不是对象，会通过包装类进行封装，会静默失败
+      // Object.setPrototypeOf(new Number(1))
+      /* let num = 1;
+      let res = Object.setPrototypeOf(num, { b: 20 });
+      console.log(Object.getPrototypeOf(num)); */
+
+      /* let str = "abc";
+      let res = Object.setPrototypeOf(str, { b: 20 });
+      console.log(Object.getPrototypeOf(str)); */
+
+      /* let bool = true;
+      let res = Object.setPrototypeOf(bool, { b: 20 });
+      console.log(Object.getPrototypeOf(bool)); */
+
+      // undefind null 会报错
+      /* Object.setPrototypeOf(undefined, { b: 20 }); // Object.setPrototypeOf called on null or undefined */
+
+      // 对象遍历
+      // Object.keys() 获取对象的键名
+      // Object.values() 获取对象的值
+      // Object.entries() 获取对象的键和值
+      // 不可枚举的数据不会被返回
+      // 原型属性不会被返回
+      /* const foo = {
+        a: 10,
+        b: 20,
+        c: 30,
+      };
+      Object.setPrototypeOf(foo, { j: 100, z: 200 });
+      Object.defineProperty(foo, "d", {
+        value: 40,
+      });
+      console.log(foo);
+
+      console.log(Object.keys(foo)); // ['a', 'b', 'c']
+      console.log(Object.values(foo)); // [10, 20, 30]
+      console.log(Object.entries(foo)); // [['a', 10], ['b', 20], ['c', 30]] */
+
+      // 其他类型的数据
+      /* console.log(Object.keys([1, 2, 3])); // ['0', '1', '2']
+      console.log(Object.keys(1)); // []
+      console.log(Object.keys(true)); // []
+      console.log(Object.keys("abc")); // ['0', '1', '2'] */
+
+      // ## super =》this
+      // super 和 this 指向不同，它指向对象的原型对象
+      /* let proto = {
+        b: 20,
+        bar() {
+          console.log("this is proto: " + this.b);
+        },
+      };
+      let obj = {
+        a: 10,
+        // foo: super.y, // 属性不行
+        // 普通函数不能使用
+        // foo: function() {
+        //   console.log(super.b); // 报错
+        // },
+        // 箭头函数不能使用
+        // foo: () => {
+        //   console.log(super.b); // 报错
+        // },
+        // 必须是对象的方法，方法必须是简写的方式才能使用 super
+        foo() {
+          console.log(super.b);
+          super.bar();
+        },
+      };
+      Object.setPrototypeOf(obj, proto);
+      console.log(obj);
+      obj.foo(); */
+
+      // ## Symbol
+      // ES6 新增的原始数据类型（ES5: string number boolean null undefind） + symbol
+      // 为什么引入？解决对象属性名的重名的问题
+      // 引入的场景是？
+      // Symbol() 不是构造函数，所以 new 是会报错的，就是一个普通的函数，生成一个唯一的值
+      /* console.log(Symbol()); // Symbol()
+      console.log(Symbol() == Symbol()); // false
+      console.log(typeof Symbol()); // symbol */
+
+      // 也有包装类，不能赋值属性
+      /* let s1 = Symbol();
+      s1.a = "a";
+      console.log(s1.a); */
+
+      // 为了区分 symbol 可以传递参数
+      /* let s1 = Symbol("s1");
+      console.log(s1); // Symbol(s1) */
+
+      // Symbol 的值是字符串，标识名会转换为字符串
+      /* let obj = { a: 1 };
+      let s1 = Symbol(obj);
+      console.log(s1); // Symbol([object Object]) */
+
+      // undefind 和 null
+      /* console.log(Symbol(undefined)); // Symbol()
+      console.log(Symbol(null)); // Symbol(null) */
+
+      // Symbol 不能转换为 number 数据类型
+      // 不能进行隐式转换（!s1 可以，其余不行）
+      // 可以显式转换（Number(s1) 不行，其余可以）
+      /* let s1 = Symbol();
+      console.log(String(s1)); // Symbol()
+      console.log(Boolean(s1)); // true
+      console.log(Number(s1)); // Cannot convert a Symbol value to a number
+      console.log(s1 + 2); // Cannot convert a Symbol value to a number */
+
+      // 可以访问到原型
+      /* let s1 = Symbol();
+      console.log(Object.getPrototypeOf(s1)); */
+
+      /* let s1 = Symbol();
+      console.log(Object.getPrototypeOf(s1));
+      console.log(s1.toString()); // Symbol() */
+
+      // 使用方法
+
+      // 1、
+      /* let name = Symbol();
+      let person = {};
+      // person.name 是无效的，不会使用上面的 Symbol，必须使用 [] 表达式
+      person[name] = "张三";
+      console.log(person); // {Symbol(): '张三'} */
+
+      // 2、
+      /* let name = Symbol();
+      let person = {
+        [name]: "lisi",
+      };
+      console.log(person); // {Symbol(): 'lisi'} */
+
+      // 3、
+      /* let name = Symbol();
+      let person = {};
+      Object.defineProperty(person, name, {
+        value: "张三",
+      });
+      console.log(person); // {Symbol(): '张三'}
+      console.log(person.name); // undefind person.name 是字符串的方式 person['name']
+      console.log(person[name]); // 张三 */
+
+      /* let name = Symbol();
+      let eat = Symbol();
+      let person = {
+        [name]: "张三",
+        [eat]() {
+          console.log(this[name] + "is eat");
+        },
+      };
+      person[eat](); */
+
+      // Symbol 方法
+      // 构造器方法（静态方法）: Symbol.for();  Symbol.keyFor();
+
+      // Symbol.for();
+      // 将 Symbol 转换为一样的值，类似在全局声明一个 Symbol.for("foo") key，然后再 Symbol.for("foo") 的时候去查询是否有 Symbol.for("foo")
+      /* let s1 = Symbol("foo");
+      let s2 = Symbol("foo");
+      let s3 = Symbol.for("foo");
+      let s4 = Symbol.for("foo");
+      console.log(s1 === s2); // false
+      console.log(s3 === s4); // true
+      console.log(s1 === s4); // false */
+
+      // Symbol.keyFor(); 获取 Symbol 的 key 值；只能获取到for方法后的key值
+      /* let s = Symbol("foo");
+      let s1 = Symbol.for("foo");
+      let s2 = Symbol.for("foo");
+      console.log(Symbol.keyFor(s)); // undefined
+      console.log(Symbol.keyFor(s1)); // foo */
+
+      // Symbol 的值不能进行遍历
+      /* let a = Symbol();
+      let b = Symbol();
+      const obj = {
+        [a]: "a",
+        [b]: "b",
+      };
+      console.log(obj); // {Symbol(): 'a', Symbol(): 'b'}
+      console.log(Object.keys(obj)); // []
+      for (const key in obj) {
+        console.log(key); // 空的
+      }
+      let newObj = Object.assign({}, obj); // 可以进行合并
+      console.log(newObj); // {Symbol(): 'a', Symbol(): 'b'}
+      // 遍历对象的 Symbol 值
+      console.log(Object.getOwnPropertySymbols(obj)); // [Symbol(), Symbol()] */
+
+      // Object.getOwnPropertySymbols(obj) 遍历 Symbol
+      /* let a = Symbol();
+      let b = Symbol();
+      const obj = {
+        [a]: "a",
+        [b]: "b",
+        c: "c",
+      };
+      // 只会遍历 Symbol
+      console.log(Object.getOwnPropertySymbols(obj)); // [Symbol(), Symbol()] */
+
+      // ## 综合案例
+
+      // for...in... 遍历自身+原型可枚举的属性（不包含 Symbol 属性）
+      // Object.keys() 遍历自身可枚举的属性（不包含 Symbol 属性）
+      // Object.assign() 遍历自身可枚举的属性，包含 Symbol 的属性
+      // Object.getOwnPropertySymbols() 遍历自身的 Symbol 可枚举属性
+      // JSON.stringify() 遍历自身可枚举的属性
+    </script>
+  </body>
+</html>

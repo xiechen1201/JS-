@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // ## iterator
+      // 给对象增加一个迭代器接口
+      /* let obj = {
+        start: [1, 2, 3, 4, 5],
+        end: [10, 20, 30],
+        [Symbol.iterator]() {
+          let index = 0,
+            list = [...this.start, ...this.end];
+          len = list.length;
+
+          return {
+            next() {
+              if (index < len) {
+                return {
+                  value: list[index++],
+                  done: false,
+                };
+              } else {
+                return {
+                  value: undefined,
+                  done: true,
+                };
+              }
+            },
+          };
+        },
+      };
+
+      for (const iterator of obj) {
+        console.log(iterator); // 1 2 3 4 5 10 20 30
+      }
+
+      // 部署了迭代器接口后，能够使用数组的拓展运算符
+      let arr = [...obj];
+      console.log(arr); // [1, 2, 3, 4, 5, 10, 20, 30] */
+
+      // ## Array
+      // 1、构造器方法 isArray
+
+      /**
+       * Array.of() 为了取代 new Array 单个参数的情况
+       * ES5 的写法 new Array()/Array/[]
+       */
+      /* // 无参数
+      console.log(new Array()); // []
+      console.log(Array.of()); // []
+      // 单个参数
+      console.log(new Array(3)); // [empty × 3]
+      console.log(Array.of(3)); // [3] */
+
+      /**
+       * Array.from(arrayLike, mapFn, thisArg)
+       * 将类数组、数组，部署了 iterator 接口的数据结构转换为数组
+       */
+      /* let dom = document.querySelectorAll("*");
+      let obj = {
+        a: 1,
+        b: 2,
+      };
+      console.log(dom);
+      // ES5 的方式
+      console.log(Array.prototype.slice.call(dom));
+      // ES6 的方式
+      console.log(Array.from(dom));
+      console.log(Array.from(obj)); // [] , 给对象新增 Symbol.iterator 接口后可以转换
+
+      let result = Array.from(
+        dom,
+        function (el, index, arr) {
+          return el.tagName;
+        },
+        {}
+      );
+      console.log(result); */
+
+      // 2、原型方法
+      /**
+       * fill()
+       * copyWithin()
+       * entries()/keys()/values()
+       * includes()
+       * find()/findIndex()
+       */
+
+      /**
+       * arr.fill()
+       * 填充/替换数据，以指定的字符进行填充
+       * 参数：value
+       * 参数：start，默认0
+       * 参数：end，结束下标-1
+       *
+       * 会更改原数组
+       */
+      /* let arr = [1, 2, 3, 4, 5];
+      let res = arr.fill(10);
+      console.log(res, arr); */
+
+      // 两个参数
+      /* let arr = [1, 2, 3, 4, 5];
+      arr.fill(10, 2);
+      console.log(arr); */
+
+      // 三个参数 左闭合，右开
+      /* let arr = [1, 2, 3, 4, 5];
+      arr.fill(10, 0, 2);
+      console.log(arr); */
+
+      // 参数2、3 一样
+      /* let arr = [1, 2, 3, 4, 5];
+      arr.fill(10, 2, 2);
+      console.log(arr); // [1, 2, 3, 4, 5] */
+
+      // 负数
+      /* let arr = [1, 2, 3, 4, 5];
+      arr.fill(10, -3, -2); // [1, 2, 10, 4, 5]
+      console.log(arr); */
+
+      // NaN 转换为0
+      /* let arr = [1, 2, 3, 4, 5];
+      arr.fill(10, NaN, -2); 
+      console.log(arr); // [10, 10, 10, 4, 5] */
+
+      // 不做任何处理
+      /* let arr = [1, 2, 3, 4, 5];
+      arr.fill(10, NaN, NaN);
+      console.log(arr); // [1, 2, 3, 4, 5] */
+
+      // 对象也可以调用 fill
+      /* console.log([].fill.call({ length: 3 }, 4)); // {0: 4, 1: 4, 2: 4, length: 3} */
+
+      /**
+       * keys() 返回迭代器对象
+       * values() 返回迭代器对象
+       * entries() 返回迭代器对象
+       */
+
+      // Object 相应的方法
+      /* let obj = {
+        a: 10,
+        b: 20,
+        c: 30,
+      };
+      console.log(Object.keys(obj)); // ['a', 'b', 'c']
+      console.log(Object.values(obj)); // [10, 20, 30]
+      console.log(Object.entries(obj)); // [['a', 10], ['b', 20], ['c', 30]] */
+
+      /* let arr = ["a", "b", "c", "d"];
+      let iter = arr.entries();
+
+      // 返回迭代器对象，和 Object.keys()... 不一样！！！
+      console.log(arr.keys());
+      console.log(arr.values());
+      console.log(arr.entries());
+
+      for (const iterator of arr) {
+        console.log(arr.entries().next());
+      }
+      for (const iterator of iter) {
+        console.log(iterator);
+      } */
+
+      /**
+       * arr.copyWithin()
+       * 将数组内的数据进行拷贝，参数和 fill 类似
+       * target 替换的位置
+       * start，默认是0
+       * end
+       */
+
+      // 一个参数
+      /* let arr = [1, 2, 3, 4, 5, 6];
+      arr.copyWithin(2);
+      console.log(arr); */
+
+      // 两个参数
+      /* let arr = [1, 2, 3, 4, 5, 6];
+      arr.copyWithin(0, 1);
+      console.log(arr); */
+
+      // 三个参数
+      /* let arr = [1, 2, 3, 4, 5, 6];
+      arr.copyWithin(1, 3, 4);
+      console.log(arr); //  [1, 4, 3, 4, 5, 6] */
+
+      // 负数
+      /* let arr = [1, 2, 3, 4, 5, 6];
+      arr.copyWithin(-2, -3, -1);
+      console.log(arr); //  [1, 2, 3, 4, 4, 5] */
+
+      // 对象使用
+      /* console.log([].copyWithin.call({ length: 4, 3: 1 }, 0, 3)); */
+
+      /**
+       * arr.find() 返回第一个满足条件的成员
+       * arr.findIndex() 返回第一个满足条件的成员的下标
+       * 获取数组的下标
+       *
+       * 之前用 indexOf，语义化不好
+       *
+       */
+
+      /* let arr = [1, 2, 3, 4, 5, 6];
+      let res = arr.find(
+        function (el, index, arr) {
+          console.log(this);
+          return el > 3;
+        },
+        { a: 10, b: 20 }
+      );
+      console.log(res); */
+
+      /* let res1 = arr.findIndex(
+        function (el, index, arr) {
+          console.log(this);
+          return el > 3;
+        },
+        { a: 10, b: 20 }
+      );
+      console.log(res1); */
+
+      /* let res2 = arr.find((el) => {
+        return el > 6;
+      });
+      console.log(res2); // undefined */
+
+      /* let res3 = arr.findIndex((el) => {
+        return el > 6;
+      });
+      console.log(res3); // -1 */
+
+      /* let arr = [NaN, undefined, null, 1, 2];
+      console.log(arr.indexOf(NaN)); // -1
+      console.log(arr.indexOf(undefined)); // 1
+      console.log(arr.indexOf(null)); // 2
+      console.log(arr.findIndex((el) => Object.is(NaN, el))); // 弥补 indexOf 的不足 */
+
+      /**
+       * arr.includes
+       * 判断数组是否包含某个值
+       */
+      /* let arr = [NaN, undefined, null, 1, 2];
+      console.log(arr.includes(NaN)); // true 解决了 NaN 的问题
+      console.log(arr.includes(undefined)); // true
+      console.log(arr.includes(null)); // true
+      console.log(arr.includes(1)); // true */
+
+      // ## 数值的拓展
+      // 1、新增方法
+      // 2、方法的调整
+
+      /* console.log(0x1f7); // ES5 的16进制数写法
+      console.log(0o767); // 8进制数写法
+      console.log(Number.prototype.toString.call(503, 2)); // 2进制数写法 */
+
+      // isNaN() 方法从娜到了 Array.prototype 上，同时修复了隐式转换的问题
+      /* console.log(isNaN("NaN")); // true
+      console.log(Number.isNaN("NaN")); // false */
+
+      // isFinite() 判断数据是是否是一个有效/限的数字，和 NaN 一样调整了位置且修复了隐式类型转换
+      /* console.log(isFinite("42")); // true
+      console.log(Number.isFinite("42")); // false */
+
+      /* console.log(parseInt(3.1415926));
+      console.log(Number.parseInt(3.1415926));
+      console.log(parseFloat(5));
+      console.log(Number.parseFloat(5)); */
+
+      // 判断整数
+      /* console.log(Number.isInteger(24)); // true
+      console.log(Number.isInteger(24.0)); // true
+      console.log(Number.isInteger(24.1)); // false */
+
+      // 判断是否范围之内的整数
+      /* console.log(Number.isSafeInteger(1.1)); */
+    </script>
+  </body>
+</html>
