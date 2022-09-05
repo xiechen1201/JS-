@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // map 转换为数组
+      /* const map = new Map([
+        [true, 7],
+        [{ foo: 3 }, "abc"],
+      ]);
+      console.log([...map]); */
+
+      // 数组转换为 map
+      /* const arr = [true, "abc", { foo: 3 }];
+      const map = new Map(arr.entries());
+      console.log(map); */
+
+      // map 转换为对象
+      /* const map = new Map([
+        [true, 7],
+        [{ foo: 3 }, "abc"],
+      ]);
+      console.log(strMapToObject(map));
+
+      function strMapToObject(map) {
+        const obj = {};
+        for (const [key, value] of map.entries()) {
+          obj[key] = value;
+        }
+        return obj;
+      } */
+
+      // 对象转换为map
+      /* const obj = {
+        true: 7,
+        abc: 5,
+      };
+      const map = new Map(Object.entries(obj));
+      console.log(map); */
+
+      // ==========
+
+      // Map 对比 Array
+      // 增删改查的操作对比
+      /* const map = new Map();
+      const arr = new Array();
+      map.set("t", 1);
+      arr.push({ t: 1 }); */
+
+      // Set 对比 Array
+      // 增删改查的操作对比
+
+      // Map、Set、Object
+      // 增删改查的操作对比
+
+      // ==========
+      // ## WeakMap WeakSet
+      // 和 Map Set 基本上一致，可以理解为阉割版的 Map 和 Set
+
+      // 区别：
+      // 1、不存在遍历的方法
+      // 2、成员只能是对象，而不能是其他类型的值。
+
+      /* let ws = new WeakSet();
+      ws.add({ name: 1 });
+      ws.add(1); // Invalid value used in weak set */
+
+      /* let wm = new WeakMap();
+      wm.set({ name: 1 }, "111");
+      wm.set(1, 1); // Invalid value used as weak map key */
+
+      // 3、弱引用，不考虑引用直接垃圾回收；
+      // 因为遍历直接就被垃圾回收了，所以没有遍历方法
+
+      // ==========
+      // Proxy 代理（拦截）
+      // 在目标之前设置了一个拦截层，当外部想要操作数据的时候需要通过拦截层来操作
+      // 形象的比喻：proxy 就是明星的经纪人，如果你想和明星谈业务必须通过经纪人来操作
+      // 语法：Proxy(target目标对象, hander处理程序对象)
+
+      /* let star = {
+        name: "liyifeng",
+        age: 25,
+        phone: "18801120543",
+      };
+      let agent = new Proxy(star, {
+        // 读取属性
+        get(target, prop) {
+          if (prop === "phone") {
+            return "手机号是私密的！！！";
+          } else {
+            return target[prop];
+          }
+        },
+        // 设置属性
+        set(target, prop, newValue) {
+          if (prop === "price") {
+            if (newValue > 5000) {
+              target[prop] = newValue;
+            } else {
+              throw new Error("价格太低");
+            }
+          }
+        },
+      });
+      console.log(agent);
+      console.log(agent.name);
+      console.log(agent.phone);
+      agent.price = 4000;
+      agent.price = 6000; */
+
+      // 实际上拦截的方法有很多，基本的就是 get、set、has、
+      /* const star = {
+        name: "zhangsan",
+      };
+      const proxy = new Proxy(star, {
+        // has，拦截 in 操作符（无法拦截 for...in...）
+        has(target, prop) {
+          console.log(arguments);
+          return true;
+        },
+        // 拦截 delete
+        deleteProperty(target,prop){
+          console.log(arguments)
+        }
+      });
+      // for...in... 
+      // for (const key in proxy) {
+      //   console.log(key);
+      // }
+      console.log("name" in proxy);
+      delete proxy.name */
+
+      // ===================
+      // Reflect 是一个对象，对象上的属性都是操作方法
+      // Reflect 本身就是一个映射，Proxy 和 Reflect 的方法都是一一对应的
+      // Reflect 增强语义化
+      /* const obj = {};
+      console.log(Reflect);
+      Reflect.set(obj, "name", "zhangsan");
+      console.log(Reflect.get(obj, "name"));
+      console.log(Reflect.has(obj, "name")); */
+    </script>
+  </body>
+</html>

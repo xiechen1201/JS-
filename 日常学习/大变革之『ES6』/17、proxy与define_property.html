@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy和defineProperty</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Object.defineProperty() 本身就是定义属性的方法
+      // 对象属性的元操作，重写、是否枚举等，如果想要更多拦截操作是无法做到的
+      /* const obj = {
+        name: "zhangsan",
+      };
+      Object.defineProperty(obj, "a", {});
+      console.log(Object.getOwnPropertyDescriptor(obj, "a")); */
+
+      // Proxy 本质上依然是元操作，用于创建一个代理对象，可以实现基本操作的拦截和自定义
+      // Reflect 和 Proxy 的元操作方法是一一对应的
+    </script>
+  </body>
+</html>

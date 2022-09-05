@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // babel 无法对新的数据结构进行降级，例如 Map、Set、Proxy
+
+      // ## Set
+      // 新增的数据结构类型; 类似为数组; 构造函数
+      // '数组'的成员都是唯一的，这是和数组的区别
+      /* let set = new Set();
+      let set1 = new Set(["10", "20", "30", "10"]); // 初始化数据为一个数组，参数必须是一个具备 iteraror 接口的数据结构
+      console.log(set);
+      console.log(set1); */
+
+      // 特殊值
+      /* var set = new Set([undefined, undefined, null, null, "10", 10, NaN, NaN, {}, {}]);
+      console.log(set); // Set{undefined, null, '10', 10, NaN, {}, {}} */
+
+      // 原型方法
+
+      // 操作set本身 set.add() set.delete() set.clear() set.has()
+      /* let x = { id: 1 },
+        y = { id: 2 };
+      let set = new Set();
+
+      let res = set.add(x);
+      console.log(res); // 返回 set 对象本身，所以可以链式
+      set.add(y).add(1).add(2);
+      console.log(set.size); // 返回set的长度
+      console.log(set);
+
+      let res2 = set.delete(x);
+      console.log(res2); // true 返回是否成功删除布尔值
+      console.log(set);
+
+      let res3 = set.clear();
+      console.log(res3); // 返回 undefind
+      console.log(set);
+
+      let re4 = set.has(x);
+      console.log(re4); // 返回布尔值
+      console.log(set); */
+
+      // 即使是后面clear，打印的时候仍然是空的
+      /* let set = new Set([10, 20, 30, "a", "b", "c"]);
+      console.log(set);
+      set.clear(); */
+
+      // 遍历 set.keys() set.values() set.entries() set.forEach() for...of...
+      // 和数组一样，返回迭代器对象
+      /* let set = new Set([10, 20, 30, "a", "b", "c"]);
+      console.log(set.keys()); // {10, 20, 30, 'a', 'b', …}
+      console.log(set.values()); // {10, 20, 30, 'a', 'b', …}
+      console.log(set.entries()); // {10 => 10, 20 => 20, 30 => 30, 'a' => 'a', 'b' => 'b', …}
+
+      // set 没有键名，虽然控制台能看到数据的索引
+      for (const iterator of set.keys()) {
+        console.log(iterator); // 10 20 30 "a" "b" "c"
+      }
+      for (const iterator of set.values()) {
+        console.log(iterator); // 10 20 30 "a" "b" "c"
+      }
+      for (const iterator of set.entries()) {
+        console.log(iterator); // [10, 10] [20, 20] [30, 30] ["a", "a"] ["b", "b"] ["c", "c"]
+      }
+      for (const iterator of set) {
+        console.log(iterator); // // 10 20 30 "a" "b" "c"
+      }
+      set.forEach((el, index, arr) => {
+        console.log(el, index, arr);
+      }); */
+
+      // 数组去重
+      /* let array = [10, 20, 30, 10, 20, "c", 10, "c"];
+      let set = new Set(array);
+      console.log([...set]); // [10, 20, 30, 'c']
+      console.log(Array.from(set)); // [10, 20, 30, 'c'] */
+
+      // 实例：set 的值*2
+      /* let set = [1, 2, 3, 4, 5, 6];
+      let set1 = new Set([...set].map((el) => el * 2));
+      console.log(set1); */
+
+      // ## Map
+      // 类似Object，Map 的 key 不只为字符串（Object）的 key 都是字符串
+
+      // 对象的写法
+      // 键名只能是字符串
+      /* let m = {};
+      let x = { id: 1 },
+        y = { id: 2 };
+
+      m[x] = "foo";
+      m[y] = "bar";
+      console.log(m); // {[object Object]: 'bar'} */
+
+      // Map 的写法
+      /* let map = new Map();
+      let x = { id: 1 },
+        y = { id: 2 };
+
+      map.set(x, "foo");
+      map.set(y, "bar");
+      console.log(map.get(x))
+      console.log(map); */
+
+      // 初始化 Map
+      // 具备 iterator 接口的数据结构
+      // 参数必须是二维数组
+      /* let map = new Map([
+        ["name", "张三"],
+        ["age", "20"],
+      ]);
+      map.set("hobby", "chfian");
+      console.log(map); */
+
+      /* const map = new Map();
+      map.set(1, "foo");
+      map.set(1, "bar"); // 同名key会进行覆盖
+      map.set([5], "bar"); // 同名key会进行覆盖
+      console.log(map);
+      console.log(map.get(1));
+      console.log(map.get([5])); // [5] 和 [5] 是两个不同的堆内存地址 */
+
+      // 特殊值赋值
+      /* const map = new Map();
+      map.set(-0, "123");
+      map.set(true, "456");
+      map.set("true", "678");
+      map.set(undefined, "10");
+      map.set(null, 2);
+      map.set(NaN, 20);
+      console.log(map.get(+0)); // 123
+      console.log(map.get(true)); // 456
+      console.log(map.get(undefined)); // 10
+      console.log(map.get(null)); // 10
+      console.log(map.get(NaN)); // 20
+      console.log(map.size) */
+
+      // 原型方法
+      // map.set() map.get() map.delete() map.clear() map.has()
+      // 比 Set 多了 set、get 方法
+      // map.keys() map.values() map.entries() map.forEach() for...of...
+
+      /* var x = { id: 1 };
+      var y = { id: 2 };
+      const map = new Map();
+      console.log(map.size);
+
+      map.set(x, "foo").set(y, "bar");
+      console.log(map);
+
+      map.delete(x);
+      console.log(map);
+      console.log(map.has(x)); // false
+
+      map.clear();
+      console.log(map); */
+
+      // 实时性
+      /* const map = new Map([
+        ["name", "123"],
+        ["age", "20"],
+      ]);
+      console.log(map);
+      map.delete("name"); */
+
+      // 遍历方法
+      /* const map = new Map([
+        ["name", "123"],
+        ["age", "20"],
+      ]);
+      for (const iterator of map.keys()) {
+        console.log(iterator);
+      }
+      for (const iterator of map.values()) {
+        console.log(iterator);
+      }
+      for (const iterator of map.entries()) {
+        console.log(iterator);
+      }
+      map.forEach((el, index, arr) => {
+        console.log(el, index, arr);
+      });
+      for (const iterator of map) {
+        console.log(iterator);
+      }
+
+      for (const [key, value] of map) {
+        console.log(key + "=" + value);
+      } */
+    </script>
+  </body>
+</html>

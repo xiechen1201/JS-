@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /***
+       * codePointAt()
+       * str.charAt(index) 返回index处的字符
+       * str.charCodeAt(index)
+       */
+      /* var str = "abcdedg";
+      console.log(str.charAt(1))
+      console.log(str.charCodeAt(1)) */
+
+      // 迭代器
+      /* var str = "abcdefg";
+      for (const iterator of str) {
+        console.log(iterator);
+      } */
+
+      // includes startsWith endsWith
+      /* console.log("abc".includes("a")); // true 字符串中是否存在某个值
+      console.log("abc".startsWith("a")); // true 字符串是否以某个值开头
+      console.log("abc".endsWith("c")); // true 字符串是否以某个值结尾 */
+
+      // repeat
+      /* console.log("abc".repeat(3)); // abcabcabc，将字符串重复某次
+      console.log("abc".repeat(2.3)); // abcabc 转换为整数2
+      console.log("abc".repeat(NaN)); // abc 不进行操作 */
+
+      // padStart padEnd
+      /* console.log("x".padStart(5, "ab")); // ababx 在字符的前面填充5位
+      console.log("x".padStart(3, "ab")); // abx 在字符的前面填充5位
+      console.log("x".padEnd(5, "ab")); // xabab 在字符的后面填充5位
+      console.log("x".padEnd(3, "ab")); // xab 在字符的后面填充5位 */
+
+      // ## 模版字符串
+
+      // 文档：https://es6.ruanyifeng.com/#docs/string
+
+      /* let name = "web";
+      let info = "developer";
+      let m = `I am a ${name} ${info}`; // ES6，不在需要频繁的使用加号进行连接组装
+      let m2 = "I am a " + name + " " + info; // ES5
+      console.log(m, m2); */
+
+      // 表达式
+      /* let x = 1;
+      let y = 2;
+      let z = `${x} + ${y} = ${x + y}`;
+      console.log(z) */
+
+      // 函数执行
+      /* function fn() {
+        return "Hello Word";
+      }
+      console.log(`foo ${fn()} bar`); */
+
+      // 模版字符串嵌套字符串
+      /* let msg = `Hello ${'palce'}`;
+      console.log(msg) */
+
+      /* const temp = (arr) => `
+        <table>
+            ${arr
+              .map((el) =>`
+                <tr>
+                    <td>${el.firstName}</td>
+                    <td>${el.lastName}</td>
+                </tr>
+              `).join("")
+            }
+        </table>`;
+
+      const data = [
+        {
+          firstName: "zhang",
+          lastName: "san",
+        },
+        {
+          firstName: "li",
+          lastName: "si",
+        },
+      ];
+      console.log(temp(data)); */
+
+      // 标签模版
+      /* let a = 5;
+      let b = 10;
+      console.log(`Hello ${a + b} world ${a * b}`);
+
+      // 它可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。
+      // tag类似一个函数调用，类似 tag(['Hello ', ' world ', ''], 15, 50)
+      tag`Hello ${a + b} world ${a * b}`;
+      function tag($, $1, $2) {
+        // $ 表示 $1、$2是第模版字符串的结果
+        console.log(arguments);
+      } */
+    </script>
+  </body>
+</html>

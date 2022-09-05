@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 字符串根据根据什么样的规则匹配字符串
+      /* let str = "",
+        reg = "";
+      str.match(reg); */
+
+      /**
+       * 修饰符
+       * i g m
+       */
+
+      /**
+       * 元字符
+       * \w \W word
+       * \d \D digit
+       * \s \S space
+       * \b \B bridge
+       */
+
+      /**
+       * 1、声明正则的变化方式
+       * 2、字符串上的正则方法进行了调整
+       * 3、新增的修饰符 u y s
+       */
+
+      // ES5 声明正则的方式
+      /* var reg1 = /es6/gi;
+      var reg2 = new RegExp("wq", "gi");
+      var reg3 = new RegExp(/\d/, "gi"); // ES6 的写法，容许第一个参数是一个正则
+      let str = "axansjhEs6qwqwa";
+      console.log(str.match(reg1));
+      console.log(str.match(reg2));
+      console.log(str.match(reg3)); */
+
+      // 字符串相关正则的方法娜到了正则的原型上
+      // console.log(RegExp.prototype);
+
+      // y 修饰符
+      /* let str = "aaa_aa_a";
+      let reg1 = /a+/g;
+      let reg2 = /a+/y;
+      console.log(reg1.global);
+      console.log(reg1.ignoreCase);
+      console.log(reg1.multiline);
+      console.log(reg1.sticky); // 粘粘修饰符 y
+
+      console.log(reg1.exec(str));
+      console.log(reg2.exec(str));
+
+      console.log(reg1.exec(str));
+      console.log(reg2.exec(str));
+      // y 遇到_的时候不能进行匹配了，第二个必须紧贴着第一个值 */
+
+      // u 修饰符
+      // unicode 分区定义
+
+      // s 修饰符
+    </script>
+  </body>
+</html>
