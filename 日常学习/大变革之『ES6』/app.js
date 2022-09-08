@@ -1,7 +1,15 @@
-var arr = [];
-
-for (let i = 0; i < 10; i++) {
-  arr[i] = ((i) => {
-    console.log(i);
-  })(i);
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  static eat() {
+    console.log("eat function");
+  }
+  say() {
+    console.log("say function");
+  }
+  drink() {
+    console.log("drink function");
+  }
 }

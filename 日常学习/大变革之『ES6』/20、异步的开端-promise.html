@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>异步的开端-promise</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 回调地狱：回调嵌套回调
+      // 难于维护；不方便拓展；try...catch... 难于捕获错误；
+
+      // promise A+ 规范，不只jQuery库实现了 promise，所有的库都要遵循A+规范去实现
+
+      // ## Promise
+      // 1、实例化 2、参数 executor 执行函数
+      /* let promise = new Promise(function (resolve, reject) {
+        // 实例化后立即执行，同步执行
+        console.log("promise");
+      });
+      console.log(promise); */
+
+      // Promise是一个异步操作，它本身存在所有异步特征需要的3种状态：进行中pending、已成功fufilled、已失败reject
+      // 状态不会被外界影响，唯一能改变状态的办法就是调用
+      // 状态不可逆转（状态更改后无法变化）
+      // 状体固化后在对promise对象添加回调，是可以直接拿到这个结果的；如果是事件的话，一旦错过了就真的错过了。
+
+      /* let promise1 = new Promise((resolve, reject) => {
+        // 调用 resolve 方法后，可以将 Promise 的状态变成已成功的状态
+        // 状态改变后调用相应的回调函数
+        setInterval(() => {
+          Math.random() > 0.5 ? resolve("成功") : reject("失败");
+        }, 1000);
+      });
+      // then绑定成功/失败的时候回调函数
+      promise1.then(
+        (res) => {
+          console.log(res);
+        },
+        (res) => {
+          console.log(res);
+        }
+      ); */
+
+      /* let promise = new Promise((resolve, reject) => {
+        // 同步执行
+        console.log(0);
+        resolve(1);
+      });
+      // 异步回调
+      promise.then((res) => {
+        console.log(res);
+      });
+      console.log(2); 
+      // 0 2 1  */
+
+      /**
+       * JS异步代码中分为「宏任务」和「微任务」
+       * 宏任务和微任务都有自己的任务队列
+       *    宏任务包括除以下两种全部异步
+       *    微任务包括 promise、process.nextTick()
+       *
+       *    微任务要比宏任务先执行
+       *
+       * 每次事件轮询的时候，调用任务队列，这个时候存在优先级，优先执行微任务
+       */
+      /* setTimeout(() => {
+        console.log("timeout");
+      }, 30);
+      let promise = new Promise((resolve, reject) => {
+        console.log(0);
+        resolve(1);
+      });
+      promise.then((res) => {
+        console.log(res);
+      });
+      console.log(2);
+      // 0 2 1 timeout */
+
+      /* Promise.resolve().then((res) => {
+        console.log("promise1");
+        setTimeout(() => {
+          console.log("setTimeout2");
+        });
+      });
+      setTimeout(() => {
+        console.log("setTimeout1");
+        Promise.resolve().then((res) => {
+          console.log("promise2");
+        });
+      });
+      // promise1 setTimeout1 promise2 promise1 */
+
+      // ## 链式调用
+      // 必须使用 return 第二次才能拿到值
+      /* let promise = new Promise((resolve, reject) => {
+        Math.random() > 0.5 ? resolve("成功") : reject("失败");
+      });
+      promise
+        .then(
+          (res) => {
+            console.log(res + "1");
+            return res;
+          },
+          (error) => {
+            console.log(error + "1");
+            return error;
+          }
+        )
+        .then(
+          (res) => {
+            console.log(res + "2");
+          },
+          (error) => {
+            console.log(error + "2");
+          }
+        ); */
+    </script>
+  </body>
+</html>

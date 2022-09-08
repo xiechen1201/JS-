@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /* let promise = new Promise((resolve, reject) => {
+        // 如果resolve发送错误，会更改promise的状态为已失败，然后被then的第二个方法捕获
+        resolve(a);
+      });
+      // promise最少一个参数，如果不需要第一个参数可以写为 null
+      // 等同于 promise.catch(() => {}) 的写法
+      promise.then(null, (error) => {
+        console.log(error);
+      }); */
+
+      // 分离写法
+      /* let promise = new Promise((resolve, reject) => {});
+      promise.then((res) => {}).catch((err) => {}); */
+
+      // 状态固化，一旦resolve后异常无法捕获
+      /* let promise = new Promise((resolve, reject) => {
+        resolve(123);
+        console.log(a);
+      });
+      promise
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        }); */
+
+      // 错误异常会一直冒泡直到被捕获
+      // 如果 then() 没有参数会直接被忽略
+      /* let promise = new Promise((resolve, reject) => {
+        console.log(a);
+      });
+      promise
+        .then((res) => {
+          console.log(res);
+        })
+        .then()
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        }); */
+
+      // 状态依赖
+      /* let p1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error("fail"));
+        }, 3000);
+      });
+      // 当p2依赖p1的时候p2的状态无效，而是变更为p1的状态
+      let p2 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(p1);
+        }, 1000);
+      });
+      p2.then((res) => {}).catch((err) => {
+        console.log(err);
+      }); */
+
+      // resolve并不能阻止函数的执行
+      /* let p1 = new Promise((resolve, reject) => {
+        reject(new Error(1));
+        console.log(2);
+      });
+      p1.catch((res) => {
+        console.log(res);
+      });
+      console.log(3);
+      // 2 3 1 */
+
+      // ## all()
+      // 管理多个Promise实例，参数接收一个数组，返回一个新的promise对象
+      // 只有三个都成功的时候才会回调then，
+      // 如果有一个失败就会有catch且返回第一个出错
+      /* Promise.all([new Promise(), new Promise(), new Promise()]); */
+
+      // ## race
+      // 和 all 基本类似，只不过任意一个成功或失败，立马就可以被捕获
+
+      // ## thenable
+      // 直接返回一个已成功的promise对象
+      // 当部署thenable对象的时候，如果对象上有then方法，就可以直接调用resolve方法，此时p的状态由obj1对象来决定
+      /* let obj1 = {
+        then: function (resolve, reject) {
+          resolve(123);
+        },
+      };
+      let p = Promise.resolve(obj1);
+      p.then((res) => {
+        console.log(res);
+      }); */
+
+      // =====================
+
+      
+    </script>
+  </body>
+</html>

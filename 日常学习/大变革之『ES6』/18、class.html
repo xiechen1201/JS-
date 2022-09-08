@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class对象</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // ## ES5 的写法
+      /* function Person(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      Person.prototype.say = function () {
+        console.log("My name is " + this.name);
+      };
+      let person = new Person("zhangsan", "20");
+      person.say();
+      console.log(person);
+      console.log(Object.getPrototypeOf(person)); */
+
+      // ## class
+      // ES6新推出的关键字class，所以不能进行变量声明，class 是一个类，模拟类的方式，本质上就是ES5原型的语法糖
+      // var class = 123; // error
+
+      // 最简单的类（构造函数）
+      /* class Person {
+        // 给构造函数传递参数
+        constructor(name, age) {
+          // 实例化的私有属性
+          this.name = name;
+          this.age = age;
+        }
+        // 这是一个方法，所以不能写 ,
+        // 公有的属性或方法
+        say() {
+          console.log("My name is " + this.name);
+        }
+        eat() {
+          console.log("I can eat");
+        }
+      }
+      let person = new Person("张三", 20);
+      console.log(person);
+      person.say();
+      console.log(typeof Person); // function 依然是一个function
+      console.log(Object.keys(Person.prototype)); // 原型属性是不可以枚举的 */
+
+      // 如果没有写constructor方法，会默认生成一个且不会报错
+      /* class Person {
+        // constructor() {}
+      }
+      let person = new Person();
+      console.log(person); */
+
+      // 函数表达式的写法,依然可以进行实例化
+      /* let Person = class {};
+      console.log(new Person()); */
+
+      // 立即执行的写法，必须通过new的方式执行
+      /* let person = new (class {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        say() {
+          console.log("say");
+        }
+      })("zhangsan", "20");
+      person.say(); */
+
+      // 不能进行变量提升，存在暂时性死区
+      /* console.log(new Person());
+      class Person {} */
+
+      // class 不存在公有属性
+      /* class Person {
+        a = 1; // 这样的写法会变成实例化对象的属性，所以class不存在公有属性
+        say() {}
+      }
+      console.log(new Person()); */
+
+      // 公有方法进行私有化
+      /* function children() {
+        console.log("children");
+      }
+      const eat = Symbol("eat");
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        say() {
+          console.log("say");
+        }
+        // 公有的方法私有化
+        [eat]() {
+          console.log("eat");
+        }
+        drink() {
+          children.call(this);
+        }
+      }
+      let person = new Person("zhangsan", "20");
+      person.say();
+      person[eat]();
+      person.eat(); */
+
+      // 构造函数静态方法/属性
+      // 给构造函数新增方法/属性
+      /* class Person {
+        static name = "shangsan";
+        static say() {
+          console.log("say");
+        }
+      }
+      console.log(Person.name);
+      Person.say(); */
+
+      // 取值函数、存值函数
+      /* class Person {
+        "use strict" // class 默认就是严格模式，不需要手动 "use strict"
+        get name() {
+          return "123";
+        }
+        set name(newVal) {
+          console.log("789");
+        }
+      }
+      let person = new Person();
+      console.log(person.name);
+      person.name = "456"; */
+
+      // ====================
+      // ## 继承
+      // ES6 通过 extends 进行继承
+
+      /* class Parent {
+        constructor(name) {
+          this.name = name;
+        }
+        static a() {
+          console.log("静态方法a");
+        }
+        say() {
+          console.log("say");
+        }
+      }
+      // Child 称为派生类
+      class Child extends Parent {
+        // 派生类中如果继承了父类想要使用this，必须调用super来指定this
+        constructor(age) {
+          // super 相当于加工了父级的实例，必须是基于constructor内部
+          // 拿到父类的实例后才能使用this
+          super("zhangsan");
+          this.age = age;
+        }
+      }
+
+      let child = new Child(20);
+      console.log(child);
+      child.say();
+      child.a(); // child.a is not a function */
+
+      // super 当对象使用的时候表示对象的原型；在静态方法中，指向自己的父类
+    </script>
+  </body>
+</html>

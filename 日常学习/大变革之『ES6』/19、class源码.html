@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /**
+       * class 的特性
+       * 1、暂时性死区
+       * 2、严格模式
+       * 3、原型方法不可枚举
+       * 4、new 进行实例化
+       * 5、默认 constructor
+       */
+
+      /* class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        static eat() {
+          console.log("eat function");
+        }
+        say() {
+          console.log("say function");
+        }
+        drink() {
+          console.log("drink function");
+        }
+      } */
+
+      // ## 源码
+      /* // 判断必须使用new进行实例化
+      function _classCallCheck(instance, Constructor) {
+        if (!instance instanceof Constructor) {
+          throw new Error("Cannot call a class as a function");
+        }
+      }
+      // 定义构造函数的属性
+      var _createClass = (function () {
+        function defineProperties(target, props) {
+          for (let index = 0; index < props.length; index++) {
+            var descriptor = props[index];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor) {
+              descriptor.writable = true;
+            }
+            Object.defineProperty(target, descriptor.key, descriptor);
+          }
+        }
+        return function (Constructor, protoProps, staticProps) {
+          if (protoProps) {
+            defineProperties(Constructor.prototype, protoProps);
+          }
+          if (staticProps) {
+            defineProperties(Constructor, protoProps);
+          }
+          return Constructor;
+        };
+      })();
+      // 立即执行函数
+      var Person = (function () {
+        function Person(name, age) {
+          _classCallCheck(this, Person);
+
+          this.name = name;
+          this.age = age;
+        }
+        // 赋值原型属性和静态属性
+        _createClass(
+          Person,
+          [
+            {
+              key: "say",
+              value: function () {
+                console.log("say");
+              },
+            },
+            {
+              key: "eat",
+              value: function () {
+                console.log("eat");
+              },
+            },
+          ],
+          [
+            {
+              key: "drink",
+              value: function () {
+                console.log("drink");
+              },
+            },
+          ]
+        );
+
+        return Person;
+      })(); */
+
+      // ## 修饰器
+      // 把对象进行修饰（手机壳案例），本身并不影响实际的使用，只是修饰作用新增一些功能，原函数是什么样就是什么样
+      /* function testable(target) {
+        console.log(target);
+      }
+      function readonly(target, name, descriptor) {
+        descriptor.writable = false;
+      }
+
+      @testable
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        static eat() {
+          console.log("eat function");
+        }
+        @readonly
+        say() {
+          console.log("say function");
+        }
+        drink() {
+          console.log("drink function");
+        }
+      }
+      let person = new Person();
+      console.log(person); */
+
+      /* let log = (type) => {
+        return function show(target, name, descriptor) {
+          // descriptor.value 就表示属性的值，也就是函数
+          let src_method = descriptor.value;
+
+          // 重写了 descriptor.value
+          descriptor.value = (...arg) => {
+            src_method.apply(target, arg);
+
+            console.log(type);
+          };
+        };
+      };
+      class AD {
+        @log("show")
+        show() {
+          console.log("ad is show");
+        }
+        @log("click")
+        click() {
+          console.log("ad is click");
+        }
+      } */
+    </script>
+  </body>
+</html>
