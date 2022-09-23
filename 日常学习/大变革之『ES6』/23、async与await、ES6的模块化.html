@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 生成器函数
+      /* function* get() {
+        yield 1;
+        yield 2;
+        yield 3;
+      }
+      let iter = get();
+      console.log(iter.next());
+      console.log(iter.return()); // 调用return方法后，会终止迭代器
+      console.log(iter.next());
+      console.log(iter.next()); */
+
+      // return 会终止迭代器
+      /* function* get() {
+        yield 1;
+        return 10;
+        yield 2;
+        yield 3;
+      }
+      let iter = get();
+      console.log(iter.next());
+      console.log(iter.next());
+      console.log(iter.next()); */
+
+      // return 方法和函数内直接 return 效果是一样的
+      /* function* get() {
+        yield 1;
+        yield 2;
+        yield 3;
+      }
+      let iter = get();
+      console.log(iter.next());
+      console.log(iter.return(10));
+      console.log(iter.next());
+      console.log(iter.next()); */
+
+      // try 不能捕获异步代码
+      /* try {
+        setTimeout(() => {
+          console.log(a);
+        });
+      } catch (err) {
+        console.log(1);
+      } */
+
+      // throw 方法用来抛出错误
+      /* function* get() {
+        // 在生成器内部进行捕获
+        try {
+          yield a;
+        } catch (error) {
+          console.log("捕获异常：" + error);
+        }
+      }
+      let iter = get();
+      console.log(iter.next());
+      console.log(iter.throw("a")); */
+
+      // throw("a") 依然可以用于迭代
+      /* function* get() {
+        yield 1;
+        try {
+          yield 2;
+        } catch (error) {
+          console.log("捕获异常：" + error);
+        }
+        yield 3;
+      }
+      let iter = get();
+      console.log(iter.next());
+      console.log(iter.next());
+      console.log(iter.throw("a"));
+      console.log(iter.next()); */
+
+      // 异步代码的异常捕获
+      /* let fs = require("fs");
+      let util = require("util");
+
+      let readFile = util.promisify(fs.readFile);
+      function* read() {
+        yield readFile("./name.txt", "utf-8");
+      } */
+
+      // ====================
+      // ## async await
+      // 本质上就是生成器函数的语法糖
+      // 更好的语义化，更广的实用性，await 后可以是非 Promise 的值
+
+      // async 函数返回一个 Promise 对象
+      /* async function read() {
+        let value1 = await readFile("./test.txt", "utf-8");
+        let value2 = await readFile(value1, "utf-8");
+        let value3 = await readFile(value2, "utf-8");
+
+        return value3;
+      }
+      read().then((res) => {
+        console.log(res);
+      }); */
+
+      // 返回值是个 Promise 值
+      /* async function read() {
+        let value1 = await setTimeout(() => {
+          console.log("abc");
+        }, 1000);
+
+        return value1; // return 的值会包装成 Promise 对象
+      }
+      read().then((res) => {
+        console.log(res);
+      }); */
+
+      // async 函数内发送错误会更改 Promise 的状态
+      /* async function read() {
+        console.log(a);
+        return "abc";
+      }
+      read().catch((err) => {
+        console.log(err);
+      }); */
+
+      // await 后面可以是一个异步操作
+      // 当返回 reject 的时候，下面的代码不会继续执行
+      /* async function read() {
+        let res = await Promise.reject("错误");
+        console.log(123);
+        return res;
+      }
+      read().catch((err) => {
+        console.log(err);
+      }); */
+
+      // await 会停止代码的执行
+      /* function request() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(2);
+          }, 3000);
+        });
+      }
+      async function getData() {
+        console.log(1);
+        let res = await request();
+        console.log(3);
+        return res;
+      }
+      getData().then((res) => {
+        console.log(res);
+      }); */
+
+      // ====================
+
+      // try 能捕获await的异常
+      // promise 的异常只能通过 .catch 捕获
+      // setTimeout 的异常只能捕获在回调函数内进行捕获
+
+      // 1、无法捕获new Promise里面的错误
+      /* function foo() {
+        try {
+          return new Promise((resolve, reject) => {
+            console.log(a);
+          });
+        } catch (error) {
+          console.log("error: " + error);
+        }
+      }
+      foo().catch((err) => console.log(err)); */
+
+      // 2、正常被 .catch 捕获
+      /* function foo() {
+        try {
+          return new Promise((resolve, reject) => {
+            reject("abc");
+          });
+        } catch (error) {
+          console.log("error: " + error);
+        }
+      }
+      foo().catch((err) => console.log(err)); */
+
+      // 3、await 可以被捕获
+      /* async function foo() {
+        try {
+          await new Promise((resolve, reject) => {
+            reject("abc");
+          });
+        } catch (error) {
+          console.log("error: " + error);
+        }
+      }
+      foo(); */
+
+      // 4、setTimout 的错误无法被捕获
+      /* function foo() {
+        try {
+          setTimeout(() => {
+            console.log(a);
+          }, 500);
+        } catch (error) {
+          console.log("error: " + error);
+        }
+      }
+      foo(); */
+    </script>
+  </body>
+</html>

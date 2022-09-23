@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iterator与generator</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // ## 模拟一个迭代器
+      // 迭代器：有序的、连续的、基于抽取的消耗数据的组织方式
+      /* function makeIterator(arr) {
+        let nextIndex = 0;
+        return {
+          next() {
+            return nextIndex < arr.length
+              ? { value: arr[nextIndex++], done: false }
+              : { value: undefined, done: true };
+          },
+        };
+      }
+      let it = makeIterator(["a", "b", "c"]);
+      console.log(it.next());
+      console.log(it.next());
+      console.log(it.next()); */
+
+      /**
+       * 迭代器：分为内部迭代器和外部迭代器
+       * 内部：函数由系统内部部署好的迭代规则，外部调用的时候可以一次性拿到遍历元素
+       * 外部：通过代码模拟部署的迭代函数
+       */
+
+      // 给对象部署一个外部迭代器
+      /* let obj = {
+        start: [1, 2, 3, 4],
+        end: [7, 8, 9, 10],
+        [Symbol.iterator]() {
+          let nextIndex = 0;
+          let array = this.start.concat(this.end);
+
+          return {
+            next() {
+              return nextIndex < array.length
+                ? { value: array[nextIndex++], done: false }
+                : { value: undefined, done: true };
+            },
+          };
+        },
+      };
+      for (const iterator of obj) {
+        console.log(iterator);
+      } */
+
+      // Map
+      /* let map = new Map([
+        ["a", 1],
+        ["b", 2],
+        ["c", 3],
+      ]);
+      console.log(map); */
+
+      // 如何将obj像map那样具有连续的下标
+      /* let obj = {
+        a: 1,
+        b: 2,
+        c: 3,
+        [Symbol.iterator]: iterator,
+      };
+      function iterator() {
+        let array = Object.entries(this);
+        let nextIndex = 0;
+
+        return {
+          next() {
+            return nextIndex < array.length
+              ? { value: array[nextIndex++], done: false }
+              : { value: undefined, done: true };
+          },
+        };
+      }
+      for (const iterator of obj) {
+        console.log(iterator);
+      } */
+
+      /**
+       * 默认调用iterator接口的场合
+       * for...of...
+       * ...拓展运算符
+       * Array.from()
+       * Map Set
+       * Promise.all()
+       * Promise.race()
+       * yield
+       */
+
+      // iterator 接口除了部署 next 方法后还可以部署 return 方法，return 方法会在 for...of... break 的时候执行
+      /* for (const iterator of object) {
+        break;
+      } */
+
+      // ===========
+
+      // ## 生成器 generator
+      // 生成器（generator）函数也是一个函数，多了一个*号，返回值一个迭代器对象
+      /* function* test() {}
+      let iter = test();
+      console.log(iter); // test {<suspended>}
+      console.log(iter.next()); // {value: undefined, done: true} */
+
+      // generator 函数要和 yield 结合使用
+      // yield 简单理解就是产出的意思，每次 yield 就相当于产出一个值，函数调用后遇到 yield 暂停函数的运行
+      // generator 函数返回的是迭代器对象，所以可以使用 next 方法得到 yield 的值
+      // 当函数运行遇到 yield 后会暂停函数的执行，所以 console.log(1); 第一次没有执行
+      /* function* test() {
+        yield "a";
+        console.log(1);
+        yield "b";
+        yield "c";
+        return "d";
+      }
+      let iter = test();
+      console.log(iter.next());
+      console.log(iter.next());
+      // {value: 'a', done: false}
+      // 1
+      // {value: 'b', done: false} */
+
+      // yield 的值也可以被接收
+      /* function* test() {
+        const value = yield "a";
+        console.log(value);
+        yield "b";
+      } */
+
+      /**
+       * yield 和 return 的区别：
+       * 1、return 依然会产出值，但是 done 为 true，再次 next 为 undefinde
+       * 2、yield 本意是暂停，具有记忆功能，继上次 next 后可以继续 next
+       */
+      /* function* test() {
+        yield "a";
+        console.log(1);
+        yield "b";
+        console.log(2);
+        yield "c";
+        console.log(3);
+        return "d";
+      }
+      let iter = test();
+      console.log(iter.next());
+      console.log(iter.next());
+      console.log(iter.next());
+      console.log(iter.next());
+      console.log(iter.next()); */
+
+      // yield 只能出现在生成器函数中，否则会抛出异常
+      /* function test() {
+        yield "a";
+        yield "b";
+        yield "c";
+        return "d";
+      }
+      let iter = test();
+      console.log(iter) */
+
+      // yield 本身并不产出值，a 的值由第二次 next 执行时的参数传递
+      /* function* test() {
+        let a = yield "a";
+        console.log(a);
+        yield "b";
+        yield "c";
+        return "d";
+      }
+      let iter = test();
+      console.log(iter.next());
+      console.log(iter.next(10)); */
+
+      // yield 表达式
+      /* function* demo() {
+        yield; // yield 单独存在
+        console.log("hello" + (yield 123)); // 表达式中使用需要使用括号 
+      }
+      let iter = demo();
+      console.log(iter.next()); */
+
+      // yield 当做参数传递的时候，无法获取值
+      // 先执行两次 yield 然后才执行 foo()
+      /* function foo(a, b) {
+        console.log(a, b);
+      }
+      function* demo() {
+        foo(yield "a", yield "b");
+      }
+      let iter = demo();
+      console.log(iter.next()); // {value: 'a', done: false}
+      console.log(iter.next()); // {value: 'b', done: false}
+      console.log(iter.next()); // {value: undefined, done: true} */
+
+      // 因为 generator 函数返回 iterator 对象，所以可以利用 for...of 来遍历（不包括 return 的值）
+      /* function* foo() {
+        yield 1;
+        yield 2;
+        yield 3;
+        yield 4;
+        yield 5;
+        return 6;
+      }
+      for (const iterator of foo()) {
+        console.log(iterator); // 1 2 3 4 5 ，不包括 return 的 6
+      } */
+
+      // yield 返回值：蛇形的传值方式
+      /* function* foo() {
+        let value1 = yield 1;
+        console.log(value1); // two
+
+        let value2 = yield 2;
+        console.log(value2); // three
+
+        let value3 = yield 3;
+        console.log(value3); // four
+
+        let value4 = yield 4;
+        console.log(value4); // five
+      }
+      let iter = foo();
+      console.log(iter.next("one"));
+      console.log(iter.next("two"));
+      console.log(iter.next("three"));
+      console.log(iter.next("four"));
+      console.log(iter.next("five")); */
+
+      // yield 优化 obj 的迭代器接口
+      /* let obj = {
+        start: [1, 2, 3, 4],
+        end: [7, 8, 9, 10],
+        [Symbol.iterator]: function* () {
+          let nextIndex = 0;
+          let array = this.start.concat(this.end);
+
+          while (nextIndex < array.length) {
+            yield array[nextIndex++];
+          }
+        },
+      };
+      for (const iterator of obj) {
+        console.log(iterator);
+      } */
+
+      // ==============
+
+      // ## 读取文件，回调地狱的写法
+      /* let fs = require("fs");
+      fs.readFile("./name.txt", "utf-8", (err, data) => {
+        fs.readFile(data, "utf-8", (err, data) => {
+          fs.readFile(data, "utf-8", (err, data) => {
+            console.log(data);
+          });
+        });
+      }); */
+
+      // ## promisify函数，解决回调地狱
+      /* function promisify(fn) {
+        return function (...args) {
+          return new Promise((resolve, reject) => {
+            fn(...args, (err, data) => {
+              if (err) reject(err);
+              else resolve(data);
+            });
+          });
+        };
+      }
+      let fs = require("fs");
+      let readFile = promisify(fs.readFile);
+      readFile("./name.txt", "utf-8")
+        .then((res) => readFile(res))
+        .then((res) => console.log(res)); */
+
+      // ## 使用生成器函数优化代码
+      let fs = require("fs");
+      let readFile = promisify(fs.readFile);
+
+      function promisify(fn) {
+        return function (...args) {
+          return new Promise((resolve, reject) => {
+            fn(...args, (err, data) => {
+              if (err) reject(err);
+              else resolve(data);
+            });
+          });
+        };
+      }
+
+      // async await 本质上就是生成器函数的语法糖
+      function* read() {
+        let value1 = yield readFile("./name.txt", "utf-8");
+        let value2 = yield readFile(value1, "utf-8");
+        let value3 = yield readFile(value2, "utf-8");
+        console.log(value3);
+      }
+
+      // 不如 .then 的写法简单，进行优化
+      // let iter = read();
+      // let { value } = iter.next();
+      // value.then((result) => {
+      //   let { value } = iter.next(result);
+      //   value.then((result) => {
+      //     let { value } = iter.next(result);
+      //     value.then((result) => {
+      //       console.log(result);
+      //     });
+      //   });
+      // });
+
+      function Co(iter) {
+        return new Promise((resolve, reject) => {
+          let next = (data) => {
+            let { value, done } = iter.next(data);
+
+            if (done) {
+              resolve(value);
+            } else {
+              value.then((res) => next(res));
+            }
+          };
+
+          next();
+        });
+      }
+
+      let promise = Co(read());
+      promise.then((result) => {
+        console.log(result);
+      });
+    </script>
+  </body>
+</html>

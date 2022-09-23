@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var arr = [1, 2, 3, 4, 5, 6];
+      /**
+       * 遍历就是在一个东西内拿东西，但是遍历有个问题，如何停止遍历？
+       * 迭代：在本次遍历的过程中进行一次程序上的输出（迭代是遍历当中的一步）
+       * 项目迭代：根据本次的结果进行功能上的迭代
+       * 想进行某一次进行程序的输出，就必须有迭代器
+       * 迭代器本身是建立在遍历的基础上的，
+       * 生成器：生产迭代器的东西
+       *
+       *
+       */
+
+      /* // 生成器
+      // 生成器函数 generator
+      function* test() {
+        for (const iterator of arr) {
+          // yield 具有停止的作用
+          yield iterator;
+        }
+      }
+      // iter 就是一个迭代器 iterator
+      let iter = test();
+      // 迭代器具有 next 方法，返回本次迭代的数据
+      console.log(iter.next());
+      console.log(iter.next()); */
+
+      // ES5 模拟生成器
+      /* function generator(arr) {
+        var i = 0;
+        return {
+          next: function () {
+            var value = arr[i++],
+              done = i > arr.length ? true : false;
+
+            return {
+              value: value,
+              done: done,
+            };
+          },
+        };
+      }
+      let iter = generator(arr);
+      console.log(iter.next()); */
+
+      // 需求：五个函数，依次执行
+      /* // 如何停止遍历？使用 return false + break
+      var functions = [
+        function test1(next) {
+          console.log("test1");
+          next();
+        },
+        function test2(next) {
+          console.log("test2");
+          next();
+        },
+        function test3(next) {
+          console.log("test3");
+          next();
+        },
+        function test4(next) {
+          console.log("test4");
+          next();
+        },
+        function test5(next) {
+          console.log("test5");
+          next();
+        },
+      ];
+      //   for (const iterator of functions) {
+      //     if (!iterator()) break;
+      //   } */
+
+      /**
+       * Node中有个中间件的东西，洋葱模型
+       * /page/user 跳转到用户也没
+       * [test1, tets2, test3, test4, test5] 中间件集合
+       * token   ctoekn  expire 打开页面
+       * 假如token不合法，需要终端后面函数的执行
+       * 跳转页面的时候要依次执行这些方法，过程中可能要阻断继续执行
+       * 
+       * 我的目的就是在某个函数要截断后续的执行
+       * 
+       * return 建立在遍历的基础上，所以不合适
+       * Koa 中间函数中都有个 next 函数，当 next 函数执行的时候才会继续执行后面的函数
+       */
+
+      /* var functions = [
+        function test1(next) {
+          console.log("test1");
+          next();
+        },
+        function test2(next) {
+          console.log("test2");
+          next();
+        },
+        function test3(next) {
+          console.log("test3");
+          // 假如判断是否有 token
+          if (true) {
+            next();
+          }
+        },
+        function test4(next) {
+          console.log("test4");
+          next();
+        },
+        function test5(next) {
+          console.log("test5");
+          next();
+        },
+      ];
+
+      (function (functions) {
+        function* generator(arr) {
+          for (const iterator of arr) {
+            yield iterator;
+          }
+        }
+
+        const iter = generator(functions);
+        const init = () => {
+          nextDo(iter.next());
+        };
+        init();
+
+        function nextDo(n) {
+          n.value(function () {
+            const n = iter.next();
+            if (!n.done) {
+              nextDo(n);
+            } else {
+              return;
+            }
+          });
+        }
+      })(functions); */
+    </script>
+  </body>
+</html>

@@ -9,21 +9,22 @@
   <body>
     <script type="text/javascript">
       // 回调地狱：回调嵌套回调
-      // 难于维护；不方便拓展；try...catch... 难于捕获错误；
+      // 1、难于维护，不方便拓展；
+      // 2、try...catch... 难于捕获错误；
 
-      // promise A+ 规范，不只jQuery库实现了 promise，所有的库都要遵循A+规范去实现
+      // promise A+ 规范，不只jQuery库实现了 promise，所有的库都要遵循 promise A+ 规范去实现
 
       // ## Promise
       // 1、实例化 2、参数 executor 执行函数
       /* let promise = new Promise(function (resolve, reject) {
-        // 实例化后立即执行，同步执行
+        // 实例化后 executor 立即执行，同步执行
         console.log("promise");
       });
       console.log(promise); */
 
-      // Promise是一个异步操作，它本身存在所有异步特征需要的3种状态：进行中pending、已成功fufilled、已失败reject
-      // 状态不会被外界影响，唯一能改变状态的办法就是调用
-      // 状态不可逆转（状态更改后无法变化）
+      // Promise 是一个异步操作，它本身存在所有异步特征需要的3种状态：进行中pending、已成功fufilled、已失败reject
+      // 1、对象的状态不会被外界影响，唯一能改变状态的办法就是调用
+      // 2、状态不可逆转（状态更改后无法变化）
       // 状体固化后在对promise对象添加回调，是可以直接拿到这个结果的；如果是事件的话，一旦错过了就真的错过了。
 
       /* let promise1 = new Promise((resolve, reject) => {

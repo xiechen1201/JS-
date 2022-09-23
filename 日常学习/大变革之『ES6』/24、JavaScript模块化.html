@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模块化</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      
+      // IE6之前是没有JS引擎的，是利用渲染引擎去执行JS的
+      /**
+       * 没有模块化概念之前，一个页面引入一个JS文件负责页面的功能
+       * 如果两个页面需要同样的逻辑，就把代码抽离为公共单独的JS文件
+       * 但是如果公共文件中有很多的代码，我用不到就造成了不合理性
+       * 所以我不能呢以页面为基础来分JS块，如何做到我想用的时候就引入进来呢？
+       *
+       * 1、必须按照顺序来引入，依赖关系会报错
+       * 2、共用一个全局作用域，就会导致变量污染
+       *
+       * 所以模块化就是要解决以上两个问题
+       */
+
+      /**
+       * 立即执行函数 (function () {})();
+       * 函数只要是表达式就可以使用()立即执行
+       * 因为函数有自己的作用域和执行期上下文，利用立即执行函数创建模块的独立作用域
+       * 返回对象是为了拓展
+       * 无法解决加载顺序的问题
+       */
+
+      /**
+       * NodeJS的产生带来了真正的模块化
+       * require()/module.exports 导入导出
+       * 运行在node环境下
+       *
+       * 这就是 commonJS，是一种模块化规范而不是任何JS库代码，来源于 NodeJS
+       *
+       * commonJS 只要引入就会创建一个模块的实例（实例化）
+       * 所有文件都是同步进行加载
+       * 会进行缓存，如果模块没有更改就会缓存
+       * 一定运行在 NodeJS 上
+       */
+
+      /**
+       * AMD 异步模块定义，通过 RequireJS 实现的
+       * 是基于 CommonJS 在客户端能异步加载模块的方案
+       *
+       * define(moduleName, [module], factory) 定义模块
+       * require([module], callback) 引入模块
+       *
+       * 当所有的模块加载完成后才会执行 callback
+       */
+
+      /**
+       * CMD
+       * 依赖就近，按需加载
+       */
+
+      /**
+       * ES6模块化
+       * ES官方终于给出了权威的答案
+       *
+       * export default {}
+       * import module from "url"
+       *
+       * export {}
+       * import { moduleName } from "url"
+       *
+       * 区别：
+       * commonJS 模块输出的是一个值的拷贝
+       * ESModule 输出的是值的引用（和原来的值一摸一样）
+       *
+       * commonJS 模块是在运行时加载
+       * ESModule 是在编译时加载
+       */
+    </script>
+  </body>
+</html>
