@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS函数、特点、函数式编程初识、纯函数</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /**
+       * JS世界中的「一等公民」就是函数，这是因为函数可以声明、调用、传参、赋值、返回、实例化、递归、立即执行等等
+       * 所以在JS中函数式编程就尤为重要
+       *
+       * JS编程特点：
+       * 函数式编程和面向对象编程的混编语言
+       * 可拓展性强（参数个数虽然，对参数的数据类型不进行校验）
+       *
+       * 优点：
+       * 编程灵活
+       * 易学（越易学越难学）
+       *
+       * 缺点：
+       * 不可控，异常和 Bug 易产生
+       *
+       * 面向对象和函数式编程的关系：
+       * 面向对象中的 this 指向太复杂，程序高度复用是面向对象的主旨
+       *
+       * 函数式编程：函数是第一类对象（最重要的对象），而且不依赖任何其他对象独立存在
+       * 优点：易读、易维护
+       *
+       */
+
+      // ## 纯函数
+      /**
+       * 相同的输入得到相同的输出，不依赖且不影响外部环境也不产生任何副作用（输出完全取决于输入）
+       * 副作用：只要和函数外部环境发生了交互就是副作用
+       */
+
+      /* var a = 1;
+      function test(num) {
+        console.log(num);
+      }
+      test(a); */
+
+      /* var arr1 = ["a", "b", "c", "d", "e"];
+      var arr2 = ["a", "b", "c", "d", "e"];
+
+      var spArr = arr.splice(0, 3); // 产生了副作用，改变了 arr1 的数据
+      var slArr = arr2.slice(0, 3); // 没有产生副作用，保证了原数组数据的原始性 */
+
+      /* var obj = {
+        a: 1,
+        b: 2,
+        c: 3,
+      };
+      function test(obj) {
+        obj.d = 4;
+        return obj;
+      }
+      console.log(test(obj)); */
+
+      /**
+       * 纯函数的好处：
+       * 可移植性
+       *
+       *
+       *
+       */
+    </script>
+  </body>
+</html>

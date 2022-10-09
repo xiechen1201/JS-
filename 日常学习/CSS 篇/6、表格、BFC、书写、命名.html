@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      /* table 相关的属性 */
+      /* table {
+        width: 300px;
+        height: 300px;
+        border: 1px solid #000;
+        caption-side: top;
+        border-collapse: separate;
+      } */
+
+      /* margin 合并的问题 */
+      /* 嵌套一层盒子，设置 overflow 属性或者不解决直接设置 200px */
+      /* .box {
+        width: 100px;
+        height: 100px;
+      }
+      .container {
+        overflow: hidden;
+      }
+      .box1 {
+        background-color: green;
+        margin-bottom: 100px;
+      }
+      .box2 {
+        background-color: orange;
+        margin-top: 100px;
+      } */
+
+      /* 浮动后高度坍塌 */
+      /* .box {
+        width: 200px;
+        border: 10px solid #000;
+        overflow: hidden;
+      }
+      .box1 {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        float: left;
+      }
+      .box2 {
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+        float: left;
+      } */
+
+      /* margin 塌陷的问题 */
+      /* .box1 {
+        width: 300px;
+        height: 300px;
+        background-color: green;
+        overflow: hidden;
+      }
+      .box2 {
+        width: 150px;
+        height: 150px;
+        background-color: orange;
+        margin: 100px auto;
+      } */
+
+      /* float 覆盖问题 */
+      .box1 {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        float: left;
+      }
+      .box2 {
+        overflow: hidden;
+        width: 150px;
+        height: 150px;
+        background-color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <table border="1">
+      <caption>
+        测试表格
+      </caption>
+      <tr>
+        <td>姓名</td>
+        <td>性别</td>
+        <td>年龄</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table> -->
+
+    <!--  <div class="container">
+      <div class="box box1"></div>
+    </div>
+    <div class="container">
+      <div class="box box2"></div>
+    </div> -->
+
+    <!-- <div class="box">
+      <div class="box1"></div>
+      <div class="box2"></div>
+    </div> -->
+
+    <!-- <div class="box1">
+      <div class="box2"></div>
+    </div> -->
+
+    <div class="box1"></div>
+    <div class="box2">我是我是我是我是我是我是我是我是我是我是我是我是我是</div>
+
+    <script type="text/javascript">
+      /**
+       * border="1" 和  border: 1px solid #000; 的区别：
+       * border="1" 会给每个单元格也设置边框
+       *
+       * caption-side: top/bottom; 标题的位置
+       * border-collapse: separate/collapse; 合并边框
+       * table-layout: automatic/fixed; 固定列的宽度不变化，平分整个 table
+       *
+       * margin-left: -1px 可以合并边框（图片），但是需要给宽高在+1px
+       */
+
+      /**
+       * BFC
+       * CSS2.1 提出的概念
+       * block formatting contxts 块级格式化上下文
+       *
+       * 总结
+       * 控制元素布局定位的方案
+       * 普通流（normal flow）：以 html 文档自上而下的布局
+       * 浮动流（float flow）： 脱离了普通流，向左或向右偏移
+       * 绝对定位布局（absolute positioning）：脱离了普通流，开辟了一个新的层，不会影响任何兄弟元素的布局
+       *
+       * BFC 是 CSS2.1 提出的概念，在我们写 CSS 布局的时候会出现一些问题，BFC 就是来解释特殊布局出现的问题，给出了相应的规范的解决方案
+       *
+       * BFC 元素（具有 BFC 特性）：
+       * body、float: left/right、position: absolute/fixed、display: inline-block/table-cell/flex、overflow: hidden/auto/scroll
+       *
+       *
+       * 1、margin 合并
+       * 2、浮动后高度坍塌
+       * 3、margin 塌陷的问题
+       * 4、float 覆盖问题
+       */
+
+      /**
+       * CSS 书写顺序
+       * 显示属性：display,position,float,clear
+       * 自身属性：width,height,margin,padding,border,background
+       * 文本属性：color,font-text-align,vertical-align,whitespace
+       * 其他
+       */
+
+      /**
+       * 选择器复合单词用 中划线
+       * JS构造ID复合单词 下划线 J_name 
+       * 选择器都用小写，经可能的使用小写，不用看不懂的缩写
+       *
+       * 
+       */
+    </script>
+  </body>
+</html>

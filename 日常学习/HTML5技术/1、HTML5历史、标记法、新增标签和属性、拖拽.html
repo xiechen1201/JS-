@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <p>
+        <label for="search">UserName:</label>
+        <input type="text" name="search" id="search" autofocus />
+      </p>
+    </form>
+    <p contenteditable="true">这是一段文字</p>
+    <p hidden>这是一段文字</p>
+    <div
+      id="box"
+      style="width: 100px; height: 100px; border: 1px solid #333"
+      draggable="true"
+    >
+      这是一个可拖拽的DIV
+    </div>
+    <script type="text/javascript">
+      /**
+       * HTML5 的目的就是创建更简单的 WEB 程序
+       * 为了使开发更容易还提供了一些 API
+       *
+       *
+       *
+       */
+
+      // ## 语法
+      /**
+       * <!DOCTYPE html> 声明文档为 HTML5 标准模式
+       * <meta charset="UTF-8" /> 指定字符编码
+       * 属性名和属性值一样的时候可以省略 <input type="checkbox" checked /> checked="checked"
+       *
+       */
+
+      // ## 表单新增属性
+      /**
+       * autofocus 自动聚焦
+       *
+       */
+
+      /**
+       * contenteditable="true" 可以让普通标签进行文本编辑
+       * hidden 给元素设置 display: none; 在页面进行隐藏
+       * draggable="true" 可以让普通标签进行拖动
+       * data-* 给标签自定义属性，通过 dataset 对象来获取
+       */
+
+      var oBox = document.getElementById("box");
+      // oBox.ondragenter
+      // oBox.ondragleave
+      // oBox.ondragover
+      // oBox.ondrop
+      oBox.ondragstart = function (e) {
+        console.log(e);
+        console.log("ondragstart");
+      };
+
+      oBox.ondrag = function (e) {
+        console.log(e);
+        console.log("ondrag");
+      };
+
+      oBox.ondragend = function (e) {
+        console.log(e);
+        console.log("ondragend");
+      };
+
+      // ## 新增标签
+      /**
+       * <header></header>
+       * <nav></nav>
+       * <section></section>
+       * <article></article>
+       * <aside></aside>
+       * <footer></footer>
+       *
+       * article 和 section 的区别：
+       * article 闭合一块自身相关的内容（重点在内容），比如一篇论坛的帖子
+       * section 某个单独功能的聚合（重点在功能），比如一个小型地图
+       *
+       * <video></video>
+       * <audio></audio>
+       * <canvas></canvas>
+       * <svg>
+       */
+    </script>
+  </body>
+</html>

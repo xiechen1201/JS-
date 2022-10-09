@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      /* 浮动  */
+      /* .box1 {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        float: left;
+      }
+      .box2 {
+        width: 200px;
+        height: 200px;
+        background-color: orange;
+        overflow: hidden;
+       }*/
+
+      /* 清除浮动 */
+      .box {
+        width: 200px;
+        border: 10px solid #000;
+      }
+      .box::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+      .inner-box {
+        float: left;
+        width: 100px;
+        height: 100px;
+      }
+      .box1 {
+        background-color: green;
+      }
+      .box2 {
+        background-color: orange;
+      }
+      .text-box {
+        width: 100px;
+        border: 1px solid #000;
+      }
+      .clear-fix {
+        clear: both;
+      }
+
+      /* .header {
+        height: 60px;
+        background-color: #000;
+      }
+      .left {
+        float: left;
+        width: 200px;
+        height: 100%;
+        background-color: green;
+      }
+      .right {
+        float: right;
+        width: 200px;
+        height: 100%;
+        background-color: orange;
+      } */
+
+      /* 伪元素 */
+      /* p::before {
+        content: "我";
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background-color: green;
+      }
+      p::after {
+        content: "程序员";
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        background-color: orange;
+      } */
+    </style>
+  </head>
+  <body>
+    <!--  <div class="box1"></div>
+    <div class="box2"></div> -->
+
+    <div class="box">
+      <div class="inner-box box1"></div>
+      <div class="inner-box box2"></div>
+      <p class="clear-fix1"></p>
+    </div>
+    <div class="text-box">123123123123123123123123123123123</div>
+
+    <!-- <div class="header">
+      <div class="left"></div>
+      <div class="right"></div>
+    </div> -->
+
+    <!-- <p>是前端</p> -->
+
+    <script type="text/javascript">
+      /**
+       * 浮动
+       * float: right/left
+       * （图片）
+       * 设置浮动后可以让块元素排练在一行，当一行排不下的时候会进行换行
+       * float 之后元素就会变成内联块
+       * 内联、内联块、float、overflow: hidden; 纯文本都可以识别浮动元素的位置，除了块元素
+       *
+       * 父元素高度塌陷
+       * 清除浮动：
+       * 1、新增一个空的块元素设置样式 clear: both; 必须加在块元素上！！！
+       * 2、父元素设置 overflow: hidden
+       * 3、使用 after + block + clear: both
+       *
+       */
+
+      /**
+       * 伪类伪元素：
+       * W3C 规定一个冒号的是伪类，两个冒号是伪元素
+       * 必须要有 content 属性，否则不起作用！！！
+       *
+       * content 的用法：
+       * 1、content: url(); 给 content 设置图片
+       * 2、content: attr(data-username)
+       * <div data-username="测试"></div>
+       */
+    </script>
+  </body>
+</html>
