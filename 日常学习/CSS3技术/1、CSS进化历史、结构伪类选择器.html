@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css"></style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /**
+       * ## CSS 的历史
+       * CSS3 是 CSS2 的一个升级版本，新增了很多功能和语法，所有的主流浏览器对 CSS3 兼容性比较好
+       *
+       * 1996年12月 CSS1.0 正式推出，它使用了相关的属性代替了 font 之类的标签
+       * 1998年5月 CSS2.0 正式推出，它解决了层叠样式的问题
+       * 2004年2月 CSS2.1 正式推出，它在 2.0 的基础上把一些不被兼容的属性进行了删除
+       * 2010年 CSS3.0 正式推出
+       */
+
+      /**
+       * ## 选择器
+       *
+       * ### 属性选择器
+       * el[type="input"]{ ... } CSS2就有了，CSS3新增的是下面内容
+       * el[type^="text"]{ ... } type 属性以 text 开头
+       * el[type$="text"]{ ... } type 属性以 text 结尾
+       * el[type*="text"]{ ... } type 属性包含 text
+       * el[type~="text"]{ ... } type 属性以空格分割的属性 type="password text"
+       * el[lang|="en"]{ ... } lang 属性以 en 开头 lang="en-us" （特例，不常用）
+       * 指定了属性名，并且属性值仅是value或者以“value-”开头的值（比如说left-con）;
+       *
+       * ### 目标伪类选择器
+       * :target{ ... } 用户点击超链接后当前指向的元素
+       *
+       * ### 否定伪类选择器
+       * el:not([type="text"]){ ... } 功能性标记函数，排除 type="text" 的属性元素
+       * :not(p) span{ ... } 除 table 下的 span
+       *
+       * ### 结构伪类选择器
+       * :root{ ... } 相当于 html 根标签，优先级比 html{ ... } 高
+       * el:emty{ ... } el 元素的子元素是空的元素（换行、空格不算空元素，内部有注释算空元素）
+       *
+       * el:first-child 寻找第一个子元素
+       * el:last-child 寻找最后一个子元素
+       * el:nth-child(n) 寻找正数第 n 个子元素，odd 奇数，even 偶数，2n 每两个循环一次
+       * el:nth-last-child(n) 寻找倒数第 n 个子元素
+       * el:only-child 寻找元素下只有一个子级的元素
+       *
+       * el:first-of-type
+       * el:last-of-type
+       * el:nth-of-type()
+       * el:nth-last-of-type()
+       * el:only-of-type
+       *
+       * 区别：https://www.php.cn/css-tutorial-413061.html
+       *
+       * ### 动态伪类选择器
+       * el:link{}
+       * el:visited{}
+       * el:active{}
+       * el:hover{}
+       * el:focus{}
+       *
+       * ### UI 元素状态伪类选择器
+       * el:enabled{} 表单项正常
+       * el:disabled{} 表单项禁用
+       * el:read-only{} 表单项只读
+       * el:read-write{} 表单项可写
+       * el:checked{} 单选框、复选框勾选
+       * el:default{} 单选框、复选框默认勾选项
+       * 
+       * ### 伪元素选择器
+       * el::selection{} 文本选中后
+       *    user-select: none; 禁止鼠标复制文字（不要用在生产环境）
+       * el::first-letter{} 第一个字母（块元素内才生效）
+       * el::first-line{} 第一行（块元素内才生效）
+       * 
+       * ### 关系选择器
+       * E F{} 包含选择器
+       * E>F{} 直接子元素
+       * E+F{} 相邻兄弟
+       * E~F{} 一般兄弟（E元素后所有的的F元素）
+       */
+    </script>
+  </body>
+</html>

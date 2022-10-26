@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /**
+       * 组件：基于页面功能的UI来划分
+       * 插件：基于业务功能进行封装
+       * 模块化：
+       */
+
+      /**
+       * namespace 命名空间
+       */
+
+      // ## 手写简化版 requireJS
+      let namespace = (function () {
+        let cache = {};
+
+        // 返回一个闭包，实现属性私有化
+        // name定义模块的名称 deps模块的依赖 fn的实现方式
+        return function createdModule(name, deps, fn) {
+          deps = deps.map((depName) => {
+            return cache[depName];
+          });
+
+          cache[name] = fn.apply(null, deps);
+          return cache[name];
+        };
+      })();
+
+      // 定义模块名称，所依赖的模块，模块的实现方式
+      namespace("math", [], function () {
+        function add(a, b) {
+          return a + b;
+        }
+        function sub(a, b) {
+          return a - b;
+        }
+
+        return {
+          add,
+          sub,
+        };
+      });
+
+      // 有一个模块就有一个参数
+      namespace("calculator", ["math"], function (math) {
+        var action = "add";
+
+        function computed(a, b) {
+          math[action](a, b);
+        }
+
+        return {
+          computed,
+        };
+      });
+
+      /**
+       * 以上缺点：只能处理单一的依赖关系，如果依赖关系比较复杂就无法直接使用了
+       * 
+       * 所以就出现了规范的模块化：
+       * CommonJS 模块化
+       *    module.exports = {} 等同于 exports.a = {}
+       *    require("module")
+       *    同步加载，因为运行在服务端（也就是本地）加载特别快，没有必要使用异步加载
+       *    反复加载同一个模块会进行缓冲
+       * 
+       * 
+       * 而前端不能使用同步的方式进行加载
+       * 所以有了前端模块化规范
+       * 
+       * AMD（Async Module Define）异步的模块加载
+       * 使用 require.js 来实现 define(moduleName, [Modules], function)
+       * 假如同步加载一个模块，浏览器就会等待加载完成造成卡顿
+       * 
+       * CMD（Common Module Define）普通的模块加载
+       * 使用 Sea.js 实现，需要引入该文件来实现
+       * 
+       * ES6Module
+       * 是前端主流的模块化，同样是异步加载，相当于把 AMD 和 CMD 进行了整合
+       * 
+       * export let a = 1;
+       * export default function(){}
+       * import module,{ a } from ""
+       * 
+       * 
+       * webpack 同时支持 CommonJS 和 ESModule规范，所以可以混合使用
+       * 
+       */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      // ## 高阶函数
+      /**
+       * 一个函数的参数含有一个函数就是高阶函数！
+       */
+
+      /* // 高阶函数的案例
+      function test(a, b, fn) {
+        // 相加之前需要另外一个函数进行处理
+        return fn(a) + fn(b);
+      }
+      function pow(x) {
+        return Math.pow(x, 2);
+      }
+      console.log(test(2, 3, pow)); */
+
+      /**
+       *
+       * 1、JS函数实际上都是指向某一个变量的
+       * var test = function(){}
+       * function test(){}
+       * 都是指向变量 test
+       *
+       * 2、变量可以指向一个函数，函数参数一定是能接收变量的
+       * 3、函数的参数能接收变量，那么一个函数就可以接收另一个函数作为变量
+       *
+       * 一个函数接收另一个函数作为参数变量的这个函数就是高阶函数
+       * 例如数组的原型方法：map、reduce、sort...
+       *
+       * 高阶函数的好处：
+       * 1、便于拓展，易于维护
+       * 2、完成一个函数执行完后的回调函数
+       *
+       */
+
+      // 不是所有的情况都需要用高阶的写法，test1 函数没有具体的功能，内部仅仅是调用 test2 函数
+      /* function test2(a, b) {
+        return a + b;
+      }
+      var test1 = function (a, b, fn) {
+        return fn(a, b);
+      };
+      console.log(test1(1, 2, test2)); */
+
+      // 问题和上面是一样的
+      /* var test = function (fn) {
+        // return fn(data);
+        return doSth(function (data) {
+          return fn(data);
+        });
+      }; */
+
+      // ## 柯里化函数
+      /**
+       * 柯里化函数是函数式编程的思想
+       *
+       * 1、简化代码
+       * 2、提高维护性
+       * 3、功能单一化
+       * 功能内聚、降低耦合、降低代码的重复性、提高代码的适应性
+       *
+       * 
+       * 
+       *
+       */
+
+      // 实现一次
+      /* function curry(fn) {
+        let _arg = Array.from(arguments).slice(1);
+
+        return function () {
+          let newArg = _arg.concat(Array.from(arguments));
+          return fn(...newArg);
+        };
+      }
+      function add(a, b, c, d) {
+        return a + b + c + d;
+      }
+      let res = curry(add, 1, 2);
+      console.log(res(3, 4)); */
+
+      // 实现多次
+      /* function curry(fn, length) {
+        let len = length || fn.length;
+
+        let func = function (fn) {
+          let _arg = [].slice.call(arguments, 1);
+
+          return function () {
+            let newArgs = _arg.concat([].slice.call(arguments));
+            return fn.apply(this, newArgs);
+          };
+        };
+
+        return function () {
+          let argLen = arguments.length;
+
+          if (argLen < len) {
+            var formatedArr = [fn].concat([].slice.call(arguments));
+            return curry(func.apply(this, formatedArr), len - argLen);
+          } else {
+            return fn.apply(this, arguments);
+          }
+        };
+      }
+
+      function add(a, b, c, d) {
+        return a + b + c + d;
+      }
+
+      let newAdd = curry(add);
+      console.log(newAdd(1)(2)(3)(4)); */
+    </script>
+  </body>
+</html>

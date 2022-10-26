@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子阴影、边框圆角</title>
+    <style type="text/css">
+      .box {
+        width: 200px;
+        height: 200px;
+        border: 1px solid #000;
+        border-radius: 50%;
+      }
+      .box1 {
+        width: 200px;
+        height: 200px;
+        border: 1px solid #000;
+        box-shadow: 10px 10px 10px 10px, 30px 30px 10px 10px olive;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="box1"></div>
+    <script type="text/javascript">
+      /**
+       * ## 边框圆角
+       * border-radius:
+       * 同 padding 一样，4个、3个、2个、1个值表达的意思不同
+       * 数值px/数值%
+       * 当设置 50% 或者宽高的一半的时候会显示一个圆形
+       * 每个圆角的值都是由两个值决定的，左边是四个圆角的水平半径，右边是四个圆角的垂直半径
+       * border-radius: 30px 30px 30px 30px / 30px 30px 30px 30x
+       *
+       * ## 盒子阴影
+       * box-shadow:
+       * x-offset 正数是向右偏移，必填
+       * y-offset 正数是向下偏移，必填
+       * blur-radius 模糊半径，值越大越模糊，最小为0
+       * spead-radius 拓展半径，有点像灯光从上面照盒子的影子，值越大越半径越大，可以为负数
+       * color 模糊的颜色
+       * inset 内部阴影，可选inset
+       * 逗号分隔表示多层阴影
+       */
+    </script>
+  </body>
+</html>

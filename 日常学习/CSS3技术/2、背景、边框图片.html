@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>背景、边框图片</title>
+    <style type="text/css">
+      .box {
+        width: 200px;
+        height: 200px;
+        background: url(./imgs/images.jpeg) no-repeat center/cover;
+        background-clip: content-box;
+      }
+      .box2 {
+        margin-top: 10px;
+        width: 246px;
+        height: 246px;
+        border: 60px solid #000;
+        /* border-image: url(./imgs/WX20221019-164032.png) 60 round; */
+        /* border-image: url(./imgs/WX20221019-164032.png); */
+        border-image: url(./imgs/zwEbB.jpeg) 30% repeat;
+        /* border-image: url(./imgs/WX20221019-164032.png) 34% repeat; */
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="box2"></div>
+    <script type="text/javascript">
+      /**
+       * ## 背景
+       *
+       * 图片滚动固定
+       * attachment 单词表示附着的意思，他的属性作用如下
+       * backgound-attachment:
+       * fixed 相当于当前视口
+       * scroll 相当于当前元素本身
+       * local 相对于当前元素的内容
+       *
+       * 图片原点
+       * backgound-origin:
+       * border-box 以左上角边框为原点
+       * padding-box 以左上角内边距为原点
+       * content-box 以内容左上角为原点
+       *
+       * 图片裁剪（类似超出的部分进行裁剪）
+       * backgound-clip:
+       * 和 backgound-origin 的值完全一样
+       *
+       * 背景图所有属性的简写：
+       * backgound: 路径 重复 固定 位置/尺寸 原点 裁剪;
+       */
+
+      /**
+       * ## 边框
+       *
+       * 边框图片的路径
+       * border-imgage-source: url()
+       *
+       * 边框图片的切割距离（4刀）
+       * border-imgage-slice:
+       * 和 padding 类似，4个、3个、2个、1个只表示的值不同，默认单位是 px
+       *
+       * 平铺的方式
+       * border-imgage-repeat：
+       * 
+       * stretch默认值。拉伸图像来填充区域
+       * repeat 平铺图像来填充区域
+       * round 类似 repeat 值。如果无法完整平铺所有图像，则对图像进行缩放以适应区域
+       * space 类似 repeat 值。如果无法完整平铺所有图像，扩展空间会分布在图像周围
+       *
+       * 边框图片宽度
+       * border-image-width: 70px
+       * 会把 border-width 替换
+       *
+       * 边框图片向外扩充的距离
+       * border-image-outset: 10px;
+       *
+       * 以上5个属性的复合属性
+       * border-imgage: url 切割/宽度px/拓展px stretch;
+       * 
+       * https://www.runoob.com/cssref/css3-pr-border-image-repeat.html
+       */
+    </script>
+  </body>
+</html>

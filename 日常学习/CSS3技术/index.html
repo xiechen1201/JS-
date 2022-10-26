@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试页面</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        border: 1px solid #000;
+        background: radial-gradient(
+          closest-corner at 30% 50%,
+          green,
+          rgb(225, 255, 0) 10%,
+          red
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+  <script type="text/javascript">
+    /**
+     * 本地对象：JS本身的对象
+     * 与宿主无关，无论在浏览器还是服务器中都有的对象，需要进行实例化
+     * Object、Function、String、Number、Boolean、Data、RegExp
+     *
+     * 内置对象：环境内置的对象，如果执行在浏览器上就是浏览器的对象
+     * 与宿主无关，无论在浏览器还是服务器中都有的对象，不需要进行实例化
+     * encodeURIComponent、decodeURIComponent、Math
+     *
+     * 宿主对象：不同的环境提供的不同对象，浏览器、Node 提供的对象
+     * DOM、BOM
+     */
+
+    /**
+     * nodeType：元素节点1 属性节点2 文本节点3 8注释节点 9文档节点Document 11文档碎片节点 12文档声明DTD节点
+     * nodeName：元素节点名称转大写
+     */
+
+    /**
+     * parendNode、childrenNodes、firstChild、lastChild、previousSibling、nextSibling
+     * parendElement、children、firstElementChild、lastElementChild、previousElementSibling、nextElementSibling
+     * getElementById()、getElementsByClassName()、getElementsByTagName()、querySelector()、querySelectorAll()
+     * appendChild()、insertBefore()
+     * removeChild()、remove()
+     */
+  </script>
+</html>

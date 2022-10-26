@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <input type="text" class="search" />
+    <script type="text/javascript">
+      // ## 防抖函数
+      /**
+       * 1、对于在事件被触发 N 秒后再执行的回调 =》 延迟执行
+       * 2、如果在这 N 秒内再次触发事件，那么就重新开始计时
+       */
+
+      var oBox = document.getElementsByClassName("box")[0];
+      var t = null;
+
+      /* oBox.onmouseover = function () {
+        clearTimeout(t);
+        t = setTimeout(function () {
+          console.log(1);
+        }, 1000);
+      }; */
+
+      // 以上的问题：1、污染全局 2、初次触发事件的时候会延迟执行
+
+      /**
+       * 防抖函数的原理：
+       * 1、是否首次延迟执行
+       * 2、N 秒之内触发事件不执行事件处理函数（N 秒内频繁触发事件，计时器会频繁重新开始计时）
+       */
+
+      /* oBox.onmouseover = debounce(handleEvent, 1000, true);
+
+      function handleEvent() {
+        console.log(1);
+      }
+      
+      function debounce(fn, time, triggleNow) {
+        var t = null;
+        var res;
+
+        var debounced = function () {
+          var _self = this;
+          var arg = arguments;
+
+          if (t) {
+            clearTimeout(t);
+          }
+
+          if (triggleNow) {
+            var exec = !t;
+            t = setTimeout(function () {
+              t = null;
+            }, time);
+            if (exec) {
+              res = fn.apply(_self, arguments);
+            }
+          } else {
+            t = setTimeout(function () {
+              res = fn.apply(_self, arguments);
+            }, time);
+          }
+
+          return res;
+        };
+
+        debounced.remove = function () {
+          clearTimeout(t);
+          t = null;
+        };
+
+        return debounced;
+      } */
+
+      // ## 函数节流
+      /**
+       * 事件被触发，N 秒之内只执行一次事件处理函数
+       *
+       */
+
+      /* var oInput = document.getElementsByClassName("search")[0];
+      var t = null;
+
+      oInput.oninput = function () {
+        clearTimeout(t);
+        t = setTimeout(function () {
+            console.log("success");
+        }, 1000);
+      }; */
+
+      var oInput = document.getElementsByClassName("search")[0];
+      oInput.oninput = throttle(handleEvent, 1000);
+
+      function handleEvent() {
+        console.log("success");
+      }
+
+      function throttle(fn, delay) {
+        var t = null;
+        var begin = new Date().getTime();
+
+        return function () {
+          var _self = this;
+          var args = arguments;
+          var cur = new Date().getTime();
+
+          clearTimeout(t);
+
+          // 时间到了
+          if (cur - begin >= delay) {
+            console.log(1);
+            fn.apply(_self, args);
+            begin = cur;
+          } else {
+            // 时间没到
+            t = setTimeout(function () {
+              console.log(2);
+              fn.apply(_self, args);
+            }, delay);
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      /* 文字阴影 */
+      /* p {
+        text-shadow: 10px 10px 10px red;
+      } */
+
+      /* 文字换行 */
+      /* .box {
+        width: 200px;
+        height: 200px;
+        border: 1px #000 solid;
+        word-wrap: break-word;
+      } */
+
+      @font-face {
+        font-family: "my-font";
+        src: url(./fonts/Spooky-Fright.ttf);
+      }
+
+      .box {
+        font-family: "my-font";
+        font-size: 30px;
+        width: 200px;
+        height: 200px;
+        border: 1px #000 solid;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <p>测试文字</p> -->
+    <!-- <div class="box">1aasaskjkansklan akjdhjzxkjhisihjhjahskahjhsjhhjh</div>
+    <div class="box">
+      正数是向右偏移正数是向右偏移正数是向右偏移正数是向右偏移正数是向右偏移
+    </div> -->
+    <div class="box">
+      aasaskjkansklan akjdhjzxkjhisihj hakjdhjzxkjhisihjh
+      jahskahjhsjhhjhaasaskjkansklanaas askjkansklanaasaskjka nsklanaasaskjkans
+      klanaasaskjkansklanaas 中文中文中文中文中文
+    </div>
+
+    <script type="text/javascript">
+      /**
+       * ## 文字阴影
+       * box-shadow:
+       * x-offset 正数是向右偏移，必填
+       * y-offset 正数是向下偏移，必填
+       * blur-radius 模糊半径，值越大越模糊，最小为0
+       * 相比 box-shadow 没有拓展半径！
+       * color 模糊的颜色
+       * 逗号分隔表示多层阴影
+       * 相比 box-shadow 没有内部阴影！
+       */
+
+      /**
+       * ## 文字换行
+       * word-wrap:
+       * noraml 正常
+       * break-wrap 长单词截断换行
+       *
+       * 浏览器对文字换行的处理规则：
+       * 1、完整的英文单词会超出容器，当遇到空格、连字符“-”会进行换行（认为是一个单词）
+       * 2、中文字符串正常换行（一个字就是一个字符），当遇到标点符号的为下一行行首的时候，会将上一行的末尾文字也进行换行。
+       */
+
+      /**
+       * ## 文本断行
+       * word-break:
+       * noraml
+       * break-all 长单词不进行另起一行的进行换行（单词内进行换行）
+       * keep-all 只能在半角空格或连字符处换行
+       */
+
+      /**
+       * ## 空白空间
+       * white-space:
+       * noraml 默认，换行和空格都合并为一个空格，文字换行
+       * nowrap 文本不会换行，强制转换在一行内
+       * pre 保留文本的空格和换行，不进行换行
+       * pre-wrap 和 pre 一样，但是正常换行
+       * pre-line 保留文本的换行，合并空格，正常换行
+       */
+
+      /**
+       * ##
+       * CSS 声明，声明以为分号“:”隔开
+       * CSS 声明块，以打括号" {}""的形式组合起来的
+       * CSS 规则，
+       * CSS 层叠，层叠算法，决定哪个优先级更高
+       */
+
+      /**
+       * ##
+       * 指定一种文字字体，可以是在线的或者本地的
+       * @font-face
+       *
+       * @font-face{
+       *    font-famil: "myFont", 字体名称
+       *    src: url(../font/test.otf), 字体的路径，在线地址或本地地址，为兼容，可以引用多个字体
+       *         url(../font/test2.otf),
+       *         url(../font/test3.otf) format(otf); 浏览器对字体格式的支持不一样，需要指定后缀
+       * }
+       *
+       */
+    </script>
+  </body>
+</html>

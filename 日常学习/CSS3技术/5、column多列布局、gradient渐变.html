@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .box {
+        width: 600px;
+        height: 400px;
+        border: 1px solid #000;
+        columns: 3;
+        column-gap: 30px;
+      }
+      p {
+        column-span: 2;
+      }
+      .box1 {
+        width: 200px;
+        height: 200px;
+        border: 1px solid #000;
+        background: linear-gradient(red, black, yellow);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <p>标题</p>
+      全面建设社会主义现代化国家，是一项伟大而艰巨的事业，前途光明，任重道远。党的二十大报告指出：我们必须增强忧患意识，坚持底线思维，做到居安思危、未雨绸缪，准备经受风高浪急甚至惊涛骇浪的重大考验。前进道路上必须牢牢把握五个重大原则，其中之一就是坚持发扬斗争精神。习近平强调，“要增强全党全国各族人民的志气、骨气、底气，不信邪、不怕鬼、不怕压。”
+      全面建设社会主义现代化国家，是一项伟大而艰巨的事业，前途光明，任重道远。党的二十大报告指出：我们必须增强忧患意识，坚持底线思维，做到居安思危、未雨绸缪，准备经受风高浪急甚至惊涛骇浪的重大考验。前进道路上必须牢牢把握五个重大原则，其中之一就是坚持发扬斗争精神。习近平强调，“要增强全党全国各族人民的志气、骨气、底气，不信邪、不怕鬼、不怕压。”
+      全面建设社会主义现代化国家，是一项伟大而艰巨的事业，前途光明，任重道远。党的二十大报告指出：我们必须增强忧患意识，坚持底线思维，做到居安思危、未雨绸缪，准备经受风高浪急甚至惊涛骇浪的重大考验。前进道路上必须牢牢把握五个重大原则，其中之一就是坚持发扬斗争精神。习近平强调，“要增强全党全国各族人民的志气、骨气、底气，不信邪、不怕鬼、不怕压。”
+    </div>
+    <div class="box1"></div>
+    <script type="text/javascript">
+      /**
+       * ## 多栏排版
+       *
+       * 列
+       * columns: 列宽度 容许的最大列数;
+       *
+       * 列宽度
+       * column-width:
+       *
+       * 列数
+       * column-count:
+       * 具体数字（无单位），最大为 5，和 columns-width 是互斥的
+       *
+       * 列间隙的大小：
+       * column-gap:
+       * 默认为 16px
+       *
+       * 列间隙的样式：
+       * column-rule:
+       * 和 border 属性值一样的，是以下三个属性的复合属性
+       * column-rule-width
+       * column-rule-style
+       * column-rule-color
+       *
+       * 合并列
+       * column-span: none/1/all
+       */
+
+      /**
+       * ## 颜色值
+       * #FFAACC HEX
+       * rgb(10,10,100) 三原色的取值范围（0-255）
+       *
+       * 新增:
+       * rgba(10,10,100, 0.5) 新增 rgba 第四个参数表示透明度
+       * hsl() hue色调(-360到360之前的一个整数) saturation饱和度(百分比) light亮度(百分比，0%为黑色，100%为白色)
+       * 三个颜色通道的改变以及它们相互之间的叠加来获得各种颜色，色调(Hue)色调最大值360，饱和度和亮度有百分比表示0-100%之间。
+       */
+
+      /**
+       * ## 线性渐变色
+       * linear-gradient 是一个函数，不是属性，属于图片类型的一种，所用 background-image
+       * background-image: linear-gradient([渐变的方向], 颜色1 [百分比], 颜色2[百分比])
+       * 渐变的方向:
+       * 1、to top/bottom/left/right，方位值也可进行组合如 to top right，默认是 to bottom
+       * 2、度数，如 45deg，正上为 0deg
+       */
+
+      /**
+       * ## 径像渐变
+       * background-image: radial-gradient([形状], [渐变半径], [所在的位置], color [百分比], color [百分比])
+       * 形状: circle圆形/ellipse椭圆
+       * 渐变半径:
+       * 所在的位置:at X和Y轴的像素值/at top/at center（默认值）
+       */
+
+      /**
+       * ## 重复性渐变
+       * repeating-linear-gradient(red, yellow 10%, green 20%);
+       * 说明：10%的位置为yellow，20%的位置为green，然后按照这20%向下重复
+       * 
+       * repeating-radial-gradient(red, yellow 10%, green 20%);
+       */
+    </script>
+  </body>
+</html>
