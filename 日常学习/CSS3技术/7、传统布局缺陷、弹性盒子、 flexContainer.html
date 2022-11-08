@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .box {
+        width: 500px;
+        height: 500px;
+        border: 1px solid #000;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+      }
+      .box > div {
+        width: 100px;
+        height: 100px;
+        color: #fff;
+        font-size: 18px;
+        text-align: center;
+        line-height: 100px;
+      }
+      .left {
+        background-color: blue;
+        /* order: 2; */
+        /* line-height: 80px !important; */
+      }
+      .mid {
+        background-color: orange;
+        /* order: 1; */
+        /* line-height: 60px !important; */
+      }
+      .right {
+        background-color: green;
+        /* order: 3; */
+        /* line-height: 40px !important; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="left">1</div>
+      <div class="mid">2</div>
+      <div class="right">3</div>
+      <div class="left">4</div>
+      <div class="mid">5</div>
+      <div class="right">6</div>
+      <div class="left">7</div>
+      <div class="mid">8</div>
+      <div class="right">9</div>
+    </div>
+    <script type="text/javascript">
+      /**
+       * ## 弹性布局
+       *
+       * 1、传统布局的缺陷？
+       * 2、弹性盒模型
+       *    flexible box 布局，能够让子元素之间提高空间分布和对齐能力
+       *
+       *    将盒子设置为弹性盒模型
+       *    兼容写法：
+       *    display: flex;
+       *    display: -webkit-box;
+       *    display: -webkit-flex;
+       *    display: -ms-flexbox;
+       *
+       *    弹性布局是一种一维布局，一次只能处理一条线的布局，我们称为主轴。
+       *    弹性容器（flex contanier）下所有的子成员都会变为「弹性项目（flex item）」
+       *    图片展示 主轴和侧轴
+       *
+       *    给父级元素设置的属性：
+       *    flex-direction 设置 flex 容器主轴的方向
+       *        row水平/row-reverse水平反转/column垂直/column-reverse垂直反转
+       *
+       *    flex-wrap 弹性项目超出父容器
+       *        nowrap子元素不换行，压缩弹性项目的大小，默认值/wrap子元素换行/wrap-reverse换行反转
+       *
+       *    flex-flow 该属性是 flex-direction 和 flex-wrap 的简写
+       *        flex-flow: row wrap;
+       *
+       *    justify-content 设置弹性项目在主轴上的对齐方式
+       *        flex-start沿着主轴起点对齐/flex-end沿着主轴终点对齐/center居中对齐/space-between两端对齐/space-around弹性项目两侧间距平分父容器
+       *
+       *    align-items 设置弹性项目在侧轴上的对齐方式
+       *         flex-start沿着侧轴起点对齐/flex-end沿着侧轴终点对齐/center居中对齐/baseline基准线/stretch没有高度时拉伸铺满
+       *        基准线：基于文本对齐的一条线
+       *
+       *    alingn-content 定义多根主轴线的对齐方式，如果父元只有一根轴线，该属性不起作用，必须设置 flex-wrap: wrap;
+       *        flex-start/flex-end/center/space-between/space-around/stretch默认值，多轴线平分占满整个交叉轴
+       */
+
+      /**
+       * 给子级元素（弹性项目）设置的属性：
+       * flex-grow 方法比例
+       * flex-shrink 缩小比例
+       * flex-basis 伸缩基准值
+       * flex 以上三个值的简写
+       * 
+       * order 弹性项目排列顺序
+       *    默认为0，值越大就往后排，值越小就往前排
+       * 
+       * align-self 单个弹性项目在侧轴的对齐方式
+       */
+    </script>
+  </body>
+</html>

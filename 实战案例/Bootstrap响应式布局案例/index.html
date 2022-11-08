@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap 响应式布局案例</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="javascript:;" class="navbar-lk">Bootstrap中文网</a>
+        </div>
+        <div class="navbar-collapse">
+          <ul class="navbar-nav clearfix">
+            <li class="navbar-nav-item">
+              <a href="javascript:;">Bootstrap2中文文档</a>
+            </li>
+            <li class="navbar-nav-item">
+              <a href="javascript:;">Bootstrap3中文文档</a>
+            </li>
+            <li class="navbar-nav-item">
+              <a href="javascript:;">Bootstrap4中文文档</a>
+            </li>
+            <li class="navbar-nav-item">
+              <a href="javascript:;">Less教程</a>
+            </li>
+            <li class="navbar-nav-item">
+              <a href="javascript:;">jQueryAPI</a>
+            </li>
+            <li class="navbar-nav-item">
+              <a href="javascript:;" class="reddot">网站实例</a>
+            </li>
+            <li class="navbar-nav-item about">
+              <a href="javascript:;">关于</a>
+            </li>
+          </ul>
+        </div>
+        <div class="navbar-nav-button" onclick="onclickButton()">
+          <span class="button-line"></span>
+          <span class="button-line"></span>
+          <span class="button-line"></span>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      let oUl = document.getElementsByClassName("navbar-nav")[0],
+        flag = false;
+
+      function onclickButton() {
+        if (flag) {
+          oUl.className = "navbar-nav clearfix";
+          flag = false;
+        } else {
+          oUl.className += " show";
+          flag = true;
+        }
+      }
+    </script>
+  </body>
+</html>

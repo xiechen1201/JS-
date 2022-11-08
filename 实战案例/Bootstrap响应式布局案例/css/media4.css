@@ -1,0 +1,61 @@
+@media (max-width: 768px) {
+  .container {
+    position: relative;
+    width: 100%;
+  }
+  .navbar-header {
+    float: left;
+    width: 161px;
+    height: 100%;
+  }
+  .navbar-header .navbar-lk {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 42px;
+    font-size: 18px;
+  }
+  .navbar-collapse {
+    height: 100%;
+  }
+  .navbar-collapse .navbar-nav {
+    position: absolute;
+    left: 0;
+    top: 42px;
+    border-color: #101010;
+    width: 100%;
+    height: 0;
+    background-color: #222;
+    transition: height 0.3s;
+    overflow: hidden;
+  }
+  .show{
+    height: 294px !important;
+  }
+  .navbar-collapse .navbar-nav .navbar-nav-item {
+    width: 100%;
+    height: 42px;
+    padding: 5px 22px;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 32px;
+  }
+  .navbar-nav-button {
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    width: 40px;
+    height: 30px;
+    padding: 8px 6px;
+    border: 1px solid #333;
+    border-radius: 3px;
+  }
+  .navbar-nav-button .button-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    margin-bottom: 4px;
+  }
+}

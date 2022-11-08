@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>transform、css属性值定义语法</title>
+    <style type="text/css">
+      .box {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        padding: 50px;
+        border: 1px solid #000;
+      }
+      .inner {
+        width: 100%;
+        height: 100%;
+        background-color: orange;
+        transform: rotate3d(45, 45, 45, 10deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="inner"></div>
+    </div>
+    <script type="text/javascript">
+      /**
+       * ## 计算值
+       * calc(50% - 100px)
+       */
+
+      /**
+       * ## transform
+       * 只对块级元素生效
+       * 应用于元素的2D或3D转换，这个属性允许你将元素旋转，缩放，移动，倾斜等。
+       *
+       * 1、笛卡尔坐标系，X 为右正方向，Y为下正方向
+       * 2、所有的元素都是平面的元素，平面的元素没有厚度
+       */
+
+      /**
+       * ## 旋转
+       * rotate(**deg)，只接收一个值，类似按照 Z 轴进行选择
+       * rotateX(**deg) X轴旋转
+       * rotateY(**deg) Y轴旋转
+       * rotateZ(**deg) Z轴旋转
+       * rotate3d(number, number, number, **deg)
+       *
+       * 单位为 deg，表示度数
+       */
+
+      /**
+       * ## 缩放
+       * scale(x, y)
+       * scaleX() 沿着 X 轴缩放
+       * scaleY() 沿着 Y 轴缩放
+       * scaleZ() 沿着 Z 轴缩放
+       * scale3d(x, y, z)
+       *
+       * 值为具体的倍数，没有单位
+       */
+
+      /**
+       * ## 倾斜
+       * skew(x, y)
+       * skewX()
+       * skewY()
+       */
+
+      /**
+       * ## 平移
+       * translate(x, y)
+       * translateX()
+       * translateY()
+       * translateZ()
+       * translate3d(x, y, z)
+       */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>button点击动画效果</title>
+    <style type="text/css">
+      @keyframes btn-animation-tomove {
+        from {
+          width: 0;
+          opacity: 1;
+        }
+        to {
+          width: 100%;
+          opacity: 0;
+        }
+      }
+
+      @keyframes btn-animation-toScale {
+        from {
+          width: 1px;
+          height: 1px;
+          transform: scale(0);
+          opacity: 1;
+        }
+        to {
+          width: 1px;
+          height: 1px;
+          transform: scale(100);
+          opacity: 0;
+        }
+      }
+
+      @keyframes btn-animation-toTop {
+        from {
+          height: 0;
+          opacity: 1;
+        }
+        to {
+          height: 100%;
+          opacity: 0;
+        }
+      }
+
+      button {
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+      .container {
+        width: 500px;
+        height: 100px;
+        margin: 200px auto;
+      }
+      .btn {
+        position: relative;
+        width: 100px;
+        height: 40px;
+        color: #fff;
+        font-size: 16px;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 3px;
+      }
+      .mask {
+        position: absolute;
+        width: 0px;
+        height: 100%;
+        background-color: #fff;
+        opacity: 1;
+        display: block;
+      }
+
+      /* btn-primary */
+      .btn-primary {
+        border-color: #2e6da4;
+        background-color: #337ab7;
+      }
+      .btn-primary:hover .mask-1 {
+        animation: btn-animation-tomove 0.8s forwards;
+      }
+      .mask-1 {
+        right: 0;
+        top: 0;
+      }
+
+      /* btn-secondary */
+      .btn-secondary {
+        border-color: #5bc0de;
+        background-color: #46b8da;
+      }
+      .btn-secondary:hover .mask-2 {
+        animation: btn-animation-tomove 0.8s forwards;
+      }
+      .mask-2 {
+        left: 0;
+        top: 0;
+        border-top-right-radius: 40px;
+      }
+
+      /* btn-waring */
+      .btn-waring {
+        border-color: #f0ad41;
+        background-color: #eea236;
+      }
+      .btn-waring:hover .mask-3 {
+        animation: btn-animation-toScale 0.8s forwards;
+      }
+      .mask-3 {
+        left: 50%;
+        top: 50%;
+        width: 0px;
+        height: 0px;
+        border-radius: 50%;
+      }
+
+      /* btn-success */
+      .btn-success {
+        border-color: #5cb85c;
+        background-color: #4cae4c;
+      }
+      .btn-success:hover .mask-4 {
+        animation: btn-animation-toTop 0.8s forwards;
+      }
+      .mask-4 {
+        width: 100%;
+        height: 0px;
+        bottom: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button class="btn btn-primary">
+        按钮一
+        <span class="mask mask-1"></span>
+      </button>
+      <button class="btn btn-secondary">
+        按钮二
+        <span class="mask mask-2"></span>
+      </button>
+      <button class="btn btn-waring">
+        按钮三
+        <span class="mask mask-3"></span>
+      </button>
+      <button class="btn btn-success">
+        按钮四
+        <span class="mask mask-4"></span>
+      </button>
+    </div>
+    <script>
+      let arr1 = ["专家1", "专家2"];
+      let arr2 = ["项目1","项目2"];
+      let arr3 = [];
+
+      arr1.forEach((el) => {
+        arr2.forEach((item) => {
+          arr3.push({
+            zhuan: el,
+            xiang: item,
+          });
+        });
+      });
+      console.log(arr3);
+    </script>
+  </body>
+</html>

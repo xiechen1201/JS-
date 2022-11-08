@@ -1,0 +1,201 @@
+/* 第一个动画 */
+@keyframes loading-one {
+  from {
+    height: 20px;
+    background-color: #925fb1;
+  }
+  to {
+    height: 100px;
+    background-color: #5197d5;
+  }
+}
+.wrap1 {
+  position: relative;
+  width: 310px;
+  height: 80px;
+  margin: 100px auto;
+  border-bottom: 3px solid #925fb1;
+}
+.wrap1 .item {
+  position: absolute;
+  bottom: 0;
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+  background-color: #925fb1;
+  animation-name: loading-one;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+.wrap1 .item-1 {
+  left: 10px;
+  animation-delay: 0.2s;
+}
+.wrap1 .item-2 {
+  left: 70px;
+  animation-delay: 0.4s;
+}
+.wrap1 .item-3 {
+  left: 130px;
+  animation-delay: 0.6s;
+}
+.wrap1 .item-4 {
+  left: 190px;
+  animation-delay: 0.8s;
+}
+.wrap1 .item-5 {
+  left: 250px;
+  animation-delay: 1s;
+}
+
+/* 第二个动画 */
+@keyframes loading-two-green {
+  0% {
+    top: 25px;
+    left: 25px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #2ecc71;
+  }
+  100% {
+    top: 0;
+    left: 80px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #925fb1;
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading-two-blue {
+  0% {
+    top: 25px;
+    left: 25px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #2498db;
+  }
+  100% {
+    bottom: 0;
+    left: 80px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #925fb1;
+    transform: rotate(-360deg);
+  }
+}
+@keyframes loading-two-red {
+  0% {
+    top: 25px;
+    right: 25px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e74c3c;
+  }
+  100% {
+    top: 0;
+    right: 80px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #925fb1;
+    transform: rotate(-360deg);
+  }
+}
+@keyframes loading-two-yellow {
+  0% {
+    top: 25px;
+    right: 25px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #f1c40f;
+  }
+  100% {
+    bottom: 0;
+    right: 80px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #925fb1;
+    transform: rotate(360deg);
+  }
+}
+.wrap2 {
+  position: relative;
+  width: 240px;
+  height: 80px;
+  margin: 100px auto;
+}
+.wrap2 .item {
+  position: absolute;
+  top: 25px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #925fb1;
+}
+.wrap2 .item-1 {
+  z-index: 1;
+  animation: loading-two-green 1s infinite alternate-reverse;
+}
+.wrap2 .item-2 {
+  animation: loading-two-blue 1s infinite alternate-reverse;
+}
+.wrap2 .item-3 {
+  z-index: 1;
+  animation: loading-two-red 1s infinite alternate-reverse;
+}
+.wrap2 .item-4 {
+  animation: loading-two-yellow 1s infinite alternate-reverse;
+}
+
+/* 第三个动画 */
+@keyframes loading-two-left {
+  0% {
+    left: 25px;
+    background-color: #2ecc71;
+  }
+  100% {
+    left: 100px;
+    background-color: #925fb1;
+    transform: scale(1.3);
+  }
+}
+@keyframes loading-two-right {
+  0% {
+    right: 25px;
+    background-color: #e74c3c;
+  }
+  100% {
+    right: 100px;
+    background-color: #925fb1;
+    transform: scale(1.3);
+  }
+}
+.wrap3 {
+  position: relative;
+  width: 160px;
+  height: 80px;
+  margin: 100px auto;
+}
+.wrap3 .item {
+  position: absolute;
+  top: 25px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.wrap3 .item-1 {
+  animation: loading-two-left 1s infinite alternate-reverse;
+}
+.wrap3 .item-2 {
+  animation: loading-two-right 1s infinite alternate-reverse;
+}

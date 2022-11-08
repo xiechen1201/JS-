@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 和 style 内 @media 是一样的 -->
+    <link
+      rel="stylesheet"
+      media="screen and (max-width: 960px) and (min-width: 768px)"
+      href="./css/media1.css"
+    />
+    <style type="text/css">
+      /* .wrap {
+        padding: 100px;
+        width: 500px;
+        height: 500px;
+        border: 1px solid #000;
+      }
+      .box {
+        width: 100%;
+        height: 100%;
+        background-color: orange;
+      } */
+
+      /* display: flex */
+
+      /* .wrap {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        border: 1px solid #000;
+      }
+      .box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -100px;
+        margin-top: -100px;
+        width: 200px;
+        height: 200px;
+        background-color: orange;
+      } */
+
+      /* .wrap {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        border: 1px solid #000;
+      }
+      .box {
+        position: absolute;
+        top: calc(50% - 100px);
+        left: calc(50% - 100px);
+        width: 200px;
+        height: 200px;
+        background-color: orange;
+      } */
+
+      .wrap {
+        position: relative;
+        z-index: 10;
+        width: 500px;
+        height: 500px;
+        border: 1px solid #000;
+      }
+      .box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: -1;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        background-color: orange;
+      }
+
+      /* 960 - 768 的宽度 */
+      @media screen and (max-width: 960px) and (min-width: 768px) {
+        body {
+          background-color: red;
+        }
+      }
+      @media screen and (max-width: 768px) and (min-width: 500px) {
+        body {
+          background-color: yellow;
+        }
+      }
+      @media screen and (max-width: 500px) {
+        @import url(./css/media2.css);
+        body {
+          background-color: darkcyan;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 居中对齐的多种办法 -->
+    <div class="wrap">
+      <div class="box"></div>
+    </div>
+    <script type="text/javascript">
+      /**
+       * ## GPU 硬件加速
+       * 当 CSS 设置了 3D 属性后，浏览器会启动 GPU 硬件加速，让渲染模式从 CPU 变为 GPU
+       */
+
+      /**
+       * ## 响应式设计
+       * PC网站的宽度一般为 1190px
+       *
+       * <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       * viewport 设置视口
+       * width=device-width 默认为设备的宽度
+       * initial-scale=1.0 初始化大小
+       * 主要是针对手机设置！
+       *
+       * Responsive Web Design: 网格布局 Flex + 弹性图片 + 媒体查询
+       * 响应式：为了让网页实现自动缩放的效果，根据当前视口大小决定怎么养的排列方式
+       *
+       * @media <描述符> screen and (max-width: xxpx) and (min-width: xxpx){
+       *    // ...样式
+       * }
+       * screen 视口（默认值为 all，所有设备都生效）
+       * and 类似并且的判断
+       * max-width 大于这个宽度时不生效
+       * min-width 小于这个宽度时不生效
+       *
+       * 逗号拼接，类似于或，都能够执行
+       * @media (max-width: xxpx), (min-width){
+       *    // ...样式
+       * }
+       *
+       * 非
+       * @media not screen and (max-width: xxpx){
+       *    // ...样式
+       * }
+       *
+       * 设备是横屏还是竖屏
+       * @media screen and (orientation: portrait/landscape){
+       *    // ...样式
+       * }
+       *
+       * 设备的黑暗/明亮模式
+       * @media (prefers-color-scheme: light)
+       */
+
+      /**
+       * link 和 @import
+       * link 是一个标签，异步加载样式，预加载
+       * @import 属于CSS范畴，只能加载CSS，没有兼容性问题
+       */
+
+      /**
+       * em、rem
+       * 都是相对单位，px 是一个具体的值，本身是一个固定的值
+       * em 和 rem 都是相对于 font-size 的相对值
+       * em 相对于父元素
+       * rem 相对于 html 标签（根标签的字体大小）
+       *
+       * 
+       */
+    </script>
+  </body>
+</html>

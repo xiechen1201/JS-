@@ -1,0 +1,36 @@
+@media (min-width: 992px) and (max-width: 1200px) {
+  .container {
+    width: 970px;
+  }
+  .navbar-header {
+    display: none;
+  }
+  .navbar-collapse {
+    height: 100%;
+  }
+  .navbar-collapse .navbar-nav-item {
+    float: left;
+    height: 100%;
+    padding: 0 15px;
+    line-height: 42px;
+    text-align: center;
+    font-size: 14px;
+  }
+  .navbar-collapse .navbar-nav-item .reddot {
+    position: relative;
+  }
+  .navbar-collapse .navbar-nav-item .reddot:after {
+    position: absolute;
+    right: -10px;
+    top: 0;
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #d9534f;
+  }
+  .navbar-collapse .about {
+    float: right;
+  }
+}

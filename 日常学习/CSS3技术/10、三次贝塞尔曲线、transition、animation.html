@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>transform、css属性值定义语法</title>
+    <style type="text/css">
+      .box {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        padding: 50px;
+        border: 1px solid #000;
+      }
+      .inner {
+        width: 100%;
+        height: 100%;
+        background-color: orange;
+        transform: rotate3d(45, 45, 45, 10deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="inner"></div>
+    </div>
+    <script type="text/javascript">
+      /**
+       * ## 中心点
+       * transform-origin:
+       *    x: left/center/right/具体数值单位
+       *    y: top/center/bottom/具体数值单位
+       *    z: 具体数值单位
+       */
+
+      /**
+       * ## transition 过渡
+       * transition-property
+       * transition-duration
+       * transition-delay
+       * transition-timing-function
+       */
+
+       /**
+       * ## animation
+       * 
+       * @keyframes name{}
+       * 兼容写法：
+       * @-moz-keyframes name{}
+       * 
+       * animation-fill-mode
+       * 
+       */
+    </script>
+  </body>
+</html>

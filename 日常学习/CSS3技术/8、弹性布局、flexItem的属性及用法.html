@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .box {
+        width: 500px;
+        height: 500px;
+        border: 1px solid #000;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+      }
+      .box > div {
+        width: 100px;
+        height: 100px;
+        color: #fff;
+        font-size: 18px;
+        text-align: center;
+        line-height: 100px;
+      }
+      .left {
+        background-color: blue;
+        align-self: auto;
+      }
+      .mid {
+        background-color: orange;
+      }
+      .right {
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="left">1</div>
+      <div class="mid">2</div>
+      <div class="right">3</div>
+      <!-- <div class="left">4</div>
+      <div class="mid">5</div>
+      <div class="right">6</div>
+      <div class="left">7</div>
+      <div class="mid">8</div>
+      <div class="right">9</div> -->
+    </div>
+    <script type="text/javascript">
+      /**
+       * 给子级元素（弹性项目）设置的属性：
+       *
+       * order 排列顺序
+       *    默认为0，值越大就往后排，值越小就往前排
+       *
+       * flex-grow 放大比例
+       *    前提是有空间剩余才会生效！
+       *    (500 - 300 = 200
+       *    每个均分 200/2 = 100) 1 1
+       *    (每个均分 200/3 * 2 = 100) 2 1
+       *    0为默认值表示不放大
+       *    1占据整个剩余空间
+       *    如果多个弹性项目设置该属性，那么均分占据剩余空间
+       *
+       * flex-shrink 缩小比例
+       *    前提是空间不足的时候才会缩小，flex-wrap: nowrap;
+       *    0表示回归默认值大小
+       *    默认值为1，值越大缩放的越小
+       *
+       * flex-basis 伸缩基准值
+       *    放大和缩小都是按照基准线来计算的，该属性就是更改基准值的
+       *    默认值是 auto，也就是元素本身的宽度
+       *
+       * flex 以上三个值的简写
+       *    flex: 0 1 auto; 1 和 auto 是可选的
+       *
+       * align-self 单个项目在侧轴的对齐方式
+       *    flex-start/flex-end/center/baseline/stretch/auto
+       */
+    </script>
+  </body>
+</html>
