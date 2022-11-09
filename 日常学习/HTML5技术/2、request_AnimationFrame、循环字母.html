@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>requestAnimationFrame、循环字母</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /**
+       * JS 写动画时需要注意的：
+       * 1、在运行动画的时候，页面上是不是还有其他事情发生
+       * 2、笔记本电脑、手机、平板电脑的低电量模式
+       * 3、切换到另外一个标签页
+       * 4、用户有没有与页面进行交互
+       * 5、浏览器类型和版本
+       */
+
+      /**
+       * requestAnimationFrame 如何工作的？
+       * 1、分析系统可用资源
+       * 2、电池
+       * 3、标签页切换考虑在内
+       */
+
+      // window.requestAnimationFrame(callback)
+
+      /* function animat() {
+        // 关于动画的代码...
+
+        window.requestAnimationFrame(animat);
+      }
+      animat(); */
+    </script>
+  </body>
+</html>

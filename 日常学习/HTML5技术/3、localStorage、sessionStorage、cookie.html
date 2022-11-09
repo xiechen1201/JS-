@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>localStorage、sessionStorage、cookie</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /**
+       * cookie、localStorage、sessionStorage 的区别？
+       * 详见图片
+       */
+
+      /**
+       * cookie 的使用：
+       * 1、通过键值对进行设置
+       * 2、document.cookie 查看所有的 cookie，使用 ；号进行分隔
+       * 3、document.cookie = "" 进行设置
+       */
+
+      /**
+       * localStorage、sessionStorage 的使用
+       *
+       * 1、设置
+       * localStorage.setItem(name, value);
+       * sessionStorage.setItem(name, value);
+       * 当 name 相同的时候，新设置的 name 会把前面的进行覆盖！
+       *
+       * 2、读取
+       * localStorage.getItem(name);
+       * sessionStorage.getItem(name);
+       *
+       * 3、删除
+       * removeItem(name) 根据指定的name进行删除
+       * clear() 全部清除
+       *
+       * 4、每个源地址都是单独的存储，不同的源数据不能共享
+       */
+
+      /**
+       * ## http 协议
+       * 无状态的网络协议，第一次请求和第二次请求是没有任何联系的
+       *
+       * 咖啡店案例：
+       * 我：客服端 咖啡店：服务器 咖啡：资源 cookie：会员卡
+       *
+       * 服务器通过cookie可以来标识客户端，用于身份证明
+       *
+       *
+       *
+       */
+    </script>
+  </body>
+</html>
