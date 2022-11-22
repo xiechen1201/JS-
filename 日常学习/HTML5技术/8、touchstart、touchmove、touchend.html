@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      id="box"
+      style="width: 100px; height: 100px; background-color: aquamarine"
+    ></div>
+    <script type="text/javascript">
+      /**
+       * click 事件的问题
+       * 1、300ms延迟问题，历史遗留问题
+       * 双指缩放、双击缩放，300ms内双击就会进行缩放，所以导致了延迟的问题
+       * 所以 dbclick 也就失效了
+       *
+       * touchstart 按下
+       *    一般都是多点触发的
+       *    touches 属性，手指的相关属性
+       *    changedTouches，和当前事件相关的
+       *    targetTouches 作用在当前元素上的目标
+       * touchmove 滑动
+       * touchend 抬起
+       * touchcancel 取消（例如来电页面触摸被打断）
+       *
+       *
+       * touchmove 和 touchend 的 target 都是 touchstart 时候的 target
+       */
+
+      /* document.addEventListener("touchstart",function(e){
+        console.log(e)
+      },false)
+      document.addEventListener("touchmove",function(e){
+        console.log(e)
+      },false)
+      document.addEventListener("touchend",function(e){
+        console.log(e)
+      },false)
+      document.addEventListener("touchcancel",function(e){
+        console.log(e)
+      },false) */
+
+      // 封装一个点击和长按的方法
+      (function (doc) {
+        let Touch = function (selector) {
+          return Touch.prototype.init(selector);
+        };
+
+        Touch.prototype = {
+          init(selector) {
+            if (typeof selector === "string") {
+              this.elem = doc.querySelector(selector);
+              return this;
+            }
+          },
+
+          tap(callback) {
+            this.elem.addEventListener("touchstart", fn);
+            this.elem.addEventListener("touchend", fn);
+
+            let sTime, eTime;
+
+            function fn(e) {
+              e.preventDefault();
+
+              switch (e.type) {
+                case "touchstart":
+                  sTime = new Date().getTime();
+                  break;
+                case "touchend":
+                  eTime = new Date().getTime();
+                  break;
+              }
+
+              if (eTime - sTime < 500) {
+                callback.call(this, e);
+              }
+            }
+          },
+
+          longtap(callback) {
+            this.elem.addEventListener("touchstart", fn, false);
+            this.elem.addEventListener("touchmove", fn, false);
+            this.elem.addEventListener("touchend", fn, false);
+
+            let t = null;
+
+            function fn(e) {
+              switch (e.type) {
+                case "touchstart":
+                  t = setTimeout(() => {
+                    callback.call(this, e);
+                  }, 500);
+                  break;
+                case "touchmove":
+                case "touchend":
+                  clearTimeout(t);
+                  t = null;
+                  break;
+              }
+            }
+          },
+        };
+        window.$ = window.Touch = Touch;
+      })(document);
+
+      $("#box").tap(function (e) {
+        console.log(1);
+      });
+      $("#box").longtap(function (e) {
+        console.log(2);
+      });
+
+      /**
+       * ## touch 穿透
+       * 1、加一个 300ms 的延迟执行
+       * 2、在这中间再加一个中间层，透明色
+       *
+       * 
+       */
+    </script>
+  </body>
+</html>

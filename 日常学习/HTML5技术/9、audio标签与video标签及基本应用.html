@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <video controls autoplay preload loop>
+      <!-- 浏览器会从下面三个寻找兼容的格式进行播放，如果只有一个格式直接在 video 上写 src 就行 -->
+      <source src="./test.mp4" type="video/mp4" />
+      <source src="./test.ogg" type="video/ogg" />
+      <source src="./test.webm" type="video/webm" />
+      浏览器内部不支持 video 标签
+    </video>
+    <audio src="./test.mp3" controls></audio>
+
+    <button id="btn">按钮</button>
+    <video
+      id="vd"
+      width="200px"
+      src="./video/哪里都是你（翻唱版）-副歌.MP4"
+    ></video>
+    <script type="text/javascript">
+      let oBtn = document.getElementById("btn");
+      let oVd = document.getElementById("vd");
+      console.log(oVd.__proto__); // HTMLVideoElement
+
+      /**
+       * 有很多相关的API
+       * HTML5 提供的音视频提供的标准接口
+       *
+       * Flash player 是个私有技术，不是浏览器的一部分，独立于浏览器的一种应用程序（插件），所以要使用音视频要按照这个插件
+       * 缺点：
+       * 1、浏览器本身不具有这个插件，体积相对较大，安装慢
+       * 2、性能差，加载资源的时间长
+       * 3、安全性差，需要获取系统相关的权限
+       *
+       * 1、video 和 audio 是一个标准，浏览器标准
+       * 2、性能好，属于浏览器的一部分
+       * 3、不接触系统层面，不涉及安全性
+       * 4、不需要进行更新和迭代
+       *
+       * video 支持的格式：
+       * 格式和编码
+       * OGG(THEORA&VORBIS) MPEG4(H264&ACC) WEBM(VP8&VORBIS)
+       * Firefox            IE              Firefox
+       * Opera              Chrome          Opera
+       * Chrome             Safari          Chrome
+       *                    基本上mp4就够用了
+       *
+       * audio 支持的格式
+       * OGG(VORBIS) MP3(ACC) WAV
+       * Firefox     IE       Firefox
+       * Opera       Chrome   Opera
+       * Chrome      Safari   Safari
+       *
+       * 常用插件 videoJS
+       */
+
+      /**
+       * 属性值和属性名一样，所以可以简写
+       * src 源地址
+       * width
+       * height
+       * controls 显示控件（开始暂停、时长、进度条、音量、【全屏、画中画】）
+       * autoplay
+       * preload 预加载（和 autoplay 互斥）
+       * loop 循环播放
+       *
+       *  */
+
+      // ## 方法
+      oBtn.onclick = function () {
+        // oVd.load(); // 重新加载
+        // oVd.play(); // 播放
+        // oVd.pause(); // 暂停
+        // console.log(oVd.currentTime); // 当前播放的时间，单位秒
+        // console.log(oVd.duration); // 总时长，单位秒
+        // console.log(oVd.paused); // 是否已暂停
+        // console.log(oVd.muted); // 是否静音，布尔值，可读可写
+        // console.log(oVd.volume) // 音量，0-1之间的小数，可读可写
+        // console.log(oVd.playbackRate) // 播放速度 0.5、1、1.25、1.5、2 常用的值，可读可写
+        // console.log(oVd.buffered.end(0)) // 缓冲的进度
+      };
+
+      // ## 事件
+      // oncanplay() 可以播放的时候触发
+      // onended() 播放完成后触发
+      // error() 加载失败
+      // onplay() 播放的时候触发
+      // onseeked() 拖动进度条后触发
+      // onseeking() 拖动进度条时触发
+      // onratechange() 播放倍数改变后触发
+      // onvolumechange() 播放音量改变时触发
+      // onwaiting() 由于暂时（缓冲）缺少数据，播放已停止
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>history、worker</title>
+  </head>
+  <body>
+    <a href="#login">login</a>
+    <a href="#logout">logout</a>
+    <script type="text/javascript">
+      /**
+       * history 对象是 window 对象的属性，这个对象保存了当前页面访问 url 的历史记录
+       * 行为类似于一个数组
+       *
+       * window.history.length 返回当前页面的历史记录数量，保存在 history 栈内存中
+       *
+       * window.history.back() 方法
+       * 用于返回上一页面，后退操作
+       *
+       * window.history.forward() 方法
+       * 用于前进下一个页面，前进操作，如果前进到头是无反应的
+       *
+       * window.history.go() 方法
+       * 负数就是后退具体几个历史
+       * 正数就是前进具体几个历史
+       *
+       * window.replaceState(stateObject , name/null, replaceStr)
+       * stateObject，状态对象，可以是 JSON 或者字符串
+       *
+       * 只是替换 URL
+       * 1、不会刷新页面
+       * 2、
+       *
+       * window.history.pushState("stateObject.html", null, "pushState.html")
+       * 参数1: stateObject 是一个状态对象，他会和我们 pushState 创建出来的新的历史记录条目进行关联
+       * 参数2: title 是一个标题，多数浏览器不支持，所以设置为 null 即可
+       * 参数3: url 是一个url，可以是相对或绝对路径，如果 url 是个绝对路径那面会替换整个 url ，前提必须是同源地址
+       *
+       * 不会立即刷新页面
+       *
+       * window.history.popState 事件
+       * 每一次活动的历史条目发生变化的时候，就会触发 popState 事件
+       *
+       * popstate 事件的事件对象有一个 state 属性，其中包含通过 pushState() 第一个参数传入的 state 对象：
+       *
+       */
+      window.addEventListener("hashchange", function (e) {
+        console.log(e);
+      });
+      window.addEventListener("beforeunload", function (e) {
+        alert();
+      });
+
+      /**
+       * ## hashchange
+       *
+       *
+       */
+
+      /**
+       * ## worker
+       * web worker
+       * postMessage() 发送数据
+       * sendMessage() 接收数据
+       * onmessage()
+       */
+      if (window.Worker) {
+        let worker = new Worker("worker.js");
+        var message = {
+          addThis: { num1: 1, num2: 2 },
+        };
+        worker.postMessage(message);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="myDiv">
+      Right click or Ctrl+click me to get a custom context menu. Click anywhere
+      else to get the default context menu.
+    </div>
+    <ul
+      id="myMenu"
+      style="position: absolute; visibility: hidden; background-color: silver"
+    >
+      <li><a href="http://www.somewhere.com">somewhere</a></li>
+      <li><a href="http://www.wrox.com">Wrox site</a></li>
+      <li><a href="http://www.somewhere-else.com">somewhere-else</a></li>
+    </ul>
+    <script>
+      /**
+       * blob 对象
+       *
+       * 二进制大对象
+       *  */
+
+      /* var str = "123";
+      var blob = new Blob([str], {
+        type: "text/plain",
+      });
+      console.log(blob);
+      blob.text().then((res) => {
+        console.log(res);
+      }); */
+      window.addEventListener("load", (event) => {
+        let div = document.getElementById("myDiv");
+
+        div.addEventListener("contextmenu", (event) => {
+          event.preventDefault();
+
+          let menu = document.getElementById("myMenu");
+          menu.style.left = event.clientX + "px";
+          menu.style.top = event.clientY + "px";
+          menu.style.visibility = "visible";
+        });
+
+        document.addEventListener("click", (event) => {
+          document.getElementById("myMenu").style.visibility = "hidden";
+        });
+      });
+
+      window.addEventListener("beforeunload", function (event) {
+        event.returnValue = "我在这写点东西...";
+      });
+
+      // ## 找规律
+      function longestTail(arr) {
+        let res = "";
+        let shorRes = null;
+
+        arr = arr.sort((a, b) => a.length - b.length);
+        shorRes = arr.shift();
+
+        console.log(arr, shorRes);
+
+        while (shorRes.length) {
+          if (arr.every((el) => el.endsWith(shorRes))) {
+            res = shorRes;
+            break;
+          } else {
+            shorRes = shorRes.slice(1);
+          }
+        }
+
+        return res;
+      }
+      console.log(longestTail(["able", "age", "are"]));
+      // console.log(longestTail(["dog", "raccar", "car"]));
+      // console.log(longestTail(["national", "arrival", "mental"]));
+
+      // ## JavaScript如何利用Promise控制并发请求个数
+      function multiRequest(urls, maxNum) {
+        const len = urls.length; // 请求总数量
+        const res = new Array(len).fill(0); // 请求结果数组
+        let sendCount = 0; // 已发送的请求数量
+        let finishCount = 0; // 已完成的请求数量
+
+        return new Promise((resolve, reject) => {
+          // 首先发送 maxNum 个请求，注意：请求数可能小于 maxNum，所以也要满足条件2
+          // 同步的 创建maxNum个next并行请求 然后才去执行异步的fetch 所以一上来就有5个next并行执行
+          while (sendCount < maxNum && sendCount < len) {
+            next();
+          }
+
+          function next() {
+            let current = sendCount++; // 当前发送的请求数量，后加一保存当前请求url的位置
+            // 递归出口
+            if (finishCount >= len) {
+              // 如果所有请求完成，则解决掉 Promise，终止递归
+              resolve(res);
+              return;
+            }
+            
+            const url = urls[current];
+            fetch(url).then(
+              (result) => {
+                finishCount++;
+                res[current] = result;
+                if (current < len) {
+                  // 如果请求没有发送完，继续发送请求
+                  next();
+                }
+              },
+              (err) => {
+                finishCount++;
+                res[current] = err;
+                if (current < len) {
+                  // 如果请求没有发送完，继续发送请求
+                  next();
+                }
+              }
+            );
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

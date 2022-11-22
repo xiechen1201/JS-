@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* img {
+        width: 10rem;
+        height: auto;
+      } */
+    </style>
+  </head>
+  <body>
+    <input type="file" id="file" />
+    读取字节：
+    <span class="readBytesButtons">
+      <button data-startbyte="0" data-endbyte="4">1-5</button>
+      <button data-startbyte="5" data-endbyte="14">6-15</button>
+      <button data-startbyte="6" data-endbyte="7">7-8</button>
+    </span>
+    <div id="byteRane"></div>
+    <div id="byteContent"></div>
+    <script type="text/javascript">
+      // ## 读取文件
+
+      /* let oInput = document.getElementById("file");
+      // 选择文件
+      oInput.onchange = function (e) {
+        // 实例化 FileReader
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+          let image = new Image();
+          // 返回 Base64
+          image.src = reader.result;
+          document.body.appendChild(image);
+        };
+        reader.readAsDataURL(this.files[0]);
+      }; */
+
+      /**
+       * ## 文件分割
+       *
+       * blob 对象：File 对象基于 blob，不可变的数据类文件
+       *
+       *
+       *
+       */
+      let oInput = document.getElementById("file");
+      let readBytesButtons =
+        document.getElementsByClassName("readBytesButtons")[0];
+      let byteRane = document.getElementById("byteRane");
+      let byteContent = document.getElementById("byteContent");
+      let file = null;
+
+      oInput.onchange = function (e) {
+        console.log(e.target.files)
+        file = e.target.files[0];
+      };
+      readBytesButtons.addEventListener("click", function (e) {
+        if (e.target.tagName === "BUTTON") {
+          const { startbyte, endbyte } = e.target.dataset;
+          readBlob(startbyte, endbyte);
+        }
+      });
+      function readBlob(startbyte, endbyte) {
+        const blob = file.slice(startbyte, endbyte);
+
+        let reader = new FileReader();
+        reader.onloadend = function (e) {
+          if (e.target.readyState === 2) {
+            byteRane.innerText = `读取的字节: ${startbyte+1} - ${endbyte +1} of ${file.size}字节`;
+            byteContent.innerHTML = e.target.result
+          }
+        };
+        reader.readAsBinaryString(blob);
+      }
+    </script>
+    <!-- <script src="./lib-flexible.js"></script> -->
+    <!-- <script type="text/javascript">
+      /* 在 750 的设计稿中测的，宽度 750 px 、高度 80px  */
+      document.getElementsByTagName("html")[0].style.fontSize =
+        (document.documentElement.clientWidth / 750) * 100 + "px";
+    </script> -->
+  </body>
+</html>
