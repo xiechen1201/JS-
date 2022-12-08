@@ -1,0 +1,36 @@
+{
+  "scripts": {
+    "dev": "webpack serve --open --config ./build/webpack.dev.js",
+    "build:stage": "webpack --config ./build/webpack.dev.js",
+    "build:test": "webpack --json > stats.json",
+    "build": "webpack --config ./build/webpack.prod.js"
+  },
+  "sidEffects": ["*.css"],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.20.2",
+    "autoprefixer": "^10.4.13",
+    "babel-loader": "^8.0.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^5.2.7",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.2",
+    "postcss-loader": "^4.2.0",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^4.11.1",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "core-js": "^3.26.1",
+    "lodash": "^4.17.21",
+    "mini-css-extract-plugin": "^2.1.0"
+  }
+}
