@@ -56,4 +56,54 @@ function getNowDate(field) {
   }
 }
 
-export { getIconDate, formatChsDdate, mapForChsDate, getNowDate };
+function formatUserDate(value) {
+  const len = value.length;
+
+  if (len < 4) {
+    return;
+  }
+
+  if (len === 4) {
+    return value;
+  }
+
+  if (len > 4 && len < 6) {
+    return value.slice(0, 4);
+  }
+
+  let _arr = [];
+
+  if (len >= 6 && len < 8) {
+    const parrern = /(\d{4})(\d{2})/;
+    value = value.slice(0, 6).replace(parrern, "$1-$2");
+
+    _arr = Array.from(value).filter((el, index) => {
+      if (index === 5 && el == 0) {
+        return false;
+      }
+      return true;
+    });
+  }
+
+  if (len >= 8) {
+    const parrern = /(\d{4})(\d{2})(\d{2})/;
+    value = value.slice(0, 8).replace(parrern, "$1-$2-$3");
+
+    _arr = Array.from(value).filter((el, index) => {
+      if ((index === 5 || index === 8) && el == 0) {
+        return false;
+      }
+      return true;
+    });
+  }
+
+  return _arr.toString().replace(/,/g, "");
+}
+
+export {
+  getIconDate,
+  formatChsDdate,
+  mapForChsDate,
+  getNowDate,
+  formatUserDate,
+};

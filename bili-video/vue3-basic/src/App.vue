@@ -1,7 +1,11 @@
 <template>
   <MyHeader>{{ headerTitle }}</MyHeader>
   <SearchInput :placeholder="placeholder" :maxlength="Number(maxlength)" />
-  <RouterView />
+  <RouterView #default="{ Component }">
+    <KeepAlive>
+      <component :is="Component" />
+    </KeepAlive>
+  </RouterView>
   <Tab />
 </template>
 
@@ -25,5 +29,6 @@ watch(router.currentRoute, (newVal) => {
   store.commit("setHeaderTitle", newVal.name);
   store.commit("setPlaceholder", newVal.name);
   store.commit("setMaxLength", newVal.name);
+  store.commit("setField", newVal.name);
 });
 </script>

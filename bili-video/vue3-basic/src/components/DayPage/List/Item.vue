@@ -38,6 +38,7 @@ export default {
     }
 
     &.content {
+      max-width: calc(3.45rem - 1rem - 0.15rem);
       display: flex;
       align-items: center;
       font-size: 0.14rem;

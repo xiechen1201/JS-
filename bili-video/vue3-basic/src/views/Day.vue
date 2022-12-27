@@ -1,7 +1,10 @@
 <template>
   <div class="container">
-    <DayPage :data="dayData" />
-    <List :data="{}" />
+    <ErrorTip />
+    <template v-if="!errorCode">
+      <DayCard :data="dayData" />
+      <List :data="dayData" />
+    </template>
   </div>
 </template>
 
@@ -12,19 +15,23 @@ export default {
 </script>
 
 <script setup>
-import DayPage from "@/components/DayPage/Card.vue";
-import List from "@/components/DayPage/List/index.vue"
-import { onMounted, computed } from "vue";
+import DayCard from "@/components/DayPage/Card.vue";
+import List from "@/components/DayPage/List/index.vue";
+import ErrorTip from "@/components/ErrorTip/index.vue";
+import { onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
 import getData from "@/services/index";
 import { getNowDate } from "@/libs/utils";
-
 const store = useStore();
 const state = store.state;
 const dayData = computed(() => state.dayData);
+const errorCode = computed(() => state.errorCode);
+
+watch(dayData, () => {
+  store.commit("setErrorCode", 0);
+});
 
 onMounted(() => {
-  return;
   getData(store, "day", getNowDate("day"));
 });
 </script>

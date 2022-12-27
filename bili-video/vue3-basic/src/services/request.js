@@ -7,7 +7,7 @@ function getDayData(date) {
       data: {
         date,
       },
-      sussess(data) {
+      success(data) {
         resolve(data);
       },
       error(err) {
@@ -24,7 +24,7 @@ function getMonthData(yearMonth) {
       data: {
         "year-month": yearMonth,
       },
-      sussess(data) {
+      success(data) {
         resolve(data);
       },
       error(err) {
@@ -41,7 +41,7 @@ function getYearData(year) {
       data: {
         year,
       },
-      sussess(data) {
+      success(data) {
         resolve(data);
       },
       error(err) {

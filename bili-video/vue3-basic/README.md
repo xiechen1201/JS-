@@ -12,22 +12,33 @@ Vue 3.0实战项目之『万年历』
 
 ## 目录
 
-- public 静态资源文件
+```
+├─ .gitignore 
+├─ README.md
+├─ index.html
+├─ jsconfig.json
+├─ package-lock.json
+├─ package.json
+├─ public
+│  └─ vite.svg
+├─ src
+│  ├─ App.vue
+│  ├─ assets
+│  │  ├─ css
+│  │  ├─ img
+│  │  ├─ js
+│  │  └─ vue.svg
+│  ├─ components
+│  ├─ components-basic
+│  ├─ configs
+│  ├─ data
+│  ├─ libs
+│  ├─ main.js
+│  ├─ router
+│  ├─ services
+│  ├─ store
+│  ├─ style.css
+│  └─ views
+└─ vite.config.js
 
-- src 源代码
-
-    - components-basic Vue3基础学习
-    
-    - components 全局组件
-
-    - configs 配置文件
-
-    - data 固定的数据
-
-    - libs 工具库
-
-    - router 路由
-
-    - store 状态管理
-    
-    - views 页面
+```

@@ -10,12 +10,12 @@ const routes = [
   {
     path: "/month",
     name: "month",
-    component: () => import("@/views/month.vue"),
+    component: () => import("@/views/Month.vue"),
   },
   {
     path: "/year",
     name: "year",
-    component: () => import("@/views/year.vue"),
+    component: () => import("@/views/Year.vue"),
   },
 ];
 

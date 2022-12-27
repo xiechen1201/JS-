@@ -11,15 +11,33 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed, watch } from "vue";
+import { useStore } from "vuex";
+import getData from "@/services/index";
+import { formatUserDate, getNowDate } from "@/libs/utils";
 
 const props = defineProps({
   placeholder: String,
   maxlength: Number,
 });
-const inputValue = ref("")
+const store = useStore();
+const state = store.state;
+const inputValue = ref("");
+const field = computed(() => state.field);
 
-const searchData = (e) => {};
+const searchData = (e) => {
+  inputValue.value = e.target.value;
+
+  if (inputValue.value.length === props.maxlength) {
+    getData(store, field.value, formatUserDate(inputValue.value));
+  } else if (inputValue.value.length === 0) {
+    getData(store, field.value, getNowDate(field.value));
+  }
+};
+
+watch(field, () => {
+  inputValue.value = "";
+});
 </script>
 
 <style lang="scss" scoped>
