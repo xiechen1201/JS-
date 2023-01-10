@@ -10,12 +10,12 @@ export default {
   data() {
     return {
       title: "this is title",
-      htmlContent:"<p>this is v-html</p>"
+      htmlContent: "<p>this is v-html</p>",
     };
   },
   methods: {
     handleClick() {
-      console.log(this)
+      console.log(this);
       this.title = new Date().getTime();
     },
   },

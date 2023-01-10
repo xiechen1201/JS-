@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let obj = {
+        name: "xiechen",
+        age: 25,
+        info: {
+          hobby: ["travel", "piano", { a: 1 }],
+          career: {
+            teacher: 4,
+            engineer: 9,
+          },
+        },
+      };
+
+      function deepClone(origin, target) {
+        let tar = target || {};
+        let toString = Object.prototype.toString;
+        let arrayType = "[object Array]";
+
+        for (const key in origin) {
+          if (Object.hasOwnProperty.call(origin, key)) {
+            let element = origin[key];
+
+            if (typeof element === "object" && element !== null) {
+              tar[key] = toString.call(element) === arrayType ? [] : {};
+              deepClone(element, tar[key]);
+            } else {
+              tar[key] = element;
+            }
+          }
+        }
+
+        return tar;
+      }
+
+      const obj2 = deepClone(obj);
+
+      obj.info.career = null;
+      console.log(obj);
+      console.log(obj2);
+
+      /**
+       * Map 键名可以是任意的数据类型
+       * WaekMap 键名只能是对象
+       */
+
+      /* 
+
+      const oBtn1 = document.querySelector("#btn1");
+      const oBtn2 = document.querySelector("#btn2");
+
+      oBtn1.addEventListener("click", handleBtn1Click, false);
+      oBtn2.addEventListener("click", handleBtn2Click, false);
+
+      function handleBtn1Click() {}
+      function handleBtn2Click() {}
+
+      oBtn1.remove();
+      oBtn2.remove();
+
+      // 函数也是引用值，无法被垃圾回收机制回收，所以我们只能手动清除
+
+      handleBtn1Click = null;
+      handleBtn2Click = null;
+
+      // WeekMap 就是解决这些问题的，
+
+      const oBnt1Map = new WeakMap();
+      oBnt1Map.set(oBtn1, handleBtn1Click);
+      oBnt1.addEventListener("click", oBnt1Map.get(oBnt1Map), false);
+      oBnt1.remove();
+
+      // 弱引用：oBnt1 删除的时候，oBnt1Map.set(oBtn1, handleBtn1Click); 也会同时被垃圾回收机制进行回收
+      // 也就说 WaekMap 的键名被删除，键值也会被删除！！！
+
+       */
+
+      function deepClone2(origin, hashMap = new WeakMap()) {
+        if (origin == undefined || typeof origin !== "object") {
+          return origin;
+        }
+        if (origin instanceof Date) {
+          return new Date(origin);
+        }
+        if (origin instanceof RegExp) {
+          return new RegExp(origin);
+        }
+
+        const hashKey = hashMap.get(origin);
+
+        if (hashKey) {
+          return origin;
+        }
+
+        // 通过实例化 constructor 出一个新的对象
+        let target = new origin.constructor();
+        hashMap.set(origin, target);
+
+        for (const key in origin) {
+          if (Object.hasOwnProperty.call(origin, key)) {
+            const element = origin[key];
+            target[key] = deepClone2(element);
+          }
+        }
+
+        return target;
+      }
+
+      console.log(deepClone2(obj));
+    </script>
+  </body>
+</html>
