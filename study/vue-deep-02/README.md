@@ -9,3 +9,5 @@
 [深入研究methods属性以及实例方法挂载实现](./REDAME_docs/04.md)
 
 [认识v-if/v-show与构建架子](./REDAME_docs/05.md)
+
+[从Webpack到v-show/if](./REDAME_docs/06.md)
