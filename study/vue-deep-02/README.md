@@ -11,3 +11,5 @@
 [认识v-if/v-show与构建架子](./REDAME_docs/05.md)
 
 [从Webpack到v-show/if](./REDAME_docs/06.md)
+
+[深入研究计算属性以及应用场景分析](./REDAME_docs/07.md)
