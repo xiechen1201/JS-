@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  .my-alert {
+    width: 500px;
+    margin: 50px auto;
+    box-shadow: 1px 3px 5px #333;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  header {
+    height: 44px;
+    line-height: 44px;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+  h1 {
+    font-size: 16px;
+  }
+  .my-alert.danger header {
+    background-color: red;
+    color: #fff;
+  }
+  .content {
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  .btn-group {
+    height: 34px;
+    margin: 20px 0;
+    padding: 0 15px;
+  }
+  button {
+    padding: 0 15px;
+    float: right;
+    height: 34px;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    color: #666;
+    border: 1px solid #666;
+    border-radius: 5px;
+  }
