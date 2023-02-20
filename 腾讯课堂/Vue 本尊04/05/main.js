@@ -25,9 +25,9 @@ console.log(vm.list); */
 
 // ==========
 
-/* // 没有触发 set 机制
+// 没有触发 set 机制
 // 当数据变化，确实变化了，视图是不是能不能变化，取决于 set 机制有没有执行
-vm.list.push(6); 
+/* vm.list.push(6); 
 console.log(vm.list); */
 
 // ==========

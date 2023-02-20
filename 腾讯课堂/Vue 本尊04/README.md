@@ -8,4 +8,12 @@
 
 [数据变更检测方案分析](./REANME_docs/05.md)
 
-[Vue2.0的数据劫持](./REANME_docs/06.md)
+[【实现课】Vue2.0的数据劫持](./REANME_docs/06.md)
+
+[v-if与v-for的联合使用风格指南](./REANME_docs/07.md)
+
+[Vue的就地更新与v-for的key属性](./REANME_docs/08.md)
+
+[【实现课】v-for之架子搭建、数据劫持](./REANME_docs/09.md)
+
+[事件处理函数的绑定](./REANME_docs/10.md)
