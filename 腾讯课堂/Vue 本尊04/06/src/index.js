@@ -26,7 +26,11 @@ let vm = new Vue({
   }
 });
 
-console.log(vm);
+console.log(vm.students.push(1))
+
+/* console.log(vm);
 console.log(vm.title);
 console.log(vm.teacher);
-console.log(vm.info.a);
+console.log(vm.info.a); */
+
+

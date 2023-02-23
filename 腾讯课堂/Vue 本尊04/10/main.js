@@ -8,6 +8,7 @@ const app = {
         <button @click="count += 1">Add</button>
         <button @click="count -= 1">Minus</button>
     </div>`, */
+
   /* // 绑定处理函数
   template: `
     <div>
@@ -16,6 +17,7 @@ const app = {
         <button @click="onClickAdd(2)">Add</button>
         <button @click="onClickMinus(2, $event)">Minus</button>
     </div>`, */
+    
   // 多个事件处理函数绑定
   template: `
     <div>

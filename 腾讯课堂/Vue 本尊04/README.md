@@ -8,7 +8,7 @@
 
 [数据变更检测方案分析](./REANME_docs/05.md)
 
-[Vue2.0 的数据劫持](./REANME_docs/06.md)
+[【实现课】Vue2.0 的数据劫持](./06/public/index.html)
 
 [v-if 与 v-for 的联合使用风格指南](./REANME_docs/07.md)
 
@@ -18,7 +18,7 @@
 
 [事件处理函数的绑定](./REANME_docs/10.md)
 
-[【铺垫课】DOM4 标准的事件监听与滚屏优化](./REANME_docs/11.md)
+[DOM4 标准的事件监听与滚屏优化](./REANME_docs/11.md)
 
 [事件与按键修饰符、为什么在 HTML 监听事件](./REANME_docs/12.md)
 

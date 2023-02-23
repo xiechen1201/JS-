@@ -1,0 +1,60 @@
+<template>
+  <!-- <div v-my-test v-my-directive> -->
+  <div>
+    <!-- <h1>{{ title }}</h1>
+    <child></child>
+    <h3>{{ plus(num1, num2) }}</h3>
+    <h3>
+      <span>{{ a }}</span>
+      <span>+</span>
+      <span>{{ b }}</span>
+      <span>=</span>
+      <span>{{ res }}</span>
+    </h3> -->
+    <!-- <component :is="currentComp === 'Child1' ? Child : Child2 "></component>
+    <button @click="switchComp">Switch</button> -->
+    <child :a="a"></child>
+    <child2 :b="b" @give-more="giveMore"></child2>
+  </div>
+</template>
+<script setup>
+  import Child from './components/Child';
+  import Child2 from './components/Child2';
+  // import { plus } from './libs/utils';
+  // import { myTest as vMyTest } from './directives';
+
+  // const vMyDirective = {
+  //   mounted (el) {
+  //     console.log(el);
+  //   }
+  // }
+  const { ref, reactive, computed, toRefs } = Vue;
+
+  // const currentComp = ref('Child1');
+
+  // const title = ref('This is TITLE');
+  // // const num1 = 1;
+  // // const num2 = 2;
+
+  const state = reactive({
+    a: 1,
+    b: 2
+  });
+
+  // const res = computed(() => state.a + state.b);
+
+  const { a, b } = toRefs(state);
+
+  const giveMore = (num) => {
+./_App.vue__    state.b = num;
+  }
+
+  // const switchComp = () => {
+  //   currentComp.value = currentComp.value === 'Child1' ? 'Child2' : 'Child1';
+  // }
+
+  defineExpose({
+    aa: 1,
+    bb: 2
+  })
+</script>

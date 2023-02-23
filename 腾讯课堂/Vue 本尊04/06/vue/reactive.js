@@ -10,7 +10,7 @@ function defineReactiveData(data, key, value) {
       return value;
     },
     set(newVal) {
-      console.log(`🔁 响应式获取：data.${key}，`, newVal);
+      console.log(`🔁 响应式设置：data.${key}，`, newVal);
       if (newVal === value) {
         return false;
       }
