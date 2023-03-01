@@ -1,11 +1,34 @@
 <template>
   <div class="tab-search">
-    <input type="text" />
+    <input type="text" placeholder="请输入" v-model="value" />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  prop: ["searchValue"],
+  /* computed: {
+    value: {
+      set(newValue) {
+        this.$emit("update:searchValue", newValue);
+      },
+      get() {
+        return this.searchValue;
+      }
+    }
+  } */
+  
+  data() {
+    return {
+      value: this.searchValue
+    };
+  },
+  watch: {
+    value() {
+      this.$emit("update:searchValue", this.value);
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

@@ -124,7 +124,52 @@ const { createApp, mount } = window.Vue;
   }
 }; */
 
+/* const app = {
+  template: `
+    <p>
+    {{pick}}
+      <input type="radio" v-model="pick" :value="first" />
+      <input type="radio" v-model="pick" :value="second" />
+    </p>`,
+  data() {
+    return {
+      pick: "",
+      first: "first",
+      second: "second"
+    };
+  }
+}; */
+
+/* const app = {
+  template: `
+    <p>
+    {{selected}}
+    <select v-model="selected">
+      <!-- 内联对象字面量 -->
+      <option :value="{ number: 123 }">123</option>
+    </select>
+    </p>`,
+  data() {
+    return {
+      selected: "",
+    };
+  }
+}; */
+
 const app = {
+  template: `
+    <p>
+      {{age}}
+      <input v-model.number="age" />
+    </p>`,
+  data() {
+    return {
+      age: 1
+    };
+  }
+};
+
+/* const app = {
   template: `
     <p>
         <p>{{ textValue }}</p>
@@ -135,6 +180,6 @@ const app = {
       textValue: ""
     };
   }
-};
+}; */
 
 createApp(app).mount("#app");

@@ -5,6 +5,8 @@
 <script>
 import MyHeader from "./components/MyHeader/index.vue";
 
+console.log(MyHeader)
+
 export default {
   components: {
     MyHeader

@@ -4,14 +4,20 @@
       'nav-item': true,
       active: currentIndex === myIndex
     }"
-    :style="{ width: 100 / navLen + '%' }">
+    :style="{ width: 100 / navLen + '%' }"
+    @click="changeIndex(myIndex)">
     {{ navItem.itemTitle }}
   </div>
 </template>
 
 <script>
 export default {
-  props: ["navItem", "myIndex", "currentIndex", "navLen"]
+  props: ["navItem", "myIndex", "currentIndex", "navLen"],
+  methods: {
+    changeIndex(index) {
+      this.$emit("changeIndex", index);
+    }
+  }
 };
 </script>
 

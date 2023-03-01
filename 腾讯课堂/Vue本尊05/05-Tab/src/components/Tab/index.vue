@@ -1,7 +1,7 @@
 <template>
   <div class="tab">
-    <tab-search></tab-search>
-    <tab-nav :tab-index="tabIndex" :nav-data="navData"></tab-nav>
+    <tab-search :search-value="searchValue" @update:search-value="updateSearchValue"></tab-search>
+    <tab-nav :tab-index="tabIndex" :nav-data="navData" @change-index="changeIndex"></tab-nav>
     <tab-page :page-data="pageData"></tab-page>
   </div>
 </template>
@@ -21,7 +21,8 @@ export default {
   },
   data() {
     return {
-      tabIndex: this.tabData.intialIndex
+      tabIndex: this.tabData.intialIndex,
+      searchValue: this.tabData.searchValue || this.tabData.data[this.tabData.intialIndex].title
     };
   },
   computed: {
@@ -40,6 +41,19 @@ export default {
             title: el.title,
             cotent: el.cotent
           };
+        }
+      });
+    }
+  },
+  methods: {
+    changeIndex(index) {
+      this.tabIndex = index;
+    },
+    updateSearchValue(value) {
+      this.tabData.data.some((el, index) => {
+        if (el.title.includes(value) || el.content.includes(value)) {
+          this.tabIndex = index;
+          return true;
         }
       });
     }

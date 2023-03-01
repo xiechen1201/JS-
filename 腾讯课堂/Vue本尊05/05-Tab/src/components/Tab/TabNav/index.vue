@@ -6,7 +6,8 @@
       :nav-item="item"
       :my-index="index"
       :current-index="tabIndex"
-      :nav-len="navData.length">
+      :nav-len="navData.length"
+      @change-index="changeIndex">
     </nav-item>
   </div>
 </template>
@@ -19,6 +20,11 @@ export default {
   props: ["tabIndex", "navData"],
   components: {
     NavItem
+  },
+  methods: {
+    changeIndex(index) {
+      this.$emit("changeIndex", index);
+    }
   }
 };
 </script>
