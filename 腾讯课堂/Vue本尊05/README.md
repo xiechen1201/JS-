@@ -13,3 +13,9 @@
 [组件注册深入](./README_docs/08.md)
 
 [手写tpl-loader分离出模板文件](./README_docs/09.md)
+
+[【铺垫课】Web components标准](./README_docs/10.md)
+
+[【插槽】了解Vue的插槽以及基本用法](./README_docs/11.md)
+
+[【插槽】具名插槽的特点与应用](./README_docs/12.md)

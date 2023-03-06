@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <my-info
+      avatar="https://cdn.pixabay.com/photo/2023/02/13/05/58/doodle-7786568__340.png"
+      name="xiechen"
+      age="22"
+      occupation="student">
+      The infomation of xiechen.
+    </my-info>
+
+    <!-- <my-article>
+      <p slot="title">This is my title.</p>
+      <p slot="author">xiechen</p>
+      <p slot="dateTime">2023年1月1日</p>
+      <p slot="content">This is my content.</p>
+    </my-article>
+
+    <template id="my-article-template">
+      <style>
+        h1 {
+          color: red;
+        }
+        .author {
+          font-size: 18px;
+          color: #666;
+        }
+      </style>
+      <div class="my-article">
+        <h1 class="my-article-title">
+          <slot name="title" class="title"></slot>
+          <slot name="author" class="author"></slot>
+          <slot name="dateTime" class="date-time"></slot>
+        </h1>
+        <p class="my-article-content">
+          <slot name="content"></slot>
+        </p>
+      </div>
+    </template> -->
+    <script>
+      window.customElements.define(
+        "my-info",
+        class extends HTMLElement {
+          constructor() {
+            super();
+            this.title = this.textContent;
+            this.avatar = this.getAttribute("avatar");
+            this.myName = this.getAttribute("name");
+            this.age = this.getAttribute("age");
+            this.occupation = this.getAttribute("occupation");
+
+            this.init();
+          }
+
+          init() {
+            var shdowDOM = this.attachShadow({
+              mode: "open"
+            });
+
+            shdowDOM.appendChild(this.createDOM());
+          }
+
+          createDOM() {
+            var oContainer = this.createContainer();
+            oContainer.appendChild(this.createTitle());
+            oContainer.appendChild(this.createAvatar());
+            oContainer.appendChild(this.createName());
+            oContainer.appendChild(this.createAge());
+            oContainer.appendChild(this.createOccupation());
+
+            return oContainer;
+          }
+
+          createContainer() {
+            var oContainer = document.createElement("div");
+            oContainer.className = "my-info-container";
+            return oContainer;
+          }
+
+          createTitle() {
+            var oTitle = document.createElement("h1");
+            oTitle.className = "my-info-title";
+            oTitle.textContent = this.title;
+            return oTitle;
+          }
+
+          createAvatar() {
+            var oImage = document.createElement("img");
+            oImage.className = "my-info-avatar";
+            oImage.style.width = "200px";
+            oImage.src = this.avatar;
+            return oImage;
+          }
+
+          createName() {
+            var oName = document.createElement("p");
+            oName.className = "my-info-name";
+            oName.textContent = this.myName;
+            return oName;
+          }
+
+          createAge() {
+            var oAge = document.createElement("p");
+            oAge.className = "my-info-age";
+            oAge.textContent = this.age;
+            return oAge;
+          }
+
+          createOccupation() {
+            var oOccupation = document.createElement("p");
+            oOccupation.className = "my-info-occupation";
+            oOccupation.textContent = this.occupation;
+            return oOccupation;
+          }
+        }
+      );
+
+      class MyArticle extends HTMLElement {
+        constructor() {
+          super();
+
+          var _tpl = document.getElementById("my-article-template").content;
+          var shdowDOM = this.attachShadow({ mode: "open" });
+          shdowDOM.appendChild(_tpl.cloneNode(true));
+        }
+      }
+
+      window.customElements.define("my-article", MyArticle);
+    </script>
+  </body>
+</html>
