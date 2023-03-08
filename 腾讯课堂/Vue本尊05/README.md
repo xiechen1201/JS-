@@ -19,3 +19,5 @@
 [【插槽】了解Vue的插槽以及基本用法](./README_docs/11.md)
 
 [【插槽】具名插槽的特点与应用](./README_docs/12.md)
+
+[作用域插槽与动态插槽](./README_docs/13.md)
