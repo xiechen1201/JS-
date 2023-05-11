@@ -10,4 +10,4 @@
 
 [05、深入应用动态、异步与suspense组件](./README_docs/05.md)
 
-[深入学习keep-alive](./README_docs/06.md)
+[06、深入学习keep-alive](./README_docs/06.md)
