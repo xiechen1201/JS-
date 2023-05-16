@@ -74,7 +74,6 @@ export default {
       ]
     };
   },
-
   /* beforeCreate() {
     console.log(this.$refs);
   },
@@ -95,7 +94,6 @@ export default {
     this.$nextTick(() => {
       console.log(this.$refs);
     }); */
-
     this.$refs.myRef.focus();
     console.log(this.$refs["loggin-box"].offsetHeight);
   }
