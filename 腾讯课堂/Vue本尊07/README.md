@@ -11,3 +11,9 @@
 [6、【props】深入props的验证方法](./README_docs/06.md)
 
 [7、attributes 传递与继承](./README_docs/07.md)
+
+[8、自定义事件（1）](./README_docs/08.md)
+
+[9、自定义事件（2）](./README_docs/09.md)
+
+[10、自定义指令概念、生命周期与参数](./README_docs/10.md)

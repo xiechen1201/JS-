@@ -45,6 +45,8 @@ function imgLazyLoad(image) {
     for (let i = n; i < imgLen; i++) {
       imgItem = image[i];
 
+      console.log(imgItem,imgItem.offsetTop)
+
       if (imgItem.offsetTop < cHeight + sTop) {
         imgItem.src = imgItem.getAttribute("data-src");
         imgItem.removeAttribute("data-src");
