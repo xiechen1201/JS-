@@ -12,7 +12,7 @@ import mixinTest from "../mixins/test";
 
 export default {
   name: "Test1",
-//   mixins: [mixinTest],
+  mixins: [mixinTest],
   data() {
     return {
       title: "This is test 1.",
@@ -21,12 +21,12 @@ export default {
   },
   mounted() {
     console.log("This is test1 mounted calling.");
-    console.log(this)
+    console.log(this);
   },
   methods: {
     doComponent() {
       console.log("doComponent");
-    },
+    }
   }
 };
 </script>

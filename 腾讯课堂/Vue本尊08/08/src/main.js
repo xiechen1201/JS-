@@ -15,6 +15,6 @@ app.use(MyUI);
 app.use(MyBadge); */
 
 // 全局注册 mixin（不推荐）
-app.mixin(testMixin)
+// app.mixin(testMixin)
 
 app.mount("#app");

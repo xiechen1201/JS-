@@ -2,7 +2,7 @@
   <!-- <MyButton type="success"> Add btn </MyButton>
   <MyBadge type="danger"> Danger </MyBadge> -->
   <Test1 />
-  <Test2 />
+  <!-- <Test2 /> -->
 </template>
 
 <script>
