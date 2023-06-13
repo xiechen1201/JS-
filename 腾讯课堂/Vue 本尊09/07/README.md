@@ -27,3 +27,40 @@ npm run dev
 ```sh
 npm run build
 ```
+
+```
+07
+├─ .gitignore
+├─ README.md
+├─ index.html
+├─ package.json
+├─ public
+│  └─ favicon.ico
+├─ src
+│  ├─ App.vue
+│  ├─ actions
+│  │  └─ counter.js
+│  ├─ assets
+│  │  ├─ base.css
+│  │  ├─ logo.svg
+│  │  └─ main.css
+│  ├─ components
+│  │  ├─ Counter
+│  │  │  └─ index.vue
+│  │  ├─ CounterBtn
+│  │  │  └─ index.vue
+│  │  └─ CounterResult
+│  │     └─ index.vue
+│  ├─ dispatchs
+│  │  └─ counter.js
+│  ├─ main.js
+│  ├─ pages
+│  │  └─ index.vue
+│  ├─ reducers
+│  │  └─ counter.js
+│  └─ router
+│     └─ index.js
+├─ vite.config.js
+└─ yarn.lock
+
+```
