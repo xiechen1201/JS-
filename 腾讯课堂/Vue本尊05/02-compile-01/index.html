@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 的模版编译</title>
+  </head>
+  <body>
+    <!-- <div id="app" style="color: red; font-size: 20px">
+      你好，{{name}}
+      <ul>
+        <li style="color: green">{{ age }}</li>
+        <li>{{ info.job }}</li>
+      </ul>
+    </div> -->
+    <div id="app" style="color: red; font-size: 20px">
+      你好，{{ name }} 欢迎来到小野森森的课堂 <span style="color: green">{{age}}</span>
+      <div>大家都来学习Vue源码</div>
+    </div>
+    <script src="dist/umd/vue.js"></script>
+    <script>
+      let vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            name: "小野森森",
+            age: 34,
+            info: {
+              job: "teacher",
+              students: [
+                {
+                  id: 1,
+                  name: "小张"
+                },
+                {
+                  id: 2,
+                  name: "小王"
+                }
+              ]
+            },
+            hobby: ["piano", "travel", "film"]
+          };
+        }
+      });
+    </script>
+  </body>
+</html>

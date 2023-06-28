@@ -7,7 +7,7 @@ export default {
   output: {
     format: "umd",
     name: "Vue",
-    file: "dist/umd/vur.js",
+    file: "dist/umd/vue.js",
     sourcemap: true
   },
   plugins: [
@@ -16,7 +16,7 @@ export default {
     }),
     serve({
       open: true,
-      port: 8080,
+      port: 8686,
       contentBase: "",
       openPage: "/index.html"
     }),
