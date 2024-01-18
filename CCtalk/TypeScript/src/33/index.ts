@@ -104,8 +104,8 @@ type Bool3 = "a" | "b" extends "a" ? string : number; // number */
   never 可以分配给其他的类型
   其他类型不可以分配给 never 类型
 */
-/* type Bool = never extends "a" ? string : number; // string */
-/* type Bool2 = "a" extends never ? string : number; // number */
+/* type Bool = never extends "a" ? string : number; // string
+type Bool2 = "a" extends never ? string : number; // number */
 
 /* 
   一个泛型传入的是 never 的话，never 相当于是一个空的联合类型，这个时候就不会做类型检查，而是直接返回 never
@@ -126,6 +126,7 @@ type Bool2 = Bool<never>; // never */
 // 把现有的类型排除出去，形成一个新的类型
 /* type MyExclude<T, U> = T extends U ? never : T;
 type res = MyExclude<"a" | "b", "a">; // "b" */
+
 
 /* 
   错误的理解："a" | "b" extends "a" ? never : "a" | "b"
@@ -149,7 +150,7 @@ type res = MyExtract<"a" | "b", "a">; // "a" */
 
 // ========
 
-interface Todo {
+/* interface Todo {
   id: number;
   content: string;
   completed: boolean;
@@ -158,8 +159,7 @@ interface Todo {
 type MyPick<T, K extends keyof T> = {
   [key in K]: T[key];
 };
-
-type Res = MyPick<Todo, "content" | "completed">;
+type Res = MyPick<Todo, "content" | "completed">; */
 
 /* 
   K extends keyof T,相当于 K 必须是 Todo 里面，也就是 id content completed 
